@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   basename: '',
   backend: 'http://bnaslogistics.com.com/',
+  apiUrl: './api/',
+  apiV1Url: '../api/v1/',
   appId: "bnaslogistics",
   firebase: {
     apiKey: "AIzaSyBtTPUa19nLkReMDWXTFr6U43D166n9MVE",
