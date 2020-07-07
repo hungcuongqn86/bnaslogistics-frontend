@@ -1,0 +1,114 @@
+<form novalidate #form="ngForm" class="form-horizontal">
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="name">
+            Tên <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.name" #name="ngModel" type="text" id="name"
+                   name="name"
+                   required
+                   class="form-control"
+                   placeholder="Tên">
+            <div [hidden]="name.valid || name.untouched">
+                                <span *ngIf="name.errors && name.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Tên!
+                                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="email">
+            Email <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.email" #email="ngModel" type="text" id="email"
+                   name="email"
+                   required
+                   class="form-control"
+                   placeholder="Email">
+            <div [hidden]="email.valid || email.untouched">
+                                <span *ngIf="email.errors && email.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Email!
+                                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="password">
+            Password <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.password" #password="ngModel" type="password" id="password"
+                   name="password"
+                   required
+                   class="form-control"
+                   placeholder="Password">
+            <div [hidden]="password.valid || password.untouched">
+                                <span *ngIf="password.errors && password.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập password!
+                                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="c_password">
+            Nhập lại password <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.c_password" #c_password="ngModel" type="password" id="c_password"
+                   name="c_password"
+                   required
+                   class="form-control"
+                   placeholder="Nhập lại password">
+            <div [hidden]="c_password.valid || c_password.untouched">
+                                <span *ngIf="c_password.errors && c_password.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập lại password!
+                                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="phone_number">
+            Số điện thoại <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.phone_number" #phone_number="ngModel" type="text" id="phone_number"
+                   name="phone_number"
+                   required
+                   class="form-control"
+                   placeholder="Số điện thoại">
+            <div [hidden]="phone_number.valid || phone_number.untouched">
+                                <span *ngIf="phone_number.errors && phone_number.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Số điện thoại!
+                                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="role_id">
+            Vai trò<code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <select [(ngModel)]="userService.user.role_id" #role_id="ngModel"
+                    required class="form-control"
+                    name="role_id" id="role_id">
+                <option value="null">Chọn vai trò ...</option>
+                <option *ngFor="let role of roles" [value]="role.id">
+                    {{role.name}}
+                </option>
+            </select>
+            <div [hidden]="role_id.valid || role_id.untouched">
+                <span *ngIf="role_id.errors && role_id.errors.required"
+                      class="badge badge-warning">
+                    Phải chọn vai trò!
+                </span>
+            </div>
+        </div>
+    </div>
+</form>

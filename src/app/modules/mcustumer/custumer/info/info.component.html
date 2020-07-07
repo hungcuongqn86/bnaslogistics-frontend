@@ -1,0 +1,108 @@
+<form novalidate #form="ngForm" class="form-horizontal">
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="name">
+            Tên <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input disabled [(ngModel)]="userService.user.name" #name="ngModel" type="text" id="name"
+                   name="name"
+                   required
+                   class="form-control"
+                   placeholder="Tên">
+            <div [hidden]="name.valid || name.untouched">
+                                <span *ngIf="name.errors && name.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Tên!
+                                </span>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="authService.hasRole('admin')" class="form-group row">
+        <label class="col-md-3 col-form-label" for="email">
+            Email <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input disabled [(ngModel)]="userService.user.email" #email="ngModel" type="text" id="email"
+                   name="email"
+                   required
+                   class="form-control"
+                   placeholder="Email">
+            <div [hidden]="email.valid || email.untouched">
+                                <span *ngIf="email.errors && email.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Email!
+                                </span>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="authService.hasRole('admin')" class="form-group row">
+        <label class="col-md-3 col-form-label" for="phone_number">
+            Số điện thoại <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input disabled [(ngModel)]="userService.user.phone_number" #phone_number="ngModel" type="text"
+                   id="phone_number"
+                   name="phone_number"
+                   required
+                   class="form-control"
+                   placeholder="Số điện thoại">
+            <div [hidden]="phone_number.valid || phone_number.untouched">
+                                <span *ngIf="phone_number.errors && phone_number.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Số điện thoại!
+                                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="cost_percent">
+            Chiết khấu phí dự kiến (%) <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.cost_percent" #cost_percent="ngModel" type="text" id="cost_percent"
+                   name="cost_percent"
+                   required
+                   class="form-control"
+                   placeholder="Phí dự kiến (%)">
+            <div [hidden]="cost_percent.valid || cost_percent.untouched">
+                                <span *ngIf="cost_percent.errors && cost_percent.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Phí dự kiến!
+                                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="deposit">
+            Các mức đặt cọc (phân cách nhau bởi dấu ',')
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.deposit" #deposit="ngModel" type="text" id="deposit"
+                   name="deposit"
+                   class="form-control"
+                   placeholder="Các mức đặt cọc">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="rate">
+            Tỉ giá
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.rate" #rate="ngModel" type="text" id="rate"
+                   name="rate"
+                   class="form-control"
+                   placeholder="Tỉ giá">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="weight_price">
+            Giá cân nặng
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.weight_price" #weight_price="ngModel" type="text" id="weight_price"
+                   name="weight_price"
+                   class="form-control"
+                   placeholder="Giá cân nặng">
+        </div>
+    </div>
+</form>

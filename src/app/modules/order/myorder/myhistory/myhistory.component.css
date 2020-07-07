@@ -1,0 +1,10 @@
+@media (max-width: 767px) {
+    .card-body {
+        overflow: auto;
+        padding: 15px 5px;
+    }
+
+    .table-data {
+        width: max-content;
+    }
+}

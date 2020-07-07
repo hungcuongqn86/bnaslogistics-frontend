@@ -1,0 +1,174 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> <strong>Danh sách đơn hàng</strong>
+                </div>
+                <tabset>
+                    <tab>
+                        <ng-template tabHeading>
+                            <div class="tab-title" (click)="selectTab()">
+                                <i class="icon-list"></i> &nbsp;Tất cả
+                            </div>
+                        </ng-template>
+                    </tab>
+                    <tab *ngFor="let item of status">
+                        <ng-template tabHeading>
+                            <div style="padding: 10px;" (click)="selectTab(item.id)">&nbsp;{{item.name}} <span
+                                    class="badge badge-pill badge-danger">{{ item.id | tempCountByStatus : counts}}</span>
+                            </div>
+                        </ng-template>
+                    </tab>
+                </tabset>
+                <div class="card-body">
+                    <form novalidate (ngSubmit)="searchOrders()" #form="ngForm">
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <input [(ngModel)]="orderService.search.code" type="text" id="code" name="code"
+                                       class="form-control"
+                                       placeholder="Mã đơn hàng">
+                            </div>
+                            <div class="col-md-2">
+                                <input [(ngModel)]="orderService.search.package_code" type="text" id="package_code"
+                                       name="package_code"
+                                       class="form-control"
+                                       placeholder="Mã vận đơn">
+                            </div>
+                          <div class="col-md-2">
+                            <input [(ngModel)]="orderService.search.contract_code" type="text" id="contract_code"
+                                   name="contract_code"
+                                   class="form-control"
+                                   placeholder="Mã hợp đồng">
+                          </div>
+                            <div class="col-md-3">
+                                <input [(ngModel)]="orderService.search.key" type="text" id="key" name="key"
+                                       class="form-control"
+                                       placeholder="Tìm kiếm theo tên khách hàng, email, số điện thoại, shop (tên cửa hàng)">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" (click)="searchOrders()"
+                                        class="btn btn-primary">Tìm kiếm
+                                </button>
+                                <button class="btn btn-brand btn-vine mr-1" style="margin: 0 4px" type="button"
+                                        (click)="exportOrders()"><i
+                                        class="fa fa-file-excel-o"></i><span>Excel</span></button>
+                            </div>
+                        </div>
+                    </form>
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="orderService.search.page"
+                                [itemsPerPage]="orderService.search.limit"
+                                (pageChanged)="pageChanged($event)"
+                                class="pagination-sm pull-right" [maxSize]="6"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                lastText="&raquo;"></pagination>
+                    <table class="table table-bordered table-data">
+                        <thead>
+                        <tr>
+                            <th>Đơn hàng</th>
+                            <th>Khách hàng</th>
+                            <th style="width: 25%; min-width: 250px;">Tiền hàng</th>
+                            <th style="width: 7%; min-width: 80px;" class="text-right">Tác vụ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of orders">
+                          <td>
+                            <p *ngIf="item.shipping===1">
+                              <span class="badge badge-warning"> Đơn ký gửi</span>
+                            </p>
+                            <p>
+                              ID: {{item.id}} <span *ngIf="status"
+                                                    class="badge badge-danger">{{item.status | tempStatus: status}}</span>
+                            </p>
+                            <p>Ngày tạo: {{item.created_at | tempDate}}</p>
+                            <p>
+                              <i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-info"> {{item.shop.name}}</span>
+                            </p>
+                          </td>
+                            <td>
+                                <p><i class="fa fa-user"></i> {{item.user.name}} <span
+                                        *ngIf="authService.hasRole('admin')">- {{item.user.phone_number}}</span></p>
+                                <p *ngIf="authService.hasRole('admin')"><i
+                                        class="fa fa-envelope"></i> {{item.user.email}}</p>
+                            </td>
+                            <td class="text-right">
+                                <p><span class="pull-left">Tiền hàng</span> <span
+                                        class="money">{{item | tempTongTienHang: 1}}</span>
+                                    <sup> đ</sup></p>
+                                <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.thanh_toan"
+                                                                                   class="money">{{item.thanh_toan | tempPrice: 1 : 1}}</span>
+                                    <sup> đ</sup></p>
+                                <p><span class="pull-left">Còn thiếu</span> <span
+                                        class="money">{{item | tempTongTienHang: 2}}</span>
+                                    <sup> đ</sup></p>
+                            </td>
+                            <td class="text-right">
+                                <button (click)="editOrder(item.id)" class="btn btn-sm btn-ghost-primary"
+                                        type="button">
+                                    Chi tiết
+                                </button>
+                                <button *ngIf="item.status===1" (click)="openModal(template,item)"
+                                        class="btn btn-sm btn-ghost-primary"
+                                        type="button">
+                                    Báo giá
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-footer">
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="orderService.search.page"
+                                [itemsPerPage]="orderService.search.limit"
+                                (pageChanged)="pageChanged($event)"
+                                class="pagination-sm pull-right" [maxSize]="6"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                lastText="&raquo;"></pagination>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div><!-- /.container-fluid -->
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title">Báo giá</h5>
+    </div>
+    <div class="modal-body">
+        <form novalidate #form="ngForm">
+            <div class="form-group">
+                <label for="content">Nội dung <code class="highlighter-rouge">*</code></label>
+                <textarea [(ngModel)]="inputBaoGia.content" #content="ngModel" id="content" name="content" rows="3"
+                          class="form-control"
+                          required
+                          placeholder="Nội dung ..."></textarea>
+                <div [hidden]="content.valid || content.untouched">
+                                <span *ngIf="content.errors && content.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập nội dung!
+                                </span>
+                </div>
+            </div>
+            <p></p>
+            <alert type="danger" *ngIf="errorMessage.length > 0">
+                <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+            </alert>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirmBaoGia()">OK</button>
+        <button type="button" class="btn btn-warning" (click)="declineBaoGia()">Cancel</button>
+    </div>
+</ng-template>

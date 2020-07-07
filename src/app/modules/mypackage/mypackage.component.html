@@ -1,0 +1,111 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> <strong>Danh sách kiện hàng</strong>
+                </div>
+                <tabset>
+                    <tab>
+                        <ng-template tabHeading>
+                            <div class="tab-title" (click)="selectTab()">
+                                <i class="icon-list"></i> &nbsp;Tất cả
+                            </div>
+                        </ng-template>
+                    </tab>
+                    <tab *ngFor="let item of pkStatus">
+                        <ng-template tabHeading>
+                            <div style="padding: 10px;" (click)="selectTab(item.id)">&nbsp;{{item.name}} <span
+                                    class="badge badge-pill badge-danger">{{ item.id | tempCountByStatus : counts}}</span>
+                            </div>
+                        </ng-template>
+                    </tab>
+                </tabset>
+                <div class="card-body">
+                    <form novalidate (ngSubmit)="searchPackages()" #form="ngForm">
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <input [(ngModel)]="packageService.search.package_code" type="text" id="package_code"
+                                       name="package_code"
+                                       class="form-control"
+                                       placeholder="Mã vận đơn">
+                            </div>
+                            <div class="col-md-2">
+                                <input [(ngModel)]="packageService.search.code" type="text" id="code" name="code"
+                                       class="form-control"
+                                       placeholder="Mã đơn hàng">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" (click)="searchPackages()"
+                                        class="btn btn-primary">Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th style="width: 40%">Kiện hàng</th>
+                            <th>Đơn hàng</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of packages">
+                            <td>
+                                <p class="text-center packages-code">{{item.package_code? item.package_code : '--'}}</p>
+                                <p class="text-center"><span class="packages-status badge badge-info">{{item.status | tempPkStatus :
+                                    pkStatus}}</span></p>
+                                <p>
+                                    <span class="packages-inf">Cân nặng</span>
+                                    <span class="packages-inf text-right badge badge-info">{{item.weight? item.weight : '0.00'}}</span>
+                                </p>
+                                <p>
+                                    <span class="packages-inf">Quy đổi</span>
+                                    <span class="packages-inf text-right badge badge-info">{{item.weight_qd? item.weight_qd : '0.00'}}</span>
+                                </p>
+                                <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
+                                                                                (click)="gotoOrder(item.order_id)"><span
+                                        class="packages-inf text-right"><strong>{{item.order_id}}</strong></span></a>
+                                </p>
+                                <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
+                                </p>
+                                <p><span class="packages-inf">Tên shop</span><span *ngIf="item.order.shop"
+                                                                                   class="packages-inf text-right">{{item.order.shop.name}}</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><i class="fa fa-qrcode"></i> Mã đơn: {{item.order.id}}</p>
+                                <p><i class="fa fa-calendar"></i> Ngày tạo: {{item.order.created_at | tempDate}}</p>
+                                <p *ngIf="!nv"><i class="fa fa-money"></i> Tổng tiền: {{item.order | tempTongTienHang : 1}} <sup>
+                                    đ</sup>
+                                </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-footer">
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems"
+                                [(ngModel)]="packageService.search.page"
+                                [itemsPerPage]="packageService.search.limit"
+                                (pageChanged)="pageChanged($event)"
+                                class="pagination-sm pull-right" [maxSize]="6"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                lastText="&raquo;"></pagination>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div><!-- /.container-fluid -->

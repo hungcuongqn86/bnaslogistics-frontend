@@ -1,0 +1,28 @@
+.bg-success {
+    background-color: #dff0d8 !important;
+    color: #333;
+}
+
+h4, .h4 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 12px;
+}
+
+.toolbar {
+    display: inline-block;
+    position: fixed;
+    z-index: 9999;
+    width: calc(100% - 200px);
+    bottom: 0;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 15px 0;
+    border-top: 3px solid #ccc;
+}
+
+.toolbar button {
+    margin: 3px;
+}

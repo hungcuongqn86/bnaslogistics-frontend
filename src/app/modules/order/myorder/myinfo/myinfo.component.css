@@ -1,0 +1,49 @@
+img {
+    max-width: 100px;
+}
+
+.yl-bg {
+    background: bisque;
+}
+
+.comment-content {
+    height: 200px;
+    padding: 0.25rem;
+    overflow: auto;
+}
+
+.comment-item {
+    padding: 5px 5px 5px;
+    margin-top: 2px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #e0edff;
+}
+
+.admin-comment-item {
+    background-color: beige;
+}
+
+.card-footer {
+    padding: 5px;
+}
+
+.card-footer .form-group{
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    .card-body {
+        overflow: auto;
+        padding: 15px 5px;
+    }
+
+    .table-data {
+        width: max-content;
+    }
+}
+
+.bang_phi p {
+    margin: 3px 0;
+    border-bottom: 1px dotted #ddd;
+}

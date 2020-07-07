@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\layout",
+    "\\src\\app\\layout\\default-layout",
+    "\\src\\app\\modules",
+    "\\src\\app\\modules\\order",
+    "\\src\\app\\modules\\order\\order",
+    "\\src\\app\\modules\\package",
+    "\\src\\scss"
+  ],
+  "SelectedNode": "\\src\\app\\layout\\default-layout\\default-layout.component.ts",
+  "PreviewInSolutionExplorer": false
+}

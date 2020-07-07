@@ -1,0 +1,241 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <a class="btn" href="javascript:void(0)" (click)="backlist()"
+               target="_blank"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Phiếu xuất kho</strong>
+                </div>
+                <div *ngIf="bill" id="printarea" class="card-body">
+                    <h3 class="text-center">PHIẾU XUẤT KHO</h3>
+                    <p class="text-center"><i>(Mã phiếu <b>{{bill.id}}</b>)</i> Hà Nội</p>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h4 class="">Thông tin khách</h4>
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                <tr>
+                                    <td>Khách</td>
+                                    <td>{{bill.user.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><p *ngIf="authService.hasRole('admin')">{{bill.user.email}}</p></td>
+                                </tr>
+                                <tr>
+                                    <td>Điện thoại</td>
+                                    <td><p *ngIf="authService.hasRole('admin')">{{bill.user.phone_number}}</p></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-7">
+                            <h4>Tiền cần thanh toán (đơn vị đ)</h4>
+                            <table class="table">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>a. Tiền (2+3+4+5)</td>
+                                    <td class="text-right">
+                                        {{(report.tong_tien_can + report.tong_thanh_ly).toString() | tempPrice: 1 : 1 : true}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>b. Số dư hiện tại</td>
+                                    <td class="text-right">{{bill.user.debt.toString() | tempPrice: 1 : 1 : true}}</td>
+                                </tr>
+                                <tr *ngIf="bill && bill.status===1">
+                                    <td>Số dư sau khi xuất kho (b - a)</td>
+                                    <td class="text-right">{{(bill.user.debt - (report.tong_tien_can +
+                                        report.tong_thanh_ly)).toString() | tempPrice: 1 : 1 : true}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4 class="">Thông tin phiếu xuất (đơn vị đ)</h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="">
+                                    <th>1. Cân nặng(kg)</th>
+                                    <th>2. Tiền cân</th>
+                                    <th>3. Đóng gỗ</th>
+                                    <th>4. Vận chuyển phát sinh</th>
+                                    <th>5. Thanh lý</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="text-center">{{report.tong_can_nang}}</td>
+                                    <td class="text-right  bold">{{report.tong_tien_can | tempPrice: 1 : 1}}
+                                    </td>
+                                    <td class="bold text-right">0</td>
+                                    <td class="bold text-right">0</td>
+                                    <td class="text-right bold "> {{report.tong_thanh_ly | tempPrice: 1 : 1}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="g-no-print">Thông tin gói hàng</h4>
+                        <p class="text-right"><i>Công thức quy đổi: (kg) = Dài (cm) x rộng (cm) x cao (cm)/ 6000</i></p>
+                        <table class="table table-bordered  lading_table" style="cursor: pointer;">
+                            <thead>
+                            <tr>
+                                <th>##</th>
+                                <th class="text-center">Mã kiện</th>
+                                <th class="text-center">Đơn hàng</th>
+                                <th class="text-center">Thanh lý(đ)</th>
+                                <th class="text-center">Dịch vụ</th>
+                                <th class="text-center">Cân nặng</th>
+                                <th class="text-center">Quy đổi(kg)</th>
+                                <th class="text-center">Đơn giá(đ)</th>
+                                <th class="text-center">Thành tiền(đ)</th>
+                                <th class="text-center">Đóng gỗ(đ)</th>
+                                <th class="text-center">Cước vận chuyển <br> phát sinh</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ng-template ngFor let-item [ngForOf]="bill.package" let-i="index">
+                                <tr>
+                                    <td class="text-center">{{i + 1}}</td>
+                                    <td>
+                                        <span>
+                                            <a target="_blank"
+                                               href="./package/{{item.package_code}}">
+                                                {{item.package_code}}
+                                            </a>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="./order/list/detail/{{item.order.id}}"
+                                           target="_blank">{{item.order.id}}</a>
+                                    </td>
+                                    <td class="text-right"><p *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
+                                        tempPrice: 1 : 1}}</p></td>
+                                    <td><br></td>
+                                    <td class="text-right">{{item.weight}}</td>
+                                    <td class="text-right">{{item.weight_qd}}</td>
+                                    <td class="text-right"><p *ngIf="item.gia_can">{{item.gia_can |
+                                        tempPrice: 1 : 1}}</p></td>
+                                    <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can |
+                                        tempPrice: 1 : 1}}</p>
+                                    </td>
+                                    <td class="text-right">0</td>
+                                    <td class="text-right ">0</td>
+                                </tr>
+                            </ng-template>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="text-right ">{{report.tong_thanh_ly | tempPrice: 1 : 1}}</td>
+                                <td colspan="4"></td>
+                                <td class="text-right ">{{report.tong_tien_can | tempPrice: 1 : 1}}</td>
+                                <td class="text-right ">0</td>
+                                <td class="text-right ">0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="detail-link">
+                        <h4>Chi tiết link</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Mã đơn</th>
+                                <th>Mã link</th>
+                                <th>Mô tả màu sắc</th>
+                                <th>Kích thước</th>
+                                <th>Ghi chú</th>
+                                <th>Giá</th>
+                                <th>SL đặt</th>
+                                <th>Còn lại</th>
+                                <th>Xuất kho</th>
+                                <th>Ghi chú kho</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ng-template ngFor let-item [ngForOf]="carts" let-i="index">
+                                <tr class="bg-success">
+                                    <td><a href="./order/list/detail/{{item.order_id}}"
+                                           target="_blank">{{item.order_id}}</a></td>
+                                    <td>
+                                        <a href="{{item.pro_link}}"
+                                           target="_blank"> {{item.id}}</a></td>
+                                    <td>{{item.colortxt}}</td>
+                                    <td>{{item.sizetxt}}</td>
+                                    <td>{{item.note}}</td>
+                                    <td class="text-right">{{item.price | tempPrice: 1 : 1 : false}}</td>
+                                    <td class="text-right">{{item.amount}}</td>
+                                    <td class="text-right">0</td>
+                                    <td class="text-right">{{item.amount}}</td>
+                                    <td>
+                                        <span class="text-right view-field lack_note"></span>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-right">Ngày <b>{{date}}</b></p>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="text-left">Khách hàng</th>
+                            <th class="text-right">Nhân viên xuất kho</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="height: 50px;" colspan="4" tabindex="1"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">{{bill.user.name}}</td>
+                            <td class="text-right">{{bill.employee.name}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+</div>
+<div class="toolbar">
+    <button onclick="window.print();" class="btn btn-sm btn-primary"
+            type="button">
+        In
+    </button>
+    <button *ngIf="bill && bill.status===1" class="btn btn-sm btn-primary" (click)="xuatKho(bill, template)"
+            type="button">
+        Xuất kho
+    </button>
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title">Thông báo từ hệ thống!</h5>
+    </div>
+    <div class="modal-body">
+        <alert type="danger" *ngIf="errorMessage.length > 0">
+            <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+        </alert>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="decline()">OK</button>
+    </div>
+</ng-template>

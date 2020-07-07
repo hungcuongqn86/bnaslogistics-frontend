@@ -1,0 +1,149 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> <strong>Danh sách khách hàng có thể xuất kho</strong>
+                </div>
+                <div class="card-body">
+                    <form novalidate (ngSubmit)="searchWarehouseWait()" #form="ngForm">
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <input [(ngModel)]="warehouseService.waitSearch.email" type="text" id="email"
+                                       name="email"
+                                       class="form-control"
+                                       placeholder="Email">
+                            </div>
+                            <div class="col-md-2">
+                                <input [(ngModel)]="warehouseService.waitSearch.package_code" type="text"
+                                       id="package_code"
+                                       name="package_code"
+                                       class="form-control"
+                                       placeholder="Mã vận đơn">
+                            </div>
+                            <div class="col-md-2">
+                                <input [(ngModel)]="warehouseService.waitSearch.code" type="text" id="code" name="code"
+                                       class="form-control"
+                                       placeholder="Mã đơn hàng">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" (click)="searchWarehouseWait()"
+                                        class="btn btn-primary">Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Khách hàng</th>
+                            <th>Thông tin xuất kho</th>
+                            <th width="25%" class="text-left">Thông tin thêm</th>
+                            <th width="18%">Ghi chú</th>
+                            <th width="5%" class="text-right">Tác vụ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of warehouseWait">
+                            <td>
+                                <p *ngIf="authService.hasRole('admin')">{{item.email}}</p>
+                                <p>{{item.name}}</p>
+                                <p *ngIf="authService.hasRole('admin')">{{item.phone_number}}</p>
+                            </td>
+                            <td>
+                                <p>
+                                    <button (click)="checkBill(item)" class="btn btn-sm btn-ghost-primary"
+                                            type="button">
+                                        Xem tiền thiếu
+                                    </button>
+                                </p>
+
+                                <p *ngIf="item.tien_xuat_kho">
+                                    <span class="packages-inf">Số dư</span>
+                                    <span class="packages-inf text-right badge badge-info">
+                                        <span>{{item.debt | tempPrice: 1 : 1 : false}}</span>
+                                    </span>
+                                </p>
+
+                                <p *ngIf="item.tien_xuat_kho">
+                                    <span class="packages-inf">Tiền xuất kho</span>
+                                    <span class="packages-inf text-right badge badge-info">
+                                        <span>{{item.tien_xuat_kho | tempPrice: 1 : 1 :
+                                    false}}</span>
+                                    </span>
+                                </p>
+
+                                <p *ngIf="item.tien_xuat_kho">
+                                    <span class="packages-inf">Số dư sau xuất kho</span>
+                                    <span class="packages-inf text-right badge badge-info">
+                                        <span>{{item.tien_thieu_xuat_kho |
+                                    tempPrice: 1 : 1 : false}}</span>
+                                    </span>
+                                </p>
+                            </td>
+                            <td class="text-right">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Số lượng</th>
+                                        <th class="text-left">Mã vận đơn</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{item.package.length}}</td>
+                                        <td class="text-left">
+                                            <p *ngFor="let package of item.package">{{package.package_code}} /
+                                                {{package.weight_qd ? package.weight_qd : '0.00'}}</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td></td>
+                            <td class="text-right">
+                                <button (click)="bill(item, template)" class="btn btn-sm btn-ghost-primary"
+                                        type="button">
+                                    Tạo phiếu
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems"
+                                [(ngModel)]="warehouseService.waitSearch.page"
+                                [itemsPerPage]="warehouseService.waitSearch.limit"
+                                (pageChanged)="pageChanged($event)"
+                                class="pagination-sm pull-right" [maxSize]="6"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                lastText="&raquo;"></pagination>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div><!-- /.container-fluid -->
+
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title">Thông báo từ hệ thống!</h5>
+    </div>
+    <div class="modal-body">
+        <alert type="danger" *ngIf="errorMessage.length > 0">
+            <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+        </alert>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="decline()">OK</button>
+    </div>
+</ng-template>

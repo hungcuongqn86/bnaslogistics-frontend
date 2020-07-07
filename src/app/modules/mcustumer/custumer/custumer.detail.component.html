@@ -1,0 +1,41 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <a *ngIf="authService.hasRole('admin')" class="btn" href="javascript:void(0)"
+               (click)="userService.updateUser()"><i class="fa fa-check-square"></i>
+                &nbsp;Cập nhật</a>
+            <a class="btn" href="javascript:void(0)" (click)="backlist()"
+               target="_blank"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Chi tiết khách hàng</strong>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12 mb-4">
+                        <!-- Nav tabs -->
+                        <tabset>
+                            <tab>
+                                <ng-template tabHeading><i class="icon-list"></i> &nbsp;Thông tin</ng-template>
+                                <app-mcustumer-custumer-detail-info></app-mcustumer-custumer-detail-info>
+                            </tab>
+                            <tab>
+                                <ng-template tabHeading><i class="icon-list"></i> &nbsp;Lịch sử giao dịch</ng-template>
+                                <app-mcustumer-custumer-detail-transaction></app-mcustumer-custumer-detail-transaction>
+                            </tab>
+                        </tabset>
+                    </div><!--/.col-->
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+</div>

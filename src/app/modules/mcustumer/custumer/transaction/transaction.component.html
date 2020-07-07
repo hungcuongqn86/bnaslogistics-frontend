@@ -1,0 +1,125 @@
+<div class="card">
+    <div class="card-header"><i class="cui-user icons"></i> <strong>{{userService.user.name}}</strong>
+        <div class="card-header-actions">
+            <button *ngIf="authService.hasRole('admin')" (click)="addTransaction(templateAddTransaction)"
+                    class="btn btn-block btn-outline-primary btn-sm"
+                    type="button">Thêm
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+            <tr>
+                <th>Ngày giao dịch</th>
+                <th>Mã giao dịch</th>
+                <th>Loại giao dịch</th>
+                <th>Nội dung</th>
+                <th class="text-right">Giá trị</th>
+                <th class="text-right">Dư nợ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of transactions; let i = index">
+                <td>{{item.created_at}}</td>
+                <td>{{item.code}}</td>
+                <td>
+                    <span *ngIf="item.otype.value > 0" class="badge badge-success">{{item.otype.name}}</span>
+                    <span *ngIf="item.otype.value < 0" class="badge badge-warning">{{item.otype.name}}</span>
+                </td>
+                <td>{{item.content}}</td>
+                <td class="text-right">
+                    <span *ngIf="item.otype.value > 0" class="badge badge-success float-left">+</span>
+                    <span *ngIf="item.otype.value < 0" class="badge badge-warning float-left">-</span>{{item.value |
+                    tempPrice : 1 : 1}} <sup>đ</sup>
+                </td>
+                <td *ngIf="i===0" class="text-right"><span class="badge badge-danger">{{item.debt | tempPrice : 1 : 1}} <sup>đ</sup></span>
+                </td>
+                <td *ngIf="i>0" class="text-right">{{item.debt | tempPrice : 1 : 1}} <sup>đ</sup></td>
+            </tr>
+            </tbody>
+        </table>
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.tSearch.page"
+                    [itemsPerPage]="userService.tSearch.limit"
+                    (pageChanged)="pageChanged($event)"
+                    class="pagination-sm pull-right" [maxSize]="6"
+                    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                    lastText="&raquo;"></pagination>
+    </div>
+</div>
+<ng-template #templateAddTransaction>
+    <div class="modal-header">
+        <h5 class="modal-title">Thêm giao dịch</h5>
+    </div>
+    <div class="modal-body">
+        <form novalidate #form="ngForm">
+            <div class="form-group">
+                <label for="code">Mã giao dịch <code class="highlighter-rouge">*</code></label>
+                <input [(ngModel)]="userService.transaction.code" #code="ngModel" class="form-control" id="code"
+                       name="code"
+                       placeholder="Nhập mã giao dịch"
+                       type="text">
+                <div [hidden]="code.valid || code.untouched">
+                                <span *ngIf="code.errors && code.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Mã giao dịch!
+                                </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="type">Loại giao dịch <code class="highlighter-rouge">*</code></label>
+                <select [(ngModel)]="userService.transaction.type" #type="ngModel"
+                        id="type"
+                        name="type"
+                        class="form-control">
+                    <option value="null">Chọn loại giao dịch</option>
+                    <option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</option>
+                </select>
+                <div [hidden]="type.valid || type.untouched">
+                                <span *ngIf="type.errors && type.errors.required"
+                                      class="badge badge-warning">
+                                    Phải chọn loại giao dịch!
+                                </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="type">Tài khoản ngân hàng <code class="highlighter-rouge">*</code></label>
+                <select [(ngModel)]="userService.transaction.bank_account" #bank_account="ngModel"
+                        id="bank_account"
+                        name="bank_account"
+                        class="form-control">
+                    <option value="null">Chọn tài khoản ngân hàng</option>
+                    <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
+                </select>
+                <div [hidden]="bank_account.valid || bank_account.untouched">
+                                <span *ngIf="bank_account.errors && bank_account.errors.required"
+                                      class="badge badge-warning">
+                                    Phải chọn tài khoản giao dịch!
+                                </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="value">Giá trị <code class="highlighter-rouge">*</code></label>
+                <input [(ngModel)]="userService.transaction.value" #value="ngModel" class="form-control" id="value"
+                       name="value"
+                       placeholder="Giá trị giao dịch"
+                       type="number">
+                <div [hidden]="value.valid || value.untouched">
+                                <span *ngIf="value.errors && value.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập giá trị giao dịch!
+                                </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="content">Nội dung</label>
+                <textarea [(ngModel)]="userService.transaction.content" class="form-control" id="content" name="content"
+                          placeholder="..." rows="3"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+        <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
+    </div>
+</ng-template>

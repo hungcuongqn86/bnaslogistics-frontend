@@ -1,0 +1,13 @@
+.pager li.btn:active {
+    box-shadow: none;
+}
+
+@media (max-width: 767px) {
+    .card-body {
+        overflow: auto;
+    }
+
+    .table-data {
+        width: max-content;
+    }
+}

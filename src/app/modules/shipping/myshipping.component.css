@@ -1,0 +1,58 @@
+img {
+    max-width: 100%;
+}
+@media (max-width: 767px) {
+    .card-body {
+        overflow: auto;
+    }
+
+    .table-data {
+        width: max-content;
+    }
+}
+.pager li.btn:active {
+  box-shadow: none;
+}
+
+.tab-container {
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+  .tab-container .tab-content {
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    height: 0;
+  }
+
+ul.nav-tabs li.nav-item:first-child {
+  margin-left: 20px;
+}
+
+ul.nav-tabs li.nav-item .nav-link {
+  padding: 0;
+}
+
+  ul.nav-tabs li.nav-item .nav-link .tab-title {
+    padding: 10px;
+  }
+
+.table p {
+  margin: 3px 0;
+  border-bottom: 1px dotted #ddd;
+}
+
+  .table p span.money {
+    color: #a94442;
+  }
+
+@media (max-width: 767px) {
+  .card-body {
+    overflow: auto;
+  }
+
+  .table-data {
+    width: max-content;
+  }
+}

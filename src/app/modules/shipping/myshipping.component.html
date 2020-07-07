@@ -1,0 +1,168 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-cubes"></i> Danh sách yêu cầu đã tạo
+                </div>
+                <div class="card-body">
+                    <form novalidate (ngSubmit)="getShippings()" #form="ngForm">
+                      <div class="form-group row">
+                        <div class="col-md-3">
+                          <input [(ngModel)]="shippingService.search.code" type="text" id="code" name="code"
+                                 class="form-control"
+                                 placeholder="Nhập mã yêu cầu ">
+                        </div>
+
+                        <div class="col-md-3">
+                          <input [(ngModel)]="shippingService.search.key" type="text" id="key" name="key"
+                                 class="form-control"
+                                 placeholder="Nhập từ tìm kiếm ">
+                        </div>
+                        <div class="col-md-2">
+                          <button type="button" (click)="getShippings()"
+                                  class="btn btn-primary">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            Tìm kiếm
+                          </button>
+
+                          <button type="button" (click)="addShipping(templateShipping)" style="margin-left: 10px;"
+                                  class="btn btn-primary">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Thêm yêu cầu
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Mã yêu cầu</th>
+                            <th>Thông tin</th>
+                            <th>Số kiện</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                            <th width="10%">Tác vụ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of shippings">
+                            <td>{{item.id}}</td>
+                            <td>{{item.content}}</td>
+                            <td>{{item.package_count}}</td>
+                            <td>{{item.created_at | tempDate}}</td>
+                            <td>
+                              <p><span class="badge badge-info">{{item.statusname}}</span></p>
+                              <p *ngIf="item.status==2">
+                                Mã đơn hàng:
+                                <a href="javascript:void(0);" (click)="gotoOrder(item.order_id)">
+                                  <span><strong>{{item.order_id}}</strong></span>
+                                </a>
+                              </p>
+                            </td>
+                            <td>
+                              <button (click)="editShipping(item.id, templateShipping)"
+                                      class="btn btn-sm btn-primary"
+                                      style="margin-right: 10px;"
+                                      type="button">
+                                Chi tiết
+                              </button>
+                              <button *ngIf="item.status==1" (click)="openModalDelete(deltemplate, item)"
+                                      class="btn btn-sm btn-warning"
+                                      style="margin-right: 10px;"
+                                      type="button">
+                                Hủy
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-footer">
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="shippingService.search.limit"
+                                [(ngModel)]="shippingService.search.page"
+                                (pageChanged)="pageChanged($event)"
+                                class="pagination-sm pull-right" [maxSize]="6"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                lastText="&raquo;"></pagination>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div><!-- /.container-fluid -->
+
+<ng-template #templateShipping>
+    <div class="modal-header">
+        <h5 class="modal-title">{{title}}</h5>
+    </div>
+    <div class="modal-body">
+      <form novalidate #form="ngForm">
+        <div class="form-group" *ngIf="shippingService.shipping.id">
+          <label for="content">
+            Mã yêu cầu
+          </label>
+          <input [(ngModel)]="shippingService.shipping.id" class="form-control"
+                 id="id"
+                 name="id"
+                 type="text">
+        </div>
+        <div class="form-group">
+          <label for="content">
+            Thông tin yêu cầu <code class="highlighter-rouge">*</code>
+          </label>
+          <textarea [(ngModel)]="shippingService.shipping.content" #content="ngModel" class="form-control" id="content"
+                    name="content" required
+                    placeholder="..." rows="3"></textarea>
+          <div [hidden]="content.valid || content.untouched">
+            <span *ngIf="content.errors && content.errors.required"
+                  class="badge badge-warning">
+              Phải nhập Nội dung thông tin yêu cầu!
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="money_request">
+            Số kiện hàng<code class="highlighter-rouge">*</code>
+          </label>
+          <input [(ngModel)]="shippingService.shipping.package_count" #package_count="ngModel" class="form-control"
+                 id="package_count"
+                 name="package_count"
+                 required
+                 placeholder="Nhập Số kiện hàng"
+                 type="number">
+          <div [hidden]="package_count.valid || package_count.untouched">
+            <span *ngIf="package_count.errors && package_count.errors.required"
+                  class="badge badge-warning">
+              Phải nhập Số kiện hàng!
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+        <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
+    </div>
+</ng-template>
+
+<ng-template #deltemplate>
+  <div class="modal-body text-center">
+    <p>Bạn có chắc chắn muốn hủy yêu cầu này!?</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-warning" (click)="confirmDelete()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
+  </div>
+</ng-template>

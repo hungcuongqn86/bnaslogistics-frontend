@@ -1,0 +1,144 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <a class="btn" href="javascript:void(0)" (click)="ketDonTatCa();">
+                <i class="fa fa-plus"></i> &nbsp;Kết đơn tất cả
+            </a>
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div *ngFor="let shopItem of shops" class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> <strong>{{shopItem.name}}</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <table class="table table-sm">
+                                <thead>
+                                <tr>
+                                    <th width="30%">Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Tỷ giá</th>
+                                    <th>Đơn giá</th>
+                                    <th>Tiền hàng</th>
+                                    <th>#</th>
+                                </tr>
+                                </thead>
+                                <tbody *ngIf="shopItem.cart && shopItem.cart.length > 0">
+                                <ng-template ngFor let-item [ngForOf]="shopItem.cart" let-i="index">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="pull-left">
+                                                <a target="_blank" rel="noopener noreferrer"
+                                                   href="{{item.pro_link}}"><img src="{{item.image}}"></a>
+                                            </div>
+                                            <p *ngIf="item.sizetxt" class="pull-left m-1 colortxt">{{item.sizetxt}}</p>
+                                            <p *ngIf="item.colortxt" class="pull-left m-1 colortxt">{{item.colortxt}}</p>
+                                        </td>
+                                        <td>
+                                            <p><input title="Số lượng" [(ngModel)]="shopItem.cart[i].amount" type="number"
+                                                      (change)="updateCart(shopItem.cart[i]);"
+                                                      id="amount"
+                                                      name="amount" class="form-control"></p>
+                                        </td>
+                                        <td>
+                                          <p *ngIf="!nv">{{item.rate}}</p>
+                                        </td>
+                                        <td>
+                                            <p *ngIf="!nv">{{item.price | tempPrice: item.rate : 1}}<sup>đ</sup></p>
+                                            <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
+                                        </td>
+                                        <td>
+                                            <p *ngIf="!nv">{{item.price | tempPrice: item.rate :
+                                                shopItem.cart[i].amount}}<sup>đ</sup></p>
+                                            <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : shopItem.cart[i].amount :
+                                                false}}</p>
+                                        </td>
+                                        <td><a href="javascript:void(0)" (click)="openModalDeleteCart(template,item)"><i
+                                                class="fa fa-trash-o"
+                                                aria-hidden="true"></i></a><br></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="border-top: none;"><input
+                                                [(ngModel)]="shopItem.cart[i].note" type="text"
+                                                class="form-control"
+                                                placeholder="Ghi chú link"
+                                                (change)="updateCart(shopItem.cart[i])"
+                                                value=""></td>
+                                    </tr>
+                                </ng-template>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div *ngIf="shopItem.cart && shopItem.cart.length > 0" class="col-lg-3">
+                            <table class="table table-sm">
+                                <tbody>
+                                <tr *ngIf="!nv">
+                                    <td>Tiền hàng</td>
+                                    <td>{{shopItem.tien_hang | tempPrice: 1 : 1}}<sup>đ</sup></td>
+                                </tr>
+                                <tr *ngIf="!nv">
+                                    <td>Phí tạm tính</td>
+                                    <td>{{shopItem.phi_tam_tinh | tempPrice: 1 : 1}}<sup>đ</sup></td>
+                                </tr>
+                                <tr *ngIf="!nv">
+                                    <td>#</td>
+                                    <td></td>
+                                </tr>
+                                <tr *ngIf="!nv">
+                                    <td>Tổng</td>
+                                    <td>{{shopItem.tong | tempPrice: 1 : 1}}<sup>đ</sup></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button class="btn btn-block btn-primary" (click)="ketDon(shopItem)"
+                                                type="button">Kết đơn
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <a style="margin-right: 25px;">
+                            <span class="ng-binding">{{shopItem.count_product}}</span><span> / </span><span>{{shopItem.count_link}}</span><span> Link</span>
+                        </a>
+                        <a href="javascript:void(0)" (click)="openModalDeleteShop(template1, shopItem)"><i
+                                class="fa fa-trash-o"
+                                aria-hidden="true"></i> Xóa shop</a><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div><!-- /.container-fluid -->
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>Bạn có chắc chắn muốn xóa sản phẩm này!?</p>
+        <div class="btn-group btn-group-toggle">
+            <button type="button" class="btn btn-warning" (click)="confirmDeleteCart()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="declineDeleteCart()">No</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #template1>
+    <div class="modal-body text-center">
+        <p>Bạn có chắc chắn muốn xóa toàn bộ sản phẩn tại shop này!?</p>
+        <div class="btn-group btn-group-toggle">
+            <button type="button" class="btn btn-warning" (click)="confirmDeleteShop()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="declineDeleteShop()">No</button>
+        </div>
+    </div>
+</ng-template>

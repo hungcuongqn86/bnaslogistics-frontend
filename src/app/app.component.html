@@ -1,0 +1,24 @@
+<router-outlet></router-outlet>
+<app-messages></app-messages>
+<div *ngIf="loadingService.loading" class="loading-over">
+    <div><i class="fa fa-spinner fa-lg fa-spin"></i></div>
+</div>
+
+<div *ngIf="errorMessagesService.errorModalShown" [config]="{ show: true }" (onHidden)="onHidden()" bsModal
+     #autoShownModal="bs-modal"
+     class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+    <div class="modal-dialog modal-sm modal-warning">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left"><i class="fa fa-warning"></i> {{errorMessagesService.formTitle}}</h4>
+            </div>
+            <div class="modal-body">
+                <p><strong><i class="fa fa-warning"></i> {{errorMessagesService.message}}</strong></p>
+                <p *ngFor="let item of errorMessagesService.messages"> {{item}}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" (click)="hideModal()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

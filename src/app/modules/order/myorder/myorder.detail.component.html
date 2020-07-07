@@ -1,0 +1,41 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <!--<a class="btn" href="javascript:void(0)" (click)="backlist()"
+     target="_blank"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>-->
+      </div>
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Chi tiết đơn hàng</strong>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12 mb-4">
+                        <!-- Nav tabs -->
+                        <tabset>
+                            <tab>
+                                <ng-template tabHeading><i class="fa fa-info-circle"></i> &nbsp;Thông tin</ng-template>
+                                <app-myorder-detail-info></app-myorder-detail-info>
+                            </tab>
+                            <tab>
+                                <ng-template tabHeading><i class="icon-list"></i> &nbsp;Lịch sử</ng-template>
+                                <app-order-detail-myhistory></app-order-detail-myhistory>
+                            </tab>
+                            <tab>
+                                <ng-template tabHeading><i class="fa fa-exclamation"></i> &nbsp;Khiếu nại</ng-template>
+                                <app-myorder-detail-complain></app-myorder-detail-complain>
+                            </tab>
+                        </tabset>
+                    </div><!--/.col-->
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+</div>
