@@ -288,7 +288,7 @@ export class OrderService {
 
     public editOrder(order: OrderCreate): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-        return this.http.put<OrderCreate>(url, order)
+        return this.http.post<OrderCreate>(url, order)
             .pipe(
                 catchError(this.handleError('editOrder', order))
             );
@@ -337,7 +337,7 @@ export class OrderService {
 
     public editCart(item: Cart) {
         const url = Util.getUri(apiUrl) + `cart/update`;
-        return this.http.put<any>(url, item)
+        return this.http.post<any>(url, item)
             .pipe(
                 catchError(this.handleError('editCart', item))
             );

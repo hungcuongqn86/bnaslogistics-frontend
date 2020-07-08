@@ -41,7 +41,7 @@ export class CartService {
 
     public updateCart(cart: Cart): Observable<any> {
         const url = Util.getUri(apiUrl) + `${this.moduleUri}update`;
-        return this.http.put<Cart>(url, cart)
+        return this.http.post<Cart>(url, cart)
             .pipe(
                 catchError(this.handleError('updateCart', cart))
             );
@@ -51,7 +51,7 @@ export class CartService {
         const url = Util.getUri(apiUrl) + `${this.moduleUri}update`;
         const res = [];
         for (let i = 0; i < carts.length; i++) {
-            const response = this.http.put<Cart>(url, carts[i]);
+            const response = this.http.post<Cart>(url, carts[i]);
             res.push(response);
         }
         return forkJoin(res);
@@ -59,7 +59,7 @@ export class CartService {
 
     public deleteCart(ids: string) {
         const url = Util.getUri(apiUrl) + `${this.moduleUri}delete`;
-        return this.http.put<any>(url, {ids: ids})
+        return this.http.post<any>(url, {ids: ids})
             .pipe(
                 catchError(this.handleError('updateCart', {ids: ids}))
             );

@@ -144,7 +144,7 @@ export class UserService {
 
     public editUser(user: User): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-        return this.http.put<User>(url, user)
+        return this.http.post<User>(url, user)
             .pipe(
                 catchError(this.handleError('editOwner', user))
             );

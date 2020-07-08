@@ -92,7 +92,7 @@ export class SettingService {
 
     public editSetting(setting: Setting): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-        return this.http.put<Setting>(url, setting)
+        return this.http.post<Setting>(url, setting)
             .pipe(
                 catchError(this.handleError('editSetting', setting))
             );

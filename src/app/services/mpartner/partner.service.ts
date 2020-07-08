@@ -93,7 +93,7 @@ export class PartnerService {
 
     public editPartner(owner: Partner): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-        return this.http.put<Partner>(url, owner)
+        return this.http.post<Partner>(url, owner)
             .pipe(
                 catchError(this.handleError('editPartner', owner))
             );
