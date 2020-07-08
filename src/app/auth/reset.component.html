@@ -1,0 +1,41 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <form #form="ngForm" id="login-form">
+                <p class="text-muted">Nhập email đã đăng ký</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                  </div>
+                  <input [(ngModel)]="resetPass.email" #email="ngModel" id="email"
+                         name="email" type="text" class="form-control" placeholder="Email" required>
+                  <div [hidden]="email.valid || email.untouched" class="message-valid">
+                                        <span *ngIf="email.errors && email.errors.required"
+                                              class="badge badge-warning">
+                                            Phải nhập Email!
+                                        </span>
+                  </div>
+                </div>
+                <div *ngIf="rError" class="alert alert-warning">
+                  <strong><i class="fa fa-exclamation-triangle"
+                             aria-hidden="true"></i> Warning!</strong> {{alert}}
+                </div>
+                <div *ngIf="sSuccess" class="alert alert-success">
+                  <strong><i class="fa fa-exclamation-triangle"
+                             aria-hidden="true"></i> Success!</strong> {{alert}}
+                </div>
+                <button *ngIf="!sSuccess" [disabled]="!form.form.valid" (click)="sendEmailResetPass()" type="button"
+                        class="btn btn-block btn-success">OK
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -11,12 +11,15 @@ import {RequestCache, RequestCacheWithMap} from './request-cache.service';
 
 import {AppComponent} from './app.component';
 import {AuthService} from './auth.service';
-import { FirebaseService} from './firebase.service';
+import {FirebaseService} from './firebase.service';
 import {HttpErrorHandler} from './http-error-handler.service';
 import {LoadingService} from './loading.service';
 import {MessagesComponent} from './messages/messages.component';
 import {Error404Component} from './messages/error404.component';
 import {LoginComponent} from './auth/login.component';
+import {ResetComponent} from './auth/reset.component';
+import {ResetPasswordComponent} from './auth/reset.password.component';
+import {ActiveComponent} from './auth/active.component';
 import {RegisterComponent} from './auth/register.component';
 import {MessageService} from './message.service';
 import {ErrorMessagesService} from './error.messages.service';
@@ -31,21 +34,21 @@ import {PERFECT_SCROLLBAR_CONFIG} from 'ngx-perfect-scrollbar';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-    suppressScrollX: true
+  suppressScrollX: true
 };
 
 // Import containers
 import {DefaultLayoutComponent} from './layout';
 
 const APP_CONTAINERS = [
-    DefaultLayoutComponent
+  DefaultLayoutComponent
 ];
 
 import {
-    AppAsideModule,
-    AppHeaderModule,
-    AppFooterModule,
-    AppSidebarModule,
+  AppAsideModule,
+  AppHeaderModule,
+  AppFooterModule,
+  AppSidebarModule,
 } from '@coreui/angular';
 
 import {httpInterceptorProviders} from './http-interceptors';
@@ -55,60 +58,63 @@ import {AppGuard} from './app.guard.service';
 import {captchar_key} from './const';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        // import HttpClientModule after BrowserModule.
-        HttpClientModule,
-        HttpClientXsrfModule.withOptions({
-            cookieName: 'My-Xsrf-Cookie',
-            headerName: 'My-Xsrf-Header',
-        }),
+  imports: [
+    BrowserModule,
+    FormsModule,
+    // import HttpClientModule after BrowserModule.
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'My-Xsrf-Cookie',
+      headerName: 'My-Xsrf-Header',
+    }),
 
-        // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-        // and returns simulated server responses.
-        // Remove it when a real server is ready to receive requests.
-        HttpClientInMemoryWebApiModule.forRoot(
-            InMemoryDataService, {
-                dataEncapsulation: false,
-                passThruUnknownUrl: true,
-                put204: false // return entity after PUT/update
-            }
-        ),
-        routing,
-        AppAsideModule,
-        AppFooterModule,
-        AppHeaderModule,
-        AppSidebarModule,
-        PerfectScrollbarModule,
-        NgxCaptchaModule.forRoot({
-            reCaptcha2SiteKey: captchar_key
-        }),
-        TabsModule.forRoot(),
-        BsDropdownModule.forRoot(),
-        SharedModule.forRoot()
-    ],
-    declarations: [
-        AppComponent,
-        ...APP_CONTAINERS,
-        MessagesComponent,
-        Error404Component,
-        LoginComponent,
-        RegisterComponent
-    ],
-    providers: [
-        AppGuard,
-      AuthService,
-      FirebaseService,
-        HttpErrorHandler,
-        LoadingService,
-        MessageService,
-        ErrorMessagesService,
-        OrderService,
-        {provide: RequestCache, useClass: RequestCacheWithMap},
-        httpInterceptorProviders
-    ],
-    bootstrap: [AppComponent]
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {
+        dataEncapsulation: false,
+        passThruUnknownUrl: true,
+        put204: false // return entity after PUT/update
+      }
+    ),
+    routing,
+    AppAsideModule,
+    AppFooterModule,
+    AppHeaderModule,
+    AppSidebarModule,
+    PerfectScrollbarModule,
+    NgxCaptchaModule.forRoot({
+      reCaptcha2SiteKey: captchar_key
+    }),
+    TabsModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    SharedModule.forRoot()
+  ],
+  declarations: [
+    AppComponent,
+    ...APP_CONTAINERS,
+    MessagesComponent,
+    Error404Component,
+    LoginComponent,
+    RegisterComponent,
+    ResetComponent,
+    ResetPasswordComponent,
+    ActiveComponent
+  ],
+  providers: [
+    AppGuard,
+    AuthService,
+    FirebaseService,
+    HttpErrorHandler,
+    LoadingService,
+    MessageService,
+    ErrorMessagesService,
+    OrderService,
+    {provide: RequestCache, useClass: RequestCacheWithMap},
+    httpInterceptorProviders
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
