@@ -7,8 +7,7 @@
             <a *ngIf="authService.hasRole('admin')" class="btn" href="javascript:void(0)"
                (click)="userService.updateUser()"><i class="fa fa-check-square"></i>
                 &nbsp;Cập nhật</a>
-            <a class="btn" href="javascript:void(0)" (click)="backlist()"
-               target="_blank"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
+            <a class="btn" href="javascript:void(0)" (click)="backlist()"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
         </div>
     </li>
 </ol>
