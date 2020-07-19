@@ -115,18 +115,20 @@
                   <sup> đ</sup></p>
               </td>
               <td>
-                <button (click)="openModal(templatePc,item)"
-                        class="btn btn-sm btn-primary"
-                        type="button">
-                  <i class="fa fa-cog" aria-hidden="true"></i>
-                  Phân công
-                </button>
+                <p *ngIf="item.handle">{{item.handle.name}}</p>
+                <p *ngIf="item.content_pc"><i>{{item.content_pc}}</i></p>
               </td>
               <td>
-                <button (click)="editOrder(item.id)" class="btn btn-sm btn-primary"
+                <button (click)="editOrder(item.id)" class="btn btn-sm btn-ghost-primary"
                         type="button">
                   <i class="fa fa-info-circle" aria-hidden="true"></i>
                   Chi tiết
+                </button>
+                <button (click)="openModal(templatePc,item)"
+                        class="btn btn-sm btn-ghost-primary"
+                        type="button">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                  Phân công
                 </button>
               </td>
             </tr>

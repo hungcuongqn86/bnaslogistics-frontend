@@ -50,6 +50,9 @@ export interface Order {
   status: number;
   rate: number;
   shipping: number;
+  hander: number;
+  content_pc: string;
+  handle: User;
   count_product: number;
   count_link: number;
   tien_hang: number;
@@ -129,6 +132,9 @@ export class OrderService {
       shop_id: null,
       rate: 1,
       shipping: 0,
+      hander: 0,
+      content_pc: '',
+      handle: null,
       is_deleted: 0,
       created_at: '',
       updated_at: '',
