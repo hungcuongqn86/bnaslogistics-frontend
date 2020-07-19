@@ -6,116 +6,129 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../../auth.service';
 import {environment} from '../../../../environments/environment';
+import {User} from "../../../models/User";
 
 @Component({
-    selector: 'app-order',
-    templateUrl: './order.component.html',
-    styleUrls: ['./order.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-order',
+  templateUrl: './order.component.html',
+  styleUrls: ['./order.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class OrderComponent implements OnInit, OnDestroy {
-    order: OrderCreate;
-    orders: Order[];
-    counts: { status: number, total: number }[];
-    status: OrderStatus[] = [];
-    totalItems = 0;
-    modalRef: BsModalRef;
-    errorMessage: string[] = [];
-    sub: Subscription;
+  order: OrderCreate;
+  orders: Order[];
+  counts: { status: number, total: number }[];
+  status: OrderStatus[] = [];
+  totalItems = 0;
+  modalRef: BsModalRef;
+  errorMessage: string[] = [];
+  sub: Subscription;
+  handers: User[] = [];
 
-    inputBaoGia = {id: null, content: null};
+  inputBaoGia = {id: null, content: null};
+  inputPhanCong = {id: null, hander: null};
 
-    constructor(public orderService: OrderService, private modalService: BsModalService, public authService: AuthService,
-                private router: Router) {
-        this.counts = null;
+  constructor(public orderService: OrderService, private modalService: BsModalService, public authService: AuthService,
+              private router: Router) {
+    this.counts = null;
+  }
+
+  ngOnInit() {
+    this.searchOrders();
+    this.getStatus();
+    this.getHandles();
+  }
+
+  pageChanged(event: any): void {
+    this.orderService.search.page = event.page;
+    this.searchOrders();
+  }
+
+  public editOrder(id) {
+    const win = window.open(`./order/list/detail/${id}`, '_blank');
+    win.focus();
+  }
+
+  public searchOrders() {
+    this.orderService.showLoading(true);
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
+    this.sub = this.orderService.getOrders()
+      .subscribe(orders => {
+        this.orders = orders.data.data;
+        this.totalItems = orders.data.total;
+        this.getCountByStatus();
+      });
+  }
 
-    ngOnInit() {
-        this.searchOrders();
-        this.getStatus();
+  public exportOrders() {
+    this.orderService.showLoading(true);
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
+    this.sub = this.orderService.exportOrders()
+      .subscribe(data => {
+        window.open(environment.backend + 'exports/' + data.data.file, '_blank');
+        this.orderService.showLoading(false);
+      });
+  }
 
-    pageChanged(event: any): void {
-        this.orderService.search.page = event.page;
-        this.searchOrders();
-    }
+  public getStatus() {
+    this.orderService.showLoading(true);
+    this.orderService.getStatus()
+      .subscribe(orders => {
+        this.status = orders.data;
+        this.orderService.showLoading(false);
+      });
+  }
 
-    public editOrder(id) {
-        const win = window.open(`./order/list/detail/${id}`, '_blank');
-        win.focus();
-    }
+  public getHandles() {
+    this.orderService.showLoading(true);
+    this.orderService.getHandles()
+      .subscribe(handers => {
+        this.handers = handers.data;
+        this.orderService.showLoading(false);
+      });
+  }
 
-    public searchOrders() {
-        this.orderService.showLoading(true);
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
-        this.sub = this.orderService.getOrders()
-            .subscribe(orders => {
-                this.orders = orders.data.data;
-                this.totalItems = orders.data.total;
-                this.getCountByStatus();
-            });
-    }
+  public getCountByStatus() {
+    this.orderService.showLoading(true);
+    this.orderService.getCountByStatus()
+      .subscribe(data => {
+        this.counts = data.data;
+        this.orderService.showLoading(false);
+      });
+  }
 
-    public exportOrders() {
-        this.orderService.showLoading(true);
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
-        this.sub = this.orderService.exportOrders()
-            .subscribe(data => {
-                window.open(environment.backend + 'exports/' + data.data.file, '_blank');
-                this.orderService.showLoading(false);
-            });
-    }
+  openModal(template: TemplateRef<any>, order: Order) {
+    this.inputBaoGia.id = order.id;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
 
-    public getStatus() {
-        this.orderService.showLoading(true);
-        this.orderService.getStatus()
-            .subscribe(orders => {
-                this.status = orders.data;
-                this.orderService.showLoading(false);
-            });
+  confirmBaoGia(): void {
+    if (this.inputBaoGia.id > 0) {
+      this.orderService.postBaoGia(this.inputBaoGia)
+        .subscribe(res => {
+          this.searchOrders();
+          this.modalRef.hide();
+        });
     }
+  }
 
-    public getCountByStatus() {
-        this.orderService.showLoading(true);
-        this.orderService.getCountByStatus()
-            .subscribe(data => {
-                this.counts = data.data;
-                this.orderService.showLoading(false);
-            });
-    }
+  declineBaoGia(): void {
+    this.modalRef.hide();
+  }
 
-    openModal(template: TemplateRef<any>, order: Order) {
-        this.inputBaoGia.id = order.id;
-        this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-    }
+  selectTab(status: string = null) {
+    this.orderService.search.status = status;
+    this.searchOrders();
+  }
 
-    confirmBaoGia(): void {
-        if (this.inputBaoGia.id > 0) {
-            this.orderService.postBaoGia(this.inputBaoGia)
-                .subscribe(res => {
-                    this.searchOrders();
-                    this.modalRef.hide();
-                });
-        }
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
-
-    declineBaoGia(): void {
-        this.modalRef.hide();
-    }
-
-    selectTab(status: string = null) {
-        this.orderService.search.status = status;
-        this.searchOrders();
-    }
-
-    ngOnDestroy() {
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
-    }
+  }
 }
