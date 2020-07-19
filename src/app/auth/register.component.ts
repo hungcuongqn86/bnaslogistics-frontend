@@ -41,7 +41,7 @@ export class RegisterComponent {
                 if (res.status) {
                     this.sSuccess = true;
                     this.rError = false;
-                    this.alert = `Đăng ký thành công! Chúng tôi gửi cho bạn 1 link kích hoạt đến địa chỉ email: ${this.register.email}, bạn hãy kiểm tra hòm thư và kích hoạt tài khoản!`;
+                    this.alert = `Đăng ký thành công! Chúng tôi gửi cho bạn 1 link kích hoạt đến địa chỉ email: ${this.register.email}, hãy kiểm tra hòm thư và kích hoạt tài khoản!`;
                 } else {
                     this.rError = true;
                     this.sSuccess = false;
