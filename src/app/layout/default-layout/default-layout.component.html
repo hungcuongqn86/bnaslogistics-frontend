@@ -1,101 +1,110 @@
 <app-header
-        [fixed]="true"
-        [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 'auto', height: '98%', alt: 'Petbook Logo'}"
-        [navbarBrandMinimized]="{src: 'assets/img/brand/logo.png', width: 'auto', height: '98%', alt: 'Petbook Logo'}"
-        [sidebarToggler]="'lg'"
-        [mobileAsideMenuToggler]=false
-        [asideMenuToggler]=false>
-    <!--<ul class="nav navbar-nav d-md-down-none">
-        <li class="nav-item px-3">
-          <a class="nav-link" target="_blank" href="https://quangchau247online.com/blog-2/">
-            <i class="fa fa-file-text-o"></i> Hướng dẫn
-          </a>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" target="_blank" href="https://quangchau247online.com/huong-dan-nap-tien-vao-tai-khoan/"><i
-                    class="fa fa-money"></i> Nạp tiền
-          </a>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" target="_blank" href="https://www.taobao.com/"><i class="fa fa-chrome"></i>
-                taobao.com
-          </a>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" target="_blank" href="https://www.tmall.com/"><i class="fa fa-chrome"></i> tmall.com</a>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" target="_blank" href="https://www.1688.com/"><i class="fa fa-chrome"></i> 1688.com</a>
-        </li>
-    </ul>-->
-    <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item dropdown" dropdown>
-            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
-               style="    font-size: 18px;
+  [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 'auto', height: '98%', alt: 'Petbook Logo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.png', width: 'auto', height: '98%', alt: 'Petbook Logo'}"
+  [sidebarToggler]="'lg'"
+  [mobileAsideMenuToggler]=false
+  [asideMenuToggler]=false>
+  <!--<ul class="nav navbar-nav d-md-down-none">
+      <li class="nav-item px-3">
+        <a class="nav-link" target="_blank" href="https://quangchau247online.com/blog-2/">
+          <i class="fa fa-file-text-o"></i> Hướng dẫn
+        </a>
+      </li>
+      <li class="nav-item px-3">
+          <a class="nav-link" target="_blank" href="https://quangchau247online.com/huong-dan-nap-tien-vao-tai-khoan/"><i
+                  class="fa fa-money"></i> Nạp tiền
+        </a>
+      </li>
+      <li class="nav-item px-3">
+          <a class="nav-link" target="_blank" href="https://www.taobao.com/"><i class="fa fa-chrome"></i>
+              taobao.com
+        </a>
+      </li>
+      <li class="nav-item px-3">
+          <a class="nav-link" target="_blank" href="https://www.tmall.com/"><i class="fa fa-chrome"></i> tmall.com</a>
+      </li>
+      <li class="nav-item px-3">
+          <a class="nav-link" target="_blank" href="https://www.1688.com/"><i class="fa fa-chrome"></i> 1688.com</a>
+      </li>
+  </ul>-->
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown" dropdown>
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+         style="    font-size: 18px;
     text-shadow: 0px 0px 2px #fff;
     color: darksalmon;"
-               dropdownToggle (click)="false"><i class="fa fa-comment-o"></i><span
-                    class="badge badge-pill badge-info"><span *ngIf="notify.length">{{notify.length}}</span></span></a>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown" style="max-height: 500px;
+         dropdownToggle (click)="false"><i class="fa fa-comment-o"></i><span
+        class="badge badge-pill badge-info"><span *ngIf="notify.length">{{notify.length}}</span></span></a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown" style="max-height: 500px;
     overflow: auto;">
-                <a *ngFor="let item of notify" class="dropdown-item" href="javascript:void(0);"
-                   (click)="gotoOrder(item.order_id)"><i
-                        class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order_id}}</strong> -
-                    <span>{{item.created_at}}</span></a>
-                <p class="center-footer-menu" style="text-align: center;line-height: 35px; margin-top: 10px;"><a
-                        href="javascript:void(0);" (click)="gotoNotification()">Xem tất cả</a></p>
-            </div>
-        </li>
-        <li *ngIf="auth.user" class="nav-item dropdown" dropdown placement="bottom right">
-            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
-               dropdownToggle (click)="false">
-                <img src="assets/img/avatars/default-avatar.png" style="opacity: 0.5" class="img-avatar"
-                     alt="admin@bootstrapmaster.com"/>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-                <div class="dropdown-header text-center">
-                    <strong>{{auth.user.name}}</strong><br>
-                    <span>{{auth.user.roles[0].position}}</span>
-                </div>
-                <a *ngIf="auth.user.roles.length" (click)="profile()" class="dropdown-item"
-                   href="javascript:void(0);"><i class="fa fa-user"></i> Thông tin</a>
-                <a class="dropdown-item" href="javascript:void(0)" (click)="auth.logout()"><i class="fa fa-lock"></i>
-                    Thoát</a>
-            </div>
-        </li>
-    </ul>
+        <a *ngFor="let item of notify" class="dropdown-item" href="javascript:void(0);"
+           (click)="gotoOrder(item.order_id)"><i
+          class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order_id}}</strong> -
+          <span>{{item.created_at}}</span></a>
+        <p class="center-footer-menu" style="text-align: center;line-height: 35px; margin-top: 10px;"><a
+          href="javascript:void(0);" (click)="gotoNotification()">Xem tất cả</a></p>
+      </div>
+    </li>
+    <li *ngIf="auth.user" class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+         dropdownToggle (click)="false">
+        <img src="assets/img/avatars/default-avatar.png" style="opacity: 0.5" class="img-avatar"
+             alt="admin@bootstrapmaster.com"/>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center">
+          <strong>{{auth.user.name}}</strong><br>
+          <span>{{auth.user.roles[0].position}}</span>
+        </div>
+        <a *ngIf="auth.user.roles.length" (click)="profile()" class="dropdown-item"
+           href="javascript:void(0);"><i class="fa fa-user"></i> Thông tin</a>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="openModal(templateLogout)"><i class="fa fa-lock"></i>
+          Thoát</a>
+      </div>
+    </li>
+  </ul>
 </app-header>
 <div class="app-body">
-    <app-sidebar [fixed]="true" [display]="'lg'">
-        <app-sidebar-nav *ngIf="load" [navItems]="navItems" [perfectScrollbar]
-                         [disabled]="sidebarMinimized"></app-sidebar-nav>
-        <app-sidebar-minimizer></app-sidebar-minimizer>
-    </app-sidebar>
-    <!-- Main content -->
-    <main id="main" class="main">
-        <router-outlet></router-outlet>
-    </main>
-    <!--<app-aside [fixed]="true" [display]="false">
-        <tabset>
-            <tab>
-                <ng-template tabHeading><i class="icon-list"></i></ng-template>
-                <div class="list-group list-group-accent">
-                </div>
-            </tab>
-            <tab>
-                <ng-template tabHeading><i class="icon-speech"></i></ng-template>
-                <div class="p-3">
-                </div>
-            </tab>
-            <tab>
-                <ng-template tabHeading><i class="icon-settings"></i></ng-template>
-                <div class="p-3">
-                </div>
-            </tab>
-        </tabset>
-    </app-aside>-->
+  <app-sidebar [fixed]="true" [display]="'lg'">
+    <app-sidebar-nav *ngIf="load" [navItems]="navItems" [perfectScrollbar]
+                     [disabled]="sidebarMinimized"></app-sidebar-nav>
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <!-- Main content -->
+  <main id="main" class="main">
+    <router-outlet></router-outlet>
+  </main>
+  <!--<app-aside [fixed]="true" [display]="false">
+      <tabset>
+          <tab>
+              <ng-template tabHeading><i class="icon-list"></i></ng-template>
+              <div class="list-group list-group-accent">
+              </div>
+          </tab>
+          <tab>
+              <ng-template tabHeading><i class="icon-speech"></i></ng-template>
+              <div class="p-3">
+              </div>
+          </tab>
+          <tab>
+              <ng-template tabHeading><i class="icon-settings"></i></ng-template>
+              <div class="p-3">
+              </div>
+          </tab>
+      </tabset>
+  </app-aside>-->
+  <ng-template #templateLogout>
+    <div class="modal-body text-center">
+      <p>Bạn có chắc chắn muốn thoát!?</p>
+      <div class="btn-group btn-group-toggle">
+        <button type="button" class="btn btn-warning" (click)="confirm()">Yes</button>
+        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+      </div>
+    </div>
+  </ng-template>
 </div>
 <app-footer>
-    <span><a href="#">bnaslogistics.com</a> &copy; 2019 creativeLabs.</span>
-    <span class="ml-auto">Powered by <a href="#">bnaslogistics.com</a></span>
+  <span><a href="#">bnaslogistics.com</a> &copy; 2019 creativeLabs.</span>
+  <span class="ml-auto">Powered by <a href="#">bnaslogistics.com</a></span>
 </app-footer>
