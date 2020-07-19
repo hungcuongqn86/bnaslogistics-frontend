@@ -55,7 +55,7 @@
             <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
                 <div class="dropdown-header text-center">
                     <strong>{{auth.user.name}}</strong><br>
-                    <span>{{auth.user.roles[0].name}}</span>
+                    <span>{{auth.user.roles[0].position}}</span>
                 </div>
                 <a *ngIf="auth.user.roles.length" (click)="profile()" class="dropdown-item"
                    href="javascript:void(0);"><i class="fa fa-user"></i> Thông tin</a>
