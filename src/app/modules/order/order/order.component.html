@@ -25,7 +25,7 @@
           </tab>
           <tab *ngFor="let item of status">
             <ng-template tabHeading>
-              <div style="padding: 10px;" (click)="selectTab(item.id)">&nbsp;{{item.name}} <span
+              <div style="padding: 10px;" (click)="selectTab(item.id.toString())">&nbsp;{{item.name}} <span
                 class="badge badge-pill badge-danger">{{ item.id | tempCountByStatus : counts}}</span>
               </div>
             </ng-template>
@@ -98,10 +98,8 @@
                 </p>
               </td>
               <td>
-                <p><i class="fa fa-user"></i> {{item.user.name}} <span
-                  *ngIf="authService.hasRole('admin')">- {{item.user.phone_number}}</span></p>
-                <p *ngIf="authService.hasRole('admin')"><i
-                  class="fa fa-envelope"></i> {{item.user.email}}</p>
+                <p><i class="fa fa-user"></i> {{item.user.name}} <span>- {{item.user.phone_number}}</span></p>
+                <p><i class="fa fa-envelope"></i> {{item.user.email}}</p>
               </td>
               <td class="text-right">
                 <p><span class="pull-left">Tiền hàng</span> <span
@@ -124,7 +122,7 @@
                   <i class="fa fa-info-circle" aria-hidden="true"></i>
                   Chi tiết
                 </button>
-                <button (click)="openModal(templatePc,item)"
+                <button *ngIf="authService.hasRole('admin')" (click)="openModal(templatePc,item)"
                         class="btn btn-sm btn-ghost-primary"
                         type="button">
                   <i class="fa fa-cog" aria-hidden="true"></i>

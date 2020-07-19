@@ -30,9 +30,9 @@
       </div>
       <div class="card-body">
         <p *ngIf="orderService.orderRe.user"><i class="fa fa-user"></i> {{orderService.orderRe.user.name}}</p>
-        <p *ngIf="orderService.orderRe.user && authService.hasRole('admin')"><i class="fa fa-phone-square"></i>
+        <p *ngIf="orderService.orderRe.user"><i class="fa fa-phone-square"></i>
           {{orderService.orderRe.user.phone_number}}</p>
-        <p *ngIf="orderService.orderRe.user && authService.hasRole('admin')"><i class="fa fa-envelope"></i>
+        <p *ngIf="orderService.orderRe.user"><i class="fa fa-envelope"></i>
           {{orderService.orderRe.user.email}}
         </p>
       </div>
