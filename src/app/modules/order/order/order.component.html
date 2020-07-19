@@ -157,6 +157,7 @@
         <label for="hander">Người thực hiện<code class="highlighter-rouge">*</code></label>
         <select [(ngModel)]="inputPhanCong.hander" #hander="ngModel"
                 required class="form-control"
+                (change)="genContentPc($event)"
                 name="hander" id="hander">
           <option value="null">Chọn người thực hiện ...</option>
           <option *ngFor="let hander of handers" [value]="hander.id">
@@ -169,6 +170,12 @@
                     Phải chọn người thực hiện!
                 </span>
         </div>
+      </div>
+      <div class="form-group">
+        <label for="content_pc">Nội dung </label>
+        <textarea [(ngModel)]="inputPhanCong.content_pc" id="content_pc" name="content_pc" rows="3"
+                  class="form-control"
+                  placeholder="Nội dung ..."></textarea>
       </div>
       <p></p>
       <alert type="danger" *ngIf="errorMessage.length > 0">

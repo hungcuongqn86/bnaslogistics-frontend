@@ -26,7 +26,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   sub: Subscription;
   handers: User[] = [];
 
-  inputPhanCong = {id: null, hander: null};
+  inputPhanCong = {id: null, hander: null, content_pc: ''};
 
   constructor(public orderService: OrderService, private modalService: BsModalService, public authService: AuthService,
               private router: Router) {
@@ -60,6 +60,16 @@ export class OrderComponent implements OnInit, OnDestroy {
         this.totalItems = orders.data.total;
         this.getCountByStatus();
       });
+  }
+
+  public genContentPc(value) {
+    let staff = '';
+    for (let i = 0; i < this.handers.length; i++) {
+      if (this.handers[i].id == value.target.value) {
+        staff = this.handers[i].name;
+      }
+    }
+    this.inputPhanCong.content_pc = staff + ' thực hiện!'
   }
 
   public exportOrders() {
