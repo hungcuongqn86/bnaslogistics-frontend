@@ -79,7 +79,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     }
     this.sub = this.orderService.exportOrders()
       .subscribe(data => {
-        window.open(environment.backend + 'exports/' + data.data.file, '_blank');
+        window.open(environment.backend + 'order/download/' + data.data, '_blank');
         this.orderService.showLoading(false);
       });
   }

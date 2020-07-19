@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   basename: '',
-  backend: 'http://bnaslogistics.com.com/',
+  backend: 'http://localhost/',
   apiUrl: './api/',
   apiV1Url: '../api/v1/',
   appId: "bnaslogistics",
