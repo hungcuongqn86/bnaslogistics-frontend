@@ -46,7 +46,7 @@
                                 <a *ngIf="item.phone_number" href="{{item.phone_number}}">  <i class="fa fa-phone-square"></i> {{item.phone_number}}</a></td>
                             <td><i class="fa fa-envelope-square"></i> <a href="{{item.email}}"> {{item.email}}</a></td>
                             <td>
-                                <p *ngFor="let role of item.roles">{{role.name}}</p>
+                                <p *ngFor="let role of item.roles">{{role.position}}</p>
                             </td>
                             <td class="text-right">
                                 <button (click)="editPartner(item.id)" class="btn btn-sm btn-ghost-primary"

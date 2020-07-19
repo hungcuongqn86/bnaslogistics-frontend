@@ -100,7 +100,7 @@
                     name="role_id" id="role_id">
                 <option value="null">Chọn vai trò ...</option>
                 <option *ngFor="let role of roles" [value]="role.id">
-                    {{role.name}}
+                    {{role.position}}
                 </option>
             </select>
             <div [hidden]="role_id.valid || role_id.untouched">
