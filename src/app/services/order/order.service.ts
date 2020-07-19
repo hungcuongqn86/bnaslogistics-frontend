@@ -313,11 +313,11 @@ export class OrderService {
       );
   }
 
-  public postBaoGia(data: { id: number; content: string }): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}baogia`;
+  public postPc(data: any): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}phancong`;
     return this.http.post<any>(url, data)
       .pipe(
-        catchError(this.handleError('postBaoGia', data))
+        catchError(this.handleError('postPc', data))
       );
   }
 

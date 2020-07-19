@@ -26,7 +26,6 @@ export class OrderComponent implements OnInit, OnDestroy {
   sub: Subscription;
   handers: User[] = [];
 
-  inputBaoGia = {id: null, content: null};
   inputPhanCong = {id: null, hander: null};
 
   constructor(public orderService: OrderService, private modalService: BsModalService, public authService: AuthService,
@@ -103,13 +102,13 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   openModal(template: TemplateRef<any>, order: Order) {
-    this.inputBaoGia.id = order.id;
+    this.inputPhanCong.id = order.id;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
-  confirmBaoGia(): void {
-    if (this.inputBaoGia.id > 0) {
-      this.orderService.postBaoGia(this.inputBaoGia)
+  confirmPc(): void {
+    if (this.inputPhanCong.id > 0 && this.inputPhanCong.hander > 0) {
+      this.orderService.postPc(this.inputPhanCong)
         .subscribe(res => {
           this.searchOrders();
           this.modalRef.hide();
@@ -117,7 +116,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     }
   }
 
-  declineBaoGia(): void {
+  declinePc(): void {
     this.modalRef.hide();
   }
 

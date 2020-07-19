@@ -128,11 +128,6 @@
                   <i class="fa fa-info-circle" aria-hidden="true"></i>
                   Chi tiết
                 </button>
-                <button *ngIf="item.status===1" (click)="openModal(template,item)"
-                        class="btn btn-sm btn-ghost-primary"
-                        type="button">
-                  Báo giá
-                </button>
               </td>
             </tr>
             </tbody>
@@ -152,37 +147,6 @@
     <!--/.col-->
   </div>
 </div><!-- /.container-fluid -->
-<ng-template #template>
-  <div class="modal-header">
-    <h5 class="modal-title">Báo giá</h5>
-  </div>
-  <div class="modal-body">
-    <form novalidate #form="ngForm">
-      <div class="form-group">
-        <label for="content">Nội dung <code class="highlighter-rouge">*</code></label>
-        <textarea [(ngModel)]="inputBaoGia.content" #content="ngModel" id="content" name="content" rows="3"
-                  class="form-control"
-                  required
-                  placeholder="Nội dung ..."></textarea>
-        <div [hidden]="content.valid || content.untouched">
-                                <span *ngIf="content.errors && content.errors.required"
-                                      class="badge badge-warning">
-                                    Phải nhập nội dung!
-                                </span>
-        </div>
-      </div>
-      <p></p>
-      <alert type="danger" *ngIf="errorMessage.length > 0">
-        <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
-      </alert>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="confirmBaoGia()">OK</button>
-    <button type="button" class="btn btn-warning" (click)="declineBaoGia()">Cancel</button>
-  </div>
-</ng-template>
-
 <ng-template #templatePc>
   <div class="modal-header">
     <h5 class="modal-title">Phân công thực hiện</h5>
@@ -213,7 +177,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="confirmBaoGia()">OK</button>
-    <button type="button" class="btn btn-warning" (click)="declineBaoGia()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="confirmPc()">OK</button>
+    <button type="button" class="btn btn-warning" (click)="declinePc()">Cancel</button>
   </div>
 </ng-template>
