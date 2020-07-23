@@ -6,7 +6,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../../auth.service';
 import {environment} from '../../../../environments/environment';
-import {User} from "../../../models/User";
+import {User} from '../../../models/User';
 
 @Component({
   selector: 'app-order',
@@ -65,11 +65,11 @@ export class OrderComponent implements OnInit, OnDestroy {
   public genContentPc(value) {
     let staff = '';
     for (let i = 0; i < this.handers.length; i++) {
-      if (this.handers[i].id == value.target.value) {
+      if (this.handers[i].id === value.target.value) {
         staff = this.handers[i].name;
       }
     }
-    this.inputPhanCong.content_pc = staff + ' thực hiện!'
+    this.inputPhanCong.content_pc = staff + ' thực hiện!';
   }
 
   public exportOrders() {

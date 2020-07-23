@@ -7,72 +7,72 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
 
 @Component({
-    selector: 'app-custumer',
-    templateUrl: './custumer.component.html',
-    styleUrls: ['./custumer.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-custumer',
+  templateUrl: './custumer.component.html',
+  styleUrls: ['./custumer.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class CustumerComponent implements OnInit {
-    user: User;
-    users: User[];
-    totalItems = 0;
-    modalRef: BsModalRef;
+  user: User;
+  users: User[];
+  totalItems = 0;
+  modalRef: BsModalRef;
 
-    constructor(public userService: UserService, public authService: AuthService,
-                private router: Router, private modalService: BsModalService) {
+  constructor(public userService: UserService, public authService: AuthService,
+              private router: Router, private modalService: BsModalService) {
 
+  }
+
+  ngOnInit() {
+    this.searchUsers();
+  }
+
+  pageChanged(event: any): void {
+    this.userService.search.page = event.page;
+    this.searchUsers();
+  }
+
+  public addPartner() {
+    this.userService.user.id = null;
+    this.router.navigate(['/mcustumer/custumer/add']);
+  }
+
+  public editPartner(id) {
+    this.router.navigate([`/mcustumer/custumer/edit/${id}`]);
+  }
+
+  public deletePartner() {
+    if (this.user) {
+      this.user.is_deleted = 1;
+      this.userService.editUser(this.user)
+        .subscribe(res => {
+          this.searchUsers();
+        });
     }
+  }
 
-    ngOnInit() {
-        this.searchUsers();
-    }
+  public searchUsers() {
+    this.userService.showLoading(true);
+    this.userService.getCustumers()
+      .subscribe(users => {
+        this.users = users.data.data;
+        this.totalItems = users.data.total;
+        this.userService.showLoading(false);
+      });
+  }
 
-    pageChanged(event: any): void {
-        this.userService.search.page = event.page;
-        this.searchUsers();
-    }
+  openModal(template: TemplateRef<any>, item) {
+    this.user = item;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
 
-    public addPartner() {
-        this.userService.user.id = null;
-        this.router.navigate(['/mcustumer/custumer/add']);
-    }
+  confirm(): void {
+    this.deletePartner();
+    this.modalRef.hide();
+  }
 
-    public editPartner(id) {
-        this.router.navigate([`/mcustumer/custumer/edit/${id}`]);
-    }
-
-    public deletePartner() {
-        if (this.user) {
-            this.user.is_deleted = 1;
-            this.userService.editUser(this.user)
-                .subscribe(res => {
-                    this.searchUsers();
-                });
-        }
-    }
-
-    public searchUsers() {
-        this.userService.showLoading(true);
-        this.userService.getCustumers()
-            .subscribe(users => {
-                this.users = users.data.data;
-                this.totalItems = users.data.total;
-                this.userService.showLoading(false);
-            });
-    }
-
-    openModal(template: TemplateRef<any>, item) {
-        this.user = item;
-        this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-    }
-
-    confirm(): void {
-        this.deletePartner();
-        this.modalRef.hide();
-    }
-
-    decline(): void {
-        this.modalRef.hide();
-    }
+  decline(): void {
+    this.modalRef.hide();
+  }
 }

@@ -43,9 +43,29 @@ export class UserService {
 
   reset() {
     this.user = {
-      id: null, name: null, partner: null, role_id: null, roles: null, transaction: null, type: null, deposit: null, active: null,
-      phone_number: null, password: null, c_password: null, partner_id: clientid, cost_percent: null, weight_price: null,
-      email: null, is_deleted: 0, created_at: '', updated_at: '', image: null, debt: null, rate: null
+      id: null,
+      name: null,
+      partner: null,
+      role_id: null,
+      roles: null,
+      transaction: null,
+      type: null,
+      deposit: null,
+      active: null,
+      hander: null,
+      phone_number: null,
+      password: null,
+      c_password: null,
+      partner_id: clientid,
+      cost_percent: null,
+      weight_price: null,
+      email: null,
+      is_deleted: 0,
+      created_at: '',
+      updated_at: '',
+      image: null,
+      debt: null,
+      rate: null
     };
   }
 
@@ -66,6 +86,14 @@ export class UserService {
     return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('getUsers', []))
+      );
+  }
+
+  getHandles(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}handles`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getHandles', []))
       );
   }
 
