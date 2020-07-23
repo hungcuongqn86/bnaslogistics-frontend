@@ -53,6 +53,7 @@ export class UserService {
       deposit: null,
       active: null,
       hander: null,
+      handle: null,
       phone_number: null,
       password: null,
       c_password: null,

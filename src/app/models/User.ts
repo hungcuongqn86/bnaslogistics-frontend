@@ -27,6 +27,7 @@ export interface User {
   rate: number;
   deposit: string;
   hander: number;
+  handle: any;
   weight_price: number;
   is_deleted: number;
   created_at: string;
