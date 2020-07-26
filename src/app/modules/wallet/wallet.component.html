@@ -77,9 +77,13 @@
                 <td>{{item.value.toString() |
                   tempPrice : 1 : 1: true}} <sup>đ</sup></td>
                 <td>{{item.content}}</td>
-                <td>{{item.status}}</td>
+                <td>
+                  <span *ngIf="item.status === 1" class="badge badge-warning">Chờ duyệt</span>
+                  <span *ngIf="item.status === 2" class="badge badge-info">Đã duyệt</span>
+                  <span *ngIf="item.status === 3" class="badge badge-danger">Từ chối</span>
+                </td>
                 <td class="text-right">
-                  <button *ngIf="item.status===1" (click)="openModal(templatePc,item)"
+                  <button *ngIf="item.status===1" (click)="huyRutTien(templateHuy, item)"
                           class="btn btn-sm btn-ghost-primary"
                           type="button">Hủy
                   </button>
@@ -125,5 +129,15 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
     <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
+  </div>
+</ng-template>
+
+<ng-template #templateHuy>
+  <div class="modal-body text-center">
+    <p>Bạn có chắc chắn muốn hủy yêu cầu này!?</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-warning" (click)="confirmHuy()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
   </div>
 </ng-template>

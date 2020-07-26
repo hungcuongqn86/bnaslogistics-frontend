@@ -53,6 +53,14 @@ export class WalletComponent {
       });
   }
 
+  public confirmHuy(): void {
+    this.modalRef.hide();
+  }
+
+  public huyRutTien(template, item) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm', ignoreBackdropClick: true});
+  }
+
   public decline(): void {
     this.modalRef.hide();
   }
