@@ -64,6 +64,7 @@
             <table class="table table-bordered table-striped table-sm table-data">
               <thead>
               <tr>
+                <th>Mã</th>
                 <th>Ngày yêu cầu</th>
                 <th>Số tiền</th>
                 <th>Nội dung</th>
@@ -73,6 +74,7 @@
               </thead>
               <tbody>
               <tr *ngFor="let item of withdrawalRequests; let i = index">
+                <td>{{item.id}}</td>
                 <td>{{item.created_at}}</td>
                 <td>{{item.value.toString() |
                   tempPrice : 1 : 1: true}} <sup>đ</sup></td>

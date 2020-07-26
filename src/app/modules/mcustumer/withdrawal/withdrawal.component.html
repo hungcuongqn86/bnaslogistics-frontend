@@ -62,6 +62,7 @@
             <tbody>
             <tr *ngFor="let item of withdrawalRequests">
               <td>
+                <p>Mã: {{item.id}}</p>
                 <p>Số tiền: {{item.value.toString() |
                   tempPrice : 1 : 1: true}} <sup>đ</sup></p>
                 <p *ngIf="item.content">Nội dung: {{item.content}}</p>
