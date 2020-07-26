@@ -16,6 +16,8 @@ export class WalletComponent {
   transactions: Transaction[];
   totalItems = 0;
 
+  inputRutTien = {id: null, value: null, content: ''};
+
   constructor(public userService: UserService, public authService: AuthService, private modalService: BsModalService) {
     this.getTransactions();
   }
@@ -34,14 +36,11 @@ export class WalletComponent {
   }
 
   public confirm(): void {
-    this.userService.addTransaction()
-      .subscribe(transaction => {
+    this.userService.addWithdrawalRequest(this.inputRutTien)
+      .subscribe(res => {
         this.modalRef.hide();
-        this.getTransactions();
-        this.userService.transaction = {
-          id: null, user_id: null, code: null, content: null, type: null, value: null, otype: null,
-          debt: null, is_deleted: 0, created_at: '', updated_at: '', bank_account: null, bank_debt: null, user: null
-        };
+        // this.getTransactions();
+        this.inputRutTien = {id: null, value: null, content: ''};
       });
   }
 

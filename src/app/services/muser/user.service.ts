@@ -191,4 +191,12 @@ export class UserService {
         catchError(this.handleError('addTransaction', this.transaction))
       );
   }
+
+  public addWithdrawalRequest(item: any): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `muser/transaction/withdrawalrequest`;
+    return this.http.post<User>(url, item)
+      .pipe(
+        catchError(this.handleError('addWithdrawalRequest', this.transaction))
+      );
+  }
 }

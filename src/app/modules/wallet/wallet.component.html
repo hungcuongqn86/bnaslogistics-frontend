@@ -8,47 +8,65 @@
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-bordered table-striped table-sm table-data">
-      <thead>
-      <tr>
-        <th>Ngày giao dịch</th>
-        <th>Mã giao dịch</th>
-        <th>Loại giao dịch</th>
-        <th>Nội dung</th>
-        <th class="text-right">Giá trị</th>
-        <th class="text-right">Dư nợ</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let item of transactions; let i = index">
-        <td>{{item.created_at}}</td>
-        <td>{{item.code}}</td>
-        <td>
-          <span *ngIf="item.otype.value > 0" class="badge badge-success">{{item.otype.name}}</span>
-          <span *ngIf="item.otype.value < 0" class="badge badge-warning">{{item.otype.name}}</span>
-        </td>
-        <td>{{item.content}}</td>
-        <td class="text-right">
-          <span *ngIf="item.otype.value > 0" class="badge badge-success float-left">+</span>
-          <span *ngIf="item.otype.value < 0" class="badge badge-warning float-left">-</span>{{item.value.toString() |
-          tempPrice : 1 : 1: true}} <sup>đ</sup>
-        </td>
-        <td *ngIf="i===0" class="text-right"><span
-          class="badge badge-danger">{{item.debt.toString() | tempPrice : 1 : 1: true}}
-          <sup>đ</sup></span>
-        </td>
-        <td *ngIf="i>0" class="text-right">{{item.debt.toString() | tempPrice : 1 : 1: true}} <sup>đ</sup></td>
-      </tr>
-      </tbody>
-    </table>
+    <tabset>
+      <tab>
+        <ng-template tabHeading><i class="icon-list"></i> &nbsp;Lịch sử giao dịch</ng-template>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-bordered table-striped table-sm table-data">
+              <thead>
+              <tr>
+                <th>Ngày giao dịch</th>
+                <th>Mã giao dịch</th>
+                <th>Loại giao dịch</th>
+                <th>Nội dung</th>
+                <th class="text-right">Giá trị</th>
+                <th class="text-right">Dư nợ</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of transactions; let i = index">
+                <td>{{item.created_at}}</td>
+                <td>{{item.code}}</td>
+                <td>
+                  <span *ngIf="item.otype.value > 0" class="badge badge-success">{{item.otype.name}}</span>
+                  <span *ngIf="item.otype.value < 0" class="badge badge-warning">{{item.otype.name}}</span>
+                </td>
+                <td>{{item.content}}</td>
+                <td class="text-right">
+                  <span *ngIf="item.otype.value > 0" class="badge badge-success float-left">+</span>
+                  <span *ngIf="item.otype.value < 0"
+                        class="badge badge-warning float-left">-</span>{{item.value.toString() |
+                  tempPrice : 1 : 1: true}} <sup>đ</sup>
+                </td>
+                <td *ngIf="i===0" class="text-right"><span
+                  class="badge badge-danger">{{item.debt.toString() | tempPrice : 1 : 1: true}}
+                  <sup>đ</sup></span>
+                </td>
+                <td *ngIf="i>0" class="text-right">{{item.debt.toString() | tempPrice : 1 : 1: true}} <sup>đ</sup></td>
+              </tr>
+              </tbody>
+            </table>
+            <p></p>
+            <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.tSearch.page"
+                        [itemsPerPage]="userService.tSearch.limit"
+                        (pageChanged)="pageChanged($event)"
+                        class="pagination-sm pull-right" [maxSize]="6"
+                        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                        lastText="&raquo;"></pagination>
+          </div>
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading><i class="icon-list"></i> &nbsp;Yêu cầu rút tiền</ng-template>
+        <div>
+          d
+        </div>
+      </tab>
+    </tabset>
   </div>
   <div class="card-footer">
-    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.tSearch.page"
-                [itemsPerPage]="userService.tSearch.limit"
-                (pageChanged)="pageChanged($event)"
-                class="pagination-sm pull-right" [maxSize]="6"
-                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
-                lastText="&raquo;"></pagination>
+
   </div>
 </div>
 <ng-template #templateRutTien>
@@ -59,7 +77,7 @@
     <form novalidate #form="ngForm">
       <div class="form-group">
         <label for="value">Giá trị <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="userService.transaction.value" #value="ngModel" class="form-control" id="value"
+        <input [(ngModel)]="inputRutTien.value" #value="ngModel" class="form-control" id="value"
                name="value"
                placeholder="Giá trị giao dịch"
                type="number">
@@ -72,7 +90,7 @@
       </div>
       <div class="form-group">
         <label for="content">Nội dung</label>
-        <textarea [(ngModel)]="userService.transaction.content" class="form-control" id="content" name="content"
+        <textarea [(ngModel)]="inputRutTien.content" class="form-control" id="content" name="content"
                   placeholder="..." rows="3"></textarea>
       </div>
     </form>
