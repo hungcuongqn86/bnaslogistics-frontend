@@ -75,7 +75,7 @@ export class WithdrawalComponent {
   public confirmApprove(): void {
     if (this.withdrawalRequest) {
       this.withdrawalRequest.status = 2;
-      this.userService.editWithdrawalRequest(this.withdrawalRequest)
+      this.userService.approveWithdrawalRequest(this.withdrawalRequest)
         .subscribe(res => {
           this.modalRef.hide();
           this.getWithdrawalRequest();
@@ -95,7 +95,7 @@ export class WithdrawalComponent {
   public reject() {
     if (this.withdrawalRequest) {
       this.withdrawalRequest.status = 3;
-      this.userService.editWithdrawalRequest(this.withdrawalRequest)
+      this.userService.approveWithdrawalRequest(this.withdrawalRequest)
         .subscribe(res => {
           this.modalRef.hide();
           this.getWithdrawalRequest();

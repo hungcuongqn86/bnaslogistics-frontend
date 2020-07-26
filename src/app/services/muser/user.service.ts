@@ -209,6 +209,14 @@ export class UserService {
       );
   }
 
+  public approveWithdrawalRequest(withdrawalRequest: WithdrawalRequest): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `muser/transaction/approvewithdrawalrequest`;
+    return this.http.post<WithdrawalRequest>(url, withdrawalRequest)
+      .pipe(
+        catchError(this.handleError('approveWithdrawalRequest', withdrawalRequest))
+      );
+  }
+
   public getWithdrawalRequest() {
     const url = Util.getUri(apiV1Url) + `muser/transaction/withdrawalrequests`;
     let params = new HttpParams();
