@@ -17,7 +17,7 @@ export class WalletComponent {
   withdrawalRequests: WithdrawalRequest[] = [];
   withdrawalRequest: WithdrawalRequest;
   totalItems = 0;
-
+  errorMessage: string[] = [];
   inputRutTien = {id: null, value: null, content: ''};
 
   constructor(public userService: UserService, public authService: AuthService, private modalService: BsModalService) {
@@ -46,11 +46,22 @@ export class WalletComponent {
   }
 
   public confirm(): void {
+    this.errorMessage = [];
+    this.userService.showLoading(true);
     this.userService.addWithdrawalRequest(this.inputRutTien)
       .subscribe(res => {
-        this.getWithdrawalRequest();
-        this.inputRutTien = {id: null, value: null, content: ''};
-        this.modalRef.hide();
+        if (res.status) {
+          this.getWithdrawalRequest();
+          this.inputRutTien = {id: null, value: null, content: ''};
+          this.userService.showLoading(false);
+          this.modalRef.hide();
+        } else {
+          // this.errorMessage.push(res.message);
+          for (let i = 0; i < res.data.length; i++) {
+            this.errorMessage.push(res.data[i]);
+          }
+          this.userService.showLoading(false);
+        }
       });
   }
 

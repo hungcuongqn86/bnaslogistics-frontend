@@ -107,15 +107,15 @@
   <div class="modal-body">
     <form novalidate #form="ngForm">
       <div class="form-group">
-        <label for="value">Giá trị <code class="highlighter-rouge">*</code></label>
+        <label for="value">Số tiền muốn rút (VNĐ) <code class="highlighter-rouge">*</code></label>
         <input [(ngModel)]="inputRutTien.value" #value="ngModel" class="form-control" id="value"
                name="value"
-               placeholder="Giá trị giao dịch"
+               placeholder="Số tiền muốn rút"
                type="number">
         <div [hidden]="value.valid || value.untouched">
                                 <span *ngIf="value.errors && value.errors.required"
                                       class="badge badge-warning">
-                                    Phải nhập giá trị giao dịch!
+                                    Phải nhập số tiền muốn rút!
                                 </span>
         </div>
       </div>
@@ -124,6 +124,10 @@
         <textarea [(ngModel)]="inputRutTien.content" class="form-control" id="content" name="content"
                   placeholder="..." rows="3"></textarea>
       </div>
+      <p></p>
+      <alert type="danger" *ngIf="errorMessage.length > 0">
+        <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
     </form>
   </div>
   <div class="modal-footer">
