@@ -15,23 +15,25 @@ import {TransactionComponent} from './custumer/transaction/transaction.component
 import {InternalComponent} from './internal/internal.component';
 import {InternalDetailComponent} from './internal/internal.detail.component';
 import {ItransactionComponent} from './internal/itransaction/itransaction.component';
+import {WithdrawalComponent} from './withdrawal/withdrawal.component';
 
 import {McustumerRoutingModule} from './mcustumer.routing.module';
 import {SharedModule} from '../../shared.module';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, McustumerRoutingModule, SharedModule, CollapseModule.forRoot()],
-    declarations: [
-        CustumerComponent,
-        CustumerDetailComponent,
-        InfoComponent,
-        TransactionComponent,
-        InternalComponent,
-        InternalDetailComponent,
-        ItransactionComponent
-    ],
-    exports: [],
-    providers: [UserService, PartnerService, BankAccountService]
+  imports: [CommonModule, FormsModule, McustumerRoutingModule, SharedModule, CollapseModule.forRoot()],
+  declarations: [
+    CustumerComponent,
+    CustumerDetailComponent,
+    InfoComponent,
+    TransactionComponent,
+    InternalComponent,
+    InternalDetailComponent,
+    ItransactionComponent,
+    WithdrawalComponent
+  ],
+  exports: [],
+  providers: [UserService, PartnerService, BankAccountService]
 })
 export class McustumerModule {
 }

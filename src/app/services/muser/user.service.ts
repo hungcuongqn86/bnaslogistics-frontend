@@ -18,6 +18,7 @@ export class UserService {
   private handleError: HandleError;
   private moduleUri = 'muser/user/';
   public search = {key: '', limit: 20, page: 1};
+  public withdrawalRequestSearch = {key: '', limit: 20, page: 1, status: '0'};
   public tSearch = {limit: 20, page: 1};
   public user: User;
   public transaction: Transaction;

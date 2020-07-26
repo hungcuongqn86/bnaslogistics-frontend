@@ -1,0 +1,134 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+  <app-breadcrumb></app-breadcrumb>
+  <!-- Breadcrumb Menu-->
+  <li class="breadcrumb-menu d-md-down-none">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+    </div>
+  </li>
+</ol>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-cubes"></i> Danh sách yêu cầu đã tạo
+        </div>
+        <tabset>
+          <tab>
+            <ng-template tabHeading>
+              <div class="tab-title" (click)="selectTab()">
+                <i class="icon-list"></i> &nbsp;Tất cả
+              </div>
+            </ng-template>
+          </tab>
+          <tab *ngFor="let item of status">
+            <ng-template tabHeading>
+              <div style="padding: 10px;" (click)="selectTab(item.id.toString())">
+                &nbsp;{{item.name}} <span
+                class="badge badge-pill badge-danger">{{ item.id | tempCountByStatus : counts}}</span>
+              </div>
+            </ng-template>
+          </tab>
+        </tabset>
+        <div class="card-body">
+          <form novalidate (ngSubmit)="getWithdrawalRequest()" #form="ngForm">
+            <div class="form-group row">
+              <div class="col-md-6">
+                <input [(ngModel)]="userService.withdrawalRequestSearch.key" type="text" id="key" name="key"
+                       class="form-control"
+                       placeholder="Nhập từ tìm kiếm ">
+              </div>
+              <div class="col-md-2">
+                <button type="button" (click)="getWithdrawalRequest()"
+                        class="btn btn-primary">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                  Tìm kiếm
+                </button>
+              </div>
+            </div>
+          </form>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>Yêu cầu</th>
+              <th>Khách hàng</th>
+              <th>Tài khoản ngân hàng</th>
+              <th>Trạng thái</th>
+              <th width="10%">Tác vụ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of withdrawalRequests">
+              <td>
+                <p>Số tiền: {{item.value.toString() |
+                  tempPrice : 1 : 1: true}} <sup>đ</sup></p>
+                <p *ngIf="item.content">Nội dung: {{item.content}}</p>
+                <p *ngIf="item.created_at">Ngày tạo: {{item.created_at | tempDate}}</p>
+              </td>
+              <td>
+                <p>{{item.user.name}}</p>
+                <p *ngIf="item.user.phone_number">{{item.user.phone_number}}</p>
+              </td>
+              <td>
+                <p>Người thụ hưởng: {{item.user.bank_username}}</p>
+                <p>Số tài khoản: {{item.user.bank_number}}</p>
+                <p>Ngân hàng: {{item.user.bank_name}}</p>
+                <p>Chi nhánh: {{item.user.bank_branch}}</p>
+              </td>
+              <td>
+                <span *ngIf="item.status === 1" class="badge badge-warning">Chờ duyệt</span>
+                <span *ngIf="item.status === 2" class="badge badge-info">Đã duyệt</span>
+                <span *ngIf="item.status === 3" class="badge badge-danger">Từ chối</span>
+              </td>
+              <td>
+                <button *ngIf="item.status==1" (click)="openModalApprove(approvetemplate, item)"
+                        class="btn btn-sm btn-primary btn-action"
+                        type="button">
+                  Xác nhận
+                </button>
+                <button *ngIf="item.status==1" (click)="openModalReject(rejecttemplate, item)"
+                        class="btn btn-sm btn-warning btn-action"
+                        type="button">
+                  Từ chối
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="card-footer">
+          <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="shippingService.search.limit"
+                      [(ngModel)]="shippingService.search.page"
+                      (pageChanged)="pageChanged($event)"
+                      class="pagination-sm pull-right" [maxSize]="6"
+                      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                      lastText="&raquo;"></pagination>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div><!-- /.container-fluid -->
+
+<ng-template #rejecttemplate>
+  <div class="modal-body text-center">
+    <p>Bạn có chắc chắn muốn từ chối yêu cầu này!?</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-warning" (click)="confirmReject()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #approvetemplate>
+  <div class="modal-body text-center">
+    <p>Xác nhận sẽ tạo giao dịch rút tiền, Bạn có chắc chắn xác nhận yêu cầu này!?</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-primary" (click)="confirmApprove()">Yes</button>
+      <button type="button" class="btn btn-warning" (click)="decline()">No</button>
+    </div>
+  </div>
+</ng-template>

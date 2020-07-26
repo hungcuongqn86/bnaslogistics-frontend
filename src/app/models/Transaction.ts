@@ -35,3 +35,8 @@ export interface WithdrawalRequest {
   created_at: string;
   updated_at: string;
 }
+
+export interface WithdrawalRequestStatus {
+  id: number;
+  name: string;
+}
