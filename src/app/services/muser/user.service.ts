@@ -216,4 +216,12 @@ export class UserService {
         catchError(this.handleError('getWithdrawalRequest', []))
       );
   }
+
+  public getWithdrawalRequestStatus(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `muser/transaction/withdrawalrequestsstatus`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getWithdrawalRequestStatus', []))
+      );
+  }
 }

@@ -22,6 +22,7 @@ export class WithdrawalComponent {
   counts: { status: number, total: number }[];
 
   constructor(public userService: UserService, public authService: AuthService, private modalService: BsModalService) {
+    this.getStatus();
     this.getWithdrawalRequest();
   }
 
