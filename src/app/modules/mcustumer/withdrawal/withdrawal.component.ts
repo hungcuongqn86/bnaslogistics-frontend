@@ -4,6 +4,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
 import {WithdrawalRequest, WithdrawalRequestStatus} from "../../../models/Transaction";
 import {UserService} from "../../../services/muser/user.service";
+import {Shipping} from "../../../models/Shipping";
 
 @Component({
   selector: 'app-withdrawal',
@@ -52,99 +53,40 @@ export class WithdrawalComponent {
       });
   }
 
-  /*
-    public editShipping(id: number, template) {
-      this.title = 'Chi tiết yêu cầu ký gửi';
-      this.shippingService.getShipping(id)
-      .subscribe(res => {
-        this.shippingService.shipping = res.data.shipping;
-        this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
-      });
-    }
+  public openModalApprove(template: TemplateRef<any>, withdrawalRequest: WithdrawalRequest) {
+    this.withdrawalRequest = withdrawalRequest;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
 
-    public confirm() {
-      this.shippingService.showLoading(true);
-      if (this.shippingService.shipping.id === null) {
-        this.shippingService.addShipping(this.shippingService.shipping).subscribe(
-          res => {
-            this.modalRef.hide();
-            this.getShippings();
-          }
-        );
-      } else {
-        this.shippingService.editShipping(this.shippingService.shipping).subscribe(
-          res => {
-            this.modalRef.hide();
-            this.getShippings();
-          }
-        );
-      }
-    }
 
-    public decline(): void {
-        this.modalRef.hide();
-    }
-
-    public openModalReject(template: TemplateRef<any>, shipping: Shipping) {
-      this.shippingService.shipping = shipping;
-      this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-    }
-
-    public openModalApprove(template: TemplateRef<any>, shipping: Shipping) {
-      this.shippingService.shipping = shipping;
-      this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-    }
-
-    public confirmApprove(): void {
-      this.approve();
-      this.modalRef.hide();
-    }
-
-    private approve() {
-      if (this.shippingService.shipping) {
-        this.shippingService.shipping.status = 2;
-        this.shippingService.approveShipping(this.shippingService.shipping)
-          .subscribe(res => {
-            this.getShippings();
-          });
-      }
-    }
-
-    public confirmReject(): void {
-      this.reject();
-      this.modalRef.hide();
-    }
-
-    private reject() {
-      if (this.shippingService.shipping) {
-        this.shippingService.shipping.status = 3;
-        this.shippingService.approveShipping(this.shippingService.shipping)
-          .subscribe(res => {
-            this.getShippings();
-          });
-      }
-    }
-
-    public getStatus() {
-      this.shippingService.showLoading(true);
-      this.shippingService.getStatus()
+  public confirmApprove(): void {
+    if (this.withdrawalRequest) {
+      this.withdrawalRequest.status = 2;
+      this.userService.editWithdrawalRequest(this.withdrawalRequest)
         .subscribe(res => {
-          this.status = res.data;
-          this.shippingService.showLoading(false);
+          this.modalRef.hide();
+          this.getWithdrawalRequest();
         });
     }
+  }
 
-    public getCountByStatus() {
-      this.shippingService.showLoading(true);
-      this.shippingService.getCountByStatus()
-        .subscribe(data => {
-          this.counts = data.data;
-          this.shippingService.showLoading(false);
+  public decline(): void {
+    this.modalRef.hide();
+  }
+
+  public openModalReject(template: TemplateRef<any>, withdrawalRequest: WithdrawalRequest) {
+    this.withdrawalRequest = withdrawalRequest;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  public reject() {
+    if (this.withdrawalRequest) {
+      this.withdrawalRequest.status = 3;
+      this.userService.editWithdrawalRequest(this.withdrawalRequest)
+        .subscribe(res => {
+          this.modalRef.hide();
+          this.getWithdrawalRequest();
         });
     }
-
-    gotoOrder(orderId: number) {
-      const win = window.open(`./order/list/detail/${orderId}`, '_blank');
-      win.focus();
-    }*/
+  }
 }
