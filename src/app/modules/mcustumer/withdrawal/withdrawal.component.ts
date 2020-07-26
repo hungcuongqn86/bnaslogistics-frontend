@@ -4,7 +4,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
 import {WithdrawalRequest, WithdrawalRequestStatus} from "../../../models/Transaction";
 import {UserService} from "../../../services/muser/user.service";
-import {Shipping} from "../../../models/Shipping";
+import {BankAccount, BankAccountService} from "../../../services/bankAccount.service";
 
 @Component({
   selector: 'app-withdrawal',
@@ -21,11 +21,15 @@ export class WithdrawalComponent {
   totalItems = 0;
   status: WithdrawalRequestStatus[] = [];
   counts: { status: number, total: number }[];
+  accounts: BankAccount[];
 
   errorMessage: string[] = [];
 
-  constructor(public userService: UserService, public authService: AuthService, private modalService: BsModalService) {
+  constructor(public userService: UserService, public authService: AuthService,
+              public bankAccountService: BankAccountService,
+              private modalService: BsModalService) {
     this.getStatus();
+    this.getBank();
     this.getWithdrawalRequest();
   }
 
@@ -46,6 +50,15 @@ export class WithdrawalComponent {
       .subscribe(data => {
         this.counts = data.data;
         this.userService.showLoading(false);
+      });
+  }
+
+  public getBank() {
+    this.bankAccountService.showLoading(true);
+    this.bankAccountService.getBankAccounts()
+      .subscribe(accounts => {
+        this.accounts = accounts.data;
+        this.bankAccountService.showLoading(false);
       });
   }
 

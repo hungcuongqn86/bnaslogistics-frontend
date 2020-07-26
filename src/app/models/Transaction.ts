@@ -31,6 +31,7 @@ export interface WithdrawalRequest {
   content: string;
   status: number;
   feedback: string;
+  bank_account: number;
   is_deleted: number;
   created_at: string;
   updated_at: string;

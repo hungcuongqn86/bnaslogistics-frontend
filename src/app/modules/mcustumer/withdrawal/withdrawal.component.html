@@ -150,8 +150,37 @@
 </ng-template>
 
 <ng-template #approvetemplate>
-  <div class="modal-body text-center">
-    <p>Xác nhận sẽ tạo giao dịch rút tiền, Bạn có chắc chắn xác nhận yêu cầu này!?</p>
+  <div class="modal-header">
+    <h5 class="modal-title">Duyệt rút tiền</h5>
+  </div>
+  <div class="modal-body">
+    <form novalidate #form="ngForm">
+      <div class="form-group">
+        <label for="bank_account">Tài khoản ngân hàng <code class="highlighter-rouge">*</code></label>
+        <select [(ngModel)]="withdrawalRequest.bank_account" #bank_account="ngModel"
+                id="bank_account"
+                required
+                name="bank_account"
+                class="form-control">
+          <option value="null">Chọn tài khoản ngân hàng</option>
+          <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
+        </select>
+        <div [hidden]="bank_account.valid || bank_account.untouched">
+                                <span *ngIf="bank_account.errors && bank_account.errors.required"
+                                      class="badge badge-warning">
+                                    Phải chọn tài khoản giao dịch!
+                                </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="feedback1">Nội dung trả lời</label>
+        <textarea [(ngModel)]="withdrawalRequest.feedback" class="form-control" id="feedback1" name="feedback1"
+                  placeholder="..." rows="3"></textarea>
+      </div>
+      <p style="color: red;">Xác nhận sẽ tạo giao dịch rút tiền, Bạn có chắc chắn xác nhận yêu cầu này!?</p>
+    </form>
+  </div>
+  <div class="modal-footer">
     <div class="btn-group btn-group-toggle">
       <button type="button" class="btn btn-primary" (click)="confirmApprove()">Yes</button>
       <button type="button" class="btn btn-warning" (click)="decline()">No</button>
