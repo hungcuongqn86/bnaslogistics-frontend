@@ -100,8 +100,8 @@
 
         </div>
         <div class="card-footer">
-          <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="userService.search.limit"
-                      [(ngModel)]="userService.search.page"
+          <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="userService.withdrawalRequestSearch.limit"
+                      [(ngModel)]="userService.withdrawalRequestSearch.page"
                       (pageChanged)="pageChanged($event)"
                       class="pagination-sm pull-right" [maxSize]="6"
                       previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"

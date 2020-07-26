@@ -32,6 +32,17 @@ export class WithdrawalComponent {
     this.userService.getWithdrawalRequest()
       .subscribe(withdrawalRequests => {
         this.withdrawalRequests = withdrawalRequests.data.data;
+        this.totalItems = withdrawalRequests.data.total;
+        this.getCountByStatus();
+        this.userService.showLoading(false);
+      });
+  }
+
+  public getCountByStatus() {
+    this.userService.showLoading(true);
+    this.userService.getWithdrawalRequestCountByStatus()
+      .subscribe(data => {
+        this.counts = data.data;
         this.userService.showLoading(false);
       });
   }
