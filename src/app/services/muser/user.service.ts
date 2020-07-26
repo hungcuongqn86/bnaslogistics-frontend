@@ -9,7 +9,7 @@ import {Util} from '../../helper/lib';
 import {apiV1Url, clientid} from '../../const';
 import {Router} from '@angular/router';
 import {User} from '../../models/User';
-import {Transaction} from '../../models/Transaction';
+import {Transaction, WithdrawalRequest} from '../../models/Transaction';
 import {LoadingService} from '../../loading.service';
 
 @Injectable()
@@ -179,7 +179,7 @@ export class UserService {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
     return this.http.post<User>(url, user)
       .pipe(
-        catchError(this.handleError('editOwner', user))
+        catchError(this.handleError('editUser', user))
       );
   }
 
@@ -197,6 +197,14 @@ export class UserService {
     return this.http.post<User>(url, item)
       .pipe(
         catchError(this.handleError('addWithdrawalRequest', this.transaction))
+      );
+  }
+
+  public editWithdrawalRequest(withdrawalRequest: WithdrawalRequest): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `muser/transaction/updatewithdrawalrequest`;
+    return this.http.post<WithdrawalRequest>(url, withdrawalRequest)
+      .pipe(
+        catchError(this.handleError('editWithdrawalRequest', withdrawalRequest))
       );
   }
 

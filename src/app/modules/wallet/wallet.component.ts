@@ -15,6 +15,7 @@ export class WalletComponent {
   modalRef: BsModalRef;
   transactions: Transaction[] = [];
   withdrawalRequests: WithdrawalRequest[] = [];
+  withdrawalRequest: WithdrawalRequest;
   totalItems = 0;
 
   inputRutTien = {id: null, value: null, content: ''};
@@ -47,17 +48,24 @@ export class WalletComponent {
   public confirm(): void {
     this.userService.addWithdrawalRequest(this.inputRutTien)
       .subscribe(res => {
-        this.modalRef.hide();
-        // this.getTransactions();
+        this.getWithdrawalRequest();
         this.inputRutTien = {id: null, value: null, content: ''};
+        this.modalRef.hide();
       });
   }
 
   public confirmHuy(): void {
-    this.modalRef.hide();
+    this.withdrawalRequest.is_deleted = 1;
+    this.userService.editWithdrawalRequest(this.withdrawalRequest)
+      .subscribe(res => {
+        this.withdrawalRequest = null;
+        this.getWithdrawalRequest();
+        this.modalRef.hide();
+      });
   }
 
   public huyRutTien(template, item) {
+    this.withdrawalRequest = item;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm', ignoreBackdropClick: true});
   }
 
