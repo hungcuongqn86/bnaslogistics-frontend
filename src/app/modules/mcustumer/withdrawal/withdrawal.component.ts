@@ -28,9 +28,11 @@ export class WithdrawalComponent {
   }
 
   public getWithdrawalRequest() {
+    this.userService.showLoading(true);
     this.userService.getWithdrawalRequest()
       .subscribe(withdrawalRequests => {
         this.withdrawalRequests = withdrawalRequests.data.data;
+        this.userService.showLoading(false);
       });
   }
 

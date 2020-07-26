@@ -211,7 +211,11 @@ export class UserService {
 
   public getWithdrawalRequest() {
     const url = Util.getUri(apiV1Url) + `muser/transaction/withdrawalrequests`;
-    return this.http.get<any>(url)
+    let params = new HttpParams();
+    Object.keys(this.withdrawalRequestSearch).map((key) => {
+      params = params.append(key, this.withdrawalRequestSearch[key]);
+    });
+    return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('getWithdrawalRequest', []))
       );
