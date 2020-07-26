@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div *ngIf="!authService.hasRole('custumer')" class="container-fluid">
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-sm-6 col-lg-3">
