@@ -199,4 +199,12 @@ export class UserService {
         catchError(this.handleError('addWithdrawalRequest', this.transaction))
       );
   }
+
+  public getWithdrawalRequest() {
+    const url = Util.getUri(apiV1Url) + `muser/transaction/withdrawalrequests`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getWithdrawalRequest', []))
+      );
+  }
 }

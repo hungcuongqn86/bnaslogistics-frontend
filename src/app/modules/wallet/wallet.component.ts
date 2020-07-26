@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {UserService} from '../../services/muser/user.service';
 import {AuthService} from '../../auth.service';
-import {Transaction} from '../../models/Transaction';
+import {Transaction, WithdrawalRequest} from '../../models/Transaction';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -13,20 +13,29 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 export class WalletComponent {
   modalRef: BsModalRef;
-  transactions: Transaction[];
+  transactions: Transaction[] = [];
+  withdrawalRequests: WithdrawalRequest[] = [];
   totalItems = 0;
 
   inputRutTien = {id: null, value: null, content: ''};
 
   constructor(public userService: UserService, public authService: AuthService, private modalService: BsModalService) {
     this.getTransactions();
+    this.getWithdrawalRequest();
   }
 
   private getTransactions() {
-    this.userService.getTransactions(this.authService.user.id)
+    this.userService.getTransactions(1)
       .subscribe(transactions => {
         this.transactions = transactions.data.data;
         this.totalItems = transactions.data.total;
+      });
+  }
+
+  private getWithdrawalRequest() {
+    this.userService.getWithdrawalRequest()
+      .subscribe(withdrawalRequests => {
+        this.withdrawalRequests = withdrawalRequests.data.data;
       });
   }
 

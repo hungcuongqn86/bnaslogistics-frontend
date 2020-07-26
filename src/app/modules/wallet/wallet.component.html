@@ -59,8 +59,35 @@
       </tab>
       <tab>
         <ng-template tabHeading><i class="icon-list"></i> &nbsp;Yêu cầu rút tiền</ng-template>
-        <div>
-          d
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-bordered table-striped table-sm table-data">
+              <thead>
+              <tr>
+                <th>Ngày yêu cầu</th>
+                <th>Số tiền</th>
+                <th>Nội dung</th>
+                <th>Trạng thái</th>
+                <th class="text-right">Tác vụ</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of withdrawalRequests; let i = index">
+                <td>{{item.created_at}}</td>
+                <td>{{item.value.toString() |
+                  tempPrice : 1 : 1: true}} <sup>đ</sup></td>
+                <td>{{item.content}}</td>
+                <td>{{item.status}}</td>
+                <td class="text-right">
+                  <button *ngIf="item.status===1" (click)="openModal(templatePc,item)"
+                          class="btn btn-sm btn-ghost-primary"
+                          type="button">Hủy
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </tab>
     </tabset>

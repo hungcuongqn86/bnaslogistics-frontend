@@ -22,3 +22,16 @@ export interface Transaction {
     created_at: string;
     updated_at: string;
 }
+
+export interface WithdrawalRequest {
+  id: number;
+  user_id: number;
+  user: User;
+  value: number;
+  content: string;
+  status: number;
+  feedback: string;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
+}
