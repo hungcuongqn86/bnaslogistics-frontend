@@ -78,9 +78,12 @@
                   tempPrice : 1 : 1: true}} <sup>đ</sup></td>
                 <td>{{item.content}}</td>
                 <td>
-                  <span *ngIf="item.status === 1" class="badge badge-warning">Chờ duyệt</span>
-                  <span *ngIf="item.status === 2" class="badge badge-info">Đã duyệt</span>
-                  <span *ngIf="item.status === 3" class="badge badge-danger">Từ chối</span>
+                  <p>
+                    <span *ngIf="item.status === 1" class="badge badge-warning">Chờ duyệt</span>
+                    <span *ngIf="item.status === 2" class="badge badge-info">Đã duyệt</span>
+                    <span *ngIf="item.status === 3" class="badge badge-danger">Từ chối</span>
+                  </p>
+                  <p *ngIf="item.feedback">{{item.feedback}}</p>
                 </td>
                 <td class="text-right">
                   <button *ngIf="item.status===1" (click)="huyRutTien(templateHuy, item)"
@@ -110,6 +113,7 @@
         <label for="value">Số tiền muốn rút (VNĐ) <code class="highlighter-rouge">*</code></label>
         <input [(ngModel)]="inputRutTien.value" #value="ngModel" class="form-control" id="value"
                name="value"
+               required
                placeholder="Số tiền muốn rút"
                type="number">
         <div [hidden]="value.valid || value.untouched">

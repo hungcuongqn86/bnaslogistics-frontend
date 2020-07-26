@@ -78,9 +78,12 @@
                 <p>Chi nhánh: {{item.user.bank_branch}}</p>
               </td>
               <td>
-                <span *ngIf="item.status === 1" class="badge badge-warning">Chờ duyệt</span>
-                <span *ngIf="item.status === 2" class="badge badge-info">Đã duyệt</span>
-                <span *ngIf="item.status === 3" class="badge badge-danger">Từ chối</span>
+                <p>
+                  <span *ngIf="item.status === 1" class="badge badge-warning">Chờ duyệt</span>
+                  <span *ngIf="item.status === 2" class="badge badge-info">Đã duyệt</span>
+                  <span *ngIf="item.status === 3" class="badge badge-danger">Từ chối</span>
+                </p>
+                <p *ngIf="item.feedback">{{item.feedback}}</p>
               </td>
               <td>
                 <button *ngIf="item.status==1" (click)="openModalApprove(approvetemplate, item)"
@@ -100,7 +103,8 @@
 
         </div>
         <div class="card-footer">
-          <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="userService.withdrawalRequestSearch.limit"
+          <pagination [boundaryLinks]="true" [totalItems]="totalItems"
+                      [itemsPerPage]="userService.withdrawalRequestSearch.limit"
                       [(ngModel)]="userService.withdrawalRequestSearch.page"
                       (pageChanged)="pageChanged($event)"
                       class="pagination-sm pull-right" [maxSize]="6"
@@ -114,12 +118,34 @@
 </div><!-- /.container-fluid -->
 
 <ng-template #rejecttemplate>
-  <div class="modal-body text-center">
-    <p>Bạn có chắc chắn muốn từ chối yêu cầu này!?</p>
-    <div class="btn-group btn-group-toggle">
-      <button type="button" class="btn btn-warning" (click)="reject()">Yes</button>
-      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
-    </div>
+  <div class="modal-header">
+    <h5 class="modal-title">Từ chối yêu cầu rút tiền</h5>
+  </div>
+  <div class="modal-body">
+    <form novalidate #form="ngForm">
+      <div class="form-group">
+        <label for="feedback">Lý do <code class="highlighter-rouge">*</code></label>
+        <textarea [(ngModel)]="withdrawalRequest.feedback" id="feedback" name="feedback" rows="3"
+                  #feedback="ngModel"
+                  required
+                  class="form-control"
+                  placeholder="Lý do từ chối ..."></textarea>
+        <div [hidden]="feedback.valid || feedback.untouched">
+                                <span *ngIf="feedback.errors && feedback.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập lý do từ chối!
+                                </span>
+        </div>
+      </div>
+      <p></p>
+      <alert type="danger" *ngIf="errorMessage.length > 0">
+        <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="reject()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
   </div>
 </ng-template>
 

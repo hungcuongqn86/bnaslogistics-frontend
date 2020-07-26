@@ -22,6 +22,8 @@ export class WithdrawalComponent {
   status: WithdrawalRequestStatus[] = [];
   counts: { status: number, total: number }[];
 
+  errorMessage: string[] = [];
+
   constructor(public userService: UserService, public authService: AuthService, private modalService: BsModalService) {
     this.getStatus();
     this.getWithdrawalRequest();
@@ -97,8 +99,15 @@ export class WithdrawalComponent {
       this.withdrawalRequest.status = 3;
       this.userService.approveWithdrawalRequest(this.withdrawalRequest)
         .subscribe(res => {
-          this.modalRef.hide();
-          this.getWithdrawalRequest();
+          if (res.status) {
+            this.modalRef.hide();
+            this.getWithdrawalRequest();
+          } else {
+            for (let i = 0; i < res.data.length; i++) {
+              this.errorMessage.push(res.data[i]);
+            }
+            this.userService.showLoading(false);
+          }
         });
     }
   }
