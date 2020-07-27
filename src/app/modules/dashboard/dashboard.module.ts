@@ -6,9 +6,10 @@ import {DashboardService} from '../../services/dashboard.service';
 import {DashboardComponent} from './dashboard.component';
 
 import {DashboardRoutingModule} from './dashboard.routing.module';
+import {SharedModule} from "../../shared.module";
 
 @NgModule({
-    imports: [CommonModule, FormsModule, DashboardRoutingModule],
+    imports: [CommonModule, FormsModule, DashboardRoutingModule, SharedModule],
     declarations: [
         DashboardComponent
     ],

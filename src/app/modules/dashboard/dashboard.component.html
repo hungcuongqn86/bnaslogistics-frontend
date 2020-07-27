@@ -6,8 +6,8 @@
           <div class="card-body pb-0">
             <button class="btn btn-transparent p-0 float-right" style="font-size: 42px;" type="button">
               <i class="fa fa-link" aria-hidden="true"></i></button>
-            <div class="text-value">0</div>
-            <div>Link sản phẩm</div>
+            <div class="text-value">{{newLink.toString() | tempPrice: 1 : 1: true}}</div>
+            <div>Link sản phẩm mới</div>
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
             <div class="btn-group float-right">
               <button class="btn btn-transparent p-0" style="font-size: 42px;" type="button"
                       aria-haspopup="true"><i class="fa fa-handshake-o" aria-hidden="true"></i></button><!----></div>
-            <div class="text-value">0</div>
+            <div class="text-value">{{newOrder.toString() | tempPrice: 1 : 1: true}}</div>
             <div>Đơn hàng mới</div>
           </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="btn-group float-right">
               <button class="btn btn-transparent p-0" style="font-size: 42px;" type="button"
                       aria-haspopup="true"><i class="fa fa-user-plus" aria-hidden="true"></i></button><!----></div>
-            <div class="text-value">0</div>
+            <div class="text-value">{{newUser.toString() | tempPrice: 1 : 1: true}}</div>
             <div>Thành viên mới</div>
           </div>
         </div>
@@ -38,8 +38,9 @@
           <div class="card-body pb-0">
             <div class="btn-group float-right">
               <button class="btn btn-transparent p-0" style="font-size: 42px;" type="button"
-                      aria-haspopup="true"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></button><!----></div>
-            <div class="text-value">0</div>
+                      aria-haspopup="true"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></button><!---->
+            </div>
+            <div class="text-value">{{newComplain.toString() | tempPrice: 1 : 1: true}}</div>
             <div>Khiếu nại</div>
           </div>
         </div>
@@ -49,7 +50,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-5">
-            <h4 class="card-title mb-0">Biểu đồ tình hình đơn hàng</h4>
+            <h4 class="card-title mb-0">Biểu đồ tình hình kết đơn</h4>
           </div>
         </div>
         <div class="chart-wrapper" style="height:300px;margin-top:40px;">

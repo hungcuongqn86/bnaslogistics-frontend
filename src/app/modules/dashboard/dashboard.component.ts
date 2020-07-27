@@ -10,6 +10,10 @@ import {AuthService} from "../../auth.service";
 })
 
 export class DashboardComponent implements OnInit {
+  newLink = 0;
+  newOrder = 0;
+  newUser = 0;
+  newComplain = 0;
 
   constructor(public dashboardService: DashboardService, private router: Router, public authService: AuthService) {
     if (authService.hasRole('custumer')) {
@@ -18,6 +22,37 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getNewLinkCount();
+    this.getNewOrderCount();
+    this.getNewUserCount();
+    this.getNewComplainCount();
+  }
 
+  public getNewLinkCount() {
+    this.dashboardService.getNewLinkCount()
+      .subscribe(data => {
+        this.newLink = data.data.newlinks;
+      });
+  }
+
+  public getNewOrderCount() {
+    this.dashboardService.getNewOrderCount()
+      .subscribe(data => {
+        this.newOrder = data.data.neworders;
+      });
+  }
+
+  public getNewUserCount() {
+    this.dashboardService.getNewUserCount()
+      .subscribe(data => {
+        this.newUser = data.data.newusers;
+      });
+  }
+
+  public getNewComplainCount() {
+    this.dashboardService.getNewComplainCount()
+      .subscribe(data => {
+        this.newComplain = data.data.newcomplains;
+      });
   }
 }
