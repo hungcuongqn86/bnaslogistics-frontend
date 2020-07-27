@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.0.3",
+    "@angular/cdk": "^10.1.0",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",
     "@angular/core": "^6.0.3",
@@ -23,6 +24,7 @@
     "@coreui/angular": "^2.0.0-rc.1",
     "@coreui/coreui": "^2.0.2",
     "@coreui/icons": "^0.3.0",
+    "@swimlane/ngx-charts": "^12.1.0",
     "angular-in-memory-web-api": "^0.6.0",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",

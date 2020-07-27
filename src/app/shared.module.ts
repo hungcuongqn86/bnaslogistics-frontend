@@ -16,26 +16,27 @@ import {TempCountByStatusPipe} from './pipes/countByStatus';
 import {TempHistoryTypePipe} from './pipes/historyType';
 import {TempDatePipe} from './pipes/date';
 import {AutofocusDirective} from './directive/autoFocus';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
-    imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(),
-        ModalModule.forRoot(), ProgressbarModule.forRoot(), TabsModule.forRoot(), BsDatepickerModule.forRoot(), AlertModule.forRoot()],
-    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe, TempCountByStatusPipe
-        , TempDatePipe, TempHistoryTypePipe, AutofocusDirective],
-    exports: [MessageDirective, PaginationModule, ModalModule, ProgressbarModule, TabsModule,
-        AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe,
-        TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe, TempCountByStatusPipe,
-        TempDatePipe, TempHistoryTypePipe, AutofocusDirective],
-    providers: []
+  imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(),NgxChartsModule,
+    ModalModule.forRoot(), ProgressbarModule.forRoot(), TabsModule.forRoot(), BsDatepickerModule.forRoot(), AlertModule.forRoot()],
+  declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe, TempCountByStatusPipe
+    , TempDatePipe, TempHistoryTypePipe, AutofocusDirective],
+  exports: [MessageDirective, PaginationModule, ModalModule, ProgressbarModule, TabsModule, NgxChartsModule,
+    AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe,
+    TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe, TempCountByStatusPipe,
+    TempDatePipe, TempHistoryTypePipe, AutofocusDirective],
+  providers: []
 })
 export class SharedModule {
-    static forRoot(): ModuleWithProviders {
-        return {
-            ngModule: SharedModule
-        };
-    }
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule
+    };
+  }
 
-    constructor() {
+  constructor() {
 
-    }
+  }
 }

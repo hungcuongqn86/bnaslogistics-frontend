@@ -27,6 +27,63 @@ export class DashboardComponent implements OnInit {
     order: 0
   };
 
+  single = [
+    {
+      "name": "19/07/2020",
+      "value": 27
+    },
+    {
+      "name": "20/07/2020",
+      "value": 35
+    },
+    {
+      "name": "21/07/2020",
+      "value": 30
+    },
+    {
+      "name": "22/07/2020",
+      "value": 50
+    },
+    {
+      "name": "23/07/2020",
+      "value": 10
+    },
+    {
+      "name": "24/07/2020",
+      "value": 15
+    },
+    {
+      "name": "25/07/2020",
+      "value": 10
+    },
+    {
+      "name": "26/07/2020",
+      "value": 40
+    },
+    {
+      "name": "27/07/2020",
+      "value": 80
+    },
+    {
+      "name": "28/07/2020",
+      "value": 30
+    }
+  ];
+
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = false;
+  showXAxisLabel = true;
+  xAxisLabel = 'Ngày';
+  showYAxisLabel = true;
+  yAxisLabel = 'Đơn hàng';
+
+  colorScheme = {
+    domain: ['#5AA454']
+  };
+
   constructor(public dashboardService: DashboardService, private router: Router, public authService: AuthService) {
     if (authService.hasRole('custumer')) {
       this.router.navigate(['/order/myorder/0/od']);
@@ -41,6 +98,10 @@ export class DashboardComponent implements OnInit {
     this.getStatisticTaobao();
     this.getStatisticTmall();
     this.getStatistic1688();
+  }
+
+  onSelect(event) {
+    console.log(event);
   }
 
   public getNewLinkCount() {
