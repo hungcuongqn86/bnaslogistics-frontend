@@ -51,4 +51,28 @@ export class DashboardService {
         catchError(this.handleError('getNewComplainCount', []))
       );
   }
+
+  getStatisticTaobao(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}statisticbytaobao`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getStatisticTaobao', []))
+      );
+  }
+
+  getStatisticTmall(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}statisticbytmall`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getStatisticTmall', []))
+      );
+  }
+
+  getStatistic1688(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}statisticby1688`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('statisticby1688', []))
+      );
+  }
 }
