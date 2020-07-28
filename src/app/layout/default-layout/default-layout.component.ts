@@ -85,8 +85,8 @@ export class DefaultLayoutComponent {
       {id: 2, name: 'Chờ đặt cọc', type: 'od'},
       {id: 3, name: 'Đang mua hàng', type: 'od'},
       {id: 2, name: 'Đã mua hàng', type: 'pk'},
-      {id: 3, name: 'Shop đang giao hàng', type: 'pk'},
-      {id: 4, name: 'Kho Trung Quốc nhận hàng', type: 'pk'},
+      {id: 3, name: 'Shop đang giao', type: 'pk'},
+      {id: 4, name: 'Kho TQ nhận hàng', type: 'pk'},
       {id: 5, name: 'Đang trên đường về VN', type: 'pk'},
       {id: 6, name: 'Trong kho VN', type: 'pk'},
       {id: 5, name: 'Thanh lý', type: 'od'},
@@ -122,7 +122,7 @@ export class DefaultLayoutComponent {
         this.navItems[i].children = [{
           name: 'Tất cả',
           url: '/order/myorder/0/od',
-          icon: 'fa fa-folder'
+          icon: 'fa fa-chevron-right'
         }];
         for (let istatus = 0; istatus < this.status.length; istatus++) {
           let name = this.status[istatus].name;
@@ -134,7 +134,7 @@ export class DefaultLayoutComponent {
           this.navItems[i].children.push({
             name: name,
             url: `/order/myorder/${this.status[istatus].id}/${this.status[istatus].type}`,
-            icon: 'fa fa-folder',
+            icon: 'fa fa-chevron-right',
             status: this.status[istatus].type + '_' + this.status[istatus].id,
             view: this.status[istatus].name
           });

@@ -60,6 +60,7 @@ export class UserService {
       bank_number: null,
       bank_username: null,
       phone_number: null,
+      address: null,
       password: null,
       c_password: null,
       partner_id: clientid,

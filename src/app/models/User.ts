@@ -17,6 +17,7 @@ export interface User {
   password: string;
   c_password: string;
   phone_number: string;
+  address: string;
   active: string;
   role_id: number;
   roles: Role[];

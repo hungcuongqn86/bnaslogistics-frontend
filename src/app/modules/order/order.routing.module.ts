@@ -12,7 +12,7 @@ const routes: Routes = [
     {
         path: 'list', component: OrderComponent,
         data: {
-            title: 'Đơn hàng'
+            title: 'Danh sách đơn hàng'
         },
         canActivate: [OrderGuardService]
     },
@@ -26,7 +26,7 @@ const routes: Routes = [
     {
         path: 'myorder', component: MyorderComponent,
         data: {
-            title: 'Đơn hàng'
+            title: 'Danh sách đơn hàng'
         }
     },
     {
@@ -38,13 +38,13 @@ const routes: Routes = [
     {
         path: 'myorder/:status', component: MyorderComponent,
         data: {
-            title: 'Đơn hàng'
+            title: 'Danh sách đơn hàng'
         }
     },
     {
         path: 'myorder/:status/:type', component: MyorderComponent,
         data: {
-            title: 'Đơn hàng'
+            title: 'Danh sách đơn hàng'
         }
     }
 ];

@@ -17,12 +17,12 @@ export const navItems = [
             {
                 name: 'Tất cả',
                 url: '/order/pet',
-                icon: 'fa fa-folder'
+                icon: 'fa fa-chevron-right'
             },
             {
                 name: 'Chờ báo giá',
                 url: '/order/species',
-                icon: 'fa fa-folder'
+                icon: 'fa fa-chevron-right'
             },
             {
                 name: 'Chờ đặt cọc',
@@ -37,12 +37,12 @@ export const navItems = [
             {
                 name: 'Đã mua hàng',
                 url: '/order/breed',
-                icon: 'fa fa-folder'
+                icon: 'fa fa-minus'
             },
             {
                 name: 'Người bán giao',
                 url: '/order/breed',
-                icon: 'fa fa-folder'
+                icon: 'fa fa-minus'
             },
             {
                 name: 'Kho THQC nhận',

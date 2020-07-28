@@ -1,6 +1,7 @@
 // Here you can add other styles
 .sidebar .nav-dropdown.open > .nav-dropdown-items .nav-item a {
   padding-left: 30px;
+  font-size: 14px;
 }
 
 .loading-over {
@@ -69,7 +70,7 @@ body {
 
 
 .app-header .navbar-brand, .sidebar-fixed .sidebar, .sidebar .sidebar-nav, .sidebar .nav {
-  width: 220px;
+  width: 230px;
 }
 
 .sidebar {
@@ -123,7 +124,7 @@ body {
 
 @media (min-width: 576px) and (min-width: 992px) {
   html:not([dir=rtl]) .sidebar-lg-show.sidebar-fixed .app-footer, html:not([dir=rtl]) .sidebar-lg-show.sidebar-fixed .main {
-    margin-left: 220px;
+    margin-left: 230px;
   }
 }
 
@@ -149,10 +150,10 @@ thead th {
   background-color: #f6f6f6;
 }
 
-form.ng-untouched.ng-pristine.ng-valid .col-md-2 {
+/*form.ng-untouched.ng-pristine.ng-valid .col-md-2 {
   flex: 0 0 25%;
   max-width: 25%;
-}
+}*/
 
 button.btn ~ button.btn{
   margin-right: 0 !important;

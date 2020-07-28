@@ -94,6 +94,18 @@
                   </div>
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="address">
+                  Địa chỉ
+                </label>
+                <div class="col-md-9">
+                  <input [(ngModel)]="userService.user.address" #address="ngModel"
+                         type="text" id="address"
+                         name="address" class="form-control" placeholder="Địa chỉ">
+                </div>
+              </div>
+              
               <div *ngIf="userService.user.image" class="form-group row">
                 <label class="col-md-3 col-form-label" for="phone_number">
                   Avata
