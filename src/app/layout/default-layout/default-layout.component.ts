@@ -87,7 +87,7 @@ export class DefaultLayoutComponent {
       {id: 2, name: 'Đã mua hàng', type: 'pk'},
       {id: 3, name: 'Shop đang giao', type: 'pk'},
       {id: 4, name: 'Kho TQ nhận hàng', type: 'pk'},
-      {id: 5, name: 'Đang trên đường về VN', type: 'pk'},
+      {id: 5, name: 'Đang về VN', type: 'pk'},
       {id: 6, name: 'Trong kho VN', type: 'pk'},
       {id: 5, name: 'Thanh lý', type: 'od'},
       {id: 6, name: 'Hủy', type: 'od'}
