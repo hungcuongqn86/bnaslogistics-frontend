@@ -17,8 +17,8 @@ export class DashboardService {
     return DashboardService.instance = DashboardService.instance || this;
   }
 
-  getNewLinkCount(): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}newlinks`;
+  getNewLinkCount(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}newlinks?dn=${dateNumber}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getNewLinkCount', []))
@@ -26,8 +26,8 @@ export class DashboardService {
   }
 
 
-  getNewOrderCount(): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}neworders`;
+  getNewOrderCount(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}neworders?dn=${dateNumber}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getNewOrderCount', []))
@@ -35,8 +35,8 @@ export class DashboardService {
   }
 
 
-  getNewUserCount(): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}newusers`;
+  getNewUserCount(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}newusers?dn=${dateNumber}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getNewUserCount', []))
@@ -44,35 +44,43 @@ export class DashboardService {
   }
 
 
-  getNewComplainCount(): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}newcomplains`;
+  getNewComplainCount(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}newcomplains?dn=${dateNumber}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getNewComplainCount', []))
       );
   }
 
-  getStatisticTaobao(): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}statisticbytaobao`;
+  getStatisticTaobao(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}statisticbytaobao?dn=${dateNumber}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getStatisticTaobao', []))
       );
   }
 
-  getStatisticTmall(): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}statisticbytmall`;
+  getStatisticTmall(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}statisticbytmall?dn=${dateNumber}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getStatisticTmall', []))
       );
   }
 
-  getStatistic1688(): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}statisticby1688`;
+  getStatistic1688(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}statisticby1688?dn=${dateNumber}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('statisticby1688', []))
+      );
+  }
+
+  orderstatisticbyday(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}orderstatisticbyday?dn=${dateNumber}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('orderstatisticbyday', []))
       );
   }
 }
