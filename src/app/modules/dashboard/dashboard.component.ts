@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   };
 
   orderstatistic: any;
+  orderstatusstatistic: any;
 
   // options
   showXAxis = true;
@@ -69,6 +70,7 @@ export class DashboardComponent implements OnInit {
     this.getStatisticTmall();
     this.getStatistic1688();
     this.orderstatisticbyday();
+    this.orderstatisticbystatus();
   }
 
   onSelect(event) {
@@ -128,6 +130,13 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.orderstatisticbyday(this.dateNumber)
       .subscribe(data => {
         this.orderstatistic = data.data;
+      });
+  }
+
+  public orderstatisticbystatus() {
+    this.dashboardService.orderstatisticbystatus(this.dateNumber)
+      .subscribe(data => {
+        this.orderstatusstatistic = data.data;
       });
   }
 }

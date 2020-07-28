@@ -83,4 +83,12 @@ export class DashboardService {
         catchError(this.handleError('orderstatisticbyday', []))
       );
   }
+
+  orderstatisticbystatus(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}orderstatisticbystatus?dn=${dateNumber}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('orderstatisticbystatus', []))
+      );
+  }
 }
