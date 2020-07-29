@@ -59,7 +59,7 @@
                         <tr>
                             <th style="width: 20%">Kiện hàng</th>
                             <th>Thông tin</th>
-                            <th>Ngày</th>
+                            <!--<th>Ngày</th>-->
                             <th style="width: 20%">Trạng thái</th>
                         </tr>
                         </thead>
@@ -116,9 +116,9 @@
                                 <p *ngIf="authService.hasRole('admin')" title="Khách hàng">{{item.order.user.email}}</p>
                                 <p *ngIf="authService.hasRole('admin')" title="Khách hàng">{{item.order.user.phone_number}}</p>
                             </td>
-                            <td class="text-right">
+                            <!--<td class="text-right">
 
-                            </td>
+                            </td>-->
                             <td>
                                 <p *ngIf="item.bill_id"><span class="packages-inf">Phiếu xuất: </span><a href="javascript:void(0);"
                                                                                 (click)="gotoBill(item.bill_id)"><span

@@ -15,7 +15,7 @@
             <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
             <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
             <p><i class="fa fa-money"></i> Đã thanh
-              toán: {{orderService.orderRe.thanh_toan.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup>
+            toán: <span *ngIf="orderService.orderRe.thanh_toan">{{orderService.orderRe.thanh_toan.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup></span>
             <p><i class="fa fa-money"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
           </div>
           <div class="col-md-6">

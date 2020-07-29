@@ -78,8 +78,6 @@
           <th>Ship TT</th>
           <th>Trả shop</th>
           <th>Thanh toán</th>
-          <th>MC</th>
-          <th>Nhận lại</th>
           <th>Mã vận đơn</th>
           <th>Mã hợp đồng</th>
           <th>Trạng thái shop</th>
@@ -136,8 +134,6 @@
               <p *ngIf="((package.id !== item.id) || (col !== 'thanh_toan')) && item.thanh_toan">
                 {{item.thanh_toan}}</p>
             </td>
-            <td></td>
-            <td></td>
             <td (click)="selectPackage(item,i,'package_code')">
               <input *ngIf="((package.id === item.id) && (col === 'package_code'))"
                      [(ngModel)]="package.package_code"
