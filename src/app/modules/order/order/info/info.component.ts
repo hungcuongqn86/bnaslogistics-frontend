@@ -99,6 +99,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       tien_can: null,
       gia_can: null,
       tien_thanh_ly: null,
+      phi_van_phat_sinh: null,
       updated_at: null,
       bill_id: null
     };

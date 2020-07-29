@@ -82,6 +82,7 @@
           <th>Mã vận đơn</th>
           <th>Mã hợp đồng</th>
           <th>Trạng thái shop</th>
+          <th>Phí vận phát sinh</th>
           <th>Ghi chú thanh lý</th>
           <th class="text-center">Thao tác</th>
         </tr>
@@ -176,6 +177,20 @@
               </select>
               <p *ngIf="((package.id !== item.id) || (col !== 'status'))">{{item.status | tempPkStatus :
                 pkStatus}}</p>
+            </td>
+            <td (click)="selectPackage(item,i,'phi_van_phat_sinh')">
+              <input *ngIf="((package.id === item.id) && (col === 'phi_van_phat_sinh'))"
+                     [(ngModel)]="package.phi_van_phat_sinh"
+                     #phi_van_phat_sinh="ngModel"
+                     class="form-control"
+                     id="phi_van_phat_sinh"
+                     name="phi_van_phat_sinh"
+                     (change)="updatePackage(template)"
+                     (blur)="hideInput()"
+                     appAutofocus
+                     type="text">
+              <p *ngIf="((package.id !== item.id) || (col !== 'phi_van_phat_sinh'))">
+                {{item.phi_van_phat_sinh}}</p>
             </td>
             <td (click)="selectPackage(item,i,'note_tl')">
                     <textarea *ngIf="((package.id === item.id) && (col === 'note_tl'))"
