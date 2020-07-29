@@ -19,7 +19,8 @@
           *ngIf="orderService.orderRe.cart && orderService.orderRe.cart[0]"
           class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span>
         </p>
-        <p *ngIf="orderService.orderRe.handle"><i class="fa fa-user"></i> Chuyên viên: {{orderService.orderRe.handle.name}}</p>
+        <p *ngIf="orderService.orderRe.handle"><i class="fa fa-user"></i> Chuyên
+          viên: {{orderService.orderRe.handle.name}}</p>
       </div>
     </div>
   </div>
@@ -262,12 +263,12 @@
               <div *ngIf="((cart.id !== item.id) || (col !== 'price'))">
                 <p *ngIf="orderService.orderRe">{{item.price | tempPrice:
                   orderService.orderRe.rate :
-                  1}}<sup>đ</sup></p>
+                  1: false}}<sup>đ</sup></p>
                 <p><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
               </div>
             </td>
             <td>
-              <p>{{item.price | tempPrice: orderService.orderRe.rate : item.amount}}<sup>đ</sup></p>
+              <p>{{item.price | tempPrice: orderService.orderRe.rate : item.amount: false}}<sup>đ</sup></p>
               <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount : false}}</p>
             </td>
             <td>{{item.note}}</td>
@@ -287,6 +288,35 @@
             </td>
           </tr>
         </ng-template>
+        <tr>
+          <td colspan="7" class="text-right">Tiền hàng</td>
+          <td colspan="3">{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup></td>
+        </tr>
+        <tr>
+          <td colspan="7" class="text-right">Phí dịch vụ mua hàng</td>
+          <td colspan="3">{{orderService.orderRe.phi_tam_tinh.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup></td>
+        </tr>
+        <tr>
+          <td colspan="7" class="text-right">Phí kiểm đếm</td>
+          <td colspan="3"
+              (click)="phiKiemDemEdit(true)">
+            <input
+              *ngIf="editPhiKiemDem"
+              [(ngModel)]="orderService.orderRe.phi_kiem_dem"
+              #phi_kiem_dem="ngModel" class="form-control"
+              id="phi_kiem_dem"
+              name="phi_kiem_dem"
+              (change)="updatePhiKiemDem()"
+              (blur)="phiKiemDemEdit(false)"
+              appAutofocus
+              type="number">
+
+            <p *ngIf="!editPhiKiemDem">
+              {{(orderService.orderRe.phi_kiem_dem) ? orderService.orderRe.phi_kiem_dem.toString() : '0' | tempPrice: 1 : 1 : false}}
+              <sup>đ </sup> <!--<span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->
+            </p>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>

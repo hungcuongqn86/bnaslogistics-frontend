@@ -59,6 +59,7 @@ export interface Order {
   thanh_toan: number;
   con_thieu: number;
   phi_tam_tinh: number;
+  phi_kiem_dem: number;
   tong: number;
   is_deleted: number;
   created_at: string;
@@ -142,6 +143,7 @@ export class OrderService {
       count_link: 0,
       tien_hang: 0,
       phi_tam_tinh: 0,
+      phi_kiem_dem: 0,
       tong: 0,
       cart: null,
       user: null,
@@ -311,7 +313,7 @@ export class OrderService {
       );
   }
 
-  public editOrder(order: OrderCreate): Observable<any> {
+  public editOrder(order: any): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
     return this.http.post<OrderCreate>(url, order)
       .pipe(
