@@ -190,7 +190,7 @@
                      appAutofocus
                      type="text">
               <p *ngIf="((package.id !== item.id) || (col !== 'phi_van_phat_sinh'))">
-                {{item.phi_van_phat_sinh}}</p>
+                {{item.phi_van_phat_sinh | tempPrice: 1 : 1 : false}}<sup>đ</sup></p>
             </td>
             <td (click)="selectPackage(item,i,'note_tl')">
                     <textarea *ngIf="((package.id === item.id) && (col === 'note_tl'))"
@@ -327,7 +327,7 @@
               type="number">
 
             <p *ngIf="!editPhiKiemDem">
-              {{(orderService.orderRe.phi_kiem_dem) ? orderService.orderRe.phi_kiem_dem.toString() : '0' | tempPrice: 1 : 1 : false}}
+              {{orderService.orderRe.phi_kiem_dem | tempPrice: 1 : 1 : false}}
               <sup>đ </sup> <!--<span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->
             </p>
           </td>

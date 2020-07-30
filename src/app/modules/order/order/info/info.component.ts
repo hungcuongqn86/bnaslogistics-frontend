@@ -218,6 +218,13 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     this.orderService.showLoading(true);
     this.orderService.editOrder(this.orderService.orderRe)
       .subscribe(res => {
+        this.updatePak();
+      });
+  }
+
+  private updatePak() {
+    this.orderService.editPackage(this.orderService.orderRe.package[0])
+      .subscribe(res => {
         this.getOrder();
       });
   }
