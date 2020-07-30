@@ -45,9 +45,9 @@
                 </thead>
                 <tbody>
                 <tr>
-                  <td>a. Tiền (2+3+4)</td>
+                  <td>a. Tiền (1+2+3)</td>
                   <td class="text-right">
-                    {{(report.tong_tien_can + report.tong_thanh_ly).toString() | tempPrice: 1 : 1 : true}}
+                    {{(report.tong_tien_can + report.tong_thanh_ly + report.tong_van_phi_ps).toString() | tempPrice: 1 : 1 : true}}
                   </td>
                 </tr>
                 <tr>
@@ -57,7 +57,7 @@
                 <tr *ngIf="bill && bill.status===1">
                   <td>Số dư sau khi xuất kho (b - a)</td>
                   <td class="text-right">{{(bill.user.debt - (report.tong_tien_can +
-                    report.tong_thanh_ly)).toString() | tempPrice: 1 : 1 : true}}
+                    report.tong_thanh_ly + report.tong_van_phi_ps)).toString() | tempPrice: 1 : 1 : true}}
                   </td>
                 </tr>
                 </tbody>
@@ -70,15 +70,13 @@
               <table class="table table-bordered">
                 <thead>
                 <tr class="">
-                  <th>1. Cân nặng(kg)</th>
-                  <th>2. Tiền cân</th>
-                  <th>3. Vận chuyển phát sinh</th>
-                  <th>4. Thanh lý</th>
+                  <th>1. Tiền cân</th>
+                  <th>2. Vận chuyển phát sinh</th>
+                  <th>3. Thanh lý</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                  <td class="text-center">{{report.tong_can_nang}}</td>
                   <td class="text-right  bold">{{report.tong_tien_can | tempPrice: 1 : 1}}
                   </td>
                   <td class="bold text-right">{{report.tong_van_phi_ps | tempPrice: 1 : 1}}</td>
@@ -99,7 +97,6 @@
                 <th class="text-center">Mã kiện</th>
                 <th class="text-center">Đơn hàng</th>
                 <th class="text-center">Thanh lý(đ)</th>
-                <th class="text-center">Dịch vụ</th>
                 <th class="text-center">Cân nặng</th>
                 <th class="text-center">Quy đổi(kg)</th>
                 <th class="text-center">Đơn giá(đ)</th>
@@ -125,7 +122,6 @@
                   </td>
                   <td class="text-right"><p *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
                     tempPrice: 1 : 1: false}}</p></td>
-                  <td><br></td>
                   <td class="text-right">{{item.weight}}</td>
                   <td class="text-right">{{item.weight_qd}}</td>
                   <td class="text-right"><p *ngIf="item.gia_can">{{item.gia_can |
@@ -140,7 +136,7 @@
               <tr>
                 <td colspan="3"></td>
                 <td class="text-right ">{{report.tong_thanh_ly | tempPrice: 1 : 1: false}}</td>
-                <td colspan="4"></td>
+                <td colspan="3"></td>
                 <td class="text-right ">{{report.tong_tien_can | tempPrice: 1 : 1: false}}</td>
                 <td class="text-right ">{{report.tong_van_phi_ps | tempPrice: 1 : 1: false}}</td>
               </tr>
