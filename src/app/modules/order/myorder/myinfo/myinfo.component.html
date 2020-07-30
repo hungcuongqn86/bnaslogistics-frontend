@@ -164,11 +164,11 @@
             <td>
               <p *ngIf="!nv && orderService.orderRe">{{item.price | tempPrice:
                 orderService.orderRe.rate :
-                1}}<sup>đ</sup></p>
+                1: false}}<sup>đ</sup></p>
               <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : 1: false}}</p>
             </td>
             <td>
-              <p *ngIf="!nv">{{item.price | tempPrice: orderService.orderRe.rate : item.amount}}<sup>đ</sup></p>
+              <p *ngIf="!nv">{{item.price | tempPrice: orderService.orderRe.rate : item.amount: false}}<sup>đ</sup></p>
               <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : item.amount: false}}</p>
             </td>
             <td>{{item.note}}</td>
