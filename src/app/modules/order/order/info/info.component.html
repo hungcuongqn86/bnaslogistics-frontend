@@ -308,7 +308,26 @@
           <td colspan="3">{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup></td>
         </tr>
         <tr>
-          <td colspan="7" class="text-right">Phí dịch vụ mua hàng</td>
+          <td colspan="7" class="text-right">Phí dịch vụ mua hàng (%)</td>
+          <td colspan="3" (click)="phiDichVuEdit(true)">
+            <input
+              *ngIf="editPhiDichVu"
+              [(ngModel)]="orderService.orderRe.phi_dich_vu"
+              #phi_dich_vu="ngModel" class="form-control"
+              id="phi_dich_vu"
+              name="phi_dich_vu"
+              (change)="updatePhiKiemDem()"
+              (blur)="phiDichVuEdit(false)"
+              appAutofocus
+              type="number">
+
+            <p *ngIf="!editPhiDichVu">
+              {{orderService.orderRe.phi_dich_vu}}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7" class="text-right">Phí dịch vụ mua hàng thành tiền</td>
           <td colspan="3">{{orderService.orderRe.phi_tam_tinh.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup></td>
         </tr>
         <tr>

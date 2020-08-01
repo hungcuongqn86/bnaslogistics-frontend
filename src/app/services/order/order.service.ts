@@ -25,6 +25,7 @@ export interface OrderCreate {
   count_link: number;
   tien_hang: number;
   phi_tam_tinh: number;
+  phi_dich_vu: number;
   tong: number;
   is_deleted: number;
   created_at: string;
@@ -59,6 +60,7 @@ export interface Order {
   thanh_toan: number;
   con_thieu: number;
   phi_tam_tinh: number;
+  phi_dich_vu: number;
   phi_kiem_dem: number;
   tong: number;
   is_deleted: number;
@@ -122,7 +124,7 @@ export class OrderService {
   reset() {
     this.order = {
       id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, is_deleted: 0, created_at: '', updated_at: '',
-      count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, tong: 0
+      count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, phi_dich_vu: 0, tong: 0
     };
   }
 
@@ -143,6 +145,7 @@ export class OrderService {
       count_link: 0,
       tien_hang: 0,
       phi_tam_tinh: 0,
+      phi_dich_vu: 0,
       phi_kiem_dem: 0,
       tong: 0,
       cart: null,

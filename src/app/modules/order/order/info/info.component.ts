@@ -24,6 +24,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   errorMessage: string[] = [];
   col: string;
   editPhiKiemDem = false;
+  editPhiDichVu = false;
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
@@ -212,6 +213,10 @@ export class InfoComponent implements OnInit, AfterViewChecked {
 
   public phiKiemDemEdit(status: boolean) {
     this.editPhiKiemDem = status;
+  }
+
+  public phiDichVuEdit(status: boolean) {
+    this.editPhiDichVu = status;
   }
 
   public updatePhiKiemDem() {
