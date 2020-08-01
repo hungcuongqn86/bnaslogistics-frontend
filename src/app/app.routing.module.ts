@@ -19,6 +19,14 @@ const appRoutes: Routes = [
     },
     children: [
       {
+        path: '',
+        loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+        data: {
+          title: 'Bảng điều khiển'
+        },
+        canActivate: [AppGuard]
+      },
+      {
         path: 'dashboard',
         loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
         data: {
