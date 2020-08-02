@@ -42,3 +42,8 @@ img {
         width: max-content;
     }
 }
+
+.badge {
+  padding: 10px;
+  margin-left: 3px;
+}

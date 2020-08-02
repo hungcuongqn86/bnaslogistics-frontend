@@ -68,6 +68,8 @@
   </div>
 </div>
 <p class="text-right"><span>Tỉ giá: {{orderService.orderRe.rate}}</span></p>
+<p class="text-right"><span *ngIf="orderService.orderRe.is_kiemdem" class="badge badge-info">Kiểm đếm</span>
+  <span *ngIf="orderService.orderRe.is_donggo" class="badge badge-info">Đóng gỗ</span></p>
 <form novalidate #form="ngForm" class="form-horizontal">
   <div class="card">
     <div class="card-body">
