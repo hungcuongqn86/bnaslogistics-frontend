@@ -15,7 +15,9 @@
             <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
             <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
             <p><i class="fa fa-money"></i> Đã thanh
-            toán: <span *ngIf="orderService.orderRe.thanh_toan">{{orderService.orderRe.thanh_toan.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup></span>
+              toán: <span
+                *ngIf="orderService.orderRe.thanh_toan">{{orderService.orderRe.thanh_toan.toString() | tempPrice: 1 : 1 : true}}
+                <sup> đ</sup></span>
             <p><i class="fa fa-money"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
           </div>
           <div class="col-md-6">
@@ -34,6 +36,30 @@
     <div *ngIf="!nv" class="card bang_phi">
       <div class="card-header">
         <i class="fa fa-align-justify"></i> <strong>Tổng phí</strong>
+        <div class="card-header-actions">
+          <ul class="options-group">
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="orderService.orderRe.is_kiemdem" id="is_kiemdem"
+                       (change)="chkKiemdem()"
+                       name="is_kiemdem"
+                       type="checkbox"
+                       value="1">
+                <label class="form-check-label" for="is_kiemdem"> Kiểm đếm </label>
+              </div>
+            </li>
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="orderService.orderRe.is_donggo" id="is_donggo"
+                       (change)="chkKiemdem()"
+                       name="is_donggo"
+                       type="checkbox"
+                       value="1">
+                <label class="form-check-label" for="is_donggo"> Đóng gỗ </label>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="card-body">
         <div class="row">
@@ -47,7 +73,9 @@
               <sup> đ</sup></strong></span></p>
             <p>(3) Ship nội địa TQ <span class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 3}}<sup> đ</sup></strong></span>
             </p>
-            <p>(4) Phí kiểm đếm <span class="pull-right"><strong>{{orderService.orderRe.phi_kiem_dem.toString() | tempPrice: 1 : 1 : false}}<sup> đ</sup></strong></span></p>
+            <p>(4) Phí kiểm đếm <span
+              class="pull-right"><strong>{{orderService.orderRe.phi_kiem_dem.toString() | tempPrice: 1 : 1 : false}}
+              <sup> đ</sup></strong></span></p>
             <p>(5) Tổng = 1 + 2 + 3 + 4 <span
               class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 1}} <sup>
                             đ</sup></strong></span></p>
@@ -64,7 +92,8 @@
               <sup> đ</sup></strong></span>
             </p>
             <p>(8) Cước vận phát sinh<span
-              class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 4}}<sup> đ</sup></strong></span></p>
+              class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 4}}<sup> đ</sup></strong></span>
+            </p>
           </div>
         </div>
       </div>

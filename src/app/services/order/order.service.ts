@@ -62,6 +62,8 @@ export interface Order {
   phi_tam_tinh: number;
   phi_dich_vu: number;
   phi_kiem_dem: number;
+  is_kiemdem: number;
+  is_donggo: number;
   tong: number;
   is_deleted: number;
   created_at: string;
@@ -123,8 +125,20 @@ export class OrderService {
 
   reset() {
     this.order = {
-      id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, is_deleted: 0, created_at: '', updated_at: '',
-      count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, phi_dich_vu: 0, tong: 0
+      id: null,
+      user_id: null,
+      shop_id: null,
+      cart_ids: null,
+      rate: 1,
+      is_deleted: 0,
+      created_at: '',
+      updated_at: '',
+      count_product: 0,
+      count_link: 0,
+      tien_hang: 0,
+      phi_tam_tinh: 0,
+      phi_dich_vu: 0,
+      tong: 0
     };
   }
 
@@ -147,6 +161,8 @@ export class OrderService {
       phi_tam_tinh: 0,
       phi_dich_vu: 0,
       phi_kiem_dem: 0,
+      is_donggo: 0,
+      is_kiemdem: 0,
       tong: 0,
       cart: null,
       user: null,
@@ -321,6 +337,14 @@ export class OrderService {
     return this.http.post<OrderCreate>(url, order)
       .pipe(
         catchError(this.handleError('editOrder', order))
+      );
+  }
+
+  public editOption(order: any): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}option`;
+    return this.http.post<OrderCreate>(url, order)
+      .pipe(
+        catchError(this.handleError('editOption', order))
       );
   }
 
