@@ -74,7 +74,7 @@
             <p>(3) Ship nội địa TQ <span class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 3}}<sup> đ</sup></strong></span>
             </p>
             <p>(4) Phí kiểm đếm <span
-              class="pull-right"><strong>{{orderService.orderRe.phi_kiem_dem.toString() | tempPrice: 1 : 1 : false}}
+              class="pull-right"><strong>{{orderService.orderRe.phi_kiem_dem | tempPrice: 1 : 1 : false}}
               <sup> đ</sup></strong></span></p>
             <p>(5) Tổng = 1 + 2 + 3 + 4 <span
               class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 1}} <sup>

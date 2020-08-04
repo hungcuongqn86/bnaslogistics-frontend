@@ -182,3 +182,62 @@ button.btn ~ button.btn{
 .tab-container .tab-content {
   height: auto;
 }
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400;1,700&display=swap');
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+form.ng-untouched.ng-pristine.ng-valid .col-md-2 {
+  flex: 0 0 16.66666667%;
+  max-width: 16.66666667%;
+}
+
+pagination.pagination-sm.pull-right.ng-untouched {
+  margin-bottom: 15px;
+}
+.page-item .page-link {
+  font-size: 12px;
+  height: 30px;
+  width: 30px;
+  line-height: 20px;
+}
+
+.card, .form-control, .btn {
+  border-radius: 0
+}
+
+.nav-tabs .nav-link {
+  color: #505b72;
+}
+
+.table-bordered, .table-bordered td, .table-bordered th {
+  border-top: 0;
+}
+
+.table thead th {
+  border-bottom: 0;
+  text-transform: uppercase;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+html:not([dir=rtl]) .sidebar {
+  margin-left: -220px;
+}
+
+.table p:last-child {
+  border-bottom: none;
+}
+
+body.app:not(.header-fixed) {
+  background-image: url(https://247logistics.com.vn/wp-content/uploads/2018/12/abr-logistics-main-slider.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.modal-dialog.modal-sm {
+  margin: calc(50vh - 50px) auto;
+}

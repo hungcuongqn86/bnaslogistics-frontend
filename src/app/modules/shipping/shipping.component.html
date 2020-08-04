@@ -64,7 +64,10 @@
                 <tbody>
                   <tr *ngFor="let item of shippings">
                     <td>{{item.id}}</td>
-                    <td>{{item.content}}</td>
+                    <td>
+                      <p>Khách hàng: {{item.user.name}} ({{item.user.phone_number}})</p>
+                      <p>Nội dung: {{item.content}}</p>
+                    </td>
                     <td>{{item.package_count}}</td>
                     <td>{{item.created_at | tempDate}}</td>
                     <td>
