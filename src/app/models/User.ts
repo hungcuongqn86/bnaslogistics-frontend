@@ -7,6 +7,11 @@ export interface Role {
   position: string;
 }
 
+export interface Vip {
+  id: string;
+  name: string;
+}
+
 export interface User {
   id: number;
   partner_id: number;
@@ -29,6 +34,7 @@ export interface User {
   deposit: string;
   hander: number;
   handle: any;
+  vip: string;
   bank_number: string;
   bank_name: string;
   bank_username: string;

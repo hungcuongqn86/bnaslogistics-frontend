@@ -55,6 +55,7 @@ export class UserService {
       active: null,
       hander: null,
       handle: null,
+      vip: null,
       bank_branch: null,
       bank_name: null,
       bank_number: null,
@@ -98,6 +99,14 @@ export class UserService {
 
   getHandles(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}handles`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getHandles', []))
+      );
+  }
+
+  getVips(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}vips`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getHandles', []))

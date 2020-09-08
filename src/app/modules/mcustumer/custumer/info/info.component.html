@@ -130,4 +130,18 @@
       </select>
     </div>
   </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="vip">
+      Vip
+    </label>
+    <div class="col-md-9">
+      <select [(ngModel)]="userService.user.vip" class="form-control"
+              name="vip" id="vip">
+        <option value="null">Chọn vip ...</option>
+        <option *ngFor="let vip of vips" [value]="vip.id">
+          {{vip.name}}
+        </option>
+      </select>
+    </div>
+  </div>
 </form>

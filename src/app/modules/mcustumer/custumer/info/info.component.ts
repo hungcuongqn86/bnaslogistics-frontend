@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {UserService} from '../../../../services/muser/user.service';
 import {PartnerService} from '../../../../services/mpartner/partner.service';
-import {Role, User} from '../../../../models/User';
+import {Role, User, Vip} from '../../../../models/User';
 import {Partner} from '../../../../models/Partner';
 import {AuthService} from '../../../../auth.service';
 
@@ -15,11 +15,13 @@ export class InfoComponent {
   roles: Role[];
   partners: Partner[];
   handers: User[] = [];
+  vips: Vip[];
 
   constructor(public userService: UserService, private partnerService: PartnerService, public authService: AuthService) {
     this.getRoles();
     this.getPartners();
     this.getHandles();
+    this.getVips();
   }
 
   public getRoles() {
@@ -41,6 +43,15 @@ export class InfoComponent {
     this.userService.getHandles()
       .subscribe(handers => {
         this.handers = handers.data;
+        this.userService.showLoading(false);
+      });
+  }
+
+  public getVips() {
+    this.userService.showLoading(true);
+    this.userService.getVips()
+      .subscribe(vips => {
+        this.vips = vips.data;
         this.userService.showLoading(false);
       });
   }
