@@ -207,16 +207,22 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   }
 
   public selectCart(item: Cart, col: string) {
-    this.col = col;
-    this.cart = item;
+    if (!this.authService.hasRole('employees') || (col === 'nv_note')) {
+      this.col = col;
+      this.cart = item;
+    }
   }
 
   public phiKiemDemEdit(status: boolean) {
-    this.editPhiKiemDem = status;
+    if (!this.authService.hasRole('employees')) {
+      this.editPhiKiemDem = status;
+    }
   }
 
   public phiDichVuEdit(status: boolean) {
-    this.editPhiDichVu = status;
+    if (!this.authService.hasRole('employees')) {
+      this.editPhiDichVu = status;
+    }
   }
 
   public updatePhiKiemDem() {
