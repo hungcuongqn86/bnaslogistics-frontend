@@ -49,7 +49,7 @@ export class CartComponent implements OnInit {
   }
 
   private convertShopsData(data: Shop[]) {
-    const chiet_khau = this.authService.user.cost_percent;
+    let phi_dich_vu = this.authService.user.cost_percent;
     const res: Shop[] = [];
     for (let i = 0; i < data.length; i++) {
       const shop: Shop = data[i];
@@ -65,11 +65,29 @@ export class CartComponent implements OnInit {
         const vnd = Math.ceil(ndt * tigia * soluong);
         shop.tien_hang = shop.tien_hang + vnd;
       }
-      shop.phi_tam_tinh = Math.ceil((shop.tien_hang * chiet_khau) / 100);
+      // Phi dich vu theo tien hang
+      phi_dich_vu = this.getPhiDichVu(shop.tien_hang);
+      shop.phi_tam_tinh = Math.ceil((shop.tien_hang * phi_dich_vu) / 100);
+
       shop.tong = shop.tien_hang + shop.phi_tam_tinh;
       res.push(shop);
     }
     return res;
+  }
+
+  private getPhiDichVu(tienhang: number) {
+    let phi_dich_vu = this.authService.user.cost_percent;
+    // Phi dich vu theo tien hang
+    if (tienhang < 2000000) {
+      phi_dich_vu = 5;
+    }
+    if ((tienhang >= 2000000) && (tienhang <= 10000000)) {
+      phi_dich_vu = 2.5;
+    }
+    if (tienhang > 10000000) {
+      phi_dich_vu = 1;
+    }
+    return phi_dich_vu;
   }
 
   public ketDon(item: Shop) {
@@ -79,7 +97,7 @@ export class CartComponent implements OnInit {
     this.order.count_product = item.count_product;
     this.order.count_link = item.count_link;
     this.order.tien_hang = item.tien_hang;
-    this.order.phi_dich_vu = this.authService.user.cost_percent;
+    this.order.phi_dich_vu = this.getPhiDichVu(item.tien_hang);
     this.order.phi_tam_tinh = item.phi_tam_tinh;
     this.order.tong = item.tong;
 
