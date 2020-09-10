@@ -24,6 +24,7 @@ export class CartComponent implements OnInit {
   order: OrderCreate;
   modalRef: BsModalRef;
   nv = false;
+  vipData = [0, 5, 10, 15, 20, 25, 30];
 
   constructor(public cartService: CartService, private authService: AuthService, private orderService: OrderService,
               public errorMessagesService: ErrorMessagesService,
@@ -49,12 +50,17 @@ export class CartComponent implements OnInit {
   }
 
   private convertShopsData(data: Shop[]) {
+    const vip = this.authService.user.vip ? this.authService.user.vip : '0';
+    const vipdc = this.vipData[vip];
+
     let phi_dich_vu = this.authService.user.cost_percent;
     const res: Shop[] = [];
     for (let i = 0; i < data.length; i++) {
       const shop: Shop = data[i];
       const detailData = shop.cart;
       shop.count_link = shop.cart.length;
+      shop.vip = vip;
+      shop.vip_dc = vipdc;
       shop.count_product = 0;
       shop.tien_hang = 0;
       for (let j = 0; j < detailData.length; j++) {
@@ -68,6 +74,7 @@ export class CartComponent implements OnInit {
       // Phi dich vu theo tien hang
       phi_dich_vu = this.getPhiDichVu(shop.tien_hang);
       shop.phi_tam_tinh = Math.ceil((shop.tien_hang * phi_dich_vu) / 100);
+      shop.phi_tam_tinh = shop.phi_tam_tinh - Math.ceil((shop.phi_tam_tinh * shop.vip_dc) / 100);
 
       shop.tong = shop.tien_hang + shop.phi_tam_tinh;
       res.push(shop);

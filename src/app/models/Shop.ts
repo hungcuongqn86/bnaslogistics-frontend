@@ -10,6 +10,8 @@ export interface Shop {
     count_link: number;
     tien_hang: number;
     phi_tam_tinh: number;
+    vip: string;
+    vip_dc: number;
     tong: number;
     is_deleted: number;
     created_at: string;

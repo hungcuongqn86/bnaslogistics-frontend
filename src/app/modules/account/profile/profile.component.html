@@ -31,6 +31,14 @@
               </div>
               <div class="form-group row">
                 <label class="col-md-3 col-form-label">
+                  Vip
+                </label>
+                <div class="col-md-9">
+                  <strong>Vip {{userService.user.vip}}</strong>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label">
                   Email
                 </label>
                 <div class="col-md-9">
@@ -105,7 +113,7 @@
                          name="address" class="form-control" placeholder="Địa chỉ">
                 </div>
               </div>
-              
+
               <div *ngIf="userService.user.image" class="form-group row">
                 <label class="col-md-3 col-form-label" for="phone_number">
                   Avata
