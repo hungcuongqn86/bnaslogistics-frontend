@@ -30,7 +30,7 @@ export class MyorderComponent implements OnInit {
               private router: Router) {
     this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
     this.order = {
-      id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, is_deleted: 0, created_at: '', updated_at: '',
+      id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, vip: null, vip_dc: 0, is_deleted: 0, created_at: '', updated_at: '',
       count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, phi_dich_vu: 0, tong: 0
     };
     this.arrDeposit = this.auth.user.deposit.split(',');
@@ -140,6 +140,8 @@ export class MyorderComponent implements OnInit {
       shop_id: order.shop_id,
       cart_ids: null,
       rate: order.rate,
+      vip: null,
+      vip_dc: 0,
       is_deleted: order.is_deleted,
       created_at: order.created_at,
       updated_at: order.updated_at,

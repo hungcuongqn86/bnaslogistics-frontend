@@ -27,6 +27,8 @@ export interface OrderCreate {
   phi_tam_tinh: number;
   phi_dich_vu: number;
   tong: number;
+  vip: string;
+  vip_dc: number;
   is_deleted: number;
   created_at: string;
   updated_at: string;
@@ -130,6 +132,8 @@ export class OrderService {
       shop_id: null,
       cart_ids: null,
       rate: 1,
+      vip: null,
+      vip_dc: 0,
       is_deleted: 0,
       created_at: '',
       updated_at: '',

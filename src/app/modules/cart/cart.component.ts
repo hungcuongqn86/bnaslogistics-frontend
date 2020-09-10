@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.getCarts();
     this.order = {
-      id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, is_deleted: 0, created_at: '', updated_at: '',
+      id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, vip: null, vip_dc: 0, is_deleted: 0, created_at: '', updated_at: '',
       count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, phi_dich_vu: 0, tong: 0
     };
   }
@@ -107,6 +107,8 @@ export class CartComponent implements OnInit {
     this.order.phi_dich_vu = this.getPhiDichVu(item.tien_hang);
     this.order.phi_tam_tinh = item.phi_tam_tinh;
     this.order.tong = item.tong;
+    this.order.vip = item.vip;
+    this.order.vip_dc = item.vip_dc;
 
     const cartids = [];
     for (let j = 0; j < item.cart.length; j++) {
