@@ -1,28 +1,80 @@
 <div class="card">
-    <div class="card-header"><i class="fa fa-cogs"></i> <strong>Danh mục tham số hệ thống</strong></div>
-    <div class="card-body">
-        <table class="table table-bordered table-striped table-sm">
-            <thead>
-            <tr>
-                <th>Tiêu đề</th>
-                <th>key</th>
-                <th>value</th>
-                <th class="text-right">Tác vụ</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of settings">
-                <td>{{item.title}}</td>
-                <td>{{item.key}}</td>
-                <td>{{item.value}}</td>
-                <td class="text-right">
-                    <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
-                            type="button">
-                        Sửa
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí dịch vụ</strong></div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped table-sm">
+      <thead>
+      <tr>
+        <th>Tiêu đề</th>
+        <th>value</th>
+        <th class="text-right">Tác vụ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of settings">
+        <td>{{item.title}}</td>
+        <td>{{item.value}}</td>
+        <td class="text-right">
+          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
+                  type="button">
+            Sửa
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header"><i class="fa fa-cogs"></i> <strong>VIP</strong></div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped table-sm">
+      <thead>
+      <tr>
+        <th>Tiêu đề</th>
+        <th>value</th>
+        <th class="text-right">Tác vụ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of settings">
+        <td>{{item.title}}</td>
+        <td>{{item.value}}</td>
+        <td class="text-right">
+          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
+                  type="button">
+            Sửa
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Tham số khác</strong></div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped table-sm">
+      <thead>
+      <tr>
+        <th>Tiêu đề</th>
+        <th>value</th>
+        <th class="text-right">Tác vụ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of settings">
+        <td>{{item.title}}</td>
+        <td>{{item.value}}</td>
+        <td class="text-right">
+          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
+                  type="button">
+            Sửa
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
