@@ -35,7 +35,7 @@
     "ngx-bootstrap": "^3.0.0",
     "ngx-captcha": "^2.2.1",
     "ngx-perfect-scrollbar": "^6.2.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "npm": "^6.4.1",
     "rxjs": "^6.0.0",
     "simple-line-icons": "^2.4.1",
