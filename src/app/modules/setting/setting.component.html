@@ -28,36 +28,7 @@
 </div>
 
 <div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí vận chuyển - Trọng lượng</strong></div>
-  <div class="card-body">
-    <table class="table table-bordered table-striped table-sm">
-      <thead>
-      <tr>
-        <th>Phí dịch vụ</th>
-        <th>Mức tiền hàng (Triệu VNĐ)</th>
-        <th>Tính phí (%)</th>
-        <th class="text-right" style="width: 80px;">Tác vụ</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let item of serviceFees">
-        <td>{{item.title}}</td>
-        <td>{{item.min_tot_tran}} - {{item.max_tot_tran}}</td>
-        <td>{{item.val}}</td>
-        <td class="text-right">
-          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
-                  type="button">
-            Sửa
-          </button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí vận chuyển - Thể tích</strong></div>
+  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí vận chuyển</strong></div>
   <div class="card-body">
     <table class="table table-bordered table-striped table-sm">
       <thead>
