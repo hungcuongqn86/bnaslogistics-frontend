@@ -4,8 +4,8 @@
     <table class="table table-bordered table-striped table-sm">
       <thead>
       <tr>
-        <th>Tiêu đề</th>
-        <th>value</th>
+        <th>Tổng giao dịch</th>
+        <th>Phí dịch vụ</th>
         <th class="text-right">Tác vụ</th>
       </tr>
       </thead>
@@ -31,15 +31,21 @@
     <table class="table table-bordered table-striped table-sm">
       <thead>
       <tr>
-        <th>Tiêu đề</th>
-        <th>value</th>
+        <th>VIP</th>
+        <th>Tổng giao dịch (Triệu VNĐ)</th>
+        <th>CK phí dịch vụ (%)</th>
+        <th>CK phí vận chuyển (%)</th>
+        <th>Đặt cọc mua hàng (%)</th>
         <th class="text-right">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of settings">
+      <tr *ngFor="let item of vips">
         <td>{{item.title}}</td>
-        <td>{{item.value}}</td>
+        <td>{{item.min_tot_tran}}</td>
+        <td>{{item.ck_dv}}</td>
+        <td>{{item.ck_vc}}</td>
+        <td>{{item.deposit}}</td>
         <td class="text-right">
           <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
                   type="button">
@@ -58,8 +64,8 @@
     <table class="table table-bordered table-striped table-sm">
       <thead>
       <tr>
-        <th>Tiêu đề</th>
-        <th>value</th>
+        <th>Tham số</th>
+        <th>Giá trị</th>
         <th class="text-right">Tác vụ</th>
       </tr>
       </thead>
