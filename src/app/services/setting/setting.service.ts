@@ -17,8 +17,10 @@ export class SettingService {
   private handleError: HandleError;
   private moduleUri = 'setting/';
   private vipModuleUri = 'vip/';
+  private serviceFeeModuleUri = 'service_fee/';
   public search = {key: '', page_size: 100, page: 1};
   public vipSearchParam = {key: '', page_size: 100, page: 1};
+  public serviceFeeSearchParam = {key: '', page_size: 100, page: 1};
   public setting: ISetting = new Setting();
 
   constructor(private router: Router, private loadingService: LoadingService,
@@ -61,6 +63,18 @@ export class SettingService {
     return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('getVips', []))
+      );
+  }
+
+  getServiceFees(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}search`;
+    let params = new HttpParams();
+    Object.keys(this.serviceFeeSearchParam).map((key) => {
+      params = params.append(key, this.serviceFeeSearchParam[key]);
+    });
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('getServiceFees', []))
       );
   }
 

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {SettingService} from '../../services/setting/setting.service';
-import {ISetting, IVip} from '../../models/Setting';
+import {IServiceFee, ISetting, IVip} from '../../models/Setting';
 import {Router} from '@angular/router';
 import {forkJoin, Subject, Observable, Subscription} from 'rxjs';
 
@@ -13,6 +13,7 @@ import {forkJoin, Subject, Observable, Subscription} from 'rxjs';
 export class SettingComponent {
   settings: ISetting[];
   vips: IVip[];
+  serviceFees: IServiceFee[];
 
   constructor(public settingService: SettingService, private router: Router) {
     this.getAllListData();
@@ -22,13 +23,16 @@ export class SettingComponent {
     this.settingService.showLoading(true);
     const getSettingsObs: Observable<any> = this.settingService.getSettings();
     const getVipsObs: Observable<any> = this.settingService.getVips();
+    const getServiceFeesObs: Observable<any> = this.settingService.getServiceFees();
 
     const listSub = forkJoin([
       getSettingsObs,
-      getVipsObs
-    ]).subscribe(([settings, vips]) => {
+      getVipsObs,
+      getServiceFeesObs
+    ]).subscribe(([settings, vips, serviceFees]) => {
       this.settings = settings.data.data;
       this.vips = vips.data.data;
+      this.serviceFees = serviceFees.data.data;
       this.settingService.showLoading(false);
       listSub.unsubscribe();
     });

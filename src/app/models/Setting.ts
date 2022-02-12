@@ -22,6 +22,32 @@ export class Setting implements ISetting {
   }
 }
 
+export interface IServiceFee {
+  id: number;
+  title: string;
+  note: string;
+  min_tot_tran: number;
+  max_tot_tran: number;
+  val: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export class ServiceFee implements IServiceFee {
+  id: number;
+  title: string;
+  note: string;
+  min_tot_tran: number;
+  max_tot_tran: number;
+  val: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+
+  }
+}
+
 export interface IVip {
   id: number;
   title: string;
