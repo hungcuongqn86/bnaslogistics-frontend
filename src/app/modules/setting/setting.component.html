@@ -1,5 +1,11 @@
 <div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí dịch vụ</strong></div>
+  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí dịch vụ</strong>
+    <div class="card-header-actions">
+      <button (click)="serviceFeeModalOpen(serviceFeeModal)" class="btn btn-block btn-primary btn-sm"
+              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
+      </button>
+    </div>
+  </div>
   <div class="card-body">
     <table class="table table-bordered table-striped table-sm">
       <thead>
@@ -32,7 +38,13 @@
 </div>
 
 <div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí vận chuyển</strong></div>
+  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí vận chuyển</strong>
+    <div class="card-header-actions">
+      <button (click)="addPet()" class="btn btn-block btn-primary btn-sm"
+              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
+      </button>
+    </div>
+  </div>
   <div class="card-body">
     <div class="form-group row">
       <div class="col-md-2">
@@ -82,7 +94,13 @@
 </div>
 
 <div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí kiểm đếm</strong></div>
+  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí kiểm đếm</strong>
+    <div class="card-header-actions">
+      <button (click)="addPet()" class="btn btn-block btn-primary btn-sm"
+              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
+      </button>
+    </div>
+  </div>
   <div class="card-body">
     <table class="table table-bordered table-striped table-sm">
       <thead>
@@ -115,7 +133,13 @@
 </div>
 
 <div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>VIP</strong></div>
+  <div class="card-header"><i class="fa fa-cogs"></i> <strong>VIP</strong>
+    <div class="card-header-actions">
+      <button (click)="addPet()" class="btn btn-block btn-primary btn-sm"
+              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
+      </button>
+    </div>
+  </div>
   <div class="card-body">
     <table class="table table-bordered table-striped table-sm">
       <thead>
@@ -177,3 +201,35 @@
     </table>
   </div>
 </div>
+
+<ng-template #serviceFeeModal>
+  <div class="modal-header">
+    <h5 class="modal-title">Chi tiết phí dịch vụ</h5>
+  </div>
+  <div class="modal-body" *ngIf="serviceFee">
+    <form novalidate #serviceFeeForm="ngForm">
+      <div class="form-group">
+        <label for="serviceFeeTitle">Dịch vụ<code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="serviceFee.title" #serviceFeeTitle="ngModel" type="text" id="serviceFeeTitle" name="serviceFeeTitle"
+               class="form-control"
+               required
+               placeholder="Dịch vụ">
+        <div [hidden]="serviceFeeTitle.valid || serviceFeeTitle.untouched">
+          <span *ngIf="serviceFeeTitle.errors && serviceFeeTitle.errors.required"
+                class="badge badge-warning">
+              Phải nhập dịch vụ!
+          </span>
+        </div>
+      </div>
+
+      <p></p>
+      <alert type="danger" *ngIf="serviceFeeErrorMessage.length > 0">
+        <p *ngFor="let error of serviceFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="serviceFeeConfirm()">Cập nhật</button>
+    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+  </div>
+</ng-template>

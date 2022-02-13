@@ -1,8 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, TemplateRef} from '@angular/core';
 import {SettingService} from '../../services/setting/setting.service';
 import {IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip, IWarehouse} from '../../models/interface';
 import {Router} from '@angular/router';
 import {forkJoin, Subject, Observable, Subscription} from 'rxjs';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {ServiceFee} from "../../models/model";
 
 @Component({
   selector: 'app-setting',
@@ -18,7 +21,13 @@ export class SettingComponent {
   inspectionFees: IInspectionFee[];
   transportFees: ITransportFee[];
 
-  constructor(public settingService: SettingService, private router: Router) {
+  serviceFee: IServiceFee;
+
+  modalRef: BsModalRef;
+
+  serviceFeeErrorMessage: string[] = [];
+
+  constructor(public settingService: SettingService, private router: Router, private modalService: BsModalService,) {
     this.getAllListData();
   }
 
@@ -61,6 +70,23 @@ export class SettingComponent {
       this.settingService.showLoading(false);
       listSub.unsubscribe();
     });
+  }
+
+  public serviceFeeModalOpen(template: TemplateRef<any>, item: IServiceFee = null) {
+    if(item){
+      this.serviceFee = item;
+    }else{
+      this.serviceFee = new ServiceFee();
+    }
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
+  public serviceFeeConfirm(): void {
+    this.modalRef.hide();
+  }
+
+  public declineModal(): void {
+    this.modalRef.hide();
   }
 
   public editSetting(id) {
