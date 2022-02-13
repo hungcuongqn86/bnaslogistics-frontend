@@ -8,7 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {Router} from '@angular/router';
-import {ISetting} from '../../models/interface';
+import {IServiceFee, ISetting} from '../../models/interface';
 import {Setting} from '../../models/model';
 import {LoadingService} from '../../loading.service';
 
@@ -73,7 +73,9 @@ export class SettingService {
       );
   }
 
-  getServiceFees(): Observable<any> {
+  // =============================================
+  // ServiceFees
+  public getServiceFees(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}search`;
     let params = new HttpParams();
     Object.keys(this.serviceFeeSearchParam).map((key) => {
@@ -84,6 +86,24 @@ export class SettingService {
         catchError(this.handleError('getServiceFees', []))
       );
   }
+
+  public addServiceFees(item: IServiceFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}create`;
+    return this.http.post<Setting>(url, item)
+      .pipe(
+        catchError(this.handleError('addSetting', item))
+      );
+  }
+
+  public editServiceFees(item: IServiceFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}update`;
+    return this.http.post<Setting>(url, item)
+      .pipe(
+        catchError(this.handleError('editSetting', item))
+      );
+  }
+
+  //=============================================
 
   getWarehouses(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.warehouseModuleUri}search`;
@@ -153,7 +173,7 @@ export class SettingService {
     this.showLoading(false);
   }
 
-  public addSetting(setting: Setting): Observable<any> {
+  public addSetting(setting: ISetting): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
     return this.http.post<Setting>(url, setting)
       .pipe(
@@ -161,7 +181,7 @@ export class SettingService {
       );
   }
 
-  public editSetting(setting: Setting): Observable<any> {
+  public editSetting(setting: ISetting): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
     return this.http.post<Setting>(url, setting)
       .pipe(

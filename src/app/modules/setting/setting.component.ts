@@ -61,7 +61,20 @@ export class SettingComponent {
     });
   }
 
-  private getTransportFeesData() {
+  private getServiceFees() {
+    this.settingService.showLoading(true);
+    const getServiceFeesObs: Observable<any> = this.settingService.getServiceFees();
+
+    const listSub = forkJoin([
+      getServiceFeesObs
+    ]).subscribe(([serviceFees]) => {
+      this.serviceFees = serviceFees.data.data;
+      this.settingService.showLoading(false);
+      listSub.unsubscribe();
+    });
+  }
+
+  public getTransportFeesData() {
     this.settingService.showLoading(true);
     const getTransportFeesObs: Observable<any> = this.settingService.getTransportFees();
 
@@ -84,14 +97,28 @@ export class SettingComponent {
   }
 
   public serviceFeeConfirm(): void {
+    let updateObs: Observable<any> = new Observable<any>();
     if (this.serviceFee.id) {
       // Update
-
+      updateObs = this.settingService.editServiceFees(this.serviceFee);
     } else {
       // Create
-
+      updateObs = this.settingService.addServiceFees(this.serviceFee);
     }
-    this.modalRef.hide();
+    this.settingService.showLoading(true);
+    const serviceFeeSub = updateObs.subscribe(data => {
+      if (data.status) {
+        this.serviceFeeErrorMessage = [];
+        this.getServiceFees();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.serviceFeeErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      serviceFeeSub.unsubscribe();
+    });
   }
 
   public declineModal(): void {
