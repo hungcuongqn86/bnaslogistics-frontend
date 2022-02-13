@@ -8,7 +8,8 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {Router} from '@angular/router';
-import {ISetting, Setting} from '../../models/Setting';
+import {ISetting} from '../../models/interface';
+import {Setting} from '../../models/model';
 import {LoadingService} from '../../loading.service';
 
 @Injectable()
@@ -18,9 +19,15 @@ export class SettingService {
   private moduleUri = 'setting/';
   private vipModuleUri = 'vip/';
   private serviceFeeModuleUri = 'service_fee/';
+  private transportFeeModuleUri = 'transport_fees/';
+  private inspectionFeeModuleUri = 'inspection_fees/';
+  private warehouseModuleUri = 'inspection_fees/';
   public search = {key: '', page_size: 100, page: 1};
   public vipSearchParam = {key: '', page_size: 100, page: 1};
   public serviceFeeSearchParam = {key: '', page_size: 100, page: 1};
+  public transportFeeSearchParam = {key: '', page_size: 100, page: 1};
+  public inspectionFeeSearchParam = {key: '', page_size: 100, page: 1};
+  public warehouseSearchParam = {key: '', page_size: 100, page: 1};
   public setting: ISetting = new Setting();
 
   constructor(private router: Router, private loadingService: LoadingService,
@@ -75,6 +82,42 @@ export class SettingService {
     return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('getServiceFees', []))
+      );
+  }
+
+  getWarehouses(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.warehouseModuleUri}search`;
+    let params = new HttpParams();
+    Object.keys(this.warehouseSearchParam).map((key) => {
+      params = params.append(key, this.warehouseSearchParam[key]);
+    });
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('getWarehouses', []))
+      );
+  }
+
+  getInspectionFees(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.inspectionFeeModuleUri}search`;
+    let params = new HttpParams();
+    Object.keys(this.inspectionFeeSearchParam).map((key) => {
+      params = params.append(key, this.inspectionFeeSearchParam[key]);
+    });
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('getInspectionFees', []))
+      );
+  }
+
+  getTransportFees(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.transportFeeModuleUri}search`;
+    let params = new HttpParams();
+    Object.keys(this.transportFeeSearchParam).map((key) => {
+      params = params.append(key, this.transportFeeSearchParam[key]);
+    });
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('getTransportFees', []))
       );
   }
 

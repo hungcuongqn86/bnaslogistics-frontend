@@ -4,7 +4,7 @@
     <table class="table table-bordered table-striped table-sm">
       <thead>
       <tr>
-        <th>Phí dịch vụ</th>
+        <th>Dịch vụ</th>
         <th>Mức tiền hàng (Triệu VNĐ)</th>
         <th>Tính phí (%)</th>
         <th class="text-right" style="width: 80px;">Tác vụ</th>
@@ -33,16 +33,16 @@
     <table class="table table-bordered table-striped table-sm">
       <thead>
       <tr>
-        <th>Phí dịch vụ</th>
-        <th>Mức tiền hàng (Triệu VNĐ)</th>
-        <th>Tính phí (%)</th>
+        <th>Dịch vụ</th>
+        <th>Mức cân nặng (Kg)</th>
+        <th>Phí (VNĐ)</th>
         <th class="text-right" style="width: 80px;">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of serviceFees">
+      <tr *ngFor="let item of transportFees">
         <td>{{item.title}}</td>
-        <td>{{item.min_tot_tran}} - {{item.max_tot_tran}}</td>
+        <td>{{item.min_r}} - {{item.max_r}}</td>
         <td>{{item.val}}</td>
         <td class="text-right">
           <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
@@ -62,16 +62,16 @@
     <table class="table table-bordered table-striped table-sm">
       <thead>
       <tr>
-        <th>Phí dịch vụ</th>
-        <th>Mức tiền hàng (Triệu VNĐ)</th>
-        <th>Tính phí (%)</th>
+        <th>Dịch vụ</th>
+        <th>Số lượng SP</th>
+        <th>Phí (VNĐ)</th>
         <th class="text-right" style="width: 80px;">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of serviceFees">
+      <tr *ngFor="let item of inspectionFees">
         <td>{{item.title}}</td>
-        <td>{{item.min_tot_tran}} - {{item.max_tot_tran}}</td>
+        <td>{{item.min_count}} - {{item.max_count}}</td>
         <td>{{item.val}}</td>
         <td class="text-right">
           <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"

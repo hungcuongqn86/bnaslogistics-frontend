@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {SettingService} from '../../services/setting/setting.service';
-import {IServiceFee, ISetting, IVip} from '../../models/Setting';
+import {IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip, IWarehouse} from '../../models/interface';
 import {Router} from '@angular/router';
 import {forkJoin, Subject, Observable, Subscription} from 'rxjs';
 
@@ -14,6 +14,9 @@ export class SettingComponent {
   settings: ISetting[];
   vips: IVip[];
   serviceFees: IServiceFee[];
+  warehouses: IWarehouse[];
+  inspectionFees: IInspectionFee[];
+  transportFees: ITransportFee[];
 
   constructor(public settingService: SettingService, private router: Router) {
     this.getAllListData();
@@ -21,15 +24,24 @@ export class SettingComponent {
 
   private getAllListData() {
     this.settingService.showLoading(true);
+    const getWarehousesObs: Observable<any> = this.settingService.getWarehouses();
+    const getTransportFeesObs: Observable<any> = this.settingService.getTransportFees();
+    const getInspectionFeesObs: Observable<any> = this.settingService.getInspectionFees();
     const getSettingsObs: Observable<any> = this.settingService.getSettings();
     const getVipsObs: Observable<any> = this.settingService.getVips();
     const getServiceFeesObs: Observable<any> = this.settingService.getServiceFees();
 
     const listSub = forkJoin([
+      getWarehousesObs,
+      getTransportFeesObs,
+      getInspectionFeesObs,
       getSettingsObs,
       getVipsObs,
       getServiceFeesObs
-    ]).subscribe(([settings, vips, serviceFees]) => {
+    ]).subscribe(([warehouses, transportFees, inspectionFees, settings, vips, serviceFees]) => {
+      this.warehouses = warehouses.data.data;
+      this.inspectionFees = inspectionFees.data.data;
+      this.transportFees = transportFees.data.data;
       this.settings = settings.data.data;
       this.vips = vips.data.data;
       this.serviceFees = serviceFees.data.data;
