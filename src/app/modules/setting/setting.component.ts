@@ -2,7 +2,7 @@ import {Component, TemplateRef} from '@angular/core';
 import {SettingService} from '../../services/setting/setting.service';
 import {IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip, IWarehouse} from '../../models/interface';
 import {Router} from '@angular/router';
-import {forkJoin, Subject, Observable, Subscription} from 'rxjs';
+import {forkJoin, Observable, Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {ServiceFee} from "../../models/model";
@@ -75,15 +75,22 @@ export class SettingComponent {
   }
 
   public serviceFeeModalOpen(template: TemplateRef<any>, item: IServiceFee = null) {
-    if(item){
+    if (item) {
       this.serviceFee = item;
-    }else{
+    } else {
       this.serviceFee = new ServiceFee();
     }
     this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
   }
 
   public serviceFeeConfirm(): void {
+    if (this.serviceFee.id) {
+      // Update
+
+    } else {
+      // Create
+
+    }
     this.modalRef.hide();
   }
 
