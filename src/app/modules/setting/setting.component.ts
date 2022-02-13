@@ -25,6 +25,8 @@ export class SettingComponent {
 
   modalRef: BsModalRef;
 
+  serviceFeeSub: Subscription;
+
   serviceFeeErrorMessage: string[] = [];
 
   constructor(public settingService: SettingService, private router: Router, private modalService: BsModalService,) {

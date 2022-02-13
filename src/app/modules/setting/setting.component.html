@@ -203,11 +203,11 @@
 </div>
 
 <ng-template #serviceFeeModal>
+  <form novalidate #serviceFeeForm="ngForm">
   <div class="modal-header">
     <h5 class="modal-title">Chi tiết phí dịch vụ</h5>
   </div>
   <div class="modal-body" *ngIf="serviceFee">
-    <form novalidate #serviceFeeForm="ngForm">
       <div class="form-group">
         <label for="serviceFeeTitle">Dịch vụ<code class="highlighter-rouge">*</code></label>
         <input [(ngModel)]="serviceFee.title" #serviceFeeTitle="ngModel" type="text" id="serviceFeeTitle" name="serviceFeeTitle"
@@ -226,10 +226,10 @@
       <alert type="danger" *ngIf="serviceFeeErrorMessage.length > 0">
         <p *ngFor="let error of serviceFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
       </alert>
-    </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="serviceFeeConfirm()">Cập nhật</button>
+    <button type="button" [disabled]="!serviceFeeForm.form.valid || (serviceFeeSub && !serviceFeeSub.closed)" class="btn btn-primary" (click)="serviceFeeConfirm()">Cập nhật</button>
     <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
   </div>
+  </form>
 </ng-template>
