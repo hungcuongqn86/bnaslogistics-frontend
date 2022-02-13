@@ -50,6 +50,19 @@ export class SettingComponent {
     });
   }
 
+  private getTransportFeesData() {
+    this.settingService.showLoading(true);
+    const getTransportFeesObs: Observable<any> = this.settingService.getTransportFees();
+
+    const listSub = forkJoin([
+      getTransportFeesObs
+    ]).subscribe(([transportFees]) => {
+      this.transportFees = transportFees.data.data;
+      this.settingService.showLoading(false);
+      listSub.unsubscribe();
+    });
+  }
+
   public editSetting(id) {
     this.router.navigate([`/setting/edit/${id}`]);
   }
