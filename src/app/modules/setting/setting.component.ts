@@ -121,6 +121,11 @@ export class SettingComponent {
     });
   }
 
+  public serviceFeeDelModalOpen(template: TemplateRef<any>, item: IServiceFee) {
+    this.serviceFee = item;
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
   public declineModal(): void {
     this.modalRef.hide();
   }

@@ -96,7 +96,7 @@ export class SettingService {
   }
 
   public editServiceFees(item: IServiceFee): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}update`;
+    const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}update/${item.id}`;
     return this.http.post<Setting>(url, item)
       .pipe(
         catchError(this.handleError('editSetting', item))
