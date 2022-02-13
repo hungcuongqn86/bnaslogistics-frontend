@@ -574,11 +574,9 @@
     </div>
     <div class="modal-body" *ngIf="setting">
       <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="key">
-          Key
-        </label>
+        <label class="col-md-3 col-form-label" for="key">Key</label>
         <div class="col-md-9">
-          <input disabled [(ngModel)]="setting.key" #key="ngModel" type="text" id="key"
+          <input disabled [(ngModel)]="setting.key" type="text" id="key"
                  name="key"
                  required
                  class="form-control"
@@ -586,11 +584,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="title">
-          Tiêu đề
-        </label>
+        <label class="col-md-3 col-form-label" for="title">Tiêu đề</label>
         <div class="col-md-9">
-          <input disabled [(ngModel)]="setting.title" #title="ngModel" type="text" id="title"
+          <input disabled [(ngModel)]="setting.title" type="text" id="title"
                  name="title"
                  required
                  class="form-control"
@@ -598,9 +594,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="value">
-          Giá trị <code class="highlighter-rouge">*</code>
-        </label>
+        <label class="col-md-3 col-form-label" for="value">Giá trị <code class="highlighter-rouge">*</code></label>
         <div class="col-md-9">
           <input [(ngModel)]="setting.value" #value="ngModel" type="text" id="value"
                  name="value"
@@ -616,13 +610,13 @@
         </div>
       </div>
       <p></p>
-      <alert type="danger" *ngIf="vipErrorMessage.length > 0">
-        <p *ngFor="let error of vipErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      <alert type="danger" *ngIf="settingErrorMessage.length > 0">
+        <p *ngFor="let error of settingErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
       </alert>
     </div>
     <div class="modal-footer">
-      <button type="button" [disabled]="!settingForm.form.valid || (vipSub && !vipSub.closed)"
-              class="btn btn-primary" (click)="vipConfirm()">Cập nhật
+      <button type="button" [disabled]="!settingForm.form.valid || (settingSub && !settingSub.closed)"
+              class="btn btn-primary" (click)="settingConfirm()">Cập nhật
       </button>
       <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
     </div>

@@ -31,10 +31,12 @@ export class SettingComponent implements OnInit, OnDestroy{
   serviceFeeSub: Subscription;
   inspectionFeeSub: Subscription;
   vipSub: Subscription;
+  settingSub: Subscription;
 
   serviceFeeErrorMessage: string[] = [];
   inspectionFeeErrorMessage: string[] = [];
   vipErrorMessage: string[] = [];
+  settingErrorMessage: string[] = [];
 
   constructor(public settingService: SettingService, private router: Router, private modalService: BsModalService,) {
 
@@ -306,12 +308,12 @@ export class SettingComponent implements OnInit, OnDestroy{
   // SETTING
   private getSettings() {
     this.settingService.showLoading(true);
-    const getVipsObs: Observable<any> = this.settingService.getVips();
+    const getSettingsObs: Observable<any> = this.settingService.getSettings();
 
     const listSub = forkJoin([
-      getVipsObs
-    ]).subscribe(([vips]) => {
-      this.vips = vips.data.data;
+      getSettingsObs
+    ]).subscribe(([setting]) => {
+      this.settings = setting.data.data;
       this.settingService.showLoading(false);
       listSub.unsubscribe();
     });
@@ -327,27 +329,20 @@ export class SettingComponent implements OnInit, OnDestroy{
   }
 
   public settingConfirm(): void {
-    let updateObs: Observable<any> = new Observable<any>();
-    if (this.vip.id) {
-      // Update
-      updateObs = this.settingService.editVip(this.vip);
-    } else {
-      // Create
-      updateObs = this.settingService.addVip(this.vip);
-    }
+    let updateObs: Observable<any> = this.settingService.editSetting(this.setting);
     this.settingService.showLoading(true);
-    this.vipSub = updateObs.subscribe(data => {
+    this.settingSub = updateObs.subscribe(data => {
       if (data.status) {
-        this.vipErrorMessage = [];
-        this.getVips();
+        this.settingErrorMessage = [];
+        this.getSettings();
         this.modalRef.hide();
       } else {
         for (let i = 0; i < data.data.length; i++) {
-          this.vipErrorMessage.push(data.data[i]);
+          this.settingErrorMessage.push(data.data[i]);
         }
       }
       this.settingService.showLoading(false);
-      this.vipSub.unsubscribe();
+      this.settingSub.unsubscribe();
     });
   }
 
@@ -367,6 +362,10 @@ export class SettingComponent implements OnInit, OnDestroy{
 
     if (this.serviceFeeSub) {
       this.serviceFeeSub.unsubscribe();
+    }
+
+    if (this.settingSub) {
+      this.settingSub.unsubscribe();
     }
   }
 }
