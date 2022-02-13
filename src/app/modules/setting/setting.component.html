@@ -13,6 +13,7 @@
         <th>Dịch vụ</th>
         <th>Mức tiền hàng (Triệu VNĐ)</th>
         <th>Tính phí (%)</th>
+        <th>Ghi chú</th>
         <th class="text-right" style="width: 90px;">Tác vụ</th>
       </tr>
       </thead>
@@ -21,8 +22,9 @@
         <td>{{item.title}}</td>
         <td>{{item.min_tot_tran}} - {{item.max_tot_tran}}</td>
         <td>{{item.val}}</td>
+        <td>{{item.note}}</td>
         <td class="text-right">
-          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="serviceFeeModalOpen(serviceFeeModal, item)" class="btn btn-sm btn-ghost-primary"
                   type="button">
             Sửa
           </button>
