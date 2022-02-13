@@ -48,7 +48,8 @@
   <div class="card-body">
     <div class="form-group row">
       <div class="col-md-2">
-        <select [(ngModel)]="settingService.transportFeeSearchParam.warehouse_id" class="form-control" name="warehouse_id"
+        <select [(ngModel)]="settingService.transportFeeSearchParam.warehouse_id" class="form-control"
+                name="warehouse_id"
                 id="warehouse_id" (change)="getTransportFeesData()">
           <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
             {{warehouse.title}}
@@ -204,32 +205,80 @@
 
 <ng-template #serviceFeeModal>
   <form novalidate #serviceFeeForm="ngForm">
-  <div class="modal-header">
-    <h5 class="modal-title">Chi tiết phí dịch vụ</h5>
-  </div>
-  <div class="modal-body" *ngIf="serviceFee">
+    <div class="modal-header">
+      <h5 class="modal-title">Chi tiết Phí dịch vụ</h5>
+    </div>
+    <div class="modal-body" *ngIf="serviceFee">
       <div class="form-group">
-        <label for="serviceFeeTitle">Dịch vụ<code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="serviceFee.title" #serviceFeeTitle="ngModel" type="text" id="serviceFeeTitle" name="serviceFeeTitle"
+        <label for="serviceFeeTitle">Dịch vụ <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="serviceFee.title" #serviceFeeTitle="ngModel" type="text" id="serviceFeeTitle"
+               name="serviceFeeTitle"
                class="form-control"
                required
                placeholder="Dịch vụ">
         <div [hidden]="serviceFeeTitle.valid || serviceFeeTitle.untouched">
           <span *ngIf="serviceFeeTitle.errors && serviceFeeTitle.errors.required"
                 class="badge badge-warning">
-              Phải nhập dịch vụ!
+              Phải nhập DỊCH VỤ!
           </span>
         </div>
+      </div>
+
+      <div class="form-group">
+        <label for="serviceFeeMinTotTran">Tiền hàng từ (Triệu VNĐ) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="serviceFee.min_tot_tran" #serviceFeeMinTotTran="ngModel" type="number" min="0"
+               id="serviceFeeMinTotTran" name="serviceFeeMinTotTran"
+               class="form-control"
+               required
+               placeholder="Tiền hàng từ">
+        <div [hidden]="serviceFeeMinTotTran.valid || serviceFeeMinTotTran.untouched">
+          <span *ngIf="serviceFeeMinTotTran.errors && serviceFeeMinTotTran.errors.required"
+                class="badge badge-warning">
+              Phải nhập TIỀN HÀNG TỪ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="serviceFeeMaxTotTran">Tiền hàng đến (Triệu VNĐ)</label>
+        <input [(ngModel)]="serviceFee.max_tot_tran" #serviceFeeMaxTotTran="ngModel" type="number" min="0"
+               id="serviceFeeMaxTotTran" name="serviceFeeMaxTotTran"
+               class="form-control"
+               placeholder="Tiền hàng đến">
+      </div>
+
+      <div class="form-group">
+        <label for="serviceVal">Tính phí (%) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="serviceFee.val" #serviceVal="ngModel" type="number" min="0" max="100"
+               id="serviceVal" name="serviceVal"
+               class="form-control"
+               required
+               placeholder="Tính phí">
+        <div [hidden]="serviceVal.valid || serviceVal.untouched">
+          <span *ngIf="serviceVal.errors && serviceVal.errors.required"
+                class="badge badge-warning">
+              Phải nhập TÍNH PHÍ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="serviceNote">Ghi chú </label>
+        <textarea [(ngModel)]="serviceFee.note" id="serviceNote" name="serviceNote" rows="3"
+                  class="form-control"
+                  placeholder="Ghi chú ..."></textarea>
       </div>
 
       <p></p>
       <alert type="danger" *ngIf="serviceFeeErrorMessage.length > 0">
         <p *ngFor="let error of serviceFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
       </alert>
-  </div>
-  <div class="modal-footer">
-    <button type="button" [disabled]="!serviceFeeForm.form.valid || (serviceFeeSub && !serviceFeeSub.closed)" class="btn btn-primary" (click)="serviceFeeConfirm()">Cập nhật</button>
-    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
-  </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="!serviceFeeForm.form.valid || (serviceFeeSub && !serviceFeeSub.closed)"
+              class="btn btn-primary" (click)="serviceFeeConfirm()">Cập nhật
+      </button>
+      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    </div>
   </form>
 </ng-template>
