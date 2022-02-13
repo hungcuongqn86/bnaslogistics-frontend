@@ -89,7 +89,7 @@ export class SettingService {
 
   public addServiceFees(item: IServiceFee): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}create`;
-    return this.http.post<Setting>(url, item)
+    return this.http.post<IServiceFee>(url, item)
       .pipe(
         catchError(this.handleError('addSetting', item))
       );
@@ -97,12 +97,19 @@ export class SettingService {
 
   public editServiceFees(item: IServiceFee): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}update/${item.id}`;
-    return this.http.post<Setting>(url, item)
+    return this.http.post<IServiceFee>(url, item)
       .pipe(
         catchError(this.handleError('editSetting', item))
       );
   }
 
+  public deleteServiceFees(item: IServiceFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}delete/${item.id}`;
+    return this.http.post<IServiceFee>(url, item)
+      .pipe(
+        catchError(this.handleError('deleteServiceFees', item))
+      );
+  }
   //=============================================
 
   getWarehouses(): Observable<any> {

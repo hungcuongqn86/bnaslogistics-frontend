@@ -80,7 +80,7 @@
 
       <div class="form-group">
         <label for="serviceFeeMaxTotTran">Tiền hàng đến (Triệu VNĐ)</label>
-        <input [(ngModel)]="serviceFee.max_tot_tran" #serviceFeeMaxTotTran="ngModel" type="number" min="0"
+        <input [(ngModel)]="serviceFee.max_tot_tran" type="number" min="0"
                id="serviceFeeMaxTotTran" name="serviceFeeMaxTotTran"
                class="form-control"
                placeholder="Tiền hàng đến">
@@ -130,10 +130,15 @@
     <alert type="danger">
       <p><strong>!</strong> Bạn chắc chắn xóa "{{serviceFee.title}}"!</p>
     </alert>
+
+    <p></p>
+    <alert type="danger" *ngIf="serviceFeeErrorMessage.length > 0">
+      <p *ngFor="let error of serviceFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
   </div>
   <div class="modal-footer">
     <button type="button" [disabled]="(serviceFeeSub && !serviceFeeSub.closed)"
-            class="btn btn-primary" (click)="serviceFeeConfirm()">Xóa
+            class="btn btn-primary" (click)="serviceFeeDelConfirm()">Xóa
     </button>
     <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
   </div>

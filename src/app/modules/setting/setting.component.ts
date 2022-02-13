@@ -126,6 +126,24 @@ export class SettingComponent {
     this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
   }
 
+  public serviceFeeDelConfirm(): void {
+    const deleteObs: Observable<any> = this.settingService.deleteServiceFees(this.serviceFee);
+    this.settingService.showLoading(true);
+    const serviceFeeSub = deleteObs.subscribe(data => {
+      if (data.status) {
+        this.serviceFeeErrorMessage = [];
+        this.getServiceFees();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.serviceFeeErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      serviceFeeSub.unsubscribe();
+    });
+  }
+
   public declineModal(): void {
     this.modalRef.hide();
   }
