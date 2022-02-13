@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {forkJoin, Observable, Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {InspectionFee, ServiceFee, Vip} from "../../models/model";
+import {InspectionFee, ServiceFee, Setting, Vip} from "../../models/model";
 
 @Component({
   selector: 'app-setting',
@@ -24,6 +24,7 @@ export class SettingComponent implements OnInit, OnDestroy{
   serviceFee: IServiceFee;
   inspectionFee: IInspectionFee;
   vip: IVip;
+  setting: ISetting;
 
   modalRef: BsModalRef;
 
@@ -301,13 +302,58 @@ export class SettingComponent implements OnInit, OnDestroy{
     });
   }
 
+  // =====================================================================================
+  // SETTING
+  private getSettings() {
+    this.settingService.showLoading(true);
+    const getVipsObs: Observable<any> = this.settingService.getVips();
+
+    const listSub = forkJoin([
+      getVipsObs
+    ]).subscribe(([vips]) => {
+      this.vips = vips.data.data;
+      this.settingService.showLoading(false);
+      listSub.unsubscribe();
+    });
+  }
+
+  public settingModalOpen(template: TemplateRef<any>, item: ISetting = null) {
+    if (item) {
+      this.setting = item;
+    } else {
+      this.setting = new Setting();
+    }
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
+  public settingConfirm(): void {
+    let updateObs: Observable<any> = new Observable<any>();
+    if (this.vip.id) {
+      // Update
+      updateObs = this.settingService.editVip(this.vip);
+    } else {
+      // Create
+      updateObs = this.settingService.addVip(this.vip);
+    }
+    this.settingService.showLoading(true);
+    this.vipSub = updateObs.subscribe(data => {
+      if (data.status) {
+        this.vipErrorMessage = [];
+        this.getVips();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.vipErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      this.vipSub.unsubscribe();
+    });
+  }
+
   // =========================================================================================
   public declineModal(): void {
     this.modalRef.hide();
-  }
-
-  public editSetting(id) {
-    this.router.navigate([`/setting/edit/${id}`]);
   }
 
   ngOnDestroy() {
