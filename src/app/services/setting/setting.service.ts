@@ -21,11 +21,11 @@ export class SettingService {
   private serviceFeeModuleUri = 'service_fee/';
   private transportFeeModuleUri = 'transport_fees/';
   private inspectionFeeModuleUri = 'inspection_fees/';
-  private warehouseModuleUri = 'inspection_fees/';
+  private warehouseModuleUri = 'warehouses/';
   public search = {key: '', page_size: 100, page: 1};
   public vipSearchParam = {key: '', page_size: 100, page: 1};
   public serviceFeeSearchParam = {key: '', page_size: 100, page: 1};
-  public transportFeeSearchParam = {key: '', page_size: 100, page: 1};
+  public transportFeeSearchParam = {key: '', type: 1, warehouse_id: 1, page_size: 100, page: 1};
   public inspectionFeeSearchParam = {key: '', page_size: 100, page: 1};
   public warehouseSearchParam = {key: '', page_size: 100, page: 1};
   public setting: ISetting = new Setting();

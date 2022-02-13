@@ -30,6 +30,23 @@
 <div class="card">
   <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí vận chuyển</strong></div>
   <div class="card-body">
+    <div class="form-group row">
+      <div class="col-md-2">
+        <select [(ngModel)]="settingService.transportFeeSearchParam.warehouse_id" class="form-control" name="warehouse_id"
+                id="warehouse_id">
+          <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+            {{warehouse.title}}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select [(ngModel)]="settingService.transportFeeSearchParam.type" class="form-control" name="type"
+                id="type">
+          <option value="1">Trọng lượng</option>
+          <option value="2">Thể tích</option>
+        </select>
+      </div>
+    </div>
     <table class="table table-bordered table-striped table-sm">
       <thead>
       <tr>
