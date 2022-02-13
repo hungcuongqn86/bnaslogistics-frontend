@@ -243,7 +243,7 @@
                   type="button">
             Sửa
           </button>
-          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-danger"
+          <button (click)="inspectionFeeDelModalOpen(inspectionFeeDelModal, item)" class="btn btn-sm btn-ghost-danger"
                   type="button">
             Xóa
           </button>
@@ -350,7 +350,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" [disabled]="(inspectionFeeSub && !inspectionFeeSub.closed)"
-            class="btn btn-primary" (click)="serviceFeeDelConfirm()">Xóa
+            class="btn btn-primary" (click)="inspectionFeeDelConfirm()">Xóa
     </button>
     <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
   </div>

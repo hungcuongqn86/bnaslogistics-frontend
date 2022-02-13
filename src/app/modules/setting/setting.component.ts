@@ -112,7 +112,7 @@ export class SettingComponent {
       updateObs = this.settingService.addServiceFees(this.serviceFee);
     }
     this.settingService.showLoading(true);
-    const serviceFeeSub = updateObs.subscribe(data => {
+    this.serviceFeeSub = updateObs.subscribe(data => {
       if (data.status) {
         this.serviceFeeErrorMessage = [];
         this.getServiceFees();
@@ -123,7 +123,7 @@ export class SettingComponent {
         }
       }
       this.settingService.showLoading(false);
-      serviceFeeSub.unsubscribe();
+      this.serviceFeeSub.unsubscribe();
     });
   }
 
@@ -135,7 +135,7 @@ export class SettingComponent {
   public serviceFeeDelConfirm(): void {
     const deleteObs: Observable<any> = this.settingService.deleteServiceFees(this.serviceFee);
     this.settingService.showLoading(true);
-    const serviceFeeSub = deleteObs.subscribe(data => {
+    this.serviceFeeSub = deleteObs.subscribe(data => {
       if (data.status) {
         this.serviceFeeErrorMessage = [];
         this.getServiceFees();
@@ -146,7 +146,7 @@ export class SettingComponent {
         }
       }
       this.settingService.showLoading(false);
-      serviceFeeSub.unsubscribe();
+      this.serviceFeeSub.unsubscribe();
     });
   }
 
@@ -155,12 +155,12 @@ export class SettingComponent {
 
   private getInspectionFees() {
     this.settingService.showLoading(true);
-    const getServiceFeesObs: Observable<any> = this.settingService.getServiceFees();
+    const getInspectionFeesObs: Observable<any> = this.settingService.getInspectionFees();
 
     const listSub = forkJoin([
-      getServiceFeesObs
-    ]).subscribe(([serviceFees]) => {
-      this.serviceFees = serviceFees.data.data;
+      getInspectionFeesObs
+    ]).subscribe(([inspectionFees]) => {
+      this.inspectionFees = inspectionFees.data.data;
       this.settingService.showLoading(false);
       listSub.unsubscribe();
     });
@@ -177,49 +177,49 @@ export class SettingComponent {
 
   public inspectionFeeConfirm(): void {
     let updateObs: Observable<any> = new Observable<any>();
-    if (this.serviceFee.id) {
+    if (this.inspectionFee.id) {
       // Update
-      updateObs = this.settingService.editServiceFees(this.serviceFee);
+      updateObs = this.settingService.editInspectionFee(this.inspectionFee);
     } else {
       // Create
-      updateObs = this.settingService.addServiceFees(this.serviceFee);
+      updateObs = this.settingService.addInspectionFee(this.inspectionFee);
     }
     this.settingService.showLoading(true);
-    const serviceFeeSub = updateObs.subscribe(data => {
+    this.inspectionFeeSub = updateObs.subscribe(data => {
       if (data.status) {
-        this.serviceFeeErrorMessage = [];
-        this.getServiceFees();
+        this.inspectionFeeErrorMessage = [];
+        this.getInspectionFees();
         this.modalRef.hide();
       } else {
         for (let i = 0; i < data.data.length; i++) {
-          this.serviceFeeErrorMessage.push(data.data[i]);
+          this.inspectionFeeErrorMessage.push(data.data[i]);
         }
       }
       this.settingService.showLoading(false);
-      serviceFeeSub.unsubscribe();
+      this.inspectionFeeSub.unsubscribe();
     });
   }
 
-  public inspectionFeeDelModalOpen(template: TemplateRef<any>, item: IServiceFee) {
-    this.serviceFee = item;
+  public inspectionFeeDelModalOpen(template: TemplateRef<any>, item: IInspectionFee) {
+    this.inspectionFee = item;
     this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
   }
 
   public inspectionFeeDelConfirm(): void {
-    const deleteObs: Observable<any> = this.settingService.deleteServiceFees(this.serviceFee);
+    const deleteObs: Observable<any> = this.settingService.deleteInspectionFee(this.inspectionFee);
     this.settingService.showLoading(true);
-    const serviceFeeSub = deleteObs.subscribe(data => {
+    this.inspectionFeeSub = deleteObs.subscribe(data => {
       if (data.status) {
-        this.serviceFeeErrorMessage = [];
-        this.getServiceFees();
+        this.inspectionFeeErrorMessage = [];
+        this.getInspectionFees();
         this.modalRef.hide();
       } else {
         for (let i = 0; i < data.data.length; i++) {
-          this.serviceFeeErrorMessage.push(data.data[i]);
+          this.inspectionFeeErrorMessage.push(data.data[i]);
         }
       }
       this.settingService.showLoading(false);
-      serviceFeeSub.unsubscribe();
+      this.inspectionFeeSub.unsubscribe();
     });
   }
 

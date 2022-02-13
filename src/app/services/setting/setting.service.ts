@@ -8,7 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {Router} from '@angular/router';
-import {IServiceFee, ISetting} from '../../models/interface';
+import {IInspectionFee, IServiceFee, ISetting} from '../../models/interface';
 import {Setting} from '../../models/model';
 import {LoadingService} from '../../loading.service';
 
@@ -91,7 +91,7 @@ export class SettingService {
     const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}create`;
     return this.http.post<IServiceFee>(url, item)
       .pipe(
-        catchError(this.handleError('addSetting', item))
+        catchError(this.handleError('addServiceFees', item))
       );
   }
 
@@ -99,7 +99,7 @@ export class SettingService {
     const url = Util.getUri(apiV1Url) + `${this.serviceFeeModuleUri}update/${item.id}`;
     return this.http.post<IServiceFee>(url, item)
       .pipe(
-        catchError(this.handleError('editSetting', item))
+        catchError(this.handleError('editServiceFees', item))
       );
   }
 
@@ -112,7 +112,7 @@ export class SettingService {
   }
   //=============================================
 
-  getWarehouses(): Observable<any> {
+  public getWarehouses(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.warehouseModuleUri}search`;
     let params = new HttpParams();
     Object.keys(this.warehouseSearchParam).map((key) => {
@@ -124,7 +124,9 @@ export class SettingService {
       );
   }
 
-  getInspectionFees(): Observable<any> {
+  // =============================================
+  // InspectionFees
+  public getInspectionFees(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.inspectionFeeModuleUri}search`;
     let params = new HttpParams();
     Object.keys(this.inspectionFeeSearchParam).map((key) => {
@@ -135,6 +137,33 @@ export class SettingService {
         catchError(this.handleError('getInspectionFees', []))
       );
   }
+
+  public addInspectionFee(item: IInspectionFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.inspectionFeeModuleUri}create`;
+    return this.http.post<IInspectionFee>(url, item)
+      .pipe(
+        catchError(this.handleError('addInspectionFee', item))
+      );
+  }
+
+  public editInspectionFee(item: IInspectionFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.inspectionFeeModuleUri}update/${item.id}`;
+    return this.http.post<IInspectionFee>(url, item)
+      .pipe(
+        catchError(this.handleError('editInspectionFee', item))
+      );
+  }
+
+  public deleteInspectionFee(item: IInspectionFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.inspectionFeeModuleUri}delete/${item.id}`;
+    return this.http.post<IInspectionFee>(url, item)
+      .pipe(
+        catchError(this.handleError('deleteInspectionFee', item))
+      );
+  }
+
+  // =============================================
+  // TransportFees
 
   getTransportFees(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.transportFeeModuleUri}search`;
