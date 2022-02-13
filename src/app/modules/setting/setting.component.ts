@@ -1,4 +1,4 @@
-import {Component, TemplateRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {SettingService} from '../../services/setting/setting.service';
 import {IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip, IWarehouse} from '../../models/interface';
 import {Router} from '@angular/router';
@@ -13,7 +13,7 @@ import {InspectionFee, ServiceFee, Vip} from "../../models/model";
   styleUrls: ['./setting.component.css']
 })
 
-export class SettingComponent {
+export class SettingComponent implements OnInit, OnDestroy{
   settings: ISetting[];
   vips: IVip[];
   serviceFees: IServiceFee[];
@@ -36,6 +36,10 @@ export class SettingComponent {
   vipErrorMessage: string[] = [];
 
   constructor(public settingService: SettingService, private router: Router, private modalService: BsModalService,) {
+
+  }
+
+  ngOnInit() {
     this.getAllListData();
   }
 
@@ -304,5 +308,19 @@ export class SettingComponent {
 
   public editSetting(id) {
     this.router.navigate([`/setting/edit/${id}`]);
+  }
+
+  ngOnDestroy() {
+    if (this.vipSub) {
+      this.vipSub.unsubscribe();
+    }
+
+    if (this.inspectionFeeSub) {
+      this.inspectionFeeSub.unsubscribe();
+    }
+
+    if (this.serviceFeeSub) {
+      this.serviceFeeSub.unsubscribe();
+    }
   }
 }
