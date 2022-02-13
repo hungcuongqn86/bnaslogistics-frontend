@@ -1,4 +1,4 @@
-import {IServiceFee, ISetting, IVip} from "./interface";
+import {IInspectionFee, IServiceFee, ISetting, IVip} from "./interface";
 
 
 export class Setting implements ISetting {
@@ -7,6 +7,21 @@ export class Setting implements ISetting {
   value: string;
   title: string;
   is_deleted: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+
+  }
+}
+
+export class InspectionFee implements IInspectionFee {
+  id: number;
+  title: string;
+  note: string;
+  min_count: number;
+  max_count: number;
+  val: number;
   created_at: string;
   updated_at: string;
 

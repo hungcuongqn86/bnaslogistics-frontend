@@ -182,6 +182,7 @@
         <th>Dịch vụ</th>
         <th>Mức cân nặng (Kg)</th>
         <th>Phí (VNĐ)</th>
+        <th>Ghi chú</th>
         <th class="text-right" style="width: 90px;">Tác vụ</th>
       </tr>
       </thead>
@@ -190,6 +191,7 @@
         <td>{{item.title}}</td>
         <td>{{item.min_r}} - {{item.max_r}}</td>
         <td>{{item.val}}</td>
+        <td>{{item.note}}</td>
         <td class="text-right">
           <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
                   type="button">
@@ -206,10 +208,15 @@
   </div>
 </div>
 
+<!--
+// =====================================================================================================================
+// Inspection Fee
+ -->
+
 <div class="card">
   <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí kiểm đếm</strong>
     <div class="card-header-actions">
-      <button (click)="addPet()" class="btn btn-block btn-primary btn-sm"
+      <button (click)="inspectionFeeModalOpen(inspectionFeeModal)" class="btn btn-block btn-primary btn-sm"
               type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
       </button>
     </div>
@@ -221,6 +228,7 @@
         <th>Dịch vụ</th>
         <th>Số lượng SP</th>
         <th>Phí (VNĐ)</th>
+        <th>Ghi chú</th>
         <th class="text-right" style="width: 90px;">Tác vụ</th>
       </tr>
       </thead>
@@ -228,9 +236,10 @@
       <tr *ngFor="let item of inspectionFees">
         <td>{{item.title}}</td>
         <td>{{item.min_count}} - {{item.max_count}}</td>
-        <td>{{item.val}}</td>
+        <td>{{item.val | currency:'VND':'' }} đ</td>
+        <td>{{item.note}}</td>
         <td class="text-right">
-          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="inspectionFeeModalOpen(inspectionFeeModal, item)" class="btn btn-sm btn-ghost-primary"
                   type="button">
             Sửa
           </button>
@@ -244,6 +253,113 @@
     </table>
   </div>
 </div>
+
+<ng-template #inspectionFeeModal>
+  <form novalidate #inspectionFeeForm="ngForm">
+    <div class="modal-header">
+      <h5 class="modal-title">Chi tiết Phí kiểm đếm</h5>
+    </div>
+    <div class="modal-body" *ngIf="inspectionFee">
+      <div class="form-group">
+        <label for="inspectionFeeTitle">Dịch vụ <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="inspectionFee.title" #inspectionFeeTitle="ngModel" type="text" id="inspectionFeeTitle"
+               name="inspectionFeeTitle"
+               class="form-control"
+               required
+               placeholder="Dịch vụ">
+        <div [hidden]="inspectionFeeTitle.valid || inspectionFeeTitle.untouched">
+          <span *ngIf="inspectionFeeTitle.errors && inspectionFeeTitle.errors.required"
+                class="badge badge-warning">
+              Phải nhập DỊCH VỤ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inspectionFeeMinCount">Số lượng từ <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="inspectionFee.min_count" #inspectionFeeMinCount="ngModel" type="number" min="0"
+               id="inspectionFeeMinCount" name="inspectionFeeMinCount"
+               class="form-control"
+               required
+               placeholder="Số lượng từ">
+        <div [hidden]="inspectionFeeMinCount.valid || inspectionFeeMinCount.untouched">
+          <span *ngIf="inspectionFeeMinCount.errors && inspectionFeeMinCount.errors.required"
+                class="badge badge-warning">
+              Phải nhập SỐ LƯỢNG TỪ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inspectionFeeMaxCount">Số lượng đến </label>
+        <input [(ngModel)]="inspectionFee.max_count" type="number" min="0"
+               id="inspectionFeeMaxCount" name="inspectionFeeMaxCount"
+               class="form-control"
+               placeholder="Số lượng đến">
+      </div>
+
+      <div class="form-group">
+        <label for="inspectionFeeVal">Tính phí (VNĐ) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="inspectionFee.val" #inspectionFeeVal="ngModel" type="number" min="0" max="100"
+               id="inspectionFeeVal" name="inspectionFeeVal"
+               class="form-control"
+               required
+               placeholder="Tính phí">
+        <div [hidden]="inspectionFeeVal.valid || inspectionFeeVal.untouched">
+          <span *ngIf="inspectionFeeVal.errors && inspectionFeeVal.errors.required"
+                class="badge badge-warning">
+              Phải nhập TÍNH PHÍ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inspectionFeeNote">Ghi chú </label>
+        <textarea [(ngModel)]="inspectionFee.note" id="inspectionFeeNote" name="inspectionFeeNote" rows="3"
+                  class="form-control"
+                  placeholder="Ghi chú ..."></textarea>
+      </div>
+
+      <p></p>
+      <alert type="danger" *ngIf="inspectionFeeErrorMessage.length > 0">
+        <p *ngFor="let error of inspectionFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="!inspectionFeeForm.form.valid || (inspectionFeeSub && !inspectionFeeSub.closed)"
+              class="btn btn-primary" (click)="serviceFeeConfirm()">Cập nhật
+      </button>
+      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #inspectionFeeDelModal>
+  <div class="modal-header">
+    <h5 class="modal-title">Xóa Phí kiểm đếm</h5>
+  </div>
+  <div class="modal-body" *ngIf="inspectionFee">
+    <alert type="danger">
+      <p><strong>!</strong> Bạn chắc chắn xóa "{{inspectionFee.title}}"!</p>
+    </alert>
+
+    <p></p>
+    <alert type="danger" *ngIf="inspectionFeeErrorMessage.length > 0">
+      <p *ngFor="let error of inspectionFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" [disabled]="(inspectionFeeSub && !inspectionFeeSub.closed)"
+            class="btn btn-primary" (click)="serviceFeeDelConfirm()">Xóa
+    </button>
+    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+  </div>
+</ng-template>
+
+<!--
+// =====================================================================================================================
+// VIP Fee
+ -->
 
 <div class="card">
   <div class="card-header"><i class="fa fa-cogs"></i> <strong>VIP</strong>
