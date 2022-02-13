@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {forkJoin, Observable, Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {InspectionFee, ServiceFee} from "../../models/model";
+import {InspectionFee, ServiceFee, Vip} from "../../models/model";
 
 @Component({
   selector: 'app-setting',
@@ -23,14 +23,17 @@ export class SettingComponent {
 
   serviceFee: IServiceFee;
   inspectionFee: IInspectionFee;
+  vip: IVip;
 
   modalRef: BsModalRef;
 
   serviceFeeSub: Subscription;
   inspectionFeeSub: Subscription;
+  vipSub: Subscription;
 
   serviceFeeErrorMessage: string[] = [];
   inspectionFeeErrorMessage: string[] = [];
+  vipErrorMessage: string[] = [];
 
   constructor(public settingService: SettingService, private router: Router, private modalService: BsModalService,) {
     this.getAllListData();
@@ -152,7 +155,6 @@ export class SettingComponent {
 
   // =====================================================================================
   // InspectionFees
-
   private getInspectionFees() {
     this.settingService.showLoading(true);
     const getInspectionFeesObs: Observable<any> = this.settingService.getInspectionFees();
@@ -223,8 +225,79 @@ export class SettingComponent {
     });
   }
 
-  // =========================================================================================
+  // =====================================================================================
+  // VIP
+  private getVips() {
+    this.settingService.showLoading(true);
+    const getVipsObs: Observable<any> = this.settingService.getVips();
 
+    const listSub = forkJoin([
+      getVipsObs
+    ]).subscribe(([vips]) => {
+      this.vips = vips.data.data;
+      this.settingService.showLoading(false);
+      listSub.unsubscribe();
+    });
+  }
+
+  public vipModalOpen(template: TemplateRef<any>, item: IVip = null) {
+    if (item) {
+      this.vip = item;
+    } else {
+      this.vip = new Vip();
+    }
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
+  public vipConfirm(): void {
+    let updateObs: Observable<any> = new Observable<any>();
+    if (this.vip.id) {
+      // Update
+      updateObs = this.settingService.editVip(this.vip);
+    } else {
+      // Create
+      updateObs = this.settingService.addVip(this.vip);
+    }
+    this.settingService.showLoading(true);
+    this.vipSub = updateObs.subscribe(data => {
+      if (data.status) {
+        this.vipErrorMessage = [];
+        this.getVips();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.vipErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      this.vipSub.unsubscribe();
+    });
+  }
+
+  public vipDelModalOpen(template: TemplateRef<any>, item: IVip) {
+    this.vip = item;
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
+  public vipDelConfirm(): void {
+    const deleteObs: Observable<any> = this.settingService.deleteVip(this.vip);
+    this.settingService.showLoading(true);
+    this.vipSub = deleteObs.subscribe(data => {
+      if (data.status) {
+        this.vipErrorMessage = [];
+        this.getVips();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.vipErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      this.vipSub.unsubscribe();
+    });
+  }
+
+  // =========================================================================================
   public declineModal(): void {
     this.modalRef.hide();
   }

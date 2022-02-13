@@ -8,7 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {Router} from '@angular/router';
-import {IInspectionFee, IServiceFee, ISetting} from '../../models/interface';
+import {IInspectionFee, IServiceFee, ISetting, IVip} from '../../models/interface';
 import {Setting} from '../../models/model';
 import {LoadingService} from '../../loading.service';
 
@@ -61,7 +61,9 @@ export class SettingService {
       );
   }
 
-  getVips(): Observable<any> {
+  // =============================================
+  // VIP
+  public getVips(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.vipModuleUri}search`;
     let params = new HttpParams();
     Object.keys(this.vipSearchParam).map((key) => {
@@ -70,6 +72,30 @@ export class SettingService {
     return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('getVips', []))
+      );
+  }
+
+  public addVip(item: IVip): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.vipModuleUri}create`;
+    return this.http.post<IVip>(url, item)
+      .pipe(
+        catchError(this.handleError('addVip', item))
+      );
+  }
+
+  public editVip(item: IVip): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.vipModuleUri}update/${item.id}`;
+    return this.http.post<IVip>(url, item)
+      .pipe(
+        catchError(this.handleError('editVip', item))
+      );
+  }
+
+  public deleteVip(item: IVip): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.vipModuleUri}delete/${item.id}`;
+    return this.http.post<IVip>(url, item)
+      .pipe(
+        catchError(this.handleError('deleteVip', item))
       );
   }
 

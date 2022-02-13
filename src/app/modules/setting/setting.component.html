@@ -358,13 +358,12 @@
 
 <!--
 // =====================================================================================================================
-// VIP Fee
+// VIP
  -->
-
 <div class="card">
   <div class="card-header"><i class="fa fa-cogs"></i> <strong>VIP</strong>
     <div class="card-header-actions">
-      <button (click)="addPet()" class="btn btn-block btn-primary btn-sm"
+      <button (click)="vipModalOpen(vipModal)" class="btn btn-block btn-primary btn-sm"
               type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
       </button>
     </div>
@@ -378,6 +377,7 @@
         <th>CK phí dịch vụ (%)</th>
         <th>CK phí vận chuyển (%)</th>
         <th>Đặt cọc tiền hàng (%)</th>
+        <th>Ghi chú</th>
         <th class="text-right" style="width: 90px;">Tác vụ</th>
       </tr>
       </thead>
@@ -388,12 +388,13 @@
         <td>{{item.ck_dv}}</td>
         <td>{{item.ck_vc}}</td>
         <td>{{item.deposit}}</td>
+        <td>{{item.note}}</td>
         <td class="text-right">
-          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="vipModalOpen(vipModal, item)" class="btn btn-sm btn-ghost-primary"
                   type="button">
             Sửa
           </button>
-          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-danger"
+          <button (click)="vipDelModalOpen(vipDelModal, item)" class="btn btn-sm btn-ghost-danger"
                   type="button">
             Xóa
           </button>
@@ -403,6 +404,142 @@
     </table>
   </div>
 </div>
+
+<ng-template #vipModal>
+  <form novalidate #vipForm="ngForm">
+    <div class="modal-header">
+      <h5 class="modal-title">Chi tiết VIP</h5>
+    </div>
+    <div class="modal-body" *ngIf="vip">
+      <div class="form-group">
+        <label for="vipTitle">Cấp độ <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.title" #vipTitle="ngModel" type="text" id="vipTitle"
+               name="vipTitle"
+               class="form-control"
+               required
+               placeholder="Cấp độ">
+        <div [hidden]="vipTitle.valid || vipTitle.untouched">
+          <span *ngIf="vipTitle.errors && vipTitle.errors.required"
+                class="badge badge-warning">
+              Phải nhập CẤP ĐỘ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipMinTotTran">Tổng giao dịch từ <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.min_tot_tran" #vipMinTotTran="ngModel" type="number" min="0"
+               id="vipMinTotTran" name="vipMinTotTran"
+               class="form-control"
+               required
+               placeholder="Tổng giao dịch từ">
+        <div [hidden]="vipMinTotTran.valid || vipMinTotTran.untouched">
+          <span *ngIf="vipMinTotTran.errors && vipMinTotTran.errors.required"
+                class="badge badge-warning">
+              Phải nhập TỔNG GIAO DỊCH TỪ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipMaxTotTran">Tổng giao dịch đến </label>
+        <input [(ngModel)]="vip.max_tot_tran" type="number" min="0"
+               id="vipMaxTotTran" name="vipMaxTotTran"
+               class="form-control"
+               placeholder="Tổng giao dịch đến">
+      </div>
+
+      <div class="form-group">
+        <label for="vipCkDv">Chiết khấu dịch vụ (%) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.ck_dv" #vipCkDv="ngModel" type="number" min="0" max="100"
+               id="vipCkDv" name="vipCkDv"
+               class="form-control"
+               required
+               placeholder="Chiết khấu dịch vụ">
+        <div [hidden]="vipCkDv.valid || vipCkDv.untouched">
+          <span *ngIf="vipCkDv.errors && vipCkDv.errors.required"
+                class="badge badge-warning">
+              Phải nhập CHIẾT KHẤU DỊCH VỤ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipCkVc">Chiết khấu vận chuyển (%) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.ck_vc" #vipCkVc="ngModel" type="number" min="0" max="100"
+               id="vipCkVc" name="vipCkVc"
+               class="form-control"
+               required
+               placeholder="Chiết khấu vận chuyển">
+        <div [hidden]="vipCkVc.valid || vipCkVc.untouched">
+          <span *ngIf="vipCkVc.errors && vipCkVc.errors.required"
+                class="badge badge-warning">
+              Phải nhập CHIẾT KHẤU VẬN CHUYỂN!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipDeposit">Đặt cọc tiền hàng (%) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.deposit" #vipDeposit="ngModel" type="number" min="0" max="100"
+               id="vipDeposit" name="vipDeposit"
+               class="form-control"
+               required
+               placeholder="Đặt cọc tiền hàng">
+        <div [hidden]="vipDeposit.valid || vipDeposit.untouched">
+          <span *ngIf="vipDeposit.errors && vipDeposit.errors.required"
+                class="badge badge-warning">
+              Phải nhập ĐẶT CỌC TIỀN HÀNG!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipNote">Ghi chú </label>
+        <textarea [(ngModel)]="vip.note" id="vipNote" name="vipNote" rows="3"
+                  class="form-control"
+                  placeholder="Ghi chú ..."></textarea>
+      </div>
+
+      <p></p>
+      <alert type="danger" *ngIf="vipErrorMessage.length > 0">
+        <p *ngFor="let error of vipErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="!vipForm.form.valid || (vipSub && !vipSub.closed)"
+              class="btn btn-primary" (click)="vipConfirm()">Cập nhật
+      </button>
+      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #vipDelModal>
+  <div class="modal-header">
+    <h5 class="modal-title">Xóa VIP</h5>
+  </div>
+  <div class="modal-body" *ngIf="inspectionFee">
+    <alert type="danger">
+      <p><strong>!</strong> Bạn chắc chắn xóa "{{inspectionFee.title}}"!</p>
+    </alert>
+
+    <p></p>
+    <alert type="danger" *ngIf="vipErrorMessage.length > 0">
+      <p *ngFor="let error of vipErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" [disabled]="(vipSub && !vipSub.closed)"
+            class="btn btn-primary" (click)="vipDelConfirm()">Xóa
+    </button>
+    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+  </div>
+</ng-template>
+<!--
+// =====================================================================================================================
+// Other
+ -->
 
 <div class="card">
   <div class="card-header"><i class="fa fa-cogs"></i> <strong>Tham số khác</strong></div>
