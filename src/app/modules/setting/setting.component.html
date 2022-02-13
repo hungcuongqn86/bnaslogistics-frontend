@@ -190,7 +190,7 @@
       <tr *ngFor="let item of transportFees">
         <td>{{item.title}}</td>
         <td>{{item.min_r}} - {{item.max_r}}</td>
-        <td>{{item.val}}</td>
+        <td>{{item.val | currency:'VND':'' }} đ</td>
         <td>{{item.note}}</td>
         <td class="text-right">
           <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
@@ -384,7 +384,7 @@
       <tbody>
       <tr *ngFor="let item of vips">
         <td>{{item.title}}</td>
-        <td>{{item.min_tot_tran}}</td>
+        <td>{{item.min_tot_tran}} - {{item.max_tot_tran}}</td>
         <td>{{item.ck_dv}}</td>
         <td>{{item.ck_vc}}</td>
         <td>{{item.deposit}}</td>
@@ -519,9 +519,9 @@
   <div class="modal-header">
     <h5 class="modal-title">Xóa VIP</h5>
   </div>
-  <div class="modal-body" *ngIf="inspectionFee">
+  <div class="modal-body" *ngIf="vip">
     <alert type="danger">
-      <p><strong>!</strong> Bạn chắc chắn xóa "{{inspectionFee.title}}"!</p>
+      <p><strong>!</strong> Bạn chắc chắn xóa "{{vip.title}}"!</p>
     </alert>
 
     <p></p>
