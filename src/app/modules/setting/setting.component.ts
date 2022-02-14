@@ -183,6 +183,8 @@ export class SettingComponent implements OnInit, OnDestroy{
       this.transportFee = item;
     } else {
       this.transportFee = new TransportFee();
+      this.transportFee.type = this.settingService.transportFeeSearchParam.type;
+      this.transportFee.warehouse_id = this.settingService.transportFeeSearchParam.warehouse_id;
     }
     this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
   }
