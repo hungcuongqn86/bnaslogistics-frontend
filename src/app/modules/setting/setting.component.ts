@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {forkJoin, Observable, Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {InspectionFee, ServiceFee, Setting, Vip} from "../../models/model";
+import {InspectionFee, ServiceFee, Setting, TransportFee, Vip} from "../../models/model";
 
 @Component({
   selector: 'app-setting',
@@ -23,6 +23,7 @@ export class SettingComponent implements OnInit, OnDestroy{
 
   serviceFee: IServiceFee;
   inspectionFee: IInspectionFee;
+  transportFee: ITransportFee;
   vip: IVip;
   setting: ISetting;
 
@@ -30,11 +31,13 @@ export class SettingComponent implements OnInit, OnDestroy{
 
   serviceFeeSub: Subscription;
   inspectionFeeSub: Subscription;
+  transportFeeSub: Subscription;
   vipSub: Subscription;
   settingSub: Subscription;
 
   serviceFeeErrorMessage: string[] = [];
   inspectionFeeErrorMessage: string[] = [];
+  transportFeeErrorMessage: string[] = [];
   vipErrorMessage: string[] = [];
   settingErrorMessage: string[] = [];
 
@@ -157,6 +160,78 @@ export class SettingComponent implements OnInit, OnDestroy{
       }
       this.settingService.showLoading(false);
       this.serviceFeeSub.unsubscribe();
+    });
+  }
+
+  // =====================================================================================
+  // InspectionFees
+  private getTransportFees() {
+    this.settingService.showLoading(true);
+    const getTransportFeesObs: Observable<any> = this.settingService.getTransportFees();
+
+    const listSub = forkJoin([
+      getTransportFeesObs
+    ]).subscribe(([transportFees]) => {
+      this.transportFees = transportFees.data.data;
+      this.settingService.showLoading(false);
+      listSub.unsubscribe();
+    });
+  }
+
+  public transportFeeModalOpen(template: TemplateRef<any>, item: ITransportFee = null) {
+    if (item) {
+      this.transportFee = item;
+    } else {
+      this.transportFee = new TransportFee();
+    }
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
+  public transportFeeConfirm(): void {
+    let updateObs: Observable<any> = new Observable<any>();
+    if (this.transportFee.id) {
+      // Update
+      updateObs = this.settingService.editTransportFee(this.transportFee);
+    } else {
+      // Create
+      updateObs = this.settingService.addTransportFee(this.transportFee);
+    }
+    this.settingService.showLoading(true);
+    this.transportFeeSub = updateObs.subscribe(data => {
+      if (data.status) {
+        this.transportFeeErrorMessage = [];
+        this.getTransportFees();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.transportFeeErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      this.transportFeeSub.unsubscribe();
+    });
+  }
+
+  public transportFeeDelModalOpen(template: TemplateRef<any>, item: ITransportFee) {
+    this.transportFee = item;
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
+  public transportFeeDelConfirm(): void {
+    const deleteObs: Observable<any> = this.settingService.deleteTransportFee(this.transportFee);
+    this.settingService.showLoading(true);
+    this.transportFeeSub = deleteObs.subscribe(data => {
+      if (data.status) {
+        this.transportFeeErrorMessage = [];
+        this.getTransportFees();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.transportFeeErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      this.transportFeeSub.unsubscribe();
     });
   }
 
@@ -366,6 +441,10 @@ export class SettingComponent implements OnInit, OnDestroy{
 
     if (this.settingSub) {
       this.settingSub.unsubscribe();
+    }
+
+    if (this.transportFeeSub) {
+      this.transportFeeSub.unsubscribe();
     }
   }
 }

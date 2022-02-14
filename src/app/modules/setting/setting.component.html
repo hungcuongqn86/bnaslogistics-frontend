@@ -152,7 +152,7 @@
 <div class="card">
   <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí vận chuyển</strong>
     <div class="card-header-actions">
-      <button (click)="addPet()" class="btn btn-block btn-primary btn-sm"
+      <button (click)="transportFeeModalOpen(transportFeeModal)" class="btn btn-block btn-primary btn-sm"
               type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
       </button>
     </div>
@@ -193,11 +193,11 @@
         <td>{{item.val | currency:'VND':'' }} đ</td>
         <td>{{item.note}}</td>
         <td class="text-right">
-          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="transportFeeModalOpen(transportFeeModal, item)" class="btn btn-sm btn-ghost-primary"
                   type="button">
             Sửa
           </button>
-          <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-danger"
+          <button (click)="transportFeeDelModalOpen(transportFeeDelModal, item)" class="btn btn-sm btn-ghost-danger"
                   type="button">
             Xóa
           </button>
@@ -207,6 +207,146 @@
     </table>
   </div>
 </div>
+
+
+<ng-template #transportFeeModal>
+  <form novalidate #transportFeeForm="ngForm">
+    <div class="modal-header">
+      <h5 class="modal-title">Chi tiết phí vận chuyển</h5>
+    </div>
+    <div class="modal-body" *ngIf="transportFee">
+      <div class="form-group">
+        <label for="transportFeeWarehouseId">Kho <code class="highlighter-rouge">*</code></label>
+        <select [(ngModel)]="transportFee.warehouse_id" class="form-control"
+                #transportFeeWarehouseId="ngModel"
+                name="transportFeeWarehouseId"
+                id="transportFeeWarehouseId"
+                required>
+          <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">
+            {{warehouse.title}}
+          </option>
+        </select>
+        <div [hidden]="transportFeeWarehouseId.valid || transportFeeWarehouseId.untouched">
+          <span *ngIf="transportFeeWarehouseId.errors && transportFeeWarehouseId.errors.required"
+                class="badge badge-warning">
+              Phải chọn KHO!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="transportFeeType">Tính theo <code class="highlighter-rouge">*</code></label>
+        <select [(ngModel)]="transportFee.type" class="form-control"
+                #transportFeeType="ngModel"
+                name="transportFeeType"
+                id="transportFeeType"
+                required>
+          <option value="1">Trọng lượng</option>
+          <option value="2">Thể tích</option>
+        </select>
+        <div [hidden]="transportFeeType.valid || transportFeeType.untouched">
+          <span *ngIf="transportFeeType.errors && transportFeeType.errors.required"
+                class="badge badge-warning">
+              Phải chọn TÍNH THEO!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="transportFeeTitle">Dịch vụ <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="transportFee.title" #transportFeeTitle="ngModel" type="text" id="transportFeeTitle"
+               name="transportFeeTitle"
+               class="form-control"
+               required
+               placeholder="Dịch vụ">
+        <div [hidden]="transportFeeTitle.valid || transportFeeTitle.untouched">
+          <span *ngIf="transportFeeTitle.errors && transportFeeTitle.errors.required"
+                class="badge badge-warning">
+              Phải nhập DỊCH VỤ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="transportFeeMinR">Trọng lượng (thể tích) từ <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="transportFee.min_r" #transportFeeMinR="ngModel" type="number" min="0"
+               id="transportFeeMinR" name="transportFeeMinR"
+               class="form-control"
+               required
+               placeholder="Trọng lượng (thể tích) từ">
+        <div [hidden]="transportFeeMinR.valid || transportFeeMinR.untouched">
+          <span *ngIf="transportFeeMinR.errors && transportFeeMinR.errors.required"
+                class="badge badge-warning">
+              Phải nhập TRỌNG LƯỢNG (THỂ TÍCH) TỪ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="transportFeeMaxR">Trọng lượng (thể tích) đến </label>
+        <input [(ngModel)]="transportFee.max_r" type="number" min="0"
+               id="transportFeeMaxR" name="transportFeeMaxR"
+               class="form-control"
+               placeholder="Trọng lượng (thể tích) đến">
+      </div>
+
+      <div class="form-group">
+        <label for="transportFeeVal">Tính phí (VNĐ) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="transportFee.val" #transportFeeVal="ngModel" type="number" min="0" max="100"
+               id="transportFeeVal" name="transportFeeVal"
+               class="form-control"
+               required
+               placeholder="Tính phí">
+        <div [hidden]="transportFeeVal.valid || transportFeeVal.untouched">
+          <span *ngIf="transportFeeVal.errors && transportFeeVal.errors.required"
+                class="badge badge-warning">
+              Phải nhập TÍNH PHÍ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="transportFeeNote">Ghi chú </label>
+        <textarea [(ngModel)]="transportFee.note" id="transportFeeNote" name="transportFeeNote" rows="3"
+                  class="form-control"
+                  placeholder="Ghi chú ..."></textarea>
+      </div>
+
+      <p></p>
+      <alert type="danger" *ngIf="transportFeeErrorMessage.length > 0">
+        <p *ngFor="let error of transportFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="!transportFeeForm.form.valid || (transportFeeSub && !transportFeeSub.closed)"
+              class="btn btn-primary" (click)="transportFeeConfirm()">Cập nhật
+      </button>
+      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #transportFeeDelModal>
+  <div class="modal-header">
+    <h5 class="modal-title">Xóa Phí Vận Chuyển</h5>
+  </div>
+  <div class="modal-body" *ngIf="transportFee">
+    <alert type="danger">
+      <p><strong>!</strong> Bạn chắc chắn xóa "{{transportFee.title}}"!</p>
+    </alert>
+
+    <p></p>
+    <alert type="danger" *ngIf="transportFeeErrorMessage.length > 0">
+      <p *ngFor="let error of transportFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" [disabled]="(transportFeeSub && !transportFeeSub.closed)"
+            class="btn btn-primary" (click)="transportFeeDelConfirm()">Xóa
+    </button>
+    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+  </div>
+</ng-template>
 
 <!--
 // =====================================================================================================================

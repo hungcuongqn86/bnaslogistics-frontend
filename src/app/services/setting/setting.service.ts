@@ -8,7 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {Router} from '@angular/router';
-import {IInspectionFee, IServiceFee, ISetting, IVip} from '../../models/interface';
+import {IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip} from '../../models/interface';
 import {Setting} from '../../models/model';
 import {LoadingService} from '../../loading.service';
 
@@ -178,6 +178,30 @@ export class SettingService {
     return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('getTransportFees', []))
+      );
+  }
+
+  public addTransportFee(item: ITransportFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.transportFeeModuleUri}create`;
+    return this.http.post<ITransportFee>(url, item)
+      .pipe(
+        catchError(this.handleError('addTransportFee', item))
+      );
+  }
+
+  public editTransportFee(item: ITransportFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.transportFeeModuleUri}update/${item.id}`;
+    return this.http.post<ITransportFee>(url, item)
+      .pipe(
+        catchError(this.handleError('editTransportFee', item))
+      );
+  }
+
+  public deleteTransportFee(item: ITransportFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.transportFeeModuleUri}delete/${item.id}`;
+    return this.http.post<ITransportFee>(url, item)
+      .pipe(
+        catchError(this.handleError('deleteTransportFee', item))
       );
   }
 
