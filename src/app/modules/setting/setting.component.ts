@@ -69,6 +69,7 @@ export class SettingComponent implements OnInit, OnDestroy{
     const getSettingsObs: Observable<any> = this.settingService.getSettings();
     const getVipsObs: Observable<any> = this.settingService.getVips();
     const getServiceFeesObs: Observable<any> = this.settingService.getServiceFees();
+    const getChinaWarehousesObs: Observable<any> = this.settingService.getChinaWarehouses();
 
     const listSub = forkJoin([
       getWarehousesObs,
@@ -76,14 +77,16 @@ export class SettingComponent implements OnInit, OnDestroy{
       getInspectionFeesObs,
       getSettingsObs,
       getVipsObs,
-      getServiceFeesObs
-    ]).subscribe(([warehouses, transportFees, inspectionFees, settings, vips, serviceFees]) => {
+      getServiceFeesObs,
+      getChinaWarehousesObs
+    ]).subscribe(([warehouses, transportFees, inspectionFees, settings, vips, serviceFees, chinaWarehouses]) => {
       this.warehouses = warehouses.data.data;
       this.inspectionFees = inspectionFees.data.data;
       this.transportFees = transportFees.data.data;
       this.settings = settings.data.data;
       this.vips = vips.data.data;
       this.serviceFees = serviceFees.data.data;
+      this.chinaWarehouses = chinaWarehouses.data.data;
       this.settingService.showLoading(false);
       listSub.unsubscribe();
     });
@@ -325,10 +328,10 @@ export class SettingComponent implements OnInit, OnDestroy{
   // CHINA Warehouse
   private getChinaWarehouses() {
     this.settingService.showLoading(true);
-    const getVipsObs: Observable<any> = this.settingService.getVips();
+    const getChinaWarehousesObs: Observable<any> = this.settingService.getChinaWarehouses();
 
     const listSub = forkJoin([
-      getVipsObs
+      getChinaWarehousesObs
     ]).subscribe(([chinaWarehouses]) => {
       this.chinaWarehouses = chinaWarehouses.data.data;
       this.settingService.showLoading(false);

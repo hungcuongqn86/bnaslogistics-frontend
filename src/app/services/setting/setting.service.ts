@@ -8,7 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {Router} from '@angular/router';
-import {IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip} from '../../models/interface';
+import {IChinaWarehouse, IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip} from '../../models/interface';
 import {Setting} from '../../models/model';
 import {LoadingService} from '../../loading.service';
 
@@ -18,12 +18,14 @@ export class SettingService {
   private handleError: HandleError;
   private moduleUri = 'setting/';
   private vipModuleUri = 'vip/';
+  private chinaWarehouseModuleUri = 'china_warehouses/';
   private serviceFeeModuleUri = 'service_fee/';
   private transportFeeModuleUri = 'transport_fees/';
   private inspectionFeeModuleUri = 'inspection_fees/';
   private warehouseModuleUri = 'warehouses/';
   public search = {key: '', page_size: 100, page: 1};
   public vipSearchParam = {key: '', page_size: 100, page: 1};
+  public chinaWarehouseSearchParam = {key: '', page_size: 100, page: 1};
   public serviceFeeSearchParam = {key: '', page_size: 100, page: 1};
   public transportFeeSearchParam = {key: '', type: 1, warehouse_id: 1, page_size: 100, page: 1};
   public inspectionFeeSearchParam = {key: '', page_size: 100, page: 1};
@@ -37,6 +39,44 @@ export class SettingService {
 
   showLoading(value: boolean) {
     this.loadingService.setLoading(value);
+  }
+
+  // =============================================
+  // CHINA Warehouse
+  public getChinaWarehouses(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.chinaWarehouseModuleUri}search`;
+    let params = new HttpParams();
+    Object.keys(this.chinaWarehouseSearchParam).map((key) => {
+      params = params.append(key, this.chinaWarehouseSearchParam[key]);
+    });
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('getChinaWarehouses', []))
+      );
+  }
+
+  public addChinaWarehouse(item: IChinaWarehouse): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.chinaWarehouseModuleUri}create`;
+    return this.http.post<IChinaWarehouse>(url, item)
+      .pipe(
+        catchError(this.handleError('addChinaWarehouse', item))
+      );
+  }
+
+  public editChinaWarehouse(item: IChinaWarehouse): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.chinaWarehouseModuleUri}update/${item.id}`;
+    return this.http.post<IChinaWarehouse>(url, item)
+      .pipe(
+        catchError(this.handleError('editChinaWarehouse', item))
+      );
+  }
+
+  public deleteChinaWarehouse(item: IChinaWarehouse): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.chinaWarehouseModuleUri}delete/${item.id}`;
+    return this.http.post<IChinaWarehouse>(url, item)
+      .pipe(
+        catchError(this.handleError('deleteChinaWarehouse', item))
+      );
   }
 
   // =============================================
