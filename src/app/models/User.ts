@@ -7,11 +7,6 @@ export interface Role {
   position: string;
 }
 
-export interface Vip {
-  id: string;
-  name: string;
-}
-
 export interface User {
   id: number;
   partner_id: number;

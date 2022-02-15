@@ -67,57 +67,6 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="cost_percent">
-      Phí dịch vụ (%) <code class="highlighter-rouge">*</code>
-    </label>
-    <div class="col-md-9">
-      <input [(ngModel)]="userService.user.cost_percent" #cost_percent="ngModel" type="text" id="cost_percent"
-             name="cost_percent"
-             required
-             class="form-control"
-             placeholder="Phí dự kiến (%)">
-      <div [hidden]="cost_percent.valid || cost_percent.untouched">
-                                <span *ngIf="cost_percent.errors && cost_percent.errors.required"
-                                      class="badge badge-warning">
-                                    Phải nhập Phí dịch vụ!
-                                </span>
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="deposit">
-      Các mức đặt cọc (phân cách nhau bởi dấu ',')
-    </label>
-    <div class="col-md-9">
-      <input [(ngModel)]="userService.user.deposit" #deposit="ngModel" type="text" id="deposit"
-             name="deposit"
-             class="form-control"
-             placeholder="Các mức đặt cọc">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="rate">
-      Tỉ giá
-    </label>
-    <div class="col-md-9">
-      <input [(ngModel)]="userService.user.rate" #rate="ngModel" type="text" id="rate"
-             name="rate"
-             class="form-control"
-             placeholder="Tỉ giá">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="weight_price">
-      Giá cân nặng
-    </label>
-    <div class="col-md-9">
-      <input [(ngModel)]="userService.user.weight_price" #weight_price="ngModel" type="text" id="weight_price"
-             name="weight_price"
-             class="form-control"
-             placeholder="Giá cân nặng">
-    </div>
-  </div>
-  <div class="form-group row">
     <label class="col-md-3 col-form-label" for="hander">Phụ trách</label>
     <div class="col-md-9">
       <select [(ngModel)]="userService.user.hander" #hander="ngModel"
@@ -137,9 +86,8 @@
     <div class="col-md-9">
       <select [(ngModel)]="userService.user.vip" class="form-control"
               name="vip" id="vip">
-        <option value="null">Chọn vip ...</option>
         <option *ngFor="let vip of vips" [value]="vip.id">
-          {{vip.name}}
+          {{vip.title}}
         </option>
       </select>
     </div>

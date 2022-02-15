@@ -109,7 +109,7 @@ export class UserService {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}vips`;
     return this.http.get<any>(url)
       .pipe(
-        catchError(this.handleError('getHandles', []))
+        catchError(this.handleError('getVips', []))
       );
   }
 

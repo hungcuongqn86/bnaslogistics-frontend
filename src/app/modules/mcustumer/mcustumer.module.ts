@@ -6,6 +6,7 @@ import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {UserService} from '../../services/muser/user.service';
 import {PartnerService} from '../../services/mpartner/partner.service';
 import {BankAccountService} from '../../services/bankAccount.service';
+import {SettingService} from '../../services/setting/setting.service';
 
 import {CustumerComponent} from './custumer/custumer.component';
 import {CustumerDetailComponent} from './custumer/custumer.detail.component';
@@ -33,7 +34,7 @@ import {SharedModule} from '../../shared.module';
     WithdrawalComponent
   ],
   exports: [],
-  providers: [UserService, PartnerService, BankAccountService]
+  providers: [UserService, PartnerService, BankAccountService, SettingService]
 })
 export class McustumerModule {
 }
