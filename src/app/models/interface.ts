@@ -66,3 +66,16 @@ export interface IVip {
   created_at: string;
   updated_at: string;
 }
+
+export interface IChinaWarehouse {
+  id: number;
+  name: string;
+  note: string;
+  address: string;
+  receiver: string;
+  phone: string;
+  zipcode: string;
+  status: number;
+  created_at: string;
+  updated_at: string;
+}

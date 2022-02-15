@@ -498,6 +498,189 @@
 
 <!--
 // =====================================================================================================================
+// CHINA Warehouse
+ -->
+<div class="card">
+  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Kho Trung Quốc</strong>
+    <div class="card-header-actions">
+      <button (click)="chinaWarehouseModalOpen(chinaWarehouseModal)" class="btn btn-block btn-primary btn-sm"
+              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped table-sm">
+      <thead>
+      <tr>
+        <th>Tên kho</th>
+        <th>Ghi chú</th>
+        <th>Địa chỉ</th>
+        <th>Người nhận</th>
+        <th>Số điện thoại</th>
+        <th>ZipCode</th>
+        <th>Hoạt động</th>
+        <th class="text-right" style="width: 90px;">Tác vụ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of chinaWarehouses">
+        <td>{{item.name}}</td>
+        <td>{{item.note}}</td>
+        <td>{{item.address}}</td>
+        <td>{{item.receiver}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.zipcode}}</td>
+        <td>{{item.status}}</td>
+        <td class="text-right">
+          <button (click)="chinaWarehouseModalOpen(chinaWarehouseModal, item)" class="btn btn-sm btn-ghost-primary"
+                  type="button">
+            Sửa
+          </button>
+          <button (click)="chinaWarehouseDelModalOpen(chinaWarehouseModal, item)" class="btn btn-sm btn-ghost-danger"
+                  type="button">
+            Xóa
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #chinaWarehouseModal>
+  <form novalidate #chinaWarehouseForm="ngForm">
+    <div class="modal-header">
+      <h5 class="modal-title">Chi tiết kho Trung Quốc</h5>
+    </div>
+    <div class="modal-body" *ngIf="chinaWarehouse">
+      <div class="form-group">
+        <label for="vipTitle">Cấp độ <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.title" #vipTitle="ngModel" type="text" id="vipTitle"
+               name="vipTitle"
+               class="form-control"
+               required
+               placeholder="Cấp độ">
+        <div [hidden]="vipTitle.valid || vipTitle.untouched">
+          <span *ngIf="vipTitle.errors && vipTitle.errors.required"
+                class="badge badge-warning">
+              Phải nhập CẤP ĐỘ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipMinTotTran">Tổng giao dịch từ (Triệu VNĐ)<code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.min_tot_tran" #vipMinTotTran="ngModel" type="number" min="0"
+               id="vipMinTotTran" name="vipMinTotTran"
+               class="form-control"
+               required
+               placeholder="Tổng giao dịch từ">
+        <div [hidden]="vipMinTotTran.valid || vipMinTotTran.untouched">
+          <span *ngIf="vipMinTotTran.errors && vipMinTotTran.errors.required"
+                class="badge badge-warning">
+              Phải nhập TỔNG GIAO DỊCH TỪ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipMaxTotTran">Tổng giao dịch đến (Triệu VNĐ)</label>
+        <input [(ngModel)]="vip.max_tot_tran" type="number" min="0"
+               id="vipMaxTotTran" name="vipMaxTotTran"
+               class="form-control"
+               placeholder="Tổng giao dịch đến">
+      </div>
+
+      <div class="form-group">
+        <label for="vipCkDv">Chiết khấu dịch vụ (%) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.ck_dv" #vipCkDv="ngModel" type="number" min="0" max="100"
+               id="vipCkDv" name="vipCkDv"
+               class="form-control"
+               required
+               placeholder="Chiết khấu dịch vụ">
+        <div [hidden]="vipCkDv.valid || vipCkDv.untouched">
+          <span *ngIf="vipCkDv.errors && vipCkDv.errors.required"
+                class="badge badge-warning">
+              Phải nhập CHIẾT KHẤU DỊCH VỤ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipCkVc">Chiết khấu vận chuyển (%) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.ck_vc" #vipCkVc="ngModel" type="number" min="0" max="100"
+               id="vipCkVc" name="vipCkVc"
+               class="form-control"
+               required
+               placeholder="Chiết khấu vận chuyển">
+        <div [hidden]="vipCkVc.valid || vipCkVc.untouched">
+          <span *ngIf="vipCkVc.errors && vipCkVc.errors.required"
+                class="badge badge-warning">
+              Phải nhập CHIẾT KHẤU VẬN CHUYỂN!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipDeposit">Đặt cọc tiền hàng (%) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="vip.deposit" #vipDeposit="ngModel" type="number" min="0" max="100"
+               id="vipDeposit" name="vipDeposit"
+               class="form-control"
+               required
+               placeholder="Đặt cọc tiền hàng">
+        <div [hidden]="vipDeposit.valid || vipDeposit.untouched">
+          <span *ngIf="vipDeposit.errors && vipDeposit.errors.required"
+                class="badge badge-warning">
+              Phải nhập ĐẶT CỌC TIỀN HÀNG!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vipNote">Ghi chú </label>
+        <textarea [(ngModel)]="vip.note" id="vipNote" name="vipNote" rows="3"
+                  class="form-control"
+                  placeholder="Ghi chú ..."></textarea>
+      </div>
+
+      <p></p>
+      <alert type="danger" *ngIf="chinaWarehouseErrorMessage.length > 0">
+        <p *ngFor="let error of chinaWarehouseErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="!chinaWarehouseForm.form.valid || (chinaWarehouseSub && !chinaWarehouseSub.closed)"
+              class="btn btn-primary" (click)="chinaWarehouseConfirm()">Cập nhật
+      </button>
+      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #chinaWarehouseDelModal>
+  <div class="modal-header">
+    <h5 class="modal-title">Xóa kho Trung Quốc</h5>
+  </div>
+  <div class="modal-body" *ngIf="chinaWarehouse">
+    <alert type="danger">
+      <p><strong>!</strong> Bạn chắc chắn xóa "{{chinaWarehouse.name}}"!</p>
+    </alert>
+
+    <p></p>
+    <alert type="danger" *ngIf="chinaWarehouseErrorMessage.length > 0">
+      <p *ngFor="let error of chinaWarehouseErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" [disabled]="(chinaWarehouseSub && !chinaWarehouseSub.closed)"
+            class="btn btn-primary" (click)="chinaWarehouseDelConfirm()">Xóa
+    </button>
+    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+  </div>
+</ng-template>
+
+<!--
+// =====================================================================================================================
 // VIP
  -->
 <div class="card">

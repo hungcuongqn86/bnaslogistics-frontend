@@ -1,4 +1,4 @@
-import {IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip} from "./interface";
+import {IChinaWarehouse, IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip} from "./interface";
 
 
 export class Setting implements ISetting {
@@ -71,6 +71,23 @@ export class Vip implements IVip {
   ck_dv: number;
   ck_vc: number;
   deposit: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+
+  }
+}
+
+export class ChinaWarehouse implements IChinaWarehouse {
+  id: number;
+  name: string;
+  note: string;
+  address: string;
+  receiver: string;
+  phone: string;
+  zipcode: string;
+  status: number;
   created_at: string;
   updated_at: string;
 

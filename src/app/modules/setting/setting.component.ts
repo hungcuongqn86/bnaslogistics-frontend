@@ -1,11 +1,19 @@
 import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {SettingService} from '../../services/setting/setting.service';
-import {IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip, IWarehouse} from '../../models/interface';
+import {
+  IChinaWarehouse,
+  IInspectionFee,
+  IServiceFee,
+  ISetting,
+  ITransportFee,
+  IVip,
+  IWarehouse
+} from '../../models/interface';
 import {Router} from '@angular/router';
 import {forkJoin, Observable, Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {InspectionFee, ServiceFee, Setting, TransportFee, Vip} from "../../models/model";
+import {ChinaWarehouse, InspectionFee, ServiceFee, Setting, TransportFee, Vip} from "../../models/model";
 
 @Component({
   selector: 'app-setting',
@@ -18,6 +26,7 @@ export class SettingComponent implements OnInit, OnDestroy{
   vips: IVip[];
   serviceFees: IServiceFee[];
   warehouses: IWarehouse[];
+  chinaWarehouses: IChinaWarehouse[];
   inspectionFees: IInspectionFee[];
   transportFees: ITransportFee[];
 
@@ -25,6 +34,7 @@ export class SettingComponent implements OnInit, OnDestroy{
   inspectionFee: IInspectionFee;
   transportFee: ITransportFee;
   vip: IVip;
+  chinaWarehouse: IChinaWarehouse;
   setting: ISetting;
 
   modalRef: BsModalRef;
@@ -33,12 +43,14 @@ export class SettingComponent implements OnInit, OnDestroy{
   inspectionFeeSub: Subscription;
   transportFeeSub: Subscription;
   vipSub: Subscription;
+  chinaWarehouseSub: Subscription;
   settingSub: Subscription;
 
   serviceFeeErrorMessage: string[] = [];
   inspectionFeeErrorMessage: string[] = [];
   transportFeeErrorMessage: string[] = [];
   vipErrorMessage: string[] = [];
+  chinaWarehouseErrorMessage: string[] = [];
   settingErrorMessage: string[] = [];
 
   constructor(public settingService: SettingService, private router: Router, private modalService: BsModalService,) {
@@ -306,6 +318,78 @@ export class SettingComponent implements OnInit, OnDestroy{
       }
       this.settingService.showLoading(false);
       this.inspectionFeeSub.unsubscribe();
+    });
+  }
+
+  // =====================================================================================
+  // CHINA Warehouse
+  private getChinaWarehouses() {
+    this.settingService.showLoading(true);
+    const getVipsObs: Observable<any> = this.settingService.getVips();
+
+    const listSub = forkJoin([
+      getVipsObs
+    ]).subscribe(([chinaWarehouses]) => {
+      this.chinaWarehouses = chinaWarehouses.data.data;
+      this.settingService.showLoading(false);
+      listSub.unsubscribe();
+    });
+  }
+
+  public chinaWarehouseModalOpen(template: TemplateRef<any>, item: IChinaWarehouse = null) {
+    if (item) {
+      this.chinaWarehouse = item;
+    } else {
+      this.chinaWarehouse = new ChinaWarehouse();
+    }
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
+  public chinaWarehouseConfirm(): void {
+    let updateObs: Observable<any> = new Observable<any>();
+    if (this.vip.id) {
+      // Update
+      updateObs = this.settingService.editVip(this.vip);
+    } else {
+      // Create
+      updateObs = this.settingService.addVip(this.vip);
+    }
+    this.settingService.showLoading(true);
+    this.vipSub = updateObs.subscribe(data => {
+      if (data.status) {
+        this.vipErrorMessage = [];
+        this.getVips();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.vipErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      this.vipSub.unsubscribe();
+    });
+  }
+
+  public chinaWarehouseDelModalOpen(template: TemplateRef<any>, item: IVip) {
+    this.vip = item;
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
+  public chinaWarehouseDelConfirm(): void {
+    const deleteObs: Observable<any> = this.settingService.deleteVip(this.vip);
+    this.settingService.showLoading(true);
+    this.vipSub = deleteObs.subscribe(data => {
+      if (data.status) {
+        this.vipErrorMessage = [];
+        this.getVips();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.vipErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      this.vipSub.unsubscribe();
     });
   }
 
