@@ -554,93 +554,57 @@
     </div>
     <div class="modal-body" *ngIf="chinaWarehouse">
       <div class="form-group">
-        <label for="vipTitle">Cấp độ <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="vip.title" #vipTitle="ngModel" type="text" id="vipTitle"
-               name="vipTitle"
+        <label for="chinaWarehouseName">Tên kho <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="chinaWarehouse.name" #chinaWarehouseName="ngModel" type="text" id="chinaWarehouseName"
+               name="chinaWarehouseName"
                class="form-control"
                required
-               placeholder="Cấp độ">
-        <div [hidden]="vipTitle.valid || vipTitle.untouched">
-          <span *ngIf="vipTitle.errors && vipTitle.errors.required"
+               placeholder="Tên kho">
+        <div [hidden]="chinaWarehouseName.valid || chinaWarehouseName.untouched">
+          <span *ngIf="chinaWarehouseName.errors && chinaWarehouseName.errors.required"
                 class="badge badge-warning">
-              Phải nhập CẤP ĐỘ!
+              Phải nhập Tên Kho!
           </span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="vipMinTotTran">Tổng giao dịch từ (Triệu VNĐ)<code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="vip.min_tot_tran" #vipMinTotTran="ngModel" type="number" min="0"
-               id="vipMinTotTran" name="vipMinTotTran"
-               class="form-control"
-               required
-               placeholder="Tổng giao dịch từ">
-        <div [hidden]="vipMinTotTran.valid || vipMinTotTran.untouched">
-          <span *ngIf="vipMinTotTran.errors && vipMinTotTran.errors.required"
-                class="badge badge-warning">
-              Phải nhập TỔNG GIAO DỊCH TỪ!
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="vipMaxTotTran">Tổng giao dịch đến (Triệu VNĐ)</label>
-        <input [(ngModel)]="vip.max_tot_tran" type="number" min="0"
-               id="vipMaxTotTran" name="vipMaxTotTran"
-               class="form-control"
-               placeholder="Tổng giao dịch đến">
-      </div>
-
-      <div class="form-group">
-        <label for="vipCkDv">Chiết khấu dịch vụ (%) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="vip.ck_dv" #vipCkDv="ngModel" type="number" min="0" max="100"
-               id="vipCkDv" name="vipCkDv"
-               class="form-control"
-               required
-               placeholder="Chiết khấu dịch vụ">
-        <div [hidden]="vipCkDv.valid || vipCkDv.untouched">
-          <span *ngIf="vipCkDv.errors && vipCkDv.errors.required"
-                class="badge badge-warning">
-              Phải nhập CHIẾT KHẤU DỊCH VỤ!
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="vipCkVc">Chiết khấu vận chuyển (%) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="vip.ck_vc" #vipCkVc="ngModel" type="number" min="0" max="100"
-               id="vipCkVc" name="vipCkVc"
-               class="form-control"
-               required
-               placeholder="Chiết khấu vận chuyển">
-        <div [hidden]="vipCkVc.valid || vipCkVc.untouched">
-          <span *ngIf="vipCkVc.errors && vipCkVc.errors.required"
-                class="badge badge-warning">
-              Phải nhập CHIẾT KHẤU VẬN CHUYỂN!
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="vipDeposit">Đặt cọc tiền hàng (%) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="vip.deposit" #vipDeposit="ngModel" type="number" min="0" max="100"
-               id="vipDeposit" name="vipDeposit"
-               class="form-control"
-               required
-               placeholder="Đặt cọc tiền hàng">
-        <div [hidden]="vipDeposit.valid || vipDeposit.untouched">
-          <span *ngIf="vipDeposit.errors && vipDeposit.errors.required"
-                class="badge badge-warning">
-              Phải nhập ĐẶT CỌC TIỀN HÀNG!
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="vipNote">Ghi chú </label>
-        <textarea [(ngModel)]="vip.note" id="vipNote" name="vipNote" rows="3"
+        <label for="chinaWarehouseNote">Ghi chú </label>
+        <textarea [(ngModel)]="chinaWarehouse.note" id="chinaWarehouseNote" name="chinaWarehouseNote" rows="3"
                   class="form-control"
                   placeholder="Ghi chú ..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="chinaWarehouseAddress">Địa chỉ</label>
+        <input [(ngModel)]="chinaWarehouse.address" #chinaWarehouseAddress="ngModel" type="text" id="chinaWarehouseAddress"
+               name="chinaWarehouseAddress"
+               class="form-control"
+               placeholder="Địa chỉ">
+      </div>
+
+      <div class="form-group">
+        <label for="chinaWarehouseZipcode">ZipCode</label>
+        <input [(ngModel)]="chinaWarehouse.zipcode" #chinaWarehouseZipcode="ngModel" type="text" id="chinaWarehouseZipcode"
+               name="chinaWarehouseZipcode"
+               class="form-control"
+               placeholder="ZipCode">
+      </div>
+
+      <div class="form-group">
+        <label for="chinaWarehouseReceiver">Người nhận</label>
+        <input [(ngModel)]="chinaWarehouse.receiver" #chinaWarehouseReceiver="ngModel" type="text" id="chinaWarehouseReceiver"
+               name="chinaWarehouseReceiver"
+               class="form-control"
+               placeholder="Người nhận">
+      </div>
+
+      <div class="form-group">
+        <label for="chinaWarehousePhone">Điện thoại</label>
+        <input [(ngModel)]="chinaWarehouse.phone" #chinaWarehousePhone="ngModel" type="text" id="chinaWarehousePhone"
+               name="chinaWarehousePhone"
+               class="form-control"
+               placeholder="Điện thoại">
       </div>
 
       <p></p>

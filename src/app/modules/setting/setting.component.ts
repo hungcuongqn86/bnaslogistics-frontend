@@ -350,49 +350,49 @@ export class SettingComponent implements OnInit, OnDestroy{
 
   public chinaWarehouseConfirm(): void {
     let updateObs: Observable<any> = new Observable<any>();
-    if (this.vip.id) {
+    if (this.chinaWarehouse.id) {
       // Update
-      updateObs = this.settingService.editVip(this.vip);
+      updateObs = this.settingService.editChinaWarehouse(this.chinaWarehouse);
     } else {
       // Create
-      updateObs = this.settingService.addVip(this.vip);
+      updateObs = this.settingService.addChinaWarehouse(this.chinaWarehouse);
     }
     this.settingService.showLoading(true);
-    this.vipSub = updateObs.subscribe(data => {
+    this.chinaWarehouseSub = updateObs.subscribe(data => {
       if (data.status) {
-        this.vipErrorMessage = [];
-        this.getVips();
+        this.chinaWarehouseErrorMessage = [];
+        this.getChinaWarehouses();
         this.modalRef.hide();
       } else {
         for (let i = 0; i < data.data.length; i++) {
-          this.vipErrorMessage.push(data.data[i]);
+          this.chinaWarehouseErrorMessage.push(data.data[i]);
         }
       }
       this.settingService.showLoading(false);
-      this.vipSub.unsubscribe();
+      this.chinaWarehouseSub.unsubscribe();
     });
   }
 
-  public chinaWarehouseDelModalOpen(template: TemplateRef<any>, item: IVip) {
-    this.vip = item;
+  public chinaWarehouseDelModalOpen(template: TemplateRef<any>, item: IChinaWarehouse) {
+    this.chinaWarehouse = item;
     this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
   }
 
   public chinaWarehouseDelConfirm(): void {
-    const deleteObs: Observable<any> = this.settingService.deleteVip(this.vip);
+    const deleteObs: Observable<any> = this.settingService.deleteChinaWarehouse(this.chinaWarehouse);
     this.settingService.showLoading(true);
-    this.vipSub = deleteObs.subscribe(data => {
+    this.chinaWarehouseSub = deleteObs.subscribe(data => {
       if (data.status) {
-        this.vipErrorMessage = [];
-        this.getVips();
+        this.chinaWarehouseErrorMessage = [];
+        this.getChinaWarehouses();
         this.modalRef.hide();
       } else {
         for (let i = 0; i < data.data.length; i++) {
-          this.vipErrorMessage.push(data.data[i]);
+          this.chinaWarehouseErrorMessage.push(data.data[i]);
         }
       }
       this.settingService.showLoading(false);
-      this.vipSub.unsubscribe();
+      this.chinaWarehouseSub.unsubscribe();
     });
   }
 
@@ -534,6 +534,10 @@ export class SettingComponent implements OnInit, OnDestroy{
 
     if (this.transportFeeSub) {
       this.transportFeeSub.unsubscribe();
+    }
+
+    if (this.chinaWarehouseSub) {
+      this.chinaWarehouseSub.unsubscribe();
     }
   }
 }
