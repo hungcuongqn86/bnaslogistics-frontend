@@ -9,6 +9,7 @@ import {ProfileComponent} from './profile/profile.component';
 
 import {AccountRoutingModule} from './account.routing.module';
 import {SharedModule} from '../../shared.module';
+import {SettingService} from "../../services/setting/setting.service";
 
 @NgModule({
     imports: [CommonModule, FormsModule, AccountRoutingModule, SharedModule, CollapseModule.forRoot()],
@@ -16,7 +17,7 @@ import {SharedModule} from '../../shared.module';
         ProfileComponent
     ],
     exports: [],
-    providers: [UserService, PartnerService]
+    providers: [UserService, PartnerService, SettingService]
 })
 export class AccountModule {
 }
