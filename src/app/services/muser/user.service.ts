@@ -8,9 +8,10 @@ import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url, clientid} from '../../const';
 import {Router} from '@angular/router';
-import {User} from '../../models/User';
+import {User} from '../../models/model';
 import {Transaction, WithdrawalRequest} from '../../models/Transaction';
 import {LoadingService} from '../../loading.service';
+import {IUser} from "../../models/interface";
 
 @Injectable()
 export class UserService {
@@ -20,7 +21,7 @@ export class UserService {
   public search = {key: '', limit: 20, page: 1};
   public withdrawalRequestSearch = {key: '', limit: 20, page: 1, status: '0'};
   public tSearch = {limit: 20, page: 1};
-  public user: User;
+  public user: IUser;
   public transaction: Transaction;
 
   constructor(private router: Router, private loadingService: LoadingService,
@@ -43,38 +44,7 @@ export class UserService {
   }
 
   reset() {
-    this.user = {
-      id: null,
-      name: null,
-      partner: null,
-      role_id: null,
-      roles: null,
-      transaction: null,
-      type: null,
-      deposit: null,
-      active: null,
-      hander: null,
-      handle: null,
-      vip: null,
-      bank_branch: null,
-      bank_name: null,
-      bank_number: null,
-      bank_username: null,
-      phone_number: null,
-      address: null,
-      password: null,
-      c_password: null,
-      partner_id: clientid,
-      cost_percent: null,
-      weight_price: null,
-      email: null,
-      is_deleted: 0,
-      created_at: '',
-      updated_at: '',
-      image: null,
-      debt: null,
-      rate: null
-    };
+    this.user = new User;
   }
 
   getRoles(): Observable<any> {
@@ -102,14 +72,6 @@ export class UserService {
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getHandles', []))
-      );
-  }
-
-  getVips(): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}vips`;
-    return this.http.get<any>(url)
-      .pipe(
-        catchError(this.handleError('getVips', []))
       );
   }
 

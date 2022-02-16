@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorHandler, HandleError} from './http-error-handler.service';
-import { User } from './models/User';
 import { environment } from '../environments/environment';
 import * as firebase from 'firebase';
+import {IUser} from "./models/interface";
 
 // declare const firebase: any;
 
@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
 export class FirebaseService {
   static instance: FirebaseService;
   private handleError: HandleError;
-  public user: User;
+  public user: IUser;
   public appFirebase: any;
 
   constructor(httpErrorHandler: HttpErrorHandler) {

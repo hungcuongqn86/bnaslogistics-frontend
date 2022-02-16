@@ -6,7 +6,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../../auth.service';
 import {environment} from '../../../../environments/environment';
-import {User} from '../../../models/User';
+import {IUser} from "../../../models/interface";
 
 @Component({
   selector: 'app-order',
@@ -24,7 +24,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   modalRef: BsModalRef;
   errorMessage: string[] = [];
   sub: Subscription;
-  handers: User[] = [];
+  handers: IUser[] = [];
 
   inputPhanCong = {id: null, hander: null, content_pc: ''};
 

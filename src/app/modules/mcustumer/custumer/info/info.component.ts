@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
 import {UserService} from '../../../../services/muser/user.service';
 import {PartnerService} from '../../../../services/mpartner/partner.service';
-import {Role, User} from '../../../../models/User';
 import {Partner} from '../../../../models/Partner';
 import {AuthService} from '../../../../auth.service';
 import {forkJoin, Observable} from "rxjs";
-import {IVip} from "../../../../models/interface";
+import {IRole, IUser, IVip} from "../../../../models/interface";
 import {SettingService} from "../../../../services/setting/setting.service";
 
 @Component({
@@ -15,9 +14,9 @@ import {SettingService} from "../../../../services/setting/setting.service";
 })
 
 export class InfoComponent {
-  roles: Role[];
+  roles: IRole[];
   partners: Partner[];
-  handers: User[] = [];
+  handers: IUser[] = [];
   vips: IVip[];
 
   constructor(public userService: UserService, public settingService: SettingService, private partnerService: PartnerService, public authService: AuthService) {

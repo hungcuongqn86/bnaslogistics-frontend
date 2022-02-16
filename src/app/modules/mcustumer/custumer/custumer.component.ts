@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/muser/user.service';
-import {User} from '../../../models/User';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
+import {IUser} from "../../../models/interface";
 
 @Component({
   selector: 'app-custumer',
@@ -14,8 +14,8 @@ import {AuthService} from '../../../auth.service';
 })
 
 export class CustumerComponent implements OnInit {
-  user: User;
-  users: User[];
+  user: IUser;
+  users: IUser[];
   totalItems = 0;
   modalRef: BsModalRef;
 

@@ -1,4 +1,4 @@
-import {User} from './User';
+import {IUser} from './interface';
 
 export interface TransactionType {
     id: number;
@@ -9,7 +9,7 @@ export interface TransactionType {
 export interface Transaction {
     id: number;
     user_id: number;
-    user: User;
+    user: IUser;
     type: number;
     otype: TransactionType;
     debt: number;
@@ -26,7 +26,7 @@ export interface Transaction {
 export interface WithdrawalRequest {
   id: number;
   user_id: number;
-  user: User;
+  user: IUser;
   value: number;
   content: string;
   status: number;

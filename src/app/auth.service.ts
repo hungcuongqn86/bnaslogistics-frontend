@@ -8,7 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {HttpErrorHandler, HandleError} from './http-error-handler.service';
 import {Util} from './helper/lib';
-import {User} from './models/User';
+import {IUser} from "./models/interface";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,7 +21,7 @@ const httpOptions = {
 export class AuthService {
   static instance: AuthService;
   private handleError: HandleError;
-  public user: User;
+  public user: IUser;
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler, private router: Router) {
     this.handleError = httpErrorHandler.createHandleError('AuthService');

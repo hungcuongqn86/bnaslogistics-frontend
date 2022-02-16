@@ -9,11 +9,10 @@ import {Util} from '../../helper/lib';
 import {apiUrl, apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
 import {Cart} from '../../models/Cart';
-import {User} from '../../models/User';
 import {Shop} from '../../models/Shop';
 import {Package} from '../../models/Package';
 import {Complain} from '../../models/Complain';
-import {Comment} from '../../models/Comment';
+import {IUser} from "../../models/interface";
 
 export interface OrderCreate {
   id: number;
@@ -55,7 +54,7 @@ export interface Order {
   shipping: number;
   hander: number;
   content_pc: string;
-  handle: User;
+  handle: IUser;
   count_product: number;
   count_link: number;
   tien_hang: number;
@@ -72,7 +71,7 @@ export interface Order {
   updated_at: string;
   cart: Cart[];
   history: History[];
-  user: User;
+  user: IUser;
   shop: Shop;
   package: Package[];
   baogia_content: string;

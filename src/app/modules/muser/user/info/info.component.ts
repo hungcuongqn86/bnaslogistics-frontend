@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {UserService} from '../../../../services/muser/user.service';
-import {Role} from '../../../../models/User';
+import {IRole} from "../../../../models/interface";
 
 @Component({
     selector: 'app-muser-user-detail-info',
@@ -9,7 +9,7 @@ import {Role} from '../../../../models/User';
 })
 
 export class InfoComponent {
-    roles: Role[];
+    roles: IRole[];
 
     constructor(public userService: UserService) {
         this.getRoles();

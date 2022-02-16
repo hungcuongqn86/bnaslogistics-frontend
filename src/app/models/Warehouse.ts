@@ -1,5 +1,5 @@
 import {Order} from '../services/order/order.service';
-import {User} from './User';
+import {IUser} from './interface';
 import {Package} from './Package';
 
 export interface WarehouseWait {
@@ -26,7 +26,7 @@ export interface Warehouse {
 export interface Bill {
     id: number;
     user_id: number;
-    user: User;
+    user: IUser;
     bill_date: string;
     created_at: string;
     tong_can: number;
@@ -35,7 +35,7 @@ export interface Bill {
     tien_thanh_ly: number;
     status: number;
     employee_id: number;
-    employee: User;
+    employee: IUser;
     package: Package[];
     so_ma: number;
 }

@@ -1,4 +1,6 @@
-import {IChinaWarehouse, IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip} from "./interface";
+import {IChinaWarehouse, IInspectionFee, IRole, IServiceFee, ISetting, ITransportFee, IUser, IVip} from "./interface";
+import {Partner} from "./Partner";
+import {Transaction} from "./Transaction";
 
 
 export class Setting implements ISetting {
@@ -92,6 +94,44 @@ export class ChinaWarehouse implements IChinaWarehouse {
   updated_at: string;
 
   constructor() {
+    this.status = 1;
+  }
+}
 
+export class User implements IUser {
+  id: number;
+  code: string;
+  partner_id: number;
+  partner: Partner;
+  transaction: Transaction[];
+  name: string;
+  email: string;
+  password: string;
+  c_password: string;
+  phone_number: string;
+  address: string;
+  active: string;
+  role_id: number;
+  roles: IRole[];
+  image: string;
+  type: number;
+  debt: number;
+  cost_percent: number;
+  rate: number;
+  deposit: string;
+  hander: number;
+  handle: any;
+  vip: string;
+  bank_number: string;
+  bank_name: string;
+  bank_username: string;
+  bank_branch: string;
+  weight_price: number;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+    this.is_deleted = 0;
   }
 }
