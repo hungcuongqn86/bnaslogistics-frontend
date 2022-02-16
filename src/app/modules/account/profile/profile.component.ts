@@ -40,8 +40,17 @@ export class ProfileComponent implements OnInit {
       getChinaWarehousesObs
     ]).subscribe(([chinaWarehouses]) => {
       this.chinaWarehouses = chinaWarehouses.data.data;
+      this.setWarehouseInfo();
       this.settingService.showLoading(false);
       listSub.unsubscribe();
+    });
+  }
+
+  private setWarehouseInfo() {
+    const code = this.userService.user.code;
+    this.chinaWarehouses.forEach(item => {
+      item.address = item.address.replace('#code#', code);
+      item.receiver = item.receiver.replace('#code#', code);
     });
   }
 }
