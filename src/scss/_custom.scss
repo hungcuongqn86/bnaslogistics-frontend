@@ -182,10 +182,10 @@ button.btn ~ button.btn{
 .tab-container .tab-content {
   height: auto;
 }
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 form.ng-untouched.ng-pristine.ng-valid .col-md-2 {
@@ -240,4 +240,28 @@ body.app:not(.header-fixed) {
 
 .modal-dialog.modal-sm {
   margin: calc(50vh - 50px) auto;
+}
+//genera
+.bg-orange{
+  background-color: $orange !important;
+}
+.bg-blue{
+  background-color: $blue !important;
+}
+.bg-blue-violet{
+  background-color: $blue-violet !important;
+}
+.icon-topbar {
+  padding: 0 11px !important;
+  height: 46px;
+  line-height: 46px;
+  @include border-radius(10px);
+}
+.app-header {
+  .nav-item {
+    min-width: auto;
+  }
+  .navbar-brand{
+    justify-content: flex-start;
+  }
 }

@@ -1,1 +1,13 @@
 // Variable overrides
+$orange: #FF7643 !default;
+$blue: #5585EE !default;
+$blue-violet: #101C36 !default;
+
+
+@mixin border-radius($radius) {
+    border-radius         : $radius;
+    -webkit-border-radius : $radius;
+    -moz-border-radius    : $radius;
+    -ms-border-radius     : $radius;
+    -o-border-radius      : $radius;
+}
