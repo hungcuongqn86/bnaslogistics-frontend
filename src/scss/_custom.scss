@@ -24,10 +24,6 @@
   font-size: 32px;
 }
 
-.sidebar .nav-link.active {
-  background: #0000004a;
-}
-
 .app-header .dropdown-item {
   font-size: 12px;
 }
@@ -78,10 +74,6 @@ body {
   background: #ffffff;
 }
 
-.sidebar .nav-item {
-  border-bottom: 1px solid #ddd;
-}
-
 .sidebar .nav-link, .sidebar .nav-dropdown.open .nav-link {
   color: #505b72;
   font-size: 15px;
@@ -92,22 +84,8 @@ body {
   background: #f6f6f6;
 }
 
-.sidebar .nav-link.active {
-  color: #262b36 !important;
-}
-
-.sidebar .nav-link:hover, .sidebar .nav-link:hover .nav-icon, .sidebar .nav-link.active .nav-icon {
-  color: #262b36 !important;
-  background: #f6f6f6;
-}
-
 .sidebar .nav-link:hover.nav-dropdown-toggle::before {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='%2373818f' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E");
-}
-
-.sidebar .nav-link.active {
-  color: #505b72;
-  background: #f6f6f6;
 }
 
 .sidebar .nav-dropdown.open>.nav-dropdown-items .nav-item a {
@@ -182,7 +160,7 @@ button.btn ~ button.btn{
 .tab-container .tab-content {
   height: auto;
 }
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 body {
   font-family: 'Inter', sans-serif;
@@ -263,5 +241,36 @@ body.app:not(.header-fixed) {
   }
   .navbar-brand{
     justify-content: flex-start;
+  }
+}
+.sidebar {
+  .nav-item {
+    i.iconsax{
+      font-size: 24px;
+      vertical-align: sub;
+      color: #6D6D6D
+    }
+  }
+  .nav-link{
+    font-size: 16px;
+    font-weight:500;
+    .nav-icon{
+      width: auto;
+    }
+    &.active {
+      font-weight: 700;
+      background-color: #F1F1F1;
+      color: #101C36;
+      .nav-icon {
+        color: #101C36;
+      }
+    }
+    &:hover{
+      background-color: #F1F1F1;
+      color: #101C36;
+      i.iconsax {
+        color: #101C36;
+      }
+    }
   }
 }
