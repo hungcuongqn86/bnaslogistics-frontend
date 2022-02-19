@@ -1,8 +1,4 @@
 // Here you can add other styles
-.sidebar .nav-dropdown.open > .nav-dropdown-items .nav-item a {
-  padding-left: 30px;
-  font-size: 14px;
-}
 
 .loading-over {
   position: fixed;
@@ -57,14 +53,6 @@
   margin: 3px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
-
-body {
-  font-family: 'Comfortaa', cursive;
-  background-color: #d8dce3;
-}
-
-
 .app-header .navbar-brand, .sidebar-fixed .sidebar, .sidebar .sidebar-nav, .sidebar .nav {
   width: 230px;
 }
@@ -74,22 +62,8 @@ body {
   background: #ffffff;
 }
 
-.sidebar .nav-link, .sidebar .nav-dropdown.open .nav-link {
-  color: #505b72;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.sidebar .nav-dropdown.open {
-  background: #f6f6f6;
-}
-
 .sidebar .nav-link:hover.nav-dropdown-toggle::before {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='%2373818f' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E");
-}
-
-.sidebar .nav-dropdown.open>.nav-dropdown-items .nav-item a {
-  padding-left: 15px;
 }
 
 .sidebar .sidebar-minimizer {
@@ -164,6 +138,7 @@ button.btn ~ button.btn{
 
 body {
   font-family: 'Inter', sans-serif;
+  background-color: #ebebeb;
 }
 
 form.ng-untouched.ng-pristine.ng-valid .col-md-2 {
@@ -243,6 +218,7 @@ body.app:not(.header-fixed) {
     justify-content: flex-start;
   }
 }
+
 .sidebar {
   .nav-item {
     i.iconsax{
@@ -254,6 +230,7 @@ body.app:not(.header-fixed) {
   .nav-link{
     font-size: 16px;
     font-weight:500;
+    color: #6D6D6D;
     .nav-icon{
       width: auto;
     }
@@ -270,6 +247,69 @@ body.app:not(.header-fixed) {
       color: #101C36;
       i.iconsax {
         color: #101C36;
+      }
+    }
+  }
+  .nav-dropdown{
+    & > .nav-dropdown-items{
+      margin-left: 25px;
+      position: relative;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: calc(100% - 26px);
+        background-color: $color-border;
+        z-index: 9;
+      }
+      > .nav-item {
+        > .nav-link {
+          position:relative;
+          margin: 0 15px;
+          @include border-radius(10px);
+          &::before{
+            content: '';
+            position: absolute;
+            top: calc(50% - 12px);
+            border-bottom: 1px solid $color-border;
+            width: 10px;
+            height: 13px;
+            left: -15px;
+            border-radius: 0 50%;
+          }
+        }
+      }
+    }
+    &.open {
+      background-color: transparent;
+      .nav-link {
+        color: #6D6D6D;
+      }
+    }
+  }
+}
+.entry-list{
+  border: 0;
+  .card-header {
+    border-bottom: 0;
+    background-color: transparent;
+    font-size: 24px;
+    font-weight: bold;
+    span {
+      position: relative;
+      padding-left: 35px;
+      &::before {
+        content: '';
+        display: block;
+        width: 16px;
+        height: 32px;
+        background-color: #5585EE;
+        @include border-radius(6px);
+        position: absolute;
+        top: -1px;
+        left: 0;
       }
     }
   }
