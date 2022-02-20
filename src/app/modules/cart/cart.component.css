@@ -2,6 +2,10 @@
     box-shadow: none;
 }
 
+.form-check-label {
+  margin-right: 25px;
+}
+
 table > tbody > tr > td img {
     max-width: 100px;
 }
