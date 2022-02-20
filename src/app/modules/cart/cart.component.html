@@ -27,7 +27,7 @@
                       <input type="checkbox" id="kiem_hang" name="kiem_hang"
                              value="1"
                              [(ngModel)]="cartf.kiem_hang"
-                              (change)="updateCart(cartf)"
+                             (change)="updateCart(cartf)"
                              class="form-check-input">
                       <label for="kiem_hang" class="form-check-label">Kiểm hàng</label>
                     </div>
@@ -35,6 +35,7 @@
                       <input type="checkbox" id="dong_go" name="dong_go"
                              value="1"
                              [(ngModel)]="cartf.dong_go"
+                             (change)="updateCart(cartf)"
                              class="form-check-input">
                       <label for="dong_go" class="form-check-label">Đóng gỗ</label>
                     </div>
@@ -42,6 +43,7 @@
                       <input type="checkbox" id="bao_hiem" name="bao_hiem"
                              value="1"
                              [(ngModel)]="cartf.bao_hiem"
+                             (change)="updateCart(cartf)"
                              class="form-check-input">
                       <label for="bao_hiem" class="form-check-label">Bảo hiểm</label>
                     </div>
@@ -159,7 +161,7 @@
             </a>
             <a href="javascript:void(0)" (click)="openModalDeleteShop(template1, cartf)"><i
               class="fa fa-trash-o"
-              aria-hidden="true"></i> Xóa shop</a><br>
+              aria-hidden="true"></i> Xóa toàn bộ</a><br>
           </div>
         </div>
       </div>

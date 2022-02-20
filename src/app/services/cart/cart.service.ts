@@ -41,7 +41,7 @@ export class CartService {
   }
 
   public updateCart(cart: ICart): Observable<any> {
-    const url = Util.getUri(apiUrl) + `${this.moduleUri}update`;
+    const url = Util.getUri(apiUrl) + `${this.moduleUri}update/${cart.id}`;
     return this.http.post<ICart>(url, cart)
       .pipe(
         catchError(this.handleError('updateCart', cart))
