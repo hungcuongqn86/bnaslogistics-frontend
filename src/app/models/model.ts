@@ -4,7 +4,7 @@ import {
   IInspectionFee,
   IRole,
   IServiceFee,
-  ISetting,
+  ISetting, IShop,
   ITransportFee,
   IUser,
   IVip
@@ -29,22 +29,23 @@ export class Setting implements ISetting {
 
 export class Cart implements ICart {
   id: number;
-  name: string;
-  url: string;
+  shop: IShop[];
   cart_items: ICartItem[];
-  rate: number;
-  count_product: number;
-  count_link: number;
   kiem_hang: boolean;
   dong_go: boolean;
   bao_hiem: boolean;
+  count_product: number;
   tien_hang: number;
-  phi_tam_tinh: number;
-  ship_khach: number;
-  vip: string;
-  vip_dc: number;
-  tong: number;
-  is_deleted: number;
+  vip_id: number;
+  ck_dv: number;
+  ck_dv_tt: number;
+  phi_dat_hang_cs: number;
+  phi_dat_hang: number;
+  phi_dat_hang_tt: number;
+  phi_bao_hiem_cs: number;
+  phi_bao_hiem_tt: number;
+  ti_gia: number;
+  status: number;
   created_at: string;
   updated_at: string;
 

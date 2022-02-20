@@ -27,6 +27,7 @@
                       <input type="checkbox" id="kiem_hang" name="kiem_hang"
                              value="1"
                              [(ngModel)]="cartf.kiem_hang"
+                
                              class="form-check-input">
                       <label for="kiem_hang" class="form-check-label">Kiểm hàng</label>
                     </div>
@@ -71,7 +72,7 @@
                     </td>
                     <td>
                       <p><input title="Số lượng" [(ngModel)]="cartf.cart_items[i].amount" type="number"
-                                (change)="updateCart(cartf.cart_items[i]);"
+                                (change)="updateCartItem(cartf.cart_items[i]);"
                                 id="amount"
                                 name="amount" class="form-control"></p>
                     </td>
@@ -99,7 +100,7 @@
                       [(ngModel)]="cartf.cart_items[i].note" type="text"
                       class="form-control"
                       placeholder="Ghi chú link"
-                      (change)="updateCart(cartf.cart_items[i])"
+                      (change)="updateCartItem(cartf.cart_items[i])"
                       value=""></td>
                   </tr>
                 </ng-template>

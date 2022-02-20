@@ -65,15 +65,11 @@ export class CartComponent implements OnInit {
   public ketDon(item: ICart) {
     this.cartService.showLoading(true);
     this.order.shop_id = item.id;
-    this.order.rate = item.rate;
+    this.order.rate = item.ti_gia;
     this.order.count_product = item.count_product;
-    this.order.count_link = item.count_link;
     this.order.tien_hang = item.tien_hang;
-    this.order.phi_dich_vu = this.getPhiDichVu(item.tien_hang);
-    this.order.phi_tam_tinh = item.phi_tam_tinh;
-    this.order.tong = item.tong;
-    this.order.vip = item.vip;
-    this.order.vip_dc = item.vip_dc;
+    this.order.phi_dich_vu = item.phi_dat_hang_tt;
+    this.order.phi_tam_tinh = item.phi_dat_hang_tt;
 
     const cartids = [];
     for (let j = 0; j < item.cart_items.length; j++) {
@@ -124,6 +120,14 @@ export class CartComponent implements OnInit {
   updateCart(cart: Cart) {
     this.cartService.showLoading(true);
     this.cartService.updateCart(cart)
+      .subscribe(res => {
+        this.getCarts();
+      });
+  }
+
+  updateCartItem(cartItem: ICartItem) {
+    this.cartService.showLoading(true);
+    this.cartService.updateCartItem(cartItem)
       .subscribe(res => {
         this.getCarts();
       });
