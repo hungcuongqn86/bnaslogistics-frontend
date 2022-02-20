@@ -15,11 +15,35 @@
     <div class="col-lg-12">
       <div *ngFor="let cartf of carts" class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> <strong>{{cartf.name}}</strong>
+          <i class="fa fa-align-justify"></i> <strong>{{cartf.shop.name}}</strong>
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col-lg-8">
+              <div class="row">
+                <div class="col-lg-12" style="text-align: right;">
+                  <div class="col-form-label">
+                    <div class="form-check form-check-inline mr-1">
+                      <input type="checkbox" id="inline-checkbox1"
+                             value="option1"
+                             class="form-check-input">
+                      <label for="inline-checkbox1" class="form-check-label">Kiểm hàng</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-1">
+                      <input type="checkbox" id="inline-checkbox2"
+                             value="option2"
+                             class="form-check-input">
+                      <label for="inline-checkbox2" class="form-check-label">Đóng gỗ</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-1">
+                      <input type="checkbox" id="inline-checkbox3"
+                             value="option3"
+                             class="form-check-input">
+                      <label for="inline-checkbox3" class="form-check-label">Bảo hiểm</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <table class="table table-sm">
                 <thead>
                 <tr>
@@ -34,7 +58,7 @@
                 <tbody *ngIf="cartf.cart_items && cartf.cart_items.length > 0">
                 <ng-template ngFor let-item [ngForOf]="cartf.cart_items" let-i="index">
                   <tr>
-                    <td rowspan="3">
+                    <td rowspan="2">
                       <div class="pull-left">
                         <a target="_blank" rel="noopener noreferrer"
                            href="{{item.pro_link}}"><img src="{{item.image}}"></a>
@@ -75,30 +99,6 @@
                       value=""></td>
                   </tr>
                 </ng-template>
-                <tr>
-                  <td colspan="5" style="border-top: none;">
-                    <div class="col-form-label">
-                      <div class="form-check form-check-inline mr-1">
-                        <input type="checkbox" id="inline-checkbox1"
-                               value="option1"
-                               class="form-check-input">
-                        <label for="inline-checkbox1" class="form-check-label">Kiểm hàng</label>
-                      </div>
-                      <div class="form-check form-check-inline mr-1">
-                        <input type="checkbox" id="inline-checkbox2"
-                               value="option2"
-                               class="form-check-input">
-                        <label for="inline-checkbox2" class="form-check-label">Đóng gỗ</label>
-                      </div>
-                      <div class="form-check form-check-inline mr-1">
-                        <input type="checkbox" id="inline-checkbox3"
-                               value="option3"
-                               class="form-check-input">
-                        <label for="inline-checkbox3" class="form-check-label">Bảo hiểm</label>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
                 </tbody>
               </table>
             </div>
@@ -136,7 +136,7 @@
                 <tr>
                   <td colspan="2">
                     <button class="btn btn-block btn-primary" (click)="ketDon(cartf)"
-                            type="button">Kết đơn
+                            type="button">Tạo đơn
                     </button>
                   </td>
                 </tr>

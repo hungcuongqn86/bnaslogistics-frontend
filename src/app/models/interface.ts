@@ -11,6 +11,35 @@ export interface ISetting {
   updated_at: string;
 }
 
+export interface IShop {
+  id: number;
+  name: string;
+  url: string;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ICart {
+  id: number;
+  shop: IShop[];
+  cart_items: ICartItem[];
+  rate: number;
+  count_product: number;
+  count_link: number;
+  kiem_hang: boolean;
+  dong_go: boolean;
+  bao_hiem: boolean;
+  tien_hang: number;
+  phi_tam_tinh: number;
+  ship_khach: number;
+  vip: string;
+  vip_dc: number;
+  tong: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface ICartItem {
   id: number;
   user_id: number;
@@ -36,28 +65,6 @@ export interface ICartItem {
   size: string;
   sizetxt: string;
   status: number;
-  is_deleted: number;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface ICart {
-  id: number;
-  name: string;
-  url: string;
-  cart_items: ICartItem[];
-  rate: number;
-  count_product: number;
-  count_link: number;
-  kiem_hang: boolean;
-  dong_go: boolean;
-  bao_hiem: boolean;
-  tien_hang: number;
-  phi_tam_tinh: number;
-  ship_khach: number;
-  vip: string;
-  vip_dc: number;
-  tong: number;
   is_deleted: number;
   created_at: string;
   updated_at: string;
