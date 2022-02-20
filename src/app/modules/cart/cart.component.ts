@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {CartService} from '../../services/cart/cart.service';
 import {OrderCreate, OrderService} from '../../services/order/order.service';
-import {Shop} from '../../models/Shop';
 import {Cart} from '../../models/Cart';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../auth.service';
 import {ErrorMessagesService} from '../../error.messages.service';
 import {email_nv} from '../../const';
+import {ICart, ICartItem} from "../../models/interface";
 
 @Component({
   selector: 'app-cart',
@@ -18,9 +18,9 @@ import {email_nv} from '../../const';
 })
 
 export class CartComponent implements OnInit {
-  shops: Shop[];
-  shop: Shop;
-  cart: Cart;
+  carts: ICart[];
+  cart: ICart;
+  cartItem: ICartItem;
   order: OrderCreate;
   modalRef: BsModalRef;
   nv = false;
@@ -35,49 +35,63 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.getCarts();
     this.order = {
-      id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, vip: null, vip_dc: 0, is_deleted: 0, created_at: '', updated_at: '',
-      count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, phi_dich_vu: 0, tong: 0
+      id: null,
+      user_id: null,
+      shop_id: null,
+      cart_ids: null,
+      rate: 1,
+      vip: null,
+      vip_dc: 0,
+      is_deleted: 0,
+      created_at: '',
+      updated_at: '',
+      count_product: 0,
+      count_link: 0,
+      tien_hang: 0,
+      phi_tam_tinh: 0,
+      phi_dich_vu: 0,
+      tong: 0
     };
   }
 
   public getCarts() {
     this.cartService.showLoading(true);
     this.cartService.getCartWithShops()
-      .subscribe(shops => {
-        this.shops = this.convertShopsData(shops.data);
+      .subscribe(carts => {
+        this.carts = this.convertCartData(carts.data);
         this.cartService.showLoading(false);
       });
   }
 
-  private convertShopsData(data: Shop[]) {
+  private convertCartData(data: ICart[]) {
     const vip = this.authService.user.vip ? this.authService.user.vip : '0';
     const vipdc = this.vipData[vip];
 
     let phi_dich_vu = this.authService.user.cost_percent;
-    const res: Shop[] = [];
+    const res: ICart[] = [];
     for (let i = 0; i < data.length; i++) {
-      const shop: Shop = data[i];
-      const detailData = shop.cart;
-      shop.count_link = shop.cart.length;
-      shop.vip = vip;
-      shop.vip_dc = vipdc;
-      shop.count_product = 0;
-      shop.tien_hang = 0;
+      const cart: ICart = data[i];
+      const detailData = cart.items;
+      cart.count_link = detailData.length;
+      cart.vip = vip;
+      cart.vip_dc = vipdc;
+      cart.count_product = 0;
+      cart.tien_hang = 0;
       for (let j = 0; j < detailData.length; j++) {
-        shop.count_product = shop.count_product + detailData[j].amount;
+        cart.count_product = cart.count_product + detailData[j].amount;
         const ndt = parseFloat(detailData[j].price);
         const tigia = parseFloat(detailData[j].rate);
         const soluong = detailData[j].amount;
         const vnd = Math.ceil(ndt * tigia * soluong);
-        shop.tien_hang = shop.tien_hang + vnd;
+        cart.tien_hang = cart.tien_hang + vnd;
       }
       // Phi dich vu theo tien hang
-      phi_dich_vu = this.getPhiDichVu(shop.tien_hang);
-      shop.phi_tam_tinh = Math.ceil((shop.tien_hang * phi_dich_vu) / 100);
-      shop.phi_tam_tinh = shop.phi_tam_tinh - Math.ceil((shop.phi_tam_tinh * shop.vip_dc) / 100);
+      phi_dich_vu = this.getPhiDichVu(cart.tien_hang);
+      cart.phi_tam_tinh = Math.ceil((cart.tien_hang * phi_dich_vu) / 100);
+      cart.phi_tam_tinh = cart.phi_tam_tinh - Math.ceil((cart.phi_tam_tinh * cart.vip_dc) / 100);
 
-      shop.tong = shop.tien_hang + shop.phi_tam_tinh;
-      res.push(shop);
+      cart.tong = cart.tien_hang + cart.phi_tam_tinh;
+      res.push(cart);
     }
     return res;
   }
@@ -97,7 +111,7 @@ export class CartComponent implements OnInit {
     return phi_dich_vu;
   }
 
-  public ketDon(item: Shop) {
+  public ketDon(item: ICart) {
     this.cartService.showLoading(true);
     this.order.shop_id = item.id;
     this.order.rate = item.rate;
@@ -111,11 +125,11 @@ export class CartComponent implements OnInit {
     this.order.vip_dc = item.vip_dc;
 
     const cartids = [];
-    for (let j = 0; j < item.cart.length; j++) {
-      cartids.push(item.cart[j].id);
+    for (let j = 0; j < item.items.length; j++) {
+      cartids.push(item.items[j].id);
     }
     this.order.cart_ids = cartids.join(',');
-    this.cartService.updateMultipleCart(item.cart)
+    this.cartService.updateMultipleCart(item.items)
       .subscribe(res => {
         this.orderService.addOrder(this.order)
           .subscribe(order => {
@@ -132,11 +146,8 @@ export class CartComponent implements OnInit {
       });
   }
 
-  public ketDonTatCa() {
-  }
-
-  openModalDeleteCart(template: TemplateRef<any>, cart: Cart) {
-    this.cart = cart;
+  openModalDeleteCart(template: TemplateRef<any>, cartItem: ICartItem) {
+    this.cartItem = cartItem;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
@@ -150,9 +161,9 @@ export class CartComponent implements OnInit {
   }
 
   public deleteCart() {
-    if (this.cart) {
-      this.cart.is_deleted = 1;
-      this.cartService.updateCart(this.cart)
+    if (this.cartItem) {
+      this.cartItem.is_deleted = 1;
+      this.cartService.updateCart(this.cartItem)
         .subscribe(res => {
           this.getCarts();
         });
@@ -167,8 +178,8 @@ export class CartComponent implements OnInit {
       });
   }
 
-  openModalDeleteShop(template: TemplateRef<any>, shop: Shop) {
-    this.shop = shop;
+  openModalDeleteShop(template: TemplateRef<any>, cart: ICart) {
+    this.cart = cart;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
@@ -182,10 +193,10 @@ export class CartComponent implements OnInit {
   }
 
   public deleteCartOfShop() {
-    if (this.shop) {
+    if (this.cart) {
       const arrId = [];
-      for (let i = 0; i < this.shop.cart.length; i++) {
-        arrId.push(this.shop.cart[i].id);
+      for (let i = 0; i < this.cart.items.length; i++) {
+        arrId.push(this.cart.items[i].id);
       }
       this.cartService.deleteCart(arrId.join(','))
         .subscribe(res => {

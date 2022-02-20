@@ -11,6 +11,58 @@ export interface ISetting {
   updated_at: string;
 }
 
+export interface ICartItem {
+  id: number;
+  user_id: number;
+  shop_id: number;
+  amount: number;
+  begin_amount: number;
+  color: string;
+  colortxt: string;
+  count: number;
+  domain: string;
+  image: string;
+  method: string;
+  name: string;
+  note: string;
+  nv_note: string;
+  kho_note: string;
+  price: string;
+  price_arr: string;
+  pro_link: string;
+  pro_properties: string;
+  rate: string;
+  site: string;
+  size: string;
+  sizetxt: string;
+  status: number;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ICart {
+  id: number;
+  name: string;
+  url: string;
+  items: ICartItem[];
+  rate: number;
+  count_product: number;
+  count_link: number;
+  kiem_hang: boolean;
+  dong_go: boolean;
+  bao_hiem: boolean;
+  tien_hang: number;
+  phi_tam_tinh: number;
+  ship_khach: number;
+  vip: string;
+  vip_dc: number;
+  tong: number;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface IWarehouse {
   id: number;
   title: string;

@@ -13,9 +13,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12">
-      <div *ngFor="let shopItem of shops" class="card">
+      <div *ngFor="let cartf of carts" class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> <strong>{{shopItem.name}}</strong>
+          <i class="fa fa-align-justify"></i> <strong>{{cartf.name}}</strong>
         </div>
         <div class="card-body">
           <div class="row">
@@ -28,11 +28,11 @@
                   <th>Tỷ giá</th>
                   <th>Đơn giá</th>
                   <th>Tiền hàng</th>
-                  <th>#</th>
+                  <th style="text-align: center;">#</th>
                 </tr>
                 </thead>
-                <tbody *ngIf="shopItem.cart && shopItem.cart.length > 0">
-                <ng-template ngFor let-item [ngForOf]="shopItem.cart" let-i="index">
+                <tbody *ngIf="cartf.items && cartf.items.length > 0">
+                <ng-template ngFor let-item [ngForOf]="cartf.items" let-i="index">
                   <tr>
                     <td rowspan="3">
                       <div class="pull-left">
@@ -43,8 +43,8 @@
                       <p *ngIf="item.colortxt" class="pull-left m-1 colortxt">{{item.colortxt}}</p>
                     </td>
                     <td>
-                      <p><input title="Số lượng" [(ngModel)]="shopItem.cart[i].amount" type="number"
-                                (change)="updateCart(shopItem.cart[i]);"
+                      <p><input title="Số lượng" [(ngModel)]="cartf.items[i].amount" type="number"
+                                (change)="updateCart(cartf.items[i]);"
                                 id="amount"
                                 name="amount" class="form-control"></p>
                     </td>
@@ -56,21 +56,22 @@
                       <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
                     </td>
                     <td>
-                      <p *ngIf="!nv">{{item.price | tempPrice: item.rate : shopItem.cart[i].amount: true}}<sup>đ</sup>
+                      <p *ngIf="!nv">{{item.price | tempPrice: item.rate : cartf.items[i].amount: true}}<sup>đ</sup>
                       </p>
-                      <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : shopItem.cart[i].amount :
+                      <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : cartf.items[i].amount :
                         false}}</p>
                     </td>
-                    <td><a href="javascript:void(0)" (click)="openModalDeleteCart(template,item)"><i
+                    <td style="text-align: center;"><a href="javascript:void(0)"
+                                                       (click)="openModalDeleteCart(template,item)"><i
                       class="fa fa-trash-o"
                       aria-hidden="true"></i></a><br></td>
                   </tr>
                   <tr>
                     <td colspan="5" style="border-top: none;"><input
-                      [(ngModel)]="shopItem.cart[i].note" type="text"
+                      [(ngModel)]="cartf.items[i].note" type="text"
                       class="form-control"
                       placeholder="Ghi chú link"
-                      (change)="updateCart(shopItem.cart[i])"
+                      (change)="updateCart(cartf.items[i])"
                       value=""></td>
                   </tr>
                 </ng-template>
@@ -101,16 +102,16 @@
                 </tbody>
               </table>
             </div>
-            <div *ngIf="shopItem.cart && shopItem.cart.length > 0" class="col-lg-3">
+            <div *ngIf="cartf.items && cartf.items.length > 0" class="col-lg-3">
               <table class="table table-sm">
                 <tbody>
                 <tr *ngIf="!nv">
                   <td>Tiền hàng</td>
-                  <td>{{shopItem.tien_hang.toString() | tempPrice: 1 : 1: true}}<sup>đ</sup></td>
+                  <td>{{cartf.tien_hang.toString() | tempPrice: 1 : 1: true}}<sup>đ</sup></td>
                 </tr>
                 <tr *ngIf="!nv">
                   <td>Phí đặt hàng</td>
-                  <td>{{shopItem.phi_tam_tinh.toString() | tempPrice: 1 : 1: true}}<sup>đ</sup></td>
+                  <td>{{cartf.phi_tam_tinh.toString() | tempPrice: 1 : 1: true}}<sup>đ</sup></td>
                 </tr>
                 <tr *ngIf="!nv">
                   <td>Kiểm hàng</td>
@@ -130,11 +131,11 @@
                 </tr>
                 <tr *ngIf="!nv">
                   <td>Tổng</td>
-                  <td>{{shopItem.tong.toString() | tempPrice: 1 : 1: true}}<sup>đ</sup></td>
+                  <td>{{cartf.tong.toString() | tempPrice: 1 : 1: true}}<sup>đ</sup></td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <button class="btn btn-block btn-primary" (click)="ketDon(shopItem)"
+                    <button class="btn btn-block btn-primary" (click)="ketDon(cartf)"
                             type="button">Kết đơn
                     </button>
                   </td>
@@ -148,9 +149,9 @@
           <div>
             <a style="margin-right: 25px;">
               <span
-                class="ng-binding">{{shopItem.count_product}}</span><span> / </span><span>{{shopItem.count_link}}</span><span> Link</span>
+                class="ng-binding">{{cartf.count_product}}</span><span> / </span><span>{{cartf.count_link}}</span><span> Link</span>
             </a>
-            <a href="javascript:void(0)" (click)="openModalDeleteShop(template1, shopItem)"><i
+            <a href="javascript:void(0)" (click)="openModalDeleteShop(template1, cartf)"><i
               class="fa fa-trash-o"
               aria-hidden="true"></i> Xóa shop</a><br>
           </div>
