@@ -71,7 +71,7 @@ export class CartComponent implements OnInit {
     const res: ICart[] = [];
     for (let i = 0; i < data.length; i++) {
       const cart: ICart = data[i];
-      const detailData = cart.items;
+      const detailData = cart.cart_items;
       cart.count_link = detailData.length;
       cart.vip = vip;
       cart.vip_dc = vipdc;
@@ -125,11 +125,11 @@ export class CartComponent implements OnInit {
     this.order.vip_dc = item.vip_dc;
 
     const cartids = [];
-    for (let j = 0; j < item.items.length; j++) {
-      cartids.push(item.items[j].id);
+    for (let j = 0; j < item.cart_items.length; j++) {
+      cartids.push(item.cart_items[j].id);
     }
     this.order.cart_ids = cartids.join(',');
-    this.cartService.updateMultipleCart(item.items)
+    this.cartService.updateMultipleCart(item.cart_items)
       .subscribe(res => {
         this.orderService.addOrder(this.order)
           .subscribe(order => {
@@ -195,8 +195,8 @@ export class CartComponent implements OnInit {
   public deleteCartOfShop() {
     if (this.cart) {
       const arrId = [];
-      for (let i = 0; i < this.cart.items.length; i++) {
-        arrId.push(this.cart.items[i].id);
+      for (let i = 0; i < this.cart.cart_items.length; i++) {
+        arrId.push(this.cart.cart_items[i].id);
       }
       this.cartService.deleteCart(arrId.join(','))
         .subscribe(res => {

@@ -31,8 +31,8 @@
                   <th style="text-align: center;">#</th>
                 </tr>
                 </thead>
-                <tbody *ngIf="cartf.items && cartf.items.length > 0">
-                <ng-template ngFor let-item [ngForOf]="cartf.items" let-i="index">
+                <tbody *ngIf="cartf.cart_items && cartf.cart_items.length > 0">
+                <ng-template ngFor let-item [ngForOf]="cartf.cart_items" let-i="index">
                   <tr>
                     <td rowspan="3">
                       <div class="pull-left">
@@ -43,8 +43,8 @@
                       <p *ngIf="item.colortxt" class="pull-left m-1 colortxt">{{item.colortxt}}</p>
                     </td>
                     <td>
-                      <p><input title="Số lượng" [(ngModel)]="cartf.items[i].amount" type="number"
-                                (change)="updateCart(cartf.items[i]);"
+                      <p><input title="Số lượng" [(ngModel)]="cartf.cart_items[i].amount" type="number"
+                                (change)="updateCart(cartf.cart_items[i]);"
                                 id="amount"
                                 name="amount" class="form-control"></p>
                     </td>
@@ -56,9 +56,9 @@
                       <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
                     </td>
                     <td>
-                      <p *ngIf="!nv">{{item.price | tempPrice: item.rate : cartf.items[i].amount: true}}<sup>đ</sup>
+                      <p *ngIf="!nv">{{item.price | tempPrice: item.rate : cartf.cart_items[i].amount: true}}<sup>đ</sup>
                       </p>
-                      <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : cartf.items[i].amount :
+                      <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : cartf.cart_items[i].amount :
                         false}}</p>
                     </td>
                     <td style="text-align: center;"><a href="javascript:void(0)"
@@ -68,10 +68,10 @@
                   </tr>
                   <tr>
                     <td colspan="5" style="border-top: none;"><input
-                      [(ngModel)]="cartf.items[i].note" type="text"
+                      [(ngModel)]="cartf.cart_items[i].note" type="text"
                       class="form-control"
                       placeholder="Ghi chú link"
-                      (change)="updateCart(cartf.items[i])"
+                      (change)="updateCart(cartf.cart_items[i])"
                       value=""></td>
                   </tr>
                 </ng-template>
@@ -102,7 +102,7 @@
                 </tbody>
               </table>
             </div>
-            <div *ngIf="cartf.items && cartf.items.length > 0" class="col-lg-3">
+            <div *ngIf="cartf.cart_items && cartf.cart_items.length > 0" class="col-lg-3">
               <table class="table table-sm">
                 <tbody>
                 <tr *ngIf="!nv">

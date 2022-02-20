@@ -45,7 +45,7 @@ export interface ICart {
   id: number;
   name: string;
   url: string;
-  items: ICartItem[];
+  cart_items: ICartItem[];
   rate: number;
   count_product: number;
   count_link: number;
