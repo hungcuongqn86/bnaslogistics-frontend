@@ -64,21 +64,11 @@ export class CartService {
       );
   }
 
-  public updateMultipleCart(carts: Cart[]): Observable<any[]> {
-    const url = Util.getUri(apiUrl) + `${this.moduleUri}update`;
-    const res = [];
-    for (let i = 0; i < carts.length; i++) {
-      const response = this.http.post<Cart>(url, carts[i]);
-      res.push(response);
-    }
-    return forkJoin(res);
-  }
-
-  public deleteCart(ids: string) {
-    const url = Util.getUri(apiUrl) + `${this.moduleUri}delete`;
-    return this.http.post<any>(url, {ids: ids})
+  public deleteCart(id: number) {
+    const url = Util.getUri(apiUrl) + `${this.moduleUri}delete/${id}`;
+    return this.http.post<any>(url, {id: id})
       .pipe(
-        catchError(this.handleError('updateCart', {ids: ids}))
+        catchError(this.handleError('deleteCart', {ids: id}))
       );
   }
 }

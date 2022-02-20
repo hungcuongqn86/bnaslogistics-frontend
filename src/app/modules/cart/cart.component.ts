@@ -137,24 +137,16 @@ export class CartComponent implements OnInit {
   }
 
   confirmDeleteShop(): void {
-    this.deleteCartOfShop();
+    if (this.cart) {
+      this.cartService.deleteCart(this.cart.id)
+        .subscribe(res => {
+          this.getCarts();
+        });
+    }
     this.modalRef.hide();
   }
 
   declineDeleteShop(): void {
     this.modalRef.hide();
-  }
-
-  public deleteCartOfShop() {
-    if (this.cart) {
-      const arrId = [];
-      for (let i = 0; i < this.cart.cart_items.length; i++) {
-        arrId.push(this.cart.cart_items[i].id);
-      }
-      this.cartService.deleteCart(arrId.join(','))
-        .subscribe(res => {
-          this.getCarts();
-        });
-    }
   }
 }
