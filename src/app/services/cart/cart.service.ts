@@ -9,7 +9,7 @@ import {Util} from '../../helper/lib';
 import {apiUrl} from '../../const';
 import {LoadingService} from '../../loading.service';
 import {Cart} from '../../models/Cart';
-import {ICartItem} from "../../models/interface";
+import {ICart, ICartItem} from "../../models/interface";
 
 @Injectable()
 export class CartService {
@@ -40,9 +40,9 @@ export class CartService {
       );
   }
 
-  public updateCart(cart: Cart): Observable<any> {
+  public updateCart(cart: ICart): Observable<any> {
     const url = Util.getUri(apiUrl) + `${this.moduleUri}update`;
-    return this.http.post<Cart>(url, cart)
+    return this.http.post<ICart>(url, cart)
       .pipe(
         catchError(this.handleError('updateCart', cart))
       );
@@ -53,6 +53,14 @@ export class CartService {
     return this.http.post<ICartItem>(url, cartItem)
       .pipe(
         catchError(this.handleError('updateCartItem', cartItem))
+      );
+  }
+
+  public deleteCartItem(id: number) {
+    const url = Util.getUri(apiUrl) + `${this.moduleUri}cart_item/delete/${id}`;
+    return this.http.post<any>(url, {id: id})
+      .pipe(
+        catchError(this.handleError('deleteCartItem', {id: id}))
       );
   }
 

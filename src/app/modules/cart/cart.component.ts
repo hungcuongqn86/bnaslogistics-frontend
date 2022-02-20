@@ -2,7 +2,6 @@ import {Component, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {CartService} from '../../services/cart/cart.service';
 import {OrderCreate, OrderService} from '../../services/order/order.service';
-import {Cart} from '../../models/Cart';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../auth.service';
@@ -63,7 +62,7 @@ export class CartComponent implements OnInit {
   }
 
   public ketDon(item: ICart) {
-    this.cartService.showLoading(true);
+    /*this.cartService.showLoading(true);
     this.order.shop_id = item.id;
     this.order.rate = item.ti_gia;
     this.order.count_product = item.count_product;
@@ -90,7 +89,7 @@ export class CartComponent implements OnInit {
               this.errorMessagesService.errorModalShown = true;
             }
           });
-      });
+      });*/
   }
 
   openModalDeleteCart(template: TemplateRef<any>, cartItem: ICartItem) {
@@ -109,15 +108,14 @@ export class CartComponent implements OnInit {
 
   public deleteCart() {
     if (this.cartItem) {
-      this.cartItem.is_deleted = 1;
-      this.cartService.updateCart(this.cartItem)
+      this.cartService.deleteCartItem(this.cartItem.id)
         .subscribe(res => {
           this.getCarts();
         });
     }
   }
 
-  updateCart(cart: Cart) {
+  updateCart(cart: ICart) {
     this.cartService.showLoading(true);
     this.cartService.updateCart(cart)
       .subscribe(res => {

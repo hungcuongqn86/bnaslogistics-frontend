@@ -27,7 +27,7 @@
                       <input type="checkbox" id="kiem_hang" name="kiem_hang"
                              value="1"
                              [(ngModel)]="cartf.kiem_hang"
-
+                              (change)="updateCart(cartf)"
                              class="form-check-input">
                       <label for="kiem_hang" class="form-check-label">Kiểm hàng</label>
                     </div>
