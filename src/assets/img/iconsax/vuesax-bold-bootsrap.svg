@@ -1,0 +1,9 @@
+<svg id="vuesax_bold_bootsrap" data-name="vuesax/bold/bootsrap" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="bootsrap">
+    <path id="BG_133" data-name="BG 133" d="M0,0H24V24H0Z" fill="none" opacity="0.58"/>
+    <path id="Vector" d="M2.17,0H0V2.67H2.17A1.329,1.329,0,0,0,3.5,1.34,1.344,1.344,0,0,0,2.17,0Z" transform="translate(10.5 12.75)" fill="#101c36"/>
+    <path id="Vector-2" data-name="Vector" d="M2.17,0H0V2.67H2.17A1.329,1.329,0,0,0,3.5,1.34,1.345,1.345,0,0,0,2.17,0Z" transform="translate(10.5 8.58)" fill="#101c36"/>
+    <path id="Vector-3" data-name="Vector" d="M22,8a2.771,2.771,0,0,1-2.63-1.9A7.293,7.293,0,0,1,19,3.83V3a3,3,0,0,0-3-3H6A3,3,0,0,0,3,3v.84a7.056,7.056,0,0,1-.37,2.27A2.785,2.785,0,0,1,0,8.01v2a2.771,2.771,0,0,1,2.63,1.9A7.278,7.278,0,0,1,3,14.17V15a3,3,0,0,0,3,3H16a3,3,0,0,0,3-3v-.84a6.952,6.952,0,0,1,.37-2.26A2.785,2.785,0,0,1,22,10Zm-7.5,3.08a2.834,2.834,0,0,1-2.83,2.83H8.75A.755.755,0,0,1,8,13.16V4.83a.755.755,0,0,1,.75-.75h2.92A2.834,2.834,0,0,1,14.5,6.91a2.787,2.787,0,0,1-.92,2.08A2.841,2.841,0,0,1,14.5,11.08Z" transform="translate(1 3)" fill="#101c36"/>
+    <path id="Vector-4" data-name="Vector" d="M0,0H24V24H0Z" fill="none" opacity="0"/>
+  </g>
+</svg>

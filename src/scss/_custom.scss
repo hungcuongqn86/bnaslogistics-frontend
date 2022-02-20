@@ -88,12 +88,6 @@ ul.nav-tabs li.nav-item .nav-link {
   border-radius: 0;
 }
 
-thead th {
-  background: #a41c21;
-  color: #fff;
-  border: 1px solid #ffffff;
-}
-
 .col-lg-8 .table.table-sm thead th:nth-child(2) {
   width: 100px;
 }
@@ -166,14 +160,6 @@ pagination.pagination-sm.pull-right.ng-untouched {
 
 .table-bordered, .table-bordered td, .table-bordered th {
   border-top: 0;
-}
-
-.table thead th {
-  border-bottom: 0;
-  text-transform: uppercase;
-  padding: 10px;
-  font-size: 12px;
-  font-weight: 800;
 }
 
 html:not([dir=rtl]) .sidebar {
@@ -297,20 +283,119 @@ body.app:not(.header-fixed) {
     background-color: transparent;
     font-size: 24px;
     font-weight: bold;
-    span {
-      position: relative;
-      padding-left: 35px;
-      &::before {
-        content: '';
-        display: block;
-        width: 16px;
-        height: 32px;
-        background-color: #5585EE;
-        @include border-radius(6px);
-        position: absolute;
-        top: -1px;
-        left: 0;
+    .title-list{
+      span {
+        position: relative;
+        padding-left: 35px;
+        &::before {
+          content: '';
+          display: block;
+          width: 16px;
+          height: 32px;
+          background-color: #5585EE;
+          @include border-radius(6px);
+          position: absolute;
+          top: -1px;
+          left: 0;
+        }
       }
     }
   }
+  thead {
+    th {
+      font-size: 16px;
+      text-transform: uppercase;
+      border: 0;
+    }
+  }
+  table {
+    td {
+      border-color: $color-grey;
+      a {
+        color: $color-text;
+      }
+    }
+  }
+  .table-hover { 
+    tbody {
+      tr {
+        &:hover {
+          background-color: $color-grey;
+          @include border-radius(10px);
+        }
+      }
+    }
+  }
+  .badge{
+    font-size: 14px;
+    font-weight: 400;
+    padding: 7px 10px;
+    @include border-radius(5px);
+    &.badge-danger{
+      background-color: #FFE0D5;
+      color: #FF7643;
+    }
+    &.badge-info{
+      background-color: #D5E3FF;
+      color: #438EFF;
+    }
+    &.badge-warning{
+      background-color: #F6E5C5;
+      color: #C88500;
+    }
+    &.badge-success{
+      background-color: #EAFAE5;
+      color: #83BF6E;
+    }
+  }
+  .btn-violet {
+    color: $white;
+    background-color: $violet;
+  }
+  .btn.btn-sm {
+    @include border-radius(5px);
+  }
+  .card-footer{
+    background-color: #fff;
+  }
+  .page-item {
+    .page-link {
+      padding: 0;
+      height: 24px;
+      width: 24px;
+      line-height: 24px;
+      text-align: center;
+      border: 0;
+      margin: 0 2px;
+      background-color: #EBEBEB;
+      font-size: 16px;
+      border-radius: 5px !important;
+      color: #858585;
+    }
+    &.active {
+      .page-link {
+        background-color: #5585EE;
+        color: $white;
+      }
+    }
+  }
+}
+.entry-search{
+  .input-group-text,
+  .form-control{
+    border: 0;
+    background-color: $color-grey;
+  }
+  .btn {
+    padding: 0 10px;
+    span{
+      padding: 2px 7px 5px 6px;
+      background-color: $white;
+      @include border-radius(5px);
+    }
+  }
+}
+:focus {
+  -webkit-box-shadow: none !important;
+  outline: -webkit-focus-ring-color auto 0px !important;
 }
