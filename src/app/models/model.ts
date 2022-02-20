@@ -1,4 +1,14 @@
-import {IChinaWarehouse, IInspectionFee, IRole, IServiceFee, ISetting, ITransportFee, IUser, IVip} from "./interface";
+import {
+  ICart, ICartItem,
+  IChinaWarehouse,
+  IInspectionFee,
+  IRole,
+  IServiceFee,
+  ISetting,
+  ITransportFee,
+  IUser,
+  IVip
+} from "./interface";
 import {Partner} from "./Partner";
 import {Transaction} from "./Transaction";
 
@@ -8,6 +18,32 @@ export class Setting implements ISetting {
   key: string;
   value: string;
   title: string;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+
+  }
+}
+
+export class Cart implements ICart {
+  id: number;
+  name: string;
+  url: string;
+  cart_items: ICartItem[];
+  rate: number;
+  count_product: number;
+  count_link: number;
+  kiem_hang: boolean;
+  dong_go: boolean;
+  bao_hiem: boolean;
+  tien_hang: number;
+  phi_tam_tinh: number;
+  ship_khach: number;
+  vip: string;
+  vip_dc: number;
+  tong: number;
   is_deleted: number;
   created_at: string;
   updated_at: string;

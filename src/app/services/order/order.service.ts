@@ -9,7 +9,6 @@ import {Util} from '../../helper/lib';
 import {apiUrl, apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
 import {Cart} from '../../models/Cart';
-import {Shop} from '../../models/Shop';
 import {Package} from '../../models/Package';
 import {Complain} from '../../models/Complain';
 import {IUser} from "../../models/interface";
