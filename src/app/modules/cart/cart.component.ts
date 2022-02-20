@@ -24,7 +24,6 @@ export class CartComponent implements OnInit {
   order: OrderCreate;
   modalRef: BsModalRef;
   nv = false;
-  vipData = [0, 5, 10, 15, 20, 25, 30];
 
   constructor(public cartService: CartService, private authService: AuthService, private orderService: OrderService,
               public errorMessagesService: ErrorMessagesService,
@@ -58,57 +57,9 @@ export class CartComponent implements OnInit {
     this.cartService.showLoading(true);
     this.cartService.getCartWithShops()
       .subscribe(carts => {
-        this.carts = this.convertCartData(carts.data);
+        this.carts = carts.data;
         this.cartService.showLoading(false);
       });
-  }
-
-  private convertCartData(data: ICart[]) {
-    const vip = this.authService.user.vip ? this.authService.user.vip : '0';
-    const vipdc = this.vipData[vip];
-
-    let phi_dich_vu = this.authService.user.cost_percent;
-    const res: ICart[] = [];
-    for (let i = 0; i < data.length; i++) {
-      const cart: ICart = data[i];
-      const detailData = cart.cart_items;
-      cart.count_link = detailData.length;
-      cart.vip = vip;
-      cart.vip_dc = vipdc;
-      cart.count_product = 0;
-      cart.tien_hang = 0;
-      for (let j = 0; j < detailData.length; j++) {
-        cart.count_product = cart.count_product + detailData[j].amount;
-        const ndt = parseFloat(detailData[j].price);
-        const tigia = parseFloat(detailData[j].rate);
-        const soluong = detailData[j].amount;
-        const vnd = Math.ceil(ndt * tigia * soluong);
-        cart.tien_hang = cart.tien_hang + vnd;
-      }
-      // Phi dich vu theo tien hang
-      phi_dich_vu = this.getPhiDichVu(cart.tien_hang);
-      cart.phi_tam_tinh = Math.ceil((cart.tien_hang * phi_dich_vu) / 100);
-      cart.phi_tam_tinh = cart.phi_tam_tinh - Math.ceil((cart.phi_tam_tinh * cart.vip_dc) / 100);
-
-      cart.tong = cart.tien_hang + cart.phi_tam_tinh;
-      res.push(cart);
-    }
-    return res;
-  }
-
-  private getPhiDichVu(tienhang: number) {
-    let phi_dich_vu = this.authService.user.cost_percent;
-    // Phi dich vu theo tien hang
-    if (tienhang < 2000000) {
-      phi_dich_vu = 5;
-    }
-    if ((tienhang >= 2000000) && (tienhang <= 10000000)) {
-      phi_dich_vu = 2.5;
-    }
-    if (tienhang > 10000000) {
-      phi_dich_vu = 1;
-    }
-    return phi_dich_vu;
   }
 
   public ketDon(item: ICart) {
