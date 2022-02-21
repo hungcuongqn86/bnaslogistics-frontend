@@ -71,7 +71,6 @@ export interface Order {
   cart: Cart[];
   history: History[];
   user: IUser;
-  shop: Shop;
   package: Package[];
   baogia_content: string;
 }
@@ -171,7 +170,6 @@ export class OrderService {
       status: null,
       con_thieu: 0,
       thanh_toan: 0,
-      shop: null,
       history: null,
       package: null,
       baogia_content: null
