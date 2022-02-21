@@ -129,7 +129,11 @@
                   <td>{{cartf.phi_dat_hang_tt | currency:'VND':'' }}<sup>đ</sup></td>
                 </tr>
                 <tr *ngIf="!nv">
-                  <td>(III) Bảo hiểm ({{cartf.phi_bao_hiem_cs}}%)</td>
+                  <td>(III) Kiểm đếm ({{cartf.phi_kiem_dem_cs | currency:'VND':'' }}<sup>đ</sup>)</td>
+                  <td>{{cartf.phi_kiem_dem_tt | currency:'VND':'' }}<sup>đ</sup></td>
+                </tr>
+                <tr *ngIf="!nv">
+                  <td>(IV) Bảo hiểm ({{cartf.phi_bao_hiem_cs}}%)</td>
                   <td>{{cartf.phi_bao_hiem_tt | currency:'VND':'' }}<sup>đ</sup></td>
                 </tr>
                 <tr *ngIf="!nv">
@@ -137,8 +141,8 @@
                   <td></td>
                 </tr>
                 <tr *ngIf="!nv">
-                  <td>Tổng (I) + (II) + (III)</td>
-                  <td>{{(cartf.tien_hang + cartf.phi_dat_hang_tt + cartf.phi_bao_hiem_tt) | currency:'VND':'' }}
+                  <td>Tổng (I) + (II) + (III) + (IV)</td>
+                  <td>{{(cartf.tien_hang + cartf.phi_dat_hang_tt + cartf.phi_kiem_dem_tt + cartf.phi_bao_hiem_tt) | currency:'VND':'' }}
                     <sup>đ</sup></td>
                 </tr>
                 <tr>

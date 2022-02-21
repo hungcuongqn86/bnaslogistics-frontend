@@ -37,6 +37,8 @@ export interface ICart {
   phi_dat_hang_tt: number;
   phi_bao_hiem_cs: number;
   phi_bao_hiem_tt: number;
+  phi_kiem_dem_cs: number;
+  phi_kiem_dem_tt: number;
   ti_gia: number;
   status: number;
   created_at: string;
