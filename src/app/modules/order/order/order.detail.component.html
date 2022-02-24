@@ -27,7 +27,7 @@
                             <tab>
                                 <ng-template tabHeading><i class="icon-list"></i> &nbsp;Thông tin</ng-template>
                                 <app-order-detail-info
-                                        *ngIf="orderService.orderRe.package && orderService.orderRe.package.length"></app-order-detail-info>
+                                        *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length"></app-order-detail-info>
                             </tab>
                             <tab>
                                 <ng-template tabHeading><i class="icon-list"></i> &nbsp;Lịch sử</ng-template>

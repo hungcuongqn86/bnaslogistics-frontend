@@ -1,11 +1,12 @@
 import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit, TemplateRef} from '@angular/core';
-import {Order, OrderService, OrderStatus} from '../../../../services/order/order.service';
+import {OrderService} from '../../../../services/order/order.service';
 import {Package, PackageStatus} from '../../../../models/Package';
 import {Cart} from '../../../../models/Cart';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../../auth.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {OrderStatus} from "../../../../models/interface";
 
 @Component({
   selector: 'app-order-detail-info',
@@ -173,7 +174,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   }
 
   public selectPackage(item: Package, firt: number, col: string) {
-    this.col = col;
+    /*this.col = col;
     this.package = item;
     if (firt === 0) {
       let traShop = 0;
@@ -184,7 +185,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
         }
       }
       this.package.tra_shop = traShop;
-    }
+    }*/
   }
 
   public updatePackage(template: TemplateRef<any>) {

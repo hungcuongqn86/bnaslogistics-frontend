@@ -11,7 +11,7 @@ import {LoadingService} from '../../loading.service';
 import {Cart} from '../../models/Cart';
 import {Package} from '../../models/Package';
 import {Complain} from '../../models/Complain';
-import {ICart, IOrder, IUser} from "../../models/interface";
+import {ICart, IOrder, History} from "../../models/interface";
 import {Order} from "../../models/model";
 
 export interface OrderCreate {

@@ -1,10 +1,10 @@
 import {Cart} from './Cart';
-import {Order} from '../services/order/order.service';
+import {IOrder} from "./interface";
 
 export interface Complain {
     id: number;
     order_id: number;
-    order: Order;
+    order: IOrder;
     type: number;
     otype: { id: number; name: string; };
     money_request: number;

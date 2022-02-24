@@ -6,7 +6,7 @@
             </button>
         </div>
     </div>
-    <div class="card-body">
+    <div *ngIf="orderService.orderRe && orderService.orderRe.history" class="card-body">
         <table class="table table-bordered">
             <thead>
             <tr>

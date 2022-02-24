@@ -8,16 +8,16 @@
         <p><i class="fa fa-map-marker"></i> Trạng thái: <span
           class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
         </p>
-        <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.id}} <i class="fa fa-calendar"></i></p>
+        <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.code}} <i class="fa fa-calendar"></i></p>
         <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
         <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
-        <p *ngIf="orderService.orderRe.thanh_toan"><i class="fa fa-money"></i> Đã thanh
-          toán: {{orderService.orderRe.thanh_toan.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup>
+        <p *ngIf="orderService.orderRe.dat_coc"><i class="fa fa-money"></i> Đã thanh
+          toán: {{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup>
         <p><i class="fa fa-money"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
         </p>
         <p><i class="fa fa-edge"></i> Đặt tại website: <span
-          *ngIf="orderService.orderRe.cart && orderService.orderRe.cart[0]"
-          class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span>
+          *ngIf="orderService.orderRe.order_items && orderService.orderRe.order_items[0]"
+          class="badge badge-danger"> {{orderService.orderRe.order_items[0].site}}</span>
         </p>
         <p *ngIf="orderService.orderRe.handle"><i class="fa fa-user"></i> Chuyên
           viên: {{orderService.orderRe.handle.name}}</p>
@@ -67,9 +67,9 @@
     </div>
   </div>
 </div>
-<p class="text-right"><span>Tỉ giá: {{orderService.orderRe.rate}}</span></p>
-<p class="text-right"><span *ngIf="orderService.orderRe.is_kiemdem" class="badge badge-info">Kiểm đếm</span>
-  <span *ngIf="orderService.orderRe.is_donggo" class="badge badge-info">Đóng gỗ</span></p>
+<p class="text-right"><span>Tỉ giá: {{orderService.orderRe.ti_gia}}</span></p>
+<p class="text-right"><span *ngIf="orderService.orderRe.kiem_hang" class="badge badge-info">Kiểm đếm</span>
+  <span *ngIf="orderService.orderRe.dong_go" class="badge badge-info">Đóng gỗ</span></p>
 <form novalidate #form="ngForm" class="form-horizontal">
   <div class="card">
     <div class="card-body">
@@ -77,9 +77,6 @@
         <thead>
         <tr>
           <th>Mã KS</th>
-          <th>Tên shop</th>
-          <th>Ghi chú</th>
-          <th>Tổng link/Tg SL</th>
           <th>Ship khách</th>
           <th>Ship TT</th>
           <th>Trả shop</th>
@@ -96,10 +93,6 @@
         <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
           <tr>
             <td>{{item.id}}</td>
-            <td><p *ngIf="i===0">{{orderService.orderRe.shop.name}}</p></td>
-            <td></td>
-            <td><p *ngIf="i===0">
-              {{orderService.orderRe.count_link}}/{{orderService.orderRe.count_product}}</p></td>
             <td (click)="selectPackage(item,i,'ship_khach')">
               <input *ngIf="((package.id === item.id) && (col === 'ship_khach'))"
                      [(ngModel)]="package.ship_khach"
@@ -228,7 +221,7 @@
       </table>
     </div>
   </div>
-  <div *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0" class="card">
+  <div *ngIf="orderService.orderRe && orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0" class="card">
     <div class="card-body">
       <table class="table table-bordered table-sm">
         <thead>
@@ -246,7 +239,7 @@
         </tr>
         </thead>
         <tbody>
-        <ng-template ngFor let-item [ngForOf]="orderService.orderRe.cart" let-i="index">
+        <ng-template ngFor let-item [ngForOf]="orderService.orderRe.order_items" let-i="index">
           <tr class="{{item.amount? '' : 'yl-bg'}}">
             <td>{{i + 1}}</td>
             <td>
@@ -282,13 +275,13 @@
                 type="number">
               <div *ngIf="((cart.id !== item.id) || (col !== 'price'))">
                 <p *ngIf="orderService.orderRe">{{item.price | tempPrice:
-                  orderService.orderRe.rate :
+                  orderService.orderRe.ti_gia :
                   1: false}}<sup>đ</sup></p>
                 <p><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
               </div>
             </td>
             <td>
-              <p>{{item.price | tempPrice: orderService.orderRe.rate : item.amount: false}}<sup>đ</sup></p>
+              <p>{{item.price | tempPrice: orderService.orderRe.ti_gia : item.amount: false}}<sup>đ</sup></p>
               <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount : false}}</p>
             </td>
             <td>{{item.note}}</td>
@@ -317,7 +310,7 @@
           <td colspan="3" (click)="phiDichVuEdit(true)">
             <input
               *ngIf="editPhiDichVu"
-              [(ngModel)]="orderService.orderRe.phi_dich_vu"
+              [(ngModel)]="orderService.orderRe.phi_dat_hang_cs"
               #phi_dich_vu="ngModel" class="form-control"
               id="phi_dich_vu"
               name="phi_dich_vu"
@@ -327,13 +320,13 @@
               type="number">
 
             <p *ngIf="!editPhiDichVu">
-              {{orderService.orderRe.phi_dich_vu}}
+              {{orderService.orderRe.phi_dat_hang_cs}}
             </p>
           </td>
         </tr>
         <tr>
           <td colspan="7" class="text-right">Phí dịch vụ mua hàng thành tiền</td>
-          <td colspan="3">{{orderService.orderRe.phi_tam_tinh.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup></td>
+          <td colspan="3">{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup></td>
         </tr>
         <tr>
           <td colspan="7" class="text-right">Phí kiểm đếm</td>
@@ -341,7 +334,7 @@
               (click)="phiKiemDemEdit(true)">
             <input
               *ngIf="editPhiKiemDem"
-              [(ngModel)]="orderService.orderRe.phi_kiem_dem"
+              [(ngModel)]="orderService.orderRe.phi_kiem_dem_cs"
               #phi_kiem_dem="ngModel" class="form-control"
               id="phi_kiem_dem"
               name="phi_kiem_dem"
@@ -351,7 +344,7 @@
               type="number">
 
             <p *ngIf="!editPhiKiemDem">
-              {{orderService.orderRe.phi_kiem_dem | tempPrice: 1 : 1 : false}}
+              {{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice: 1 : 1 : false}}
               <sup>đ </sup> <!--<span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->
             </p>
           </td>

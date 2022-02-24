@@ -2,7 +2,7 @@ import {Component, Input, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../auth.service';
 import {FirebaseService} from '../../firebase.service';
-import {Order, OrderCreate, OrderService, OrderStatus} from '../../services/order/order.service';
+import {OrderService} from '../../services/order/order.service';
 import {BsModalRef} from "ngx-bootstrap/modal/bs-modal-ref.service";
 import {BsModalService} from "ngx-bootstrap/modal";
 
