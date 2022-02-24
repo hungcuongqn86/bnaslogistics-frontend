@@ -190,6 +190,7 @@ body.app:not(.header-fixed) {
   line-height: 46px;
   @include border-radius(10px);
 }
+.navbar-brand-full{padding-left: 15px;}
 .app-header {
   .nav-item {
     min-width: auto;
