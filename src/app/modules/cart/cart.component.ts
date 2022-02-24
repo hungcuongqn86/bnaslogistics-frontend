@@ -62,34 +62,19 @@ export class CartComponent implements OnInit {
   }
 
   public ketDon(item: ICart) {
-    /*this.cartService.showLoading(true);
-    this.order.shop_id = item.id;
-    this.order.rate = item.ti_gia;
-    this.order.count_product = item.count_product;
-    this.order.tien_hang = item.tien_hang;
-    this.order.phi_dich_vu = item.phi_dat_hang_tt;
-    this.order.phi_tam_tinh = item.phi_dat_hang_tt;
-
-    const cartids = [];
-    for (let j = 0; j < item.cart_items.length; j++) {
-      cartids.push(item.cart_items[j].id);
-    }
-    this.order.cart_ids = cartids.join(',');
-    this.cartService.updateMultipleCart(item.cart_items)
-      .subscribe(res => {
-        this.orderService.addOrder(this.order)
-          .subscribe(order => {
-            if (order.status) {
-              this.getCarts();
-            } else {
-              this.getCarts();
-              this.cartService.showLoading(false);
-              this.errorMessagesService.message = order.message;
-              this.errorMessagesService.messages = order.data;
-              this.errorMessagesService.errorModalShown = true;
-            }
-          });
-      });*/
+    this.cartService.showLoading(true);
+    this.orderService.addOrder(item)
+      .subscribe(order => {
+        if (order.status) {
+          this.getCarts();
+        } else {
+          this.getCarts();
+          this.cartService.showLoading(false);
+          this.errorMessagesService.message = order.message;
+          this.errorMessagesService.messages = order.data;
+          this.errorMessagesService.errorModalShown = true;
+        }
+      });
   }
 
   openModalDeleteCart(template: TemplateRef<any>, cartItem: ICartItem) {

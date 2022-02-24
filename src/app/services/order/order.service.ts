@@ -4,14 +4,14 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
-import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
+import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiUrl, apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
 import {Cart} from '../../models/Cart';
 import {Package} from '../../models/Package';
 import {Complain} from '../../models/Complain';
-import {IUser} from "../../models/interface";
+import {ICart, IUser} from "../../models/interface";
 
 export interface OrderCreate {
   id: number;
@@ -303,11 +303,11 @@ export class OrderService {
   updateOrder() {
     this.showLoading(true);
     if (this.order.id === null) {
-      this.addOrder(this.order).subscribe(
+      /*this.addOrder(this.order).subscribe(
         res => {
           this.updateSuccess(res);
         }
-      );
+      );*/
     } else {
       this.editOrder(this.order).subscribe(
         res => {
@@ -324,11 +324,11 @@ export class OrderService {
     this.showLoading(false);
   }
 
-  public addOrder(order: OrderCreate): Observable<any> {
+  public addOrder(cart: ICart): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
-    return this.http.post<OrderCreate>(url, order)
+    return this.http.post<OrderCreate>(url, {id: cart.id})
       .pipe(
-        catchError(this.handleError('addOrder', order))
+        catchError(this.handleError('addOrder', cart))
       );
   }
 
