@@ -1,19 +1,15 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Order} from '../services/order/order.service';
+import {IOrder} from "../models/interface";
 
 @Pipe({
   name: 'tempTongTienHang'
 })
 export class TempTongTienHangPipe implements PipeTransform {
-  transform(order: Order, output: number): string {
-    let vndTotal = order.tong;
-    const tigia = order.rate;
+  transform(order: IOrder, output: number): string {
+    let vndTotal = order.tien_hang + order.phi_dat_hang_tt + order.phi_kiem_dem_tt + order.phi_bao_hiem_tt;
+    const tigia = order.ti_gia;
     let shiptq = 0;
     let phivanps = 0;
-
-    if (order.phi_kiem_dem) {
-      vndTotal = vndTotal + order.phi_kiem_dem;
-    }
 
     if (order.package) {
       for (let i = 0; i < order.package.length; i++) {
@@ -33,7 +29,7 @@ export class TempTongTienHangPipe implements PipeTransform {
     }
 
     if (output === 2) {
-      let conThieu = vndTotal - order.thanh_toan;
+      let conThieu = vndTotal - order.dat_coc;
       conThieu = Math.round(conThieu * 100) / 100;
       return this.formatCurrency(conThieu.toString());
     }

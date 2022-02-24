@@ -11,7 +11,8 @@ import {LoadingService} from '../../loading.service';
 import {Cart} from '../../models/Cart';
 import {Package} from '../../models/Package';
 import {Complain} from '../../models/Complain';
-import {ICart, IUser} from "../../models/interface";
+import {ICart, IOrder, IUser} from "../../models/interface";
+import {Order} from "../../models/model";
 
 export interface OrderCreate {
   id: number;
@@ -32,59 +33,6 @@ export interface OrderCreate {
   updated_at: string;
 }
 
-export interface History {
-  id: number;
-  user_id: number;
-  user_name: string;
-  order_id: number;
-  type: number;
-  content: string;
-  is_deleted: number;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface Order {
-  id: number;
-  user_id: number;
-  shop_id: number;
-  status: number;
-  rate: number;
-  shipping: number;
-  hander: number;
-  content_pc: string;
-  handle: IUser;
-  count_product: number;
-  count_link: number;
-  tien_hang: number;
-  thanh_toan: number;
-  con_thieu: number;
-  phi_tam_tinh: number;
-  phi_dich_vu: number;
-  phi_kiem_dem: number;
-  is_kiemdem: number;
-  is_donggo: number;
-  tong: number;
-  is_deleted: number;
-  created_at: string;
-  updated_at: string;
-  cart: Cart[];
-  history: History[];
-  user: IUser;
-  package: Package[];
-  baogia_content: string;
-}
-
-export interface HistoryType {
-  id: number;
-  name: string;
-}
-
-export interface OrderStatus {
-  id: number;
-  name: string;
-}
-
 @Injectable()
 export class OrderService {
   static instance: OrderService;
@@ -101,7 +49,7 @@ export class OrderService {
     page: 1
   };
   public order: OrderCreate;
-  public orderRe: Order;
+  public orderRe: IOrder;
   public bang_phi: { tong_can_nang: number, tong_can_nang_qd: number, tong_tien_can: number };
 
   constructor(private loadingService: LoadingService,
@@ -144,36 +92,7 @@ export class OrderService {
   }
 
   order_renew() {
-    this.orderRe = {
-      id: null,
-      user_id: null,
-      shop_id: null,
-      rate: 1,
-      shipping: 0,
-      hander: 0,
-      content_pc: '',
-      handle: null,
-      is_deleted: 0,
-      created_at: '',
-      updated_at: '',
-      count_product: 0,
-      count_link: 0,
-      tien_hang: 0,
-      phi_tam_tinh: 0,
-      phi_dich_vu: 0,
-      phi_kiem_dem: 0,
-      is_donggo: 0,
-      is_kiemdem: 0,
-      tong: 0,
-      cart: null,
-      user: null,
-      status: null,
-      con_thieu: 0,
-      thanh_toan: 0,
-      history: null,
-      package: null,
-      baogia_content: null
-    };
+    this.orderRe = new Order();
   }
 
   getOrders(): Observable<any> {

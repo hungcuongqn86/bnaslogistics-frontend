@@ -1,16 +1,22 @@
 import {
-  ICart, ICartItem,
+  ICart,
+  ICartItem,
   IChinaWarehouse,
   IInspectionFee,
+  IOrder,
+  IOrderItem,
   IRole,
   IServiceFee,
-  ISetting, IShop,
+  ISetting,
+  IShop,
   ITransportFee,
   IUser,
   IVip
 } from "./interface";
 import {Partner} from "./Partner";
 import {Transaction} from "./Transaction";
+import {History} from "../services/order/order.service";
+import {Package} from "./Package";
 
 
 export class Setting implements ISetting {
@@ -172,5 +178,46 @@ export class User implements IUser {
 
   constructor() {
     this.is_deleted = 0;
+  }
+}
+
+export class Order implements IOrder {
+  id: number;
+  user_id: number;
+  code: string;
+  cart_id: number;
+  shipping: number;
+  ti_gia: number;
+  count_product: number;
+  kiem_hang: boolean;
+  dong_go: boolean;
+  bao_hiem: boolean;
+  tien_hang: number;
+  vip_id: number;
+  ck_dv: number;
+  ck_dv_tt: number;
+  phi_dat_hang_cs: number;
+  phi_dat_hang: number;
+  phi_dat_hang_tt: number;
+  phi_bao_hiem_cs: number;
+  phi_bao_hiem_tt: number;
+  phi_kiem_dem_cs: number;
+  phi_kiem_dem_tt: number;
+  tong: number;
+  dat_coc: number;
+  con_thieu: number;
+  dat_coc_content: string;
+  handle: IUser;
+  content_pc: string;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  cart: ICart[];
+  history: History[];
+  user: IUser;
+  package: Package[];
+  order_items: IOrderItem[];
+
+  constructor() {
   }
 }

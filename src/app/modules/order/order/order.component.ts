@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewEncapsulation, TemplateRef, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {Order, OrderCreate, OrderService, OrderStatus} from '../../../services/order/order.service';
+import {OrderCreate, OrderService} from '../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../../auth.service';
 import {environment} from '../../../../environments/environment';
-import {IUser} from "../../../models/interface";
+import {IOrder, IUser, OrderStatus} from "../../../models/interface";
 
 @Component({
   selector: 'app-order',
@@ -17,7 +17,7 @@ import {IUser} from "../../../models/interface";
 
 export class OrderComponent implements OnInit, OnDestroy {
   order: OrderCreate;
-  orders: Order[];
+  orders: IOrder[];
   counts: { status: number, total: number }[];
   status: OrderStatus[] = [];
   totalItems = 0;
@@ -111,7 +111,7 @@ export class OrderComponent implements OnInit, OnDestroy {
       });
   }
 
-  openModal(template: TemplateRef<any>, order: Order) {
+  openModal(template: TemplateRef<any>, order: IOrder) {
     this.inputPhanCong.id = order.id;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }

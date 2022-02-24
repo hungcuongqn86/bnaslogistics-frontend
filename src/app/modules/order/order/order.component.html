@@ -21,7 +21,7 @@
                 <tab *ngFor="let item of status">
                   <ng-template tabHeading>
                     <div (click)="selectTab(item.id.toString())">
-                      {{item.name}} 
+                      {{item.name}}
                       <!-- <span class="badge badge-pill badge-danger">{{ item.id | tempCountByStatus : counts}}</span> -->
                     </div>
                   </ng-template>
@@ -91,7 +91,7 @@
                   </div>
                   <div class="col-md-3">
                     <button type="submit" (click)="searchOrders()"
-                        class="btn btn-primary mr-2">
+                            class="btn btn-primary mr-2">
                       <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
                     </button>
                     <button class="btn btn-brand btn-vine" type="button"
@@ -119,14 +119,10 @@
                 <p *ngIf="item.shipping===1">
                   <span class="badge badge-warning"> Đơn ký gửi</span>
                 </p>
-                <p>
-                  ID: {{item.id}} <span *ngIf="status"
-                                        class="badge badge-danger">{{item.status | tempStatus: status}}</span>
+                <p>{{item.code}} <span *ngIf="status"
+                                       class="badge badge-danger">{{item.status | tempStatus: status}}</span>
                 </p>
                 <p>Ngày tạo: {{item.created_at | tempDate}}</p>
-                <p>
-                  <i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-info"> {{item.shop.name}}</span>
-                </p>
               </td>
               <td>
                 <p><i class="fa fa-user"></i> {{item.user.name}} <span>- {{item.user.phone_number}}</span></p>
@@ -136,8 +132,8 @@
                 <p><span class="pull-left">Tiền hàng</span> <span
                   class="money">{{item | tempTongTienHang: 1}}</span>
                   <sup> đ</sup></p>
-                <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.thanh_toan"
-                                                                   class="money">{{item.thanh_toan.toString() | tempPrice: 1 : 1: true}}</span>
+                <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.dat_coc"
+                                                                   class="money">{{item.dat_coc.toString() | tempPrice: 1 : 1: true}}</span>
                   <sup> đ</sup></p>
                 <p><span class="pull-left">Còn thiếu</span> <span
                   class="money">{{item | tempTongTienHang: 2}}</span>

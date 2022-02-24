@@ -1,5 +1,6 @@
 import {Partner} from "./Partner";
 import {Transaction} from "./Transaction";
+import {Package} from "./Package";
 
 export interface ISetting {
   id: number;
@@ -185,4 +186,92 @@ export interface IUser {
   is_deleted: number;
   created_at: string;
   updated_at: string;
+}
+
+export interface IOrderItem {
+  id: number;
+  user_id: number;
+  order_id: number;
+  amount: number;
+  begin_amount: number;
+  color: string;
+  colortxt: string;
+  count: number;
+  domain: string;
+  image: string;
+  method: string;
+  name: string;
+  note: string;
+  nv_note: string;
+  kho_note: string;
+  price: string;
+  price_arr: string;
+  pro_link: string;
+  pro_properties: string;
+  rate: string;
+  site: string;
+  size: string;
+  sizetxt: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface IOrder {
+  id: number;
+  user_id: number;
+  code: string;
+  cart_id: number;
+  shipping: number;
+  ti_gia: number;
+  count_product: number;
+  kiem_hang: boolean;
+  dong_go: boolean;
+  bao_hiem: boolean;
+  tien_hang: number;
+  vip_id: number;
+  ck_dv: number;
+  ck_dv_tt: number;
+  phi_dat_hang_cs: number;
+  phi_dat_hang: number;
+  phi_dat_hang_tt: number;
+  phi_bao_hiem_cs: number;
+  phi_bao_hiem_tt: number;
+  phi_kiem_dem_cs: number;
+  phi_kiem_dem_tt: number;
+  tong: number;
+  dat_coc: number;
+  con_thieu: number;
+  dat_coc_content: string;
+  handle: IUser;
+  content_pc: string;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  cart: ICart[];
+  history: History[];
+  user: IUser;
+  package: Package[];
+  order_items: IOrderItem[];
+}
+
+export interface History {
+  id: number;
+  user_id: number;
+  user_name: string;
+  order_id: number;
+  type: number;
+  content: string;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface HistoryType {
+  id: number;
+  name: string;
+}
+
+export interface OrderStatus {
+  id: number;
+  name: string;
 }
