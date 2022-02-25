@@ -8,7 +8,7 @@
         <p><i class="fa fa-map-marker"></i> Trạng thái: <span
           class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
         </p>
-        <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.code}} <i class="fa fa-calendar"></i></p>
+        <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.code}}</p>
         <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
         <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
         <p *ngIf="orderService.orderRe.dat_coc"><i class="fa fa-money"></i> Đã thanh
