@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {OrderStatus} from '../services/order/order.service';
+import {OrderStatus} from "../models/interface";
 
 @Pipe({
     name: 'tempStatus'

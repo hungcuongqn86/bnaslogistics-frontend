@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {HistoryType} from '../services/order/order.service';
+import {HistoryType} from "../models/interface";
 
 @Pipe({
     name: 'tempHistoryType'

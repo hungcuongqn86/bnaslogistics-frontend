@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OrderService, Order} from '../../../services/order/order.service';
+import {OrderService} from '../../../services/order/order.service';
 
 @Component({
     selector: 'app-myorder-detail',

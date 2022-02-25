@@ -1,10 +1,11 @@
 import {Component, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Order, OrderCreate, OrderService, OrderStatus} from '../../../services/order/order.service';
+import {OrderCreate, OrderService} from '../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
 import {email_nv} from '../../../const';
+import {IOrder, OrderStatus} from "../../../models/interface";
 
 @Component({
   selector: 'app-myorder',
@@ -15,7 +16,7 @@ import {email_nv} from '../../../const';
 
 export class MyorderComponent implements OnInit {
   order: OrderCreate;
-  orders: Order[];
+  orders: IOrder[];
   counts: { status: number, total: number }[];
   status: OrderStatus[];
   modalRef: BsModalRef;
@@ -30,8 +31,22 @@ export class MyorderComponent implements OnInit {
               private router: Router) {
     this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
     this.order = {
-      id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, vip: null, vip_dc: 0, is_deleted: 0, created_at: '', updated_at: '',
-      count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, phi_dich_vu: 0, tong: 0
+      id: null,
+      user_id: null,
+      shop_id: null,
+      cart_ids: null,
+      rate: 1,
+      vip: null,
+      vip_dc: 0,
+      is_deleted: 0,
+      created_at: '',
+      updated_at: '',
+      count_product: 0,
+      count_link: 0,
+      tien_hang: 0,
+      phi_tam_tinh: 0,
+      phi_dich_vu: 0,
+      tong: 0
     };
     this.arrDeposit = this.auth.user.deposit.split(',');
     this.counts = null;
@@ -92,9 +107,9 @@ export class MyorderComponent implements OnInit {
     this.searchOrders();
   }
 
-  openModal(template: TemplateRef<any>, order: Order) {
+  openModal(template: TemplateRef<any>, order: IOrder) {
     this.inputDatCoc.id = order.id;
-    this.inputDatCoc.tien_hang = order.tien_hang + order.phi_tam_tinh;
+    this.inputDatCoc.tien_hang = order.tien_hang + order.phi_kiem_dem_tt + order.phi_dat_hang_tt + order.phi_bao_hiem_tt;
     this.calTienCoc();
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
@@ -133,8 +148,8 @@ export class MyorderComponent implements OnInit {
     return n2.split('').reverse().join('');
   }
 
-  openDeleteModal(template: TemplateRef<any>, order: Order) {
-    this.order = {
+  openDeleteModal(template: TemplateRef<any>, order: IOrder) {
+    /*this.order = {
       id: order.id,
       user_id: order.user_id,
       shop_id: order.shop_id,
@@ -152,7 +167,7 @@ export class MyorderComponent implements OnInit {
       phi_dich_vu: order.phi_dich_vu,
       tong: order.tong
     };
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});*/
   }
 
   confirmDeleteOrder(): void {

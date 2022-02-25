@@ -58,25 +58,25 @@
                             </p>
                           </td>
                             <td>
-                                <p *ngFor="let cart of item.cart">
+                                <p *ngFor="let cart of item.order_items">
                                     <a target="_blank" href="{{cart.pro_link}}"><img style="max-width: 50px;" src="{{cart.image}}"></a>
                                     <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
                                     <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
                                     <span> - Số lượng: {{cart.amount}}</span>
-                                    <span *ngIf="!nv"> - Đơn giá: {{cart.price | tempPrice: item.rate : 1 : false}}
+                                    <span *ngIf="!nv"> - Đơn giá: {{cart.price | tempPrice: item.ti_gia : 1 : false}}
                                         <sup>đ</sup></span>
-                                    <span *ngIf="!nv"> - Thành tiền: {{cart.price | tempPrice: item.rate : cart.amount: false}}<sup>đ</sup></span>
+                                    <span *ngIf="!nv"> - Thành tiền: {{cart.price | tempPrice: item.ti_gia : cart.amount: false}}<sup>đ</sup></span>
                                 </p>
                             </td>
                             <td class="text-right">
                                 <p *ngIf="!nv"><span class="pull-left">Tiền hàng</span> <span
                                         class="money">{{item | tempTongTienHang: 1}}</span>
                                     <sup> đ</sup></p>
-                                <p *ngIf="!nv"><span class="pull-left">Thanh toán</span> <span *ngIf="item.thanh_toan"
-                                                                                   class="money">{{item.thanh_toan.toString() | tempPrice: 1 : 1 : false}}</span>
+                                <p *ngIf="!nv"><span class="pull-left">Thanh toán</span> <span *ngIf="item.dat_coc"
+                                                                                   class="money">{{item.dat_coc.toString() | tempPrice: 1 : 1 : false}}</span>
                                     <sup> đ</sup></p>
                                 <p *ngIf="!nv"><span class="pull-left">Còn thiếu</span> <span
-                                        *ngIf="item.tien_hang && item.thanh_toan"
+                                        *ngIf="item.tien_hang && item.dat_coc"
                                         class="money">{{item | tempTongTienHang: 2}}</span>
                                     <sup> đ</sup></p>
                             </td>

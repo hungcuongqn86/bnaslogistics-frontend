@@ -67,7 +67,8 @@ export class BillDetailComponent implements OnInit, OnDestroy {
       for (let j = 0; j < this.bill.package[i].order.cart.length; j++) {
         const checkExit = this.carts.findIndex(x => x.id === this.bill.package[i].order.cart[j].id);
         if (checkExit < 0) {
-          this.carts.push(this.bill.package[i].order.cart[j]);
+          // this.carts.push(this.bill.package[i].order.cart[j]);
+          // Todo
         }
       }
     }
