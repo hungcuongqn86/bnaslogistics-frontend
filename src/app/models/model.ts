@@ -11,11 +11,11 @@ import {
   IShop,
   ITransportFee,
   IUser,
-  IVip
+  IVip,
+  History
 } from "./interface";
 import {Partner} from "./Partner";
 import {Transaction} from "./Transaction";
-import {History} from "../services/order/order.service";
 import {Package} from "./Package";
 
 

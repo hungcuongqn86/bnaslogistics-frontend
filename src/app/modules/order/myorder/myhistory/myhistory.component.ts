@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {OrderService, HistoryType} from '../../../../services/order/order.service';
+import {OrderService} from '../../../../services/order/order.service';
+import {HistoryType} from "../../../../models/interface";
 
 @Component({
     selector: 'app-order-detail-myhistory',

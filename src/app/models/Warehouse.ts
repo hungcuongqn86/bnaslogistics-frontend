@@ -1,5 +1,4 @@
-import {Order} from '../services/order/order.service';
-import {IUser} from './interface';
+import {IOrder, IUser} from './interface';
 import {Package} from './Package';
 
 export interface WarehouseWait {
@@ -13,7 +12,7 @@ export interface WarehouseWait {
     tien_xuat_kho: number;
     tien_thieu_xuat_kho: number;
     rate: number;
-    order: Order[];
+    order: IOrder[];
     is_deleted: number;
     created_at: string;
     updated_at: string;

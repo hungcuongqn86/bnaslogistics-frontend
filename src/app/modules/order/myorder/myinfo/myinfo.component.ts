@@ -1,10 +1,11 @@
 import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit} from '@angular/core';
-import {OrderService, OrderStatus} from '../../../../services/order/order.service';
+import {OrderService} from '../../../../services/order/order.service';
 import {PackageStatus} from '../../../../models/Package';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../../auth.service';
 import {email_nv} from '../../../../const';
+import {OrderStatus} from "../../../../models/interface";
 
 @Component({
   selector: 'app-myorder-detail-info',
@@ -103,8 +104,8 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
     this.orderService.showLoading(true);
     const input = {
       id: this.orderService.orderRe.id,
-      is_kiemdem: this.orderService.orderRe.is_kiemdem ? 1 : 0,
-      is_donggo: this.orderService.orderRe.is_donggo ? 1 : 0
+      is_kiemdem: this.orderService.orderRe.kiem_hang ? 1 : 0,
+      is_donggo: this.orderService.orderRe.dong_go ? 1 : 0
     };
     this.orderService.editOption(input)
       .subscribe(res => {

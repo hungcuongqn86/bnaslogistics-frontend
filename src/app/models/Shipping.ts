@@ -1,4 +1,4 @@
-import {Order} from '../services/order/order.service';
+import {IOrder} from "./interface";
 
 export interface ShippingStatus {
   id: number;
@@ -9,7 +9,7 @@ export interface Shipping {
   id: number;
   code: string;
   order_id: number;
-  order: Order;
+  order: IOrder;
   package_count: number;
   content: string;
   user_id: number;

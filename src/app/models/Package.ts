@@ -1,9 +1,9 @@
-import {Order} from '../services/order/order.service';
+import {IOrder} from "./interface";
 
 export interface Package {
     id: number;
     order_id: number;
-    order: Order;
+    order: IOrder;
     package_code: string;
     contract_code: string;
     ship_khach: number;

@@ -1,5 +1,4 @@
-import {Cart} from './Cart';
-import {IOrder} from "./interface";
+import {IOrder, IOrderItem} from "./interface";
 
 export interface Complain {
     id: number;
@@ -21,7 +20,7 @@ export interface ComplainProducts {
     id: number;
     complain_id: number;
     cart_id: number;
-    cart: Cart;
+    orderItem: IOrderItem;
     media: { id: number; url: string }[];
     note: string;
     is_deleted: number;
