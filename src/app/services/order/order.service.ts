@@ -308,7 +308,7 @@ export class OrderService {
   }
 
   public editOrderItem(item: IOrderItem, dirty: string) {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}item_update/${item.id}`;
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}order_item/update/${item.id}`;
     return this.http.post<any>(url, {dirty: dirty, value: item[dirty]})
       .pipe(
         catchError(this.handleError('editOrderItem', item))
