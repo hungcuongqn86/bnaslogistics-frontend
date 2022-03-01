@@ -256,7 +256,7 @@
                 #amount="ngModel" class="form-control"
                 id="amount"
                 name="amount"
-                (change)="editOrderConfirm()"
+                (change)="editOrderConfirm(col)"
                 (blur)="hideInput()"
                 appAutofocus
                 type="number">
@@ -269,7 +269,7 @@
                 #price="ngModel" class="form-control"
                 id="price"
                 name="price"
-                (change)="editOrderConfirm()"
+                (change)="editOrderConfirm(col)"
                 (blur)="hideInput()"
                 appAutofocus
                 type="number">
@@ -292,7 +292,7 @@
                       #nv_note="ngModel"
                       id="nv_note"
                       name="nv_note"
-                      (change)="editOrderConfirm()"
+                      (change)="editOrderConfirm(col)"
                       (blur)="hideInput()"
                       appAutofocus
                       rows="3"

@@ -6,7 +6,7 @@ import {catchError} from 'rxjs/operators';
 
 import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
-import {apiUrl, apiV1Url} from '../../const';
+import {apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
 import {Package} from '../../models/Package';
 import {Complain} from '../../models/Complain';
@@ -307,9 +307,9 @@ export class OrderService {
       );
   }
 
-  public editOrderItem(item: IOrderItem) {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}item_update`;
-    return this.http.post<any>(url, item)
+  public editOrderItem(item: IOrderItem, dirty: string) {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}item_update/${item.id}`;
+    return this.http.post<any>(url, {dirty: dirty, value: item[dirty]})
       .pipe(
         catchError(this.handleError('editOrderItem', item))
       );
