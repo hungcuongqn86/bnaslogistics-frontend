@@ -151,11 +151,6 @@ pagination.pagination-sm.pull-right.ng-untouched {
   border-radius: 0
 }
 
-
-.table-bordered, .table-bordered td, .table-bordered th {
-  border-top: 0;
-}
-
 html:not([dir=rtl]) .sidebar {
   margin-left: -220px;
 }
@@ -342,7 +337,7 @@ body.app:not(.header-fixed) {
       }
     }
   }
-  .table-hover { 
+  .table-hover {
     tbody {
       tr {
         &:hover {

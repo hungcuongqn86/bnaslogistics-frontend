@@ -8,10 +8,9 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiUrl, apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
-import {Cart} from '../../models/Cart';
 import {Package} from '../../models/Package';
 import {Complain} from '../../models/Complain';
-import {ICart, IOrder, History} from "../../models/interface";
+import {History, ICart, IOrder, IOrderItem} from "../../models/interface";
 import {Order} from "../../models/model";
 
 export interface OrderCreate {
@@ -308,11 +307,11 @@ export class OrderService {
       );
   }
 
-  public editCart(item: Cart) {
-    const url = Util.getUri(apiUrl) + `cart/update`;
+  public editOrderItem(item: IOrderItem) {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}item_update`;
     return this.http.post<any>(url, item)
       .pipe(
-        catchError(this.handleError('editCart', item))
+        catchError(this.handleError('editOrderItem', item))
       );
   }
 

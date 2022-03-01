@@ -19,7 +19,8 @@
           *ngIf="orderService.orderRe.order_items && orderService.orderRe.order_items[0]"
           class="badge badge-danger"> {{orderService.orderRe.order_items[0].site}}</span>
         </p>
-        <p *ngIf="orderService.orderRe.handle"><i class="fa fa-user"></i> Phụ trách: {{orderService.orderRe.handle.name}}</p>
+        <p *ngIf="orderService.orderRe.handle"><i class="fa fa-user"></i> Phụ
+          trách: {{orderService.orderRe.handle.name}}</p>
       </div>
     </div>
   </div>
@@ -220,13 +221,14 @@
       </table>
     </div>
   </div>
-  <div *ngIf="orderService.orderRe && orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0" class="card">
+  <div *ngIf="orderService.orderRe && orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0"
+       class="card">
     <div class="card-body">
       <table class="table table-bordered table-sm">
         <thead>
         <tr>
-          <th>STT</th>
-          <th>Mã, link</th>
+          <th style="text-align: center;">STT</th>
+          <th>Link</th>
           <th>Hình ảnh</th>
           <th>Màu sắc</th>
           <th>Size/mẫu</th>
@@ -240,39 +242,38 @@
         <tbody>
         <ng-template ngFor let-item [ngForOf]="orderService.orderRe.order_items" let-i="index">
           <tr class="{{item.amount? '' : 'yl-bg'}}">
-            <td>{{i + 1}}</td>
+            <td style="text-align: center;">{{i + 1}}</td>
             <td>
-              <p><span class="badge badge-warning">{{item.id}}</span></p>
               <p><a target="_blank" rel="noopener noreferrer" href="{{item.pro_link}}">Xem</a></p>
             </td>
             <td><img src="{{item.image}}"></td>
             <td><p *ngIf="item.colortxt" class="pull-left m-1">{{item.colortxt}}</p></td>
             <td><p *ngIf="item.sizetxt" class="pull-left m-1">{{item.sizetxt}}</p></td>
-            <td (click)="selectCart(item,'amount')">
+            <td (click)="selectOrderItem(item,'amount')">
               <input
-                *ngIf="((cart.id === item.id) && (col === 'amount'))"
-                [(ngModel)]="cart.amount"
+                *ngIf="((orderItem.id === item.id) && (col === 'amount'))"
+                [(ngModel)]="orderItem.amount"
                 #amount="ngModel" class="form-control"
                 id="amount"
                 name="amount"
-                (change)="editCartConfirm()"
+                (change)="editOrderConfirm()"
                 (blur)="hideInput()"
                 appAutofocus
                 type="number">
-              <p *ngIf="((cart.id !== item.id) || (col !== 'amount'))">{{item.amount}}</p>
+              <p *ngIf="((orderItem.id !== item.id) || (col !== 'amount'))">{{item.amount}}</p>
             </td>
-            <td (click)="selectCart(item,'price')">
+            <td (click)="selectOrderItem(item,'price')">
               <input
-                *ngIf="((cart.id === item.id) && (col === 'price'))"
-                [(ngModel)]="cart.price"
+                *ngIf="((orderItem.id === item.id) && (col === 'price'))"
+                [(ngModel)]="orderItem.price"
                 #price="ngModel" class="form-control"
                 id="price"
                 name="price"
-                (change)="editCartConfirm()"
+                (change)="editOrderConfirm()"
                 (blur)="hideInput()"
                 appAutofocus
                 type="number">
-              <div *ngIf="((cart.id !== item.id) || (col !== 'price'))">
+              <div *ngIf="((orderItem.id !== item.id) || (col !== 'price'))">
                 <p *ngIf="orderService.orderRe">{{item.price | tempPrice:
                   orderService.orderRe.ti_gia :
                   1: false}}<sup>đ</sup></p>
@@ -284,19 +285,19 @@
               <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount : false}}</p>
             </td>
             <td>{{item.note}}</td>
-            <td (click)="selectCart(item,'nv_note')">
+            <td (click)="selectOrderItem(item,'nv_note')">
                     <textarea
-                      *ngIf="((cart.id === item.id) && (col === 'nv_note'))"
-                      [(ngModel)]="cart.nv_note"
+                      *ngIf="((orderItem.id === item.id) && (col === 'nv_note'))"
+                      [(ngModel)]="orderItem.nv_note"
                       #nv_note="ngModel"
                       id="nv_note"
                       name="nv_note"
-                      (change)="editCartConfirm()"
+                      (change)="editOrderConfirm()"
                       (blur)="hideInput()"
                       appAutofocus
                       rows="3"
                       class="form-control"></textarea>
-              <p *ngIf="((cart.id !== item.id) || (col !== 'nv_note'))">{{item.nv_note}}</p>
+              <p *ngIf="((orderItem.id !== item.id) || (col !== 'nv_note'))">{{item.nv_note}}</p>
             </td>
           </tr>
         </ng-template>
@@ -325,7 +326,8 @@
         </tr>
         <tr>
           <td colspan="7" class="text-right">Phí dịch vụ mua hàng thành tiền</td>
-          <td colspan="3">{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup></td>
+          <td colspan="3">{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup>
+          </td>
         </tr>
         <tr>
           <td colspan="7" class="text-right">Phí kiểm đếm</td>

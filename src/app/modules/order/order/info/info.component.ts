@@ -1,12 +1,12 @@
-import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit, TemplateRef} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {OrderService} from '../../../../services/order/order.service';
 import {Package, PackageStatus} from '../../../../models/Package';
-import {Cart} from '../../../../models/Cart';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../../auth.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {OrderStatus} from "../../../../models/interface";
+import {IOrderItem, OrderStatus} from "../../../../models/interface";
+import {OrderItem} from "../../../../models/model";
 
 @Component({
   selector: 'app-order-detail-info',
@@ -19,7 +19,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   status: OrderStatus[];
   pkStatus: PackageStatus[];
   package: Package;
-  cart: Cart;
+  orderItem: IOrderItem;
   comment: Comment;
   comments: Comment[];
   errorMessage: string[] = [];
@@ -50,35 +50,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   }
 
   reNewCart() {
-    this.cart = {
-      id: null,
-      amount: null,
-      begin_amount: null,
-      color: null,
-      colortxt: null,
-      count: null,
-      created_at: null,
-      domain: null,
-      image: null,
-      is_deleted: null,
-      kho_note: null,
-      method: null,
-      name: null,
-      note: null,
-      nv_note: null,
-      price: null,
-      price_arr: null,
-      pro_link: null,
-      pro_properties: null,
-      rate: null,
-      shop_id: null,
-      site: null,
-      status: null,
-      size: null,
-      sizetxt: null,
-      updated_at: null,
-      user_id: null
-    };
+    this.orderItem = new OrderItem();
   }
 
   reNewPackage() {
@@ -207,10 +179,10 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     this.reNewCart();
   }
 
-  public selectCart(item: Cart, col: string) {
+  public selectOrderItem(item: IOrderItem, col: string) {
     if (!this.authService.hasRole('employees') || (col === 'nv_note')) {
       this.col = col;
-      this.cart = item;
+      this.orderItem = item;
     }
   }
 
@@ -241,9 +213,9 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       });
   }
 
-  public editCartConfirm(): void {
+  public editOrderConfirm(): void {
     this.orderService.showLoading(true);
-    this.orderService.editCart(this.cart)
+    this.orderService.editOrderItem(this.orderItem)
       .subscribe(res => {
         this.getOrder();
       });

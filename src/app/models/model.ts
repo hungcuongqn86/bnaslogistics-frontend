@@ -181,6 +181,37 @@ export class User implements IUser {
   }
 }
 
+export class OrderItem implements IOrderItem {
+  id: number;
+  user_id: number;
+  order_id: number;
+  amount: number;
+  begin_amount: number;
+  color: string;
+  colortxt: string;
+  count: number;
+  domain: string;
+  image: string;
+  method: string;
+  name: string;
+  note: string;
+  nv_note: string;
+  kho_note: string;
+  price: string;
+  price_arr: string;
+  pro_link: string;
+  pro_properties: string;
+  rate: string;
+  site: string;
+  size: string;
+  sizetxt: string;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+  }
+}
+
 export class Order implements IOrder {
   id: number;
   user_id: number;
