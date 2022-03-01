@@ -19,8 +19,7 @@
           *ngIf="orderService.orderRe.order_items && orderService.orderRe.order_items[0]"
           class="badge badge-danger"> {{orderService.orderRe.order_items[0].site}}</span>
         </p>
-        <p *ngIf="orderService.orderRe.handle"><i class="fa fa-user"></i> Chuyên
-          viên: {{orderService.orderRe.handle.name}}</p>
+        <p *ngIf="orderService.orderRe.handle"><i class="fa fa-user"></i> Phụ trách: {{orderService.orderRe.handle.name}}</p>
       </div>
     </div>
   </div>

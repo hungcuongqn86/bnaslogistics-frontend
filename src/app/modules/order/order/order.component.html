@@ -109,7 +109,7 @@
               <th>Đơn hàng</th>
               <th>Khách hàng</th>
               <th style="width: 25%; min-width: 250px;">Tiền hàng</th>
-              <th style="width: 10%; min-width: 150px;">Thực hiện</th>
+              <th style="width: 10%; min-width: 150px;">Phụ trách</th>
               <th style="width: 7%; min-width: 80px;">Tác vụ</th>
             </tr>
             </thead>
@@ -119,13 +119,13 @@
                 <p *ngIf="item.shipping===1">
                   <span class="badge badge-warning"> Đơn ký gửi</span>
                 </p>
-                <p>{{item.code}} <span *ngIf="status"
-                                       class="badge badge-danger">{{item.status | tempStatus: status}}</span>
-                </p>
+                <p>{{item.code}}</p>
+                <p><span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span></p>
                 <p>Ngày tạo: {{item.created_at | tempDate}}</p>
               </td>
               <td>
-                <p><i class="fa fa-user"></i> {{item.user.name}} <span>- {{item.user.phone_number}}</span></p>
+                <p><i class="fa fa-user"></i> {{item.user.code}} <span>- {{item.user.name}}</span></p>
+                <p><i class="fa fa-phone"></i> <span> {{item.user.phone_number}}</span></p>
                 <p><i class="fa fa-envelope"></i> {{item.user.email}}</p>
               </td>
               <td class="text-right">

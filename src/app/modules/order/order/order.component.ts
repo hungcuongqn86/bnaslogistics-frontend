@@ -45,8 +45,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   public editOrder(id) {
-    const win = window.open(`./order/list/detail/${id}`, '_blank');
-    win.focus();
+    this.router.navigate([`/order/list/detail/${id}`]);
   }
 
   public searchOrders() {
