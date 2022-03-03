@@ -121,8 +121,7 @@ export class DefaultLayoutComponent {
       if (this.navItems[i].url === '/order/myorder') {
         this.navItems[i].children = [{
           name: 'Tất cả',
-          url: '/order/myorder/0/od',
-          icon: 'fa fa-chevron-right'
+          url: '/order/myorder/0/od'
         }];
         for (let istatus = 0; istatus < this.status.length; istatus++) {
           let name = this.status[istatus].name;
@@ -134,7 +133,6 @@ export class DefaultLayoutComponent {
           this.navItems[i].children.push({
             name: name,
             url: `/order/myorder/${this.status[istatus].id}/${this.status[istatus].type}`,
-            icon: 'fa fa-chevron-right',
             status: this.status[istatus].type + '_' + this.status[istatus].id,
             view: this.status[istatus].name
           });

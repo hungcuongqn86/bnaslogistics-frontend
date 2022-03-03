@@ -1,39 +1,56 @@
-<!-- Breadcrumb -->
-<ol class="breadcrumb">
-    <app-breadcrumb></app-breadcrumb>
-    <!-- Breadcrumb Menu-->
-    <li class="breadcrumb-menu d-md-down-none">
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-
-        </div>
-    </li>
-</ol>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card entry-list">
+                <div class="card-header">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-12 col-md-12">
+                            <div class="title-list">
+                                <span>Danh sách đơn hàng</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form novalidate (ngSubmit)="searchOrders()" #form="ngForm">
-                        <div class="form-group row">
-                            <div class="col-md-3">
-                                <input [(ngModel)]="orderService.search.code" type="text" id="key" name="key"
-                                       class="form-control"
-                                       placeholder="Tìm kiếm mã đơn hàng">
+                        <div class="form-group space-7 row filter-advanced">
+                            <div class="col-md-5">
+                                <div class="row space-7">
+                                    <div class="col-md">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                  <i class="iconsax isax-document-text-1"></i>
+                                                </div>
+                                            </div>
+                                            <input [(ngModel)]="orderService.search.code" type="text" id="key" name="key"
+                                               class="form-control"
+                                               placeholder="Mã đơn hàng">
+                                        </div>
+                                    </div>
+                                    <div class="col-md">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                  <i class="iconsax isax-document-forward"></i>
+                                                </div>
+                                            </div>
+                                            <input [(ngModel)]="orderService.search.package_code" type="text" id="package_code"
+                                               name="package_code"
+                                               class="form-control"
+                                               placeholder="Mã vận đơn">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <input [(ngModel)]="orderService.search.package_code" type="text" id="package_code"
-                                       name="package_code"
-                                       class="form-control"
-                                       placeholder="Tìm kiếm mã vận đơn">
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" (click)="searchOrders()"
-                                        class="btn btn-primary">Tìm kiếm
+                            <div class="col-md-1">
+                                <button type="button" (click)="searchOrders()" class="btn btn-primary">
+                                    <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <table class="table table-bordered table-data">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th width="20%">Đơn hàng</th>

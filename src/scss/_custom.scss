@@ -186,7 +186,17 @@ body.app:not(.header-fixed) {
   @include border-radius(10px);
 }
 .navbar-brand-full{padding-left: 15px;}
+.header-fixed {
+  .app-body{
+    margin-top: 76px;
+  }
+}
 .app-header {
+  height: auto;
+  padding: 10px 0;
+  .navbar-nav {
+    padding-right: 15px;
+  }
   .nav-item {
     min-width: auto;
   }
@@ -303,6 +313,9 @@ body.app:not(.header-fixed) {
     }
     .tab-content{
       border: 0;
+      .tab-pane {
+        padding: 0;
+      }
     }
     .title-list{
       span {
