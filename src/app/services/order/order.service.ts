@@ -218,30 +218,6 @@ export class OrderService {
       );
   }
 
-  updateOrder() {
-    this.showLoading(true);
-    if (this.order.id === null) {
-      /*this.addOrder(this.order).subscribe(
-        res => {
-          this.updateSuccess(res);
-        }
-      );*/
-    } else {
-      this.editOrder(this.order).subscribe(
-        res => {
-          this.updateSuccess(res);
-        }
-      );
-    }
-  }
-
-  private updateSuccess(res: any) {
-    if (res.status) {
-      // this.router.navigate(['/owner']);
-    }
-    this.showLoading(false);
-  }
-
   public addOrder(cart: ICart): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
     return this.http.post<OrderCreate>(url, {id: cart.id})
@@ -250,19 +226,11 @@ export class OrderService {
       );
   }
 
-  public editOrder(order: any): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-    return this.http.post<OrderCreate>(url, order)
+  public editOrder(order: any, dirty: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}update/${order.id}`;
+    return this.http.post<OrderCreate>(url, {dirty: dirty, value: order[dirty]})
       .pipe(
         catchError(this.handleError('editOrder', order))
-      );
-  }
-
-  public editOption(order: any): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}option`;
-    return this.http.post<OrderCreate>(url, order)
-      .pipe(
-        catchError(this.handleError('editOption', order))
       );
   }
 
@@ -282,8 +250,7 @@ export class OrderService {
       );
   }
 
-
-  getPkStatus(): Observable<any> {
+  public getPkStatus(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/status`;
     return this.http.get<any>(url)
       .pipe(
