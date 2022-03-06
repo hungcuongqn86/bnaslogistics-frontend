@@ -1,11 +1,12 @@
 import {Component, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OrderCreate, OrderService} from '../../../services/order/order.service';
+import {OrderService} from '../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
 import {email_nv} from '../../../const';
 import {IOrder, OrderStatus} from "../../../models/interface";
+import {Order} from "../../../models/model";
 
 @Component({
   selector: 'app-myorder',
@@ -15,7 +16,7 @@ import {IOrder, OrderStatus} from "../../../models/interface";
 })
 
 export class MyorderComponent implements OnInit {
-  order: OrderCreate;
+  order: IOrder;
   orders: IOrder[];
   counts: { status: number, total: number }[];
   status: OrderStatus[];
@@ -30,24 +31,7 @@ export class MyorderComponent implements OnInit {
               public auth: AuthService,
               private router: Router) {
     this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
-    this.order = {
-      id: null,
-      user_id: null,
-      shop_id: null,
-      cart_ids: null,
-      rate: 1,
-      vip: null,
-      vip_dc: 0,
-      is_deleted: 0,
-      created_at: '',
-      updated_at: '',
-      count_product: 0,
-      count_link: 0,
-      tien_hang: 0,
-      phi_tam_tinh: 0,
-      phi_dich_vu: 0,
-      tong: 0
-    };
+    this.order = new Order();
     this.arrDeposit = this.auth.user.deposit.split(',');
     this.counts = null;
     this.route.params.subscribe(params => {
@@ -60,7 +44,7 @@ export class MyorderComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getStatus();
+    this.getStatus();
   }
 
   pageChanged(event: any): void {
@@ -149,31 +133,14 @@ export class MyorderComponent implements OnInit {
   }
 
   openDeleteModal(template: TemplateRef<any>, order: IOrder) {
-    /*this.order = {
-      id: order.id,
-      user_id: order.user_id,
-      shop_id: order.shop_id,
-      cart_ids: null,
-      rate: order.rate,
-      vip: null,
-      vip_dc: 0,
-      is_deleted: order.is_deleted,
-      created_at: order.created_at,
-      updated_at: order.updated_at,
-      count_product: order.count_product,
-      count_link: order.count_link,
-      tien_hang: order.tien_hang,
-      phi_tam_tinh: order.phi_tam_tinh,
-      phi_dich_vu: order.phi_dich_vu,
-      tong: order.tong
-    };
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});*/
+    this.order = order;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
   confirmDeleteOrder(): void {
     if (this.order) {
-      this.order.is_deleted = 1;
-      this.orderService.editOrder(this.order)
+      this.order.status = 6;
+      this.orderService.editOrder(this.order, 'status')
         .subscribe(res => {
           if (res.status) {
             this.searchOrders();

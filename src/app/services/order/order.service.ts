@@ -13,25 +13,6 @@ import {Complain} from '../../models/Complain';
 import {History, ICart, IOrder, IOrderItem} from "../../models/interface";
 import {Order} from "../../models/model";
 
-export interface OrderCreate {
-  id: number;
-  user_id: number;
-  shop_id: number;
-  cart_ids: string;
-  rate: number;
-  count_product: number;
-  count_link: number;
-  tien_hang: number;
-  phi_tam_tinh: number;
-  phi_dich_vu: number;
-  tong: number;
-  vip: string;
-  vip_dc: number;
-  is_deleted: number;
-  created_at: string;
-  updated_at: string;
-}
-
 @Injectable()
 export class OrderService {
   static instance: OrderService;
@@ -47,7 +28,7 @@ export class OrderService {
     limit: 20,
     page: 1
   };
-  public order: OrderCreate;
+  public order: IOrder;
   public orderRe: IOrder;
   public bang_phi: { tong_can_nang: number, tong_can_nang_qd: number, tong_tien_can: number };
 
@@ -70,24 +51,7 @@ export class OrderService {
   }
 
   reset() {
-    this.order = {
-      id: null,
-      user_id: null,
-      shop_id: null,
-      cart_ids: null,
-      rate: 1,
-      vip: null,
-      vip_dc: 0,
-      is_deleted: 0,
-      created_at: '',
-      updated_at: '',
-      count_product: 0,
-      count_link: 0,
-      tien_hang: 0,
-      phi_tam_tinh: 0,
-      phi_dich_vu: 0,
-      tong: 0
-    };
+    this.order = new Order();
   }
 
   order_renew() {
@@ -220,15 +184,15 @@ export class OrderService {
 
   public addOrder(cart: ICart): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
-    return this.http.post<OrderCreate>(url, {id: cart.id})
+    return this.http.post<IOrder>(url, {id: cart.id})
       .pipe(
         catchError(this.handleError('addOrder', cart))
       );
   }
 
-  public editOrder(order: any, dirty: string): Observable<any> {
+  public editOrder(order: IOrder, dirty: string): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}update/${order.id}`;
-    return this.http.post<OrderCreate>(url, {dirty: dirty, value: order[dirty]})
+    return this.http.post<IOrder>(url, {dirty: dirty, value: order[dirty]})
       .pipe(
         catchError(this.handleError('editOrder', order))
       );
