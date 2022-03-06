@@ -198,7 +198,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  public updatePhiKiemDem() {
+  public updateOrder(dirty: string) {
     this.orderService.showLoading(true);
     this.orderService.editOrder(this.orderService.orderRe)
       .subscribe(res => {

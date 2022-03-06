@@ -229,6 +229,7 @@
               <input type="checkbox" id="kiem_hang" name="kiem_hang"
                      value="1"
                      [(ngModel)]="orderService.orderRe.kiem_hang"
+                     (change)="updateOrder('kiem_hang')"
                      class="form-check-input">
               <label class="form-check-label">Kiểm hàng</label>
             </div>
@@ -236,6 +237,7 @@
               <input type="checkbox" id="dong_go" name="dong_go"
                      value="1"
                      [(ngModel)]="orderService.orderRe.dong_go"
+                     (change)="updateOrder('dong_go')"
                      class="form-check-input">
               <label class="form-check-label">Đóng gỗ</label>
             </div>
@@ -243,6 +245,7 @@
               <input type="checkbox" id="bao_hiem" name="bao_hiem"
                      value="1"
                      [(ngModel)]="orderService.orderRe.bao_hiem"
+                     (change)="updateOrder('bao_hiem')"
                      class="form-check-input">
               <label class="form-check-label">Chống sốc</label>
             </div>
@@ -250,12 +253,14 @@
               <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
                      value="1"
                      [(ngModel)]="orderService.orderRe.chinh_ngach"
+                     (change)="updateOrder('chinh_ngach')"
                      class="form-check-input">
               <label class="form-check-label">Chính ngạch</label>
             </div>
             <div class="form-check form-check-inline mr-1">
               <input type="checkbox" id="vat" name="vat"
                      value="1"
+                     (change)="updateOrder('vat')"
                      [(ngModel)]="orderService.orderRe.vat"
                      class="form-check-input">
               <label class="form-check-label">VAT</label>
@@ -355,7 +360,7 @@
                   #phi_dich_vu="ngModel" class="form-control"
                   id="phi_dich_vu"
                   name="phi_dich_vu"
-                  (change)="updatePhiKiemDem()"
+                  (change)="updateOrder('phi_dat_hang_cs')"
                   (blur)="phiDichVuEdit(false)"
                   appAutofocus
                   type="number">
@@ -380,11 +385,10 @@
                   #phi_kiem_dem="ngModel" class="form-control"
                   id="phi_kiem_dem"
                   name="phi_kiem_dem"
-                  (change)="updatePhiKiemDem()"
+                  (change)="updateOrder('phi_kiem_dem_cs')"
                   (blur)="phiKiemDemEdit(false)"
                   appAutofocus
                   type="number">
-
                 <p *ngIf="!editPhiKiemDem">
                   {{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice: 1 : 1 : false}}
                   <sup>đ </sup> <!--<span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->
