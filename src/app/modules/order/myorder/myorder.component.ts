@@ -5,7 +5,7 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
 import {email_nv} from '../../../const';
-import {IOrder, OrderStatus} from "../../../models/interface";
+import {History, IOrder, OrderStatus} from "../../../models/interface";
 import {Order} from "../../../models/model";
 
 @Component({
@@ -139,14 +139,29 @@ export class MyorderComponent implements OnInit {
 
   confirmDeleteOrder(): void {
     if (this.order) {
-      this.order.status = 6;
-      this.orderService.editOrder(this.order, 'status')
+      this.errorMessage = [];
+      const history: History = {
+        id: null,
+        user_name: null,
+        content: 'Hủy đơn!',
+        type: 6,
+        created_at: null,
+        is_deleted: 0,
+        order_id: this.order.id,
+        updated_at: null,
+        user_id: null
+      };
+
+      this.orderService.postHistory(history)
         .subscribe(res => {
           if (res.status) {
+            this.errorMessage = [];
             this.searchOrders();
             this.modalRef.hide();
           } else {
-            this.errorMessage.push(res.message);
+            for (let i = 0; i < res.data.length; i++) {
+              this.errorMessage.push(res.data[i]);
+            }
           }
         });
     }
