@@ -26,6 +26,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   col: string;
   editPhiKiemDem = false;
   editPhiDichVu = false;
+  editTigia = false;
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
@@ -195,6 +196,12 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   public phiDichVuEdit(status: boolean) {
     if (!this.authService.hasRole('employees')) {
       this.editPhiDichVu = status;
+    }
+  }
+
+  public tigiaEdit(status: boolean) {
+    if (!this.authService.hasRole('employees')) {
+      this.editTigia = status;
     }
   }
 
