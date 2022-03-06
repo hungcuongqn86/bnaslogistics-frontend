@@ -118,7 +118,7 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
       this.orderService.showLoading(true);
       this.orderService.getOrder(this.orderService.orderRe.id)
         .subscribe(order => {
-          this.orderService.orderRe = order.data.order;
+          this.orderService.orderRe = order.data;
           this.orderService.showLoading(false);
         });
     }

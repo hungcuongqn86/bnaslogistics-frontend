@@ -55,7 +55,7 @@ export class MyorderDetailComponent implements OnInit {
     if (this.orderService.search.type === 'pk') {
       status = this.orderService.search.pk_status;
     }
-    link +=  status + '/' + this.orderService.search.type;
+    link += status + '/' + this.orderService.search.type;
     this.router.navigate([link]);
   }
 }
