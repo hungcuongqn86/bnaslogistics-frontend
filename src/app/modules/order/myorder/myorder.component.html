@@ -66,13 +66,11 @@
                               <span class="badge badge-warning"> Đơn ký gửi</span>
                             </p>
                             <p>
-                              ID: {{item.id}} <span *ngIf="status"
+                              Mã: {{item.code}} <span *ngIf="status"
                                                     class="badge badge-danger">{{item.status | tempStatus: status}}</span>
                             </p>
                             <p>Ngày tạo: {{item.created_at | tempDate}}</p>
-                            <p>
-                              <i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-danger"> {{item.shop.name}}</span>
-                            </p>
+
                           </td>
                             <td>
                                 <p *ngFor="let cart of item.order_items">
