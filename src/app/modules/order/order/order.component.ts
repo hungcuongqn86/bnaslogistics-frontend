@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {OrderCreate, OrderService} from '../../../services/order/order.service';
+import {OrderService} from '../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
@@ -16,7 +16,7 @@ import {IOrder, IUser, OrderStatus} from "../../../models/interface";
 })
 
 export class OrderComponent implements OnInit, OnDestroy {
-  order: OrderCreate;
+  order: IOrder;
   orders: IOrder[];
   counts: { status: number, total: number }[];
   status: OrderStatus[] = [];

@@ -53,8 +53,7 @@ export class MyorderComponent implements OnInit {
   }
 
   public editOrder(id) {
-    const win = window.open(`./order/myorder/detail/${id}`, '_blank');
-    win.focus();
+    this.router.navigate([`/order/myorder/detail/${id}`]);
   }
 
   public searchOrders() {
@@ -79,6 +78,7 @@ export class MyorderComponent implements OnInit {
   selectTab(status: string = null, type: string = null) {
     this.orderService.search.status = '0';
     this.orderService.search.pk_status = '0';
+    this.orderService.search.type = type;
 
     if (type === 'od') {
       this.orderService.search.status = status;

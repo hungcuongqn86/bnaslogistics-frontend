@@ -21,6 +21,7 @@ export class OrderService {
   public search = {
     key: '',
     code: '',
+    type: '',
     package_code: '',
     contract_code: '',
     status: '',
