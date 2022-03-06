@@ -45,7 +45,23 @@
                              [(ngModel)]="cartf.bao_hiem"
                              (change)="updateCart(cartf)"
                              class="form-check-input">
-                      <label class="form-check-label">Bảo hiểm</label>
+                      <label class="form-check-label">Chống sốc</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-1">
+                      <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
+                             value="1"
+                             [(ngModel)]="cartf.chinh_ngach"
+                             (change)="updateCart(cartf)"
+                             class="form-check-input">
+                      <label class="form-check-label">Chính ngạch</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-1">
+                      <input type="checkbox" id="vat" name="vat"
+                             value="1"
+                             [(ngModel)]="cartf.vat"
+                             (change)="updateCart(cartf)"
+                             class="form-check-input">
+                      <label class="form-check-label">VAT</label>
                     </div>
                   </div>
                 </div>

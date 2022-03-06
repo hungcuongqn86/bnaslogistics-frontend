@@ -28,6 +28,8 @@ export interface ICart {
   kiem_hang: boolean;
   dong_go: boolean;
   bao_hiem: boolean;
+  chinh_ngach: boolean;
+  vat: boolean;
   count_product: number;
   tien_hang: number;
   vip_id: number;
