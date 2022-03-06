@@ -329,8 +329,8 @@
           <td colspan="3">{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup>
           </td>
         </tr>
-        <tr>
-          <td colspan="7" class="text-right">Phí kiểm đếm</td>
+        <tr *ngIf="orderService.orderRe.kiem_hang">
+          <td colspan="7" class="text-right">Phí kiểm đếm (VNĐ)</td>
           <td colspan="3"
               (click)="phiKiemDemEdit(true)">
             <input
@@ -348,6 +348,12 @@
               {{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice: 1 : 1 : false}}
               <sup>đ </sup> <!--<span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->
             </p>
+          </td>
+        </tr>
+        <tr *ngIf="orderService.orderRe.kiem_hang">
+          <td colspan="7" class="text-right">Phí kiểm đếm thành tiền</td>
+          <td colspan="3">
+            {{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup>
           </td>
         </tr>
         </tbody>
