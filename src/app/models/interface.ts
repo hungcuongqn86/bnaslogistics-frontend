@@ -273,6 +273,7 @@ export interface History {
 export interface HistoryType {
   id: number;
   name: string;
+  sys: number;
 }
 
 export interface OrderStatus {

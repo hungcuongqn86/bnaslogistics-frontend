@@ -1,77 +1,79 @@
 <div class="card">
-    <div class="card-header"><i class="fa fa-cubes"></i> <strong>Danh sách lịch sử</strong>
-        <div class="card-header-actions">
-            <button (click)="addHistory(template_history)" class="btn btn-block btn-outline-primary btn-sm"
-                    type="button">Thêm
-            </button>
-        </div>
+  <div class="card-header"><i class="fa fa-cubes"></i> <strong>Danh sách lịch sử</strong>
+    <div class="card-header-actions">
+      <button (click)="addHistory(template_history)" class="btn btn-block btn-outline-primary btn-sm"
+              type="button">Thêm
+      </button>
     </div>
-    <div *ngIf="orderService.orderRe && orderService.orderRe.history" class="card-body">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Ngày giờ</th>
-                <th>Người thực hiện</th>
-                <th>Công việc</th>
-                <th>Nội dung</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of orderService.orderRe.history">
-                <td><p>{{item.created_at}}</p></td>
-                <td><p><i class="fa fa-user"></i> {{item.user_name}}</p></td>
-                <td><p *ngIf="types">{{item.type | tempHistoryType : types}}</p></td>
-                <td><p>{{item.content}}</p></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+  </div>
+  <div *ngIf="orderService.orderRe && orderService.orderRe.history" class="card-body">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Ngày giờ</th>
+        <th>Người thực hiện</th>
+        <th>Công việc</th>
+        <th>Nội dung</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of orderService.orderRe.history">
+        <td><p>{{item.created_at}}</p></td>
+        <td><p><i class="fa fa-user"></i> {{item.user_name}}</p></td>
+        <td><p *ngIf="types">{{item.type | tempHistoryType : types}}</p></td>
+        <td><p>{{item.content}}</p></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <ng-template #template_history>
-    <div class="modal-header">
-        <h5 class="modal-title">Cập nhật tiến độ đơn hàng</h5>
-    </div>
-    <div class="modal-body">
-        <form novalidate #form="ngForm">
-            <div class="form-group">
-                <label for="type">Công việc <code class="highlighter-rouge">*</code></label>
-                <select [(ngModel)]="history.type"
-                        #type="ngModel"
-                        id="type"
-                        name="type"
-                        required
-                        class="form-control">
-                    <option value="null">Chọn việc thực hiện</option>
-                    <option *ngFor="let item of types" value="{{item.id}}">{{item.name}}</option>
-                </select>
-                <div [hidden]="type.valid || type.untouched">
+  <div class="modal-header">
+    <h5 class="modal-title">Cập nhật tiến độ đơn hàng</h5>
+  </div>
+  <div class="modal-body">
+    <form novalidate #form="ngForm">
+      <div class="form-group">
+        <label for="type">Công việc <code class="highlighter-rouge">*</code></label>
+        <select [(ngModel)]="history.type"
+                #type="ngModel"
+                id="type"
+                name="type"
+                required
+                class="form-control">
+          <option value="null">Chọn việc thực hiện</option>
+          <ng-template ngFor let-item [ngForOf]="types" let-i="index">
+            <option *ngIf="(item.sys == 0)" value="{{item.id}}">{{item.name}}</option>
+          </ng-template>
+        </select>
+        <div [hidden]="type.valid || type.untouched">
                                 <span *ngIf="type.errors && type.errors.required"
                                       class="badge badge-warning">
                                     Phải chọn công việc thực hiện!
                                 </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="content">Nội dung <code class="highlighter-rouge">*</code></label>
-                <textarea [(ngModel)]="history.content" #content="ngModel" id="content" name="content" rows="3"
-                          class="form-control"
-                          required
-                          placeholder="Nội dung ..."></textarea>
-                <div [hidden]="content.valid || content.untouched">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="content">Nội dung <code class="highlighter-rouge">*</code></label>
+        <textarea [(ngModel)]="history.content" #content="ngModel" id="content" name="content" rows="3"
+                  class="form-control"
+                  required
+                  placeholder="Nội dung ..."></textarea>
+        <div [hidden]="content.valid || content.untouched">
                                 <span *ngIf="content.errors && content.errors.required"
                                       class="badge badge-warning">
                                     Phải nhập nội dung!
                                 </span>
-                </div>
-            </div>
-            <p></p>
-            <alert type="danger" *ngIf="errorMessage.length > 0">
-                <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
-            </alert>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="confirmHistory()">OK</button>
-        <button type="button" class="btn btn-warning" (click)="declineHistory()">Cancel</button>
-    </div>
+        </div>
+      </div>
+      <p></p>
+      <alert type="danger" *ngIf="errorMessage.length > 0">
+        <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="confirmHistory()">OK</button>
+    <button type="button" class="btn btn-warning" (click)="declineHistory()">Cancel</button>
+  </div>
 </ng-template>
