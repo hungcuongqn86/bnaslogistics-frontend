@@ -53,11 +53,11 @@
           <table class="table table-hover">
             <thead>
             <tr>
-              <th width="20%">Đơn hàng</th>
+              <th width="15%">Đơn hàng</th>
               <th>Sản phẩm</th>
               <th width="18%">Tiền hàng</th>
               <th style="width: 10%; min-width: 150px;">Trạng thái</th>
-              <th width="5%" class="text-right">Tác vụ</th>
+              <th width="8%" class="text-right">Tác vụ</th>
             </tr>
             </thead>
             <tbody>
@@ -75,10 +75,6 @@
                   <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
                   <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
                   <span> - Số lượng: {{cart.amount}}</span>
-                  <span *ngIf="!nv"> - Đơn giá: {{cart.price | tempPrice: item.ti_gia : 1 : false}}
-                    <sup>đ</sup></span>
-                  <span *ngIf="!nv"> - Thành tiền: {{cart.price | tempPrice: item.ti_gia : cart.amount: false}}
-                    <sup>đ</sup></span>
                 </p>
               </td>
               <td class="text-right">
