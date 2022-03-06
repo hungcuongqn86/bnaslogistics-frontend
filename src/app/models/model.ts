@@ -225,6 +225,8 @@ export class Order implements IOrder {
   kiem_hang: boolean;
   dong_go: boolean;
   bao_hiem: boolean;
+  chinh_ngach: boolean;
+  vat: boolean;
   tien_hang: number;
   vip_id: number;
   ck_dv: number;

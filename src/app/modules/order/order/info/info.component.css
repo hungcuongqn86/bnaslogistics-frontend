@@ -47,3 +47,27 @@ img {
   padding: 10px;
   margin-left: 3px;
 }
+.pager li.btn:active {
+  box-shadow: none;
+}
+
+.form-check-label {
+  margin-right: 25px;
+}
+
+table > tbody > tr > td img {
+  max-width: 100px;
+}
+
+@media (max-width: 767px) {
+  table > tbody > tr > td img {
+    max-width: 60px;
+  }
+
+  p.colortxt {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60px;
+  }
+}
