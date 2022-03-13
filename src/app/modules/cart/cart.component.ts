@@ -1,13 +1,14 @@
 import {Component, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {CartService} from '../../services/cart/cart.service';
-import {OrderCreate, OrderService} from '../../services/order/order.service';
+import {OrderService} from '../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../auth.service';
 import {ErrorMessagesService} from '../../error.messages.service';
 import {email_nv} from '../../const';
-import {ICart, ICartItem} from "../../models/interface";
+import {ICart, ICartItem, IOrder} from "../../models/interface";
+import {Order} from "../../models/model";
 
 @Component({
   selector: 'app-cart',
@@ -20,7 +21,7 @@ export class CartComponent implements OnInit {
   carts: ICart[];
   cart: ICart;
   cartItem: ICartItem;
-  order: OrderCreate;
+  order: IOrder;
   modalRef: BsModalRef;
   nv = false;
 
@@ -32,24 +33,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.getCarts();
-    this.order = {
-      id: null,
-      user_id: null,
-      shop_id: null,
-      cart_ids: null,
-      rate: 1,
-      vip: null,
-      vip_dc: 0,
-      is_deleted: 0,
-      created_at: '',
-      updated_at: '',
-      count_product: 0,
-      count_link: 0,
-      tien_hang: 0,
-      phi_tam_tinh: 0,
-      phi_dich_vu: 0,
-      tong: 0
-    };
+    this.order = new Order();
   }
 
   public getCarts() {

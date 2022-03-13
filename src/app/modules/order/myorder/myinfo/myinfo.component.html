@@ -33,30 +33,6 @@
     <div *ngIf="!nv" class="card bang_phi">
       <div class="card-header">
         <i class="fa fa-align-justify"></i> <strong>Tổng phí</strong>
-        <div class="card-header-actions">
-          <ul class="options-group">
-            <li>
-              <div class="form-check">
-                <input class="form-check-input" [(ngModel)]="orderService.orderRe.kiem_hang" id="is_kiemdem"
-                       (change)="chkKiemdem()"
-                       name="is_kiemdem"
-                       type="checkbox"
-                       value="1">
-                <label class="form-check-label" for="is_kiemdem"> Kiểm đếm </label>
-              </div>
-            </li>
-            <li>
-              <div class="form-check">
-                <input class="form-check-input" [(ngModel)]="orderService.orderRe.dong_go" id="is_donggo"
-                       (change)="chkKiemdem()"
-                       name="is_donggo"
-                       type="checkbox"
-                       value="1">
-                <label class="form-check-label" for="is_donggo"> Đóng gỗ </label>
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
       <div *ngIf="orderService.orderRe" class="card-body">
         <div class="row">

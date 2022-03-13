@@ -100,19 +100,6 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  public chkKiemdem() {
-    this.orderService.showLoading(true);
-    const input = {
-      id: this.orderService.orderRe.id,
-      is_kiemdem: this.orderService.orderRe.kiem_hang ? 1 : 0,
-      is_donggo: this.orderService.orderRe.dong_go ? 1 : 0
-    };
-    this.orderService.editOption(input)
-      .subscribe(res => {
-        this.getOrder();
-      });
-  }
-
   private getOrder() {
     if (this.orderService.orderRe.id !== null) {
       this.orderService.showLoading(true);
