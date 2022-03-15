@@ -44,12 +44,12 @@
             <p>(1) Tiền hàng <span *ngIf="orderService.orderRe.tien_hang"
                                    class="pull-right"><strong>{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}}
               <sup> đ</sup></strong></span></p>
-            <p>(2) Phí mua hàng <span *ngIf="orderService.orderRe.phi_dat_hang_tt"
+            <p>(2) Phí mua hàng<span *ngIf="orderService.orderRe.phi_dat_hang_cs"> ({{orderService.orderRe.phi_dat_hang_cs}}%)</span><span *ngIf="orderService.orderRe.phi_dat_hang_tt"
                                       class="pull-right"><strong>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
               <sup> đ</sup></strong></span></p>
             <p>(3) Ship nội địa TQ <span class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 3}}<sup> đ</sup></strong></span>
             </p>
-            <p>(4) Phí kiểm đếm <span *ngIf="orderService.orderRe.phi_kiem_dem_tt"
+            <p>(4) Phí kiểm đếm<span *ngIf="orderService.orderRe.phi_kiem_dem_cs"> ({{orderService.orderRe.phi_kiem_dem_cs | currency:'VND':''}}<sup> đ</sup>)</span> <span *ngIf="orderService.orderRe.phi_kiem_dem_tt"
                                       class="pull-right"><strong>{{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice: 1 : 1 : false}}
               <sup> đ</sup></strong></span></p>
             <p>(5) Tổng = 1 + 2 + 3 + 4 <span
@@ -57,17 +57,24 @@
                             đ</sup></strong></span></p>
           </div>
           <div class="col-md-6">
-            <p><strong>Tiền cân nặng</strong></p>
             <p>Số cân nặng <span
               class="pull-right"><strong>{{orderService.bang_phi.tong_can_nang}}</strong></span></p>
             <p>Cân nặng quy đổi <span
               class="pull-right"><strong>{{orderService.bang_phi.tong_can_nang_qd}}</strong></span>
             </p>
-            <p>(7) Tiền cân nặng <span
+            <p>(6) Phí cân nặng <span
               class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}
               <sup> đ</sup></strong></span>
             </p>
-            <p>(8) Cước vận phát sinh<span
+            <p>(7) Tiền đóng gỗ <span
+              class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}
+              <sup> đ</sup></strong></span>
+            </p>
+            <p>(8) Tiền chống sốc <span
+              class="pull-right"><strong>{{orderService.orderRe.phi_bao_hiem_tt.toString() | tempPrice: 1 : 1 : false}}
+              <sup> đ</sup></strong></span>
+            </p>
+            <p>(9) Cước vận phát sinh<span
               class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 4}}<sup> đ</sup></strong></span>
             </p>
           </div>
@@ -105,6 +112,52 @@
   <div *ngIf="orderService.orderRe && orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0"
        class="card">
     <div class="card-body">
+      <div class="row">
+        <div class="col-lg-12" style="text-align: right;">
+          <div class="col-form-label">
+            <div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="kiem_hang" name="kiem_hang"
+                     value="1"
+                     readonly
+                     [(ngModel)]="orderService.orderRe.kiem_hang"
+                     class="form-check-input">
+              <label class="form-check-label">Kiểm hàng</label>
+            </div>
+            <div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="dong_go" name="dong_go"
+                     value="1"
+                     readonly
+                     [(ngModel)]="orderService.orderRe.dong_go"
+                     class="form-check-input">
+              <label class="form-check-label">Đóng gỗ</label>
+            </div>
+            <div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="bao_hiem" name="bao_hiem"
+                     value="1"
+                     readonly
+                     [(ngModel)]="orderService.orderRe.bao_hiem"
+                     class="form-check-input">
+              <label class="form-check-label">Chống sốc</label>
+            </div>
+            <div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
+                     value="1"
+                     readonly
+                     [(ngModel)]="orderService.orderRe.chinh_ngach"
+                     class="form-check-input">
+              <label class="form-check-label">Chính ngạch</label>
+            </div>
+            <div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="vat" name="vat"
+                     value="1"
+                     readonly
+                     [(ngModel)]="orderService.orderRe.vat"
+                     class="form-check-input">
+              <label class="form-check-label">VAT</label>
+            </div>
+          </div>
+        </div>
+      </div>
       <table class="table table-bordered table-sm table-data">
         <thead>
         <tr>

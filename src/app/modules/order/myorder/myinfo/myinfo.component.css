@@ -64,3 +64,12 @@ ul.options-group > li {
 ul.options-group > li .form-check-input {
   top: 5px;
 }
+
+
+.form-check-label {
+  margin-right: 25px;
+}
+
+table > tbody > tr > td img {
+  max-width: 100px;
+}
