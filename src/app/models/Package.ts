@@ -14,8 +14,12 @@ export interface Package {
     note_tl: string;
     weight: number;
     weight_qd: number;
+    size: number;
+    size_qd: number;
     tien_can: number;
     gia_can: number;
+    tien_kt: number;
+    gia_kt: number;
     tien_thanh_ly: number;
     phi_van_phat_sinh: number;
     bill_id: number;

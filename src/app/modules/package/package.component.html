@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="card-body">
           <form novalidate (ngSubmit)="searchPackages()" #form="ngForm">
             <div class="form-group space-7 row filter-advanced">
@@ -91,8 +91,9 @@
             <thead>
             <tr>
               <th style="width: 20%">Kiện hàng</th>
-              <th style="width: 20%">Cân nặng</th>
               <th>Đơn hàng</th>
+              <th style="width: 20%">Cân nặng</th>
+              <th style="width: 20%">Kích thước</th>
               <th style="width: 20%">Trạng thái kho</th>
             </tr>
             </thead>
@@ -107,6 +108,21 @@
                 <p><span class="packages-inf">Trạng thái</span><span
                   class="packages-inf text-right packages-status badge badge-info">{{item.status | tempPkStatus :
                   pkStatus}}</span>
+                </p>
+              </td>
+              <td>
+                <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
+                                                                (click)="gotoOrder(item.order_id)"><span
+                  class="packages-inf text-right"><strong>{{item.order_id}}</strong></span></a>
+                </p>
+                <p><span class="packages-inf">Khách hàng</span><span
+                  class="packages-inf text-right"><strong>{{item.order.user.name}}</strong></span>
+                </p>
+                <p><span class="packages-inf">Email</span><span
+                  class="packages-inf text-right"><strong>{{item.order.user.email}}</strong></span>
+                </p>
+                <p><span class="packages-inf">Số điện thoại</span><span
+                  class="packages-inf text-right"><strong>{{item.order.user.phone_number}}</strong></span>
                 </p>
               </td>
               <td>
@@ -169,18 +185,62 @@
                 </p>
               </td>
               <td>
-                <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
-                                                                (click)="gotoOrder(item.order_id)"><span
-                  class="packages-inf text-right"><strong>{{item.order_id}}</strong></span></a>
+                <p><span class="packages-inf">Kích thước (m3)</span><span
+                  (click)="selectPackage(item,'size')"
+                  class="packages-inf text-right badge badge-info">
+                                    <input *ngIf="((package.id === item.id) && (col === 'weight'))"
+                                           [(ngModel)]="package.size"
+                                           #size="ngModel"
+                                           class="form-control"
+                                           id="size"
+                                           name="size"
+                                           (change)="updatePackage()"
+                                           (blur)="hideInput()"
+                                           appAutofocus
+                                           type="number">
+                                <span
+                                  *ngIf="((package.id !== item.id) || (col !== 'size'))">{{item.size ? item.size : '0.00'}}</span>
+                                </span>
                 </p>
-                <p><span class="packages-inf">Khách hàng</span><span
-                  class="packages-inf text-right"><strong>{{item.order.user.name}}</strong></span>
+                <p><span class="packages-inf">Quy đổi (m3)</span><span
+                  (click)="selectPackage(item,'size_qd')"
+                  class="packages-inf text-right badge badge-info">
+                                    <input *ngIf="((package.id === item.id) && (col === 'size_qd'))"
+                                           [(ngModel)]="package.size_qd"
+                                           #size_qd="ngModel"
+                                           class="form-control"
+                                           id="size_qd"
+                                           name="size_qd"
+                                           (change)="updatePackage()"
+                                           (blur)="hideInput()"
+                                           appAutofocus
+                                           type="number">
+                                <span
+                                  *ngIf="((package.id !== item.id) || (col !== 'size_qd'))">{{item.size_qd ? item.size_qd : '0.00'}}</span>
+                                </span>
                 </p>
-                <p><span class="packages-inf">Email</span><span
-                  class="packages-inf text-right"><strong>{{item.order.user.email}}</strong></span>
+                <p><span class="packages-inf">Giá vận (vnđ/m3)</span><span
+                  (click)="selectPackage(item,'gia_kt')"
+                  class="packages-inf text-right badge badge-info">
+                                    <input *ngIf="((package.id === item.id) && (col === 'gia_kt'))"
+                                           [(ngModel)]="package.gia_kt"
+                                           #gia_can="ngModel"
+                                           class="form-control"
+                                           id="gia_kt"
+                                           name="gia_kt"
+                                           (change)="updatePackage()"
+                                           (blur)="hideInput()"
+                                           appAutofocus
+                                           type="number">
+                                <span
+                                  *ngIf="((package.id !== item.id) || (col !== 'gia_kt'))">{{item.gia_kt ? item.gia_kt : '0'}}</span>
+                                </span>
                 </p>
-                <p><span class="packages-inf">Số điện thoại</span><span
-                  class="packages-inf text-right"><strong>{{item.order.user.phone_number}}</strong></span>
+                <p>
+                  <span class="packages-inf">Phí vận (vnđ)</span>
+                  <span class="packages-inf text-right badge badge-info">
+                    {{item.tien_kt ? item.tien_kt : '0'}}
+                  </span>
                 </p>
               </td>
               <td>
