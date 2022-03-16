@@ -1,12 +1,12 @@
 import {AfterViewChecked, Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {OrderService} from '../../../../services/order/order.service';
-import {Package, PackageStatus} from '../../../../models/Package';
+import {IPackage, PackageStatus} from '../../../../models/interface';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../../auth.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {IOrderItem, OrderStatus} from "../../../../models/interface";
-import {OrderItem} from "../../../../models/model";
+import {OrderItem, Package} from "../../../../models/model";
 
 @Component({
   selector: 'app-order-detail-info',
@@ -18,7 +18,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   modalRef: BsModalRef;
   status: OrderStatus[];
   pkStatus: PackageStatus[];
-  package: Package;
+  package: IPackage;
   orderItem: IOrderItem;
   comment: Comment;
   comments: Comment[];
@@ -55,29 +55,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   }
 
   reNewPackage() {
-    this.package = {
-      id: null,
-      is_deleted: null,
-      contract_code: null,
-      ship_khach: null,
-      ship_tt: null,
-      tra_shop: null,
-      thanh_toan: null,
-      created_at: null,
-      order_id: null,
-      order: null,
-      package_code: null,
-      status: null,
-      note_tl: null,
-      weight: null,
-      weight_qd: null,
-      tien_can: null,
-      gia_can: null,
-      tien_thanh_ly: null,
-      phi_van_phat_sinh: null,
-      updated_at: null,
-      bill_id: null
-    };
+    this.package = new Package();
   }
 
   ngOnInit() {
@@ -129,7 +107,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       });
   }
 
-  public deletePackage(item: Package) {
+  public deletePackage(item: IPackage) {
     this.orderService.showLoading(true);
     item.is_deleted = 1;
     this.orderService.editPackage(item)
@@ -146,7 +124,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       });
   }
 
-  public selectPackage(item: Package, firt: number, col: string) {
+  public selectPackage(item: IPackage, firt: number, col: string) {
     /*this.col = col;
     this.package = item;
     if (firt === 0) {

@@ -1,5 +1,4 @@
-import {IOrder, IUser} from './interface';
-import {Package} from './Package';
+import {IOrder, IPackage, IUser} from './interface';
 
 export interface WarehouseWait {
     id: number;
@@ -8,7 +7,7 @@ export interface WarehouseWait {
     phone_number: string;
     debt: number;
     cost_percent: number;
-    package: Package[];
+    package: IPackage[];
     tien_xuat_kho: number;
     tien_thieu_xuat_kho: number;
     rate: number;
@@ -35,7 +34,7 @@ export interface Bill {
     status: number;
     employee_id: number;
     employee: IUser;
-    package: Package[];
+    package: IPackage[];
     so_ma: number;
 }
 

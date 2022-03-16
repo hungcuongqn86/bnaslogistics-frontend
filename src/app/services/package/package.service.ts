@@ -8,7 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
-import {Package} from '../../models/Package';
+import {IPackage} from '../../models/interface';
 
 @Injectable()
 export class PackageService {
@@ -16,7 +16,7 @@ export class PackageService {
   private handleError: HandleError;
   private moduleUri = 'order/package/';
   public search = {key: '', code: '', package_code: '', status: '', limit: 20, page: 1};
-  public package: Package;
+  public package: IPackage;
 
   constructor(private loadingService: LoadingService,
               private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
@@ -58,7 +58,7 @@ export class PackageService {
       );
   }
 
-  public editPackage(item: Package) {
+  public editPackage(item: IPackage) {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
     return this.http.post<any>(url, item)
       .pipe(

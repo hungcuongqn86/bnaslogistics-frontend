@@ -1,6 +1,6 @@
 import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {OrderService} from '../../../../services/order/order.service';
-import {PackageStatus} from '../../../../models/Package';
+import {PackageStatus} from '../../../../models/interface';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../../auth.service';

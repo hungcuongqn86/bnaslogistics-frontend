@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PackageService} from '../../services/package/package.service';
-import {Package, PackageStatus} from '../../models/Package';
+import {IPackage, PackageStatus} from '../../models/interface';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../auth.service';
 import {email_nv} from '../../const';
@@ -14,7 +14,7 @@ import {email_nv} from '../../const';
 })
 
 export class MypackageComponent implements OnInit, OnDestroy {
-    packages: Package[];
+    packages: IPackage[];
     pkStatus: PackageStatus[];
     totalItems = 0;
     errorMessage: string[] = [];

@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {PackageStatus} from '../models/Package';
+import {PackageStatus} from '../models/interface';
 
 @Pipe({
     name: 'tempPkStatus'

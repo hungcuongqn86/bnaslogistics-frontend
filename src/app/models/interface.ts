@@ -1,6 +1,5 @@
 import {Partner} from "./Partner";
 import {Transaction} from "./Transaction";
-import {Package} from "./Package";
 
 export interface ISetting {
   id: number;
@@ -254,7 +253,7 @@ export interface IOrder {
   cart: ICart[];
   history: History[];
   user: IUser;
-  package: Package[];
+  package: IPackage[];
   order_items: IOrderItem[];
 }
 

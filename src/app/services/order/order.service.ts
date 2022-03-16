@@ -8,7 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
-import {Package} from '../../models/Package';
+import {IPackage} from '../../models/interface';
 import {Complain} from '../../models/Complain';
 import {History, ICart, IOrder, IOrderItem} from "../../models/interface";
 import {Order} from "../../models/model";
@@ -231,7 +231,7 @@ export class OrderService {
       );
   }
 
-  public editPackage(item: Package) {
+  public editPackage(item: IPackage) {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/update`;
     return this.http.post<any>(url, item)
       .pipe(
