@@ -3,3 +3,11 @@
         padding: 15px 5px;
     }
 }
+
+table {
+  width: 100%;
+}
+
+.form-check-label {
+  margin-right: 25px;
+}

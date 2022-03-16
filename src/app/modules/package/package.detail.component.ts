@@ -40,6 +40,11 @@ export class PackageDetailComponent implements OnInit {
     }
   }
 
+  gotoOrder(orderId: number) {
+    const win = window.open(`./order/list/detail/${orderId}`, '_blank');
+    win.focus();
+  }
+
   public backlist() {
     this.router.navigate(['/package']);
   }
