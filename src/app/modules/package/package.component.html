@@ -193,32 +193,10 @@
                 </p>
               </td>
               <td>
-                <p><span class="packages-inf">Giá vận (vnđ)</span><span
-                  (click)="selectPackage(item,'gia_can')"
-                  class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'gia_can'))"
-                                           [(ngModel)]="package.gia_can"
-                                           #gia_can="ngModel"
-                                           class="form-control"
-                                           id="gia_can"
-                                           name="gia_can"
-                                           (change)="updatePackage()"
-                                           (blur)="hideInput()"
-                                           appAutofocus
-                                           type="number">
-                                <span
-                                  *ngIf="((package.id !== item.id) || (col !== 'gia_can'))">{{item.gia_can ? item.gia_can : '0'}}</span>
-                                </span>
-                </p>
-                <p>
-                  <span class="packages-inf">Phí vận (vnđ)</span>
-                  <span class="packages-inf text-right badge badge-info">
-                    {{item.tien_can ? item.tien_can : '0'}}
-                  </span>
-                </p>
+
               </td>
               <td>
-                <button (click)="editOrder(item.id)" class="btn btn-sm btn-ghost-primary"
+                <button (click)="editPackages(item.id)" class="btn btn-sm btn-ghost-primary"
                         type="button">
                   <i class="fa fa-info-circle" aria-hidden="true"></i>
                   Chi tiết

@@ -5,17 +5,19 @@ import {CollapseModule} from 'ngx-bootstrap/collapse';
 
 import {PackageService} from '../../services/package/package.service';
 import {PackageComponent} from './package.component';
+import {PackageDetailComponent} from './package.detail.component';
 
 import {PackageRoutingModule} from './package.routing.module';
 import {SharedModule} from '../../shared.module';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, PackageRoutingModule, SharedModule, CollapseModule.forRoot()],
-    declarations: [
-        PackageComponent
-    ],
-    exports: [],
-    providers: [PackageService]
+  imports: [CommonModule, FormsModule, PackageRoutingModule, SharedModule, CollapseModule.forRoot()],
+  declarations: [
+    PackageComponent,
+    PackageDetailComponent
+  ],
+  exports: [],
+  providers: [PackageService]
 })
 export class PackageModule {
 }

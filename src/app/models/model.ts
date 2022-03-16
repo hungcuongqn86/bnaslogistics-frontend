@@ -12,11 +12,10 @@ import {
   ITransportFee,
   IUser,
   IVip,
-  History
+  History, IPackage
 } from "./interface";
 import {Partner} from "./Partner";
 import {Transaction} from "./Transaction";
-import {Package} from "./Package";
 
 
 export class Setting implements ISetting {
@@ -250,8 +249,39 @@ export class Order implements IOrder {
   cart: ICart[];
   history: History[];
   user: IUser;
-  package: Package[];
+  package: IPackage[];
   order_items: IOrderItem[];
+
+  constructor() {
+  }
+}
+
+export class Package implements IPackage {
+  id: number;
+  order_id: number;
+  order: IOrder;
+  package_code: string;
+  contract_code: string;
+  ship_khach: number;
+  ship_tt: number;
+  tra_shop: number;
+  thanh_toan: number;
+  status: number;
+  note_tl: string;
+  weight: number;
+  weight_qd: number;
+  size: number;
+  size_qd: number;
+  tien_can: number;
+  gia_can: number;
+  tien_kt: number;
+  gia_kt: number;
+  tien_thanh_ly: number;
+  phi_van_phat_sinh: number;
+  bill_id: number;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
 
   constructor() {
   }

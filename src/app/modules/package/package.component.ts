@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PackageService} from '../../services/package/package.service';
-import {Package, PackageStatus} from '../../models/Package';
+import {IPackage, PackageStatus} from '../../models/interface';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../auth.service';
+import {Package} from "../../models/model";
 
 @Component({
   selector: 'app-package',
@@ -13,8 +14,8 @@ import {AuthService} from '../../auth.service';
 })
 
 export class PackageComponent implements OnInit, OnDestroy {
-  packages: Package[];
-  package: Package;
+  packages: IPackage[];
+  package: IPackage;
   col: string;
   pkStatus: PackageStatus[];
   totalItems = 0;
@@ -65,9 +66,13 @@ export class PackageComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectTab(status: string = null) {
+  public selectTab(status: string = null) {
     this.packageService.search.status = status;
     this.searchPackages();
+  }
+
+  public editPackages(id) {
+    this.router.navigate([`/package/detail/${id}`]);
   }
 
   gotoOrder(orderId: number) {
@@ -80,7 +85,7 @@ export class PackageComponent implements OnInit, OnDestroy {
     win.focus();
   }
 
-  public selectPackage(item: Package, col: string) {
+  public selectPackage(item: IPackage, col: string) {
     this.col = col;
     this.package = item;
   }
@@ -90,29 +95,7 @@ export class PackageComponent implements OnInit, OnDestroy {
   }
 
   reNewPackage() {
-    this.package = {
-      id: null,
-      is_deleted: null,
-      contract_code: null,
-      ship_khach: null,
-      ship_tt: null,
-      tra_shop: null,
-      thanh_toan: null,
-      created_at: null,
-      order_id: null,
-      order: null,
-      package_code: null,
-      status: null,
-      note_tl: null,
-      weight: null,
-      weight_qd: null,
-      tien_can: null,
-      gia_can: null,
-      tien_thanh_ly: null,
-      phi_van_phat_sinh: null,
-      updated_at: null,
-      bill_id: null
-    };
+    this.package = new Package();
   }
 
   public updatePackage() {
