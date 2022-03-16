@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PackageService} from '../../services/package/package.service';
+import {IPackage} from "../../models/interface";
+import {Package} from "../../models/model";
 
 @Component({
   selector: 'app-package-detail',
@@ -9,11 +11,14 @@ import {PackageService} from '../../services/package/package.service';
 })
 
 export class PackageDetailComponent implements OnInit {
+  package: IPackage;
+
   constructor(private router: Router, private route: ActivatedRoute
     , public packageService: PackageService) {
+    this.reNewPackage();
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.packageService.package.id = params['id'];
+        this.package.id = params['id'];
         this.getPackage();
       }
     });
@@ -22,11 +27,15 @@ export class PackageDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  private reNewPackage() {
+    this.package = new Package();
+  }
+
   private getPackage() {
-    if (this.packageService.package.id !== null) {
-      this.packageService.getPackage(this.packageService.package.id)
+    if (this.package.id !== null) {
+      this.packageService.getPackage(this.package.id)
         .subscribe(res => {
-          this.packageService.package = res.data;
+          this.package = res.data;
         });
     }
   }

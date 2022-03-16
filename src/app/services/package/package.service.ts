@@ -16,7 +16,6 @@ export class PackageService {
   private handleError: HandleError;
   private moduleUri = 'order/package/';
   public search = {key: '', code: '', package_code: '', status: '', limit: 20, page: 1};
-  public package: IPackage;
 
   constructor(private loadingService: LoadingService,
               private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
