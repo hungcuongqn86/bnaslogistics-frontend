@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PackageService} from '../../services/package/package.service';
-import {IPackage} from "../../models/interface";
+import {IPackage, PackageStatus} from "../../models/interface";
 import {Package} from "../../models/model";
 
 @Component({
@@ -12,6 +12,7 @@ import {Package} from "../../models/model";
 
 export class PackageDetailComponent implements OnInit {
   package: IPackage;
+  pkStatus: PackageStatus[];
 
   constructor(private router: Router, private route: ActivatedRoute
     , public packageService: PackageService) {
@@ -25,6 +26,7 @@ export class PackageDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getPkStatus();
   }
 
   private reNewPackage() {
@@ -40,7 +42,16 @@ export class PackageDetailComponent implements OnInit {
     }
   }
 
-  gotoOrder(orderId: number) {
+  public getPkStatus() {
+    this.packageService.showLoading(true);
+    this.packageService.getPkStatus()
+      .subscribe(pks => {
+        this.pkStatus = pks.data;
+        this.packageService.showLoading(false);
+      });
+  }
+
+  public gotoOrder(orderId: number) {
     const win = window.open(`./order/list/detail/${orderId}`, '_blank');
     win.focus();
   }

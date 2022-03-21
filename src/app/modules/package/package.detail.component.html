@@ -24,8 +24,25 @@
                   <i class="fa fa-align-justify"></i> <strong>Thông tin kiện hàng</strong>
                 </div>
                 <div class="card-body">
-                  <div class="row">
-
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Mã kiện</label>
+                    <div class="col-md-9">{{package.id}}</div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Trạng thái</label>
+                    <div class="col-md-9">
+                      <span
+                        class="packages-inf text-right packages-status badge badge-info">{{package.status | tempPkStatus : pkStatus}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="package_code">Mã vận đơn</label>
+                    <div class="col-md-9">
+                      <input [(ngModel)]="package.package_code" #package_code="ngModel" type="text" id="package_code"
+                             name="package_code"
+                             class="form-control"
+                             placeholder="Mã vận đơn">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -35,7 +52,7 @@
                 <div class="card-header">
                   <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
                 </div>
-                <div class="card-body">
+                <div *ngIf="package.order" class="card-body">
                   <table>
                     <tbody>
                     <tr>
