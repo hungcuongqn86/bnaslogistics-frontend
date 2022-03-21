@@ -1,10 +1,10 @@
 export const environment = {
   production: true,
-  basename: '/admin',
-  backend: 'https://dathang.g4tech.vn/api/public/',
-  apiUrl: './api/public/api/',
-  apiV1Url: '../api/public/api/v1/',
-  appId: "g4tech",
+  basename: '',
+  backend: 'https://nguonhang.net/order/api/public/',
+  apiUrl: './order/api/public/api/',
+  apiV1Url: '../order/api/public/api/v1/',
+  appId: "nguonhang",
   firebase: {
     apiKey: "AIzaSyBtTPUa19nLkReMDWXTFr6U43D166n9MVE",
     authDomain: "banhangqc.firebaseapp.com",
