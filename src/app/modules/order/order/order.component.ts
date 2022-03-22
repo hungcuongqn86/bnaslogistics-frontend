@@ -63,11 +63,13 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   public genContentPc(value) {
     let staff = '';
+    const selectVal = Number(value.target.value);
     for (let i = 0; i < this.handers.length; i++) {
-      if (this.handers[i].id === value.target.value) {
+      if (this.handers[i].id === selectVal) {
         staff = this.handers[i].name;
       }
     }
+
     this.inputPhanCong.content_pc = staff + ' thực hiện!';
   }
 
