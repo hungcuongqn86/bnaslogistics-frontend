@@ -93,6 +93,14 @@ export class SettingService {
       );
   }
 
+  public getVip(vipid: number): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.vipModuleUri}detail/${vipid}`;
+    return this.http.get<any>(url, {})
+      .pipe(
+        catchError(this.handleError('getVip', []))
+      );
+  }
+
   public addVip(item: IVip): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.vipModuleUri}create`;
     return this.http.post<IVip>(url, item)

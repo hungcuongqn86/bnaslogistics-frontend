@@ -19,6 +19,7 @@ import {MycomplainComponent} from './myorder/complain/mycomplain.component';
 import {OrderRoutingModule} from './order.routing.module';
 import {SharedModule} from '../../shared.module';
 import {OrderGuardService} from './order.guard.service';
+import {SettingService} from '../../services/setting/setting.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule, OrderRoutingModule, SharedModule, CollapseModule.forRoot()],
@@ -35,7 +36,7 @@ import {OrderGuardService} from './order.guard.service';
         MycomplainComponent
     ],
     exports: [],
-    providers: [OrderService, OrderGuardService]
+    providers: [OrderService, SettingService, OrderGuardService]
 })
 export class OrderModule {
 }

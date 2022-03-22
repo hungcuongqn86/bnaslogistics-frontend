@@ -97,7 +97,7 @@
                         type="button">
                   Chi tiết
                 </button>
-                <button *ngIf="!nv && item.status===2" (click)="openModal(template,item)"
+                <button *ngIf="!nv && item.status===2" (click)="datCoc(template,item)"
                         class="btn btn-sm btn-ghost-primary"
                         type="button">
                   Đặt cọc
@@ -146,23 +146,9 @@
           </div>
         </div>
       </div>
-
       <alert type="danger" *ngIf="auth.user.debt < inputDatCoc.dc_value">
         <p><strong>Cảnh báo!</strong> Dư nợ không đủ để thực hiện đặt cọc!</p>
       </alert>
-
-      <div class="input-group">
-        <select [(ngModel)]="inputDatCoc.dc_percent_value" #dc_percent_value="ngModel"
-                (change)="calTienCoc()"
-                id="dc_percent_value" name="dc_percent_value" class="input-group-prepend form-control">
-          <option *ngFor="let deposit of arrDeposit" [value]="deposit">
-            {{deposit}}
-          </option>
-        </select>
-        <input class="form-control" required id="dc_value" name="dc_value" disabled
-               value="% tiền hàng"
-               placeholder="Tiền cọc" type="text">
-      </div>
       <p></p>
       <div class="form-group">
         <label for="content">Nội dung</label>

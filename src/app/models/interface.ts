@@ -178,7 +178,7 @@ export interface IUser {
   deposit: string;
   hander: number;
   handle: any;
-  vip: string;
+  vip: number;
   bank_number: string;
   bank_name: string;
   bank_username: string;
