@@ -1,11 +1,10 @@
 import {AfterViewChecked, Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {OrderService} from '../../../../services/order/order.service';
-import {IPackage, PackageStatus} from '../../../../models/interface';
+import {IOrderItem, IPackage, OrderStatus, PackageStatus} from '../../../../models/interface';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../../auth.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {IOrderItem, OrderStatus} from "../../../../models/interface";
 import {OrderItem, Package} from "../../../../models/model";
 
 @Component({
@@ -125,18 +124,11 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   }
 
   public selectPackage(item: IPackage, firt: number, col: string) {
-    /*this.col = col;
+    this.col = col;
     this.package = item;
     if (firt === 0) {
-      let traShop = 0;
-      if (this.orderService.orderRe.cart) {
-        for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
-          const arrPrice = this.orderService.orderRe.cart[i].price.split('-');
-          traShop = traShop + (Number(arrPrice[0]) * this.orderService.orderRe.cart[i].amount);
-        }
-      }
-      this.package.tra_shop = traShop;
-    }*/
+      this.package.tra_shop = this.orderService.orderRe.tien_hang;
+    }
   }
 
   public updatePackage(template: TemplateRef<any>) {
@@ -187,7 +179,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     this.orderService.showLoading(true);
     this.orderService.editOrder(this.orderService.orderRe, dirty)
       .subscribe(res => {
-        if(res.status){
+        if (res.status) {
           this.updatePak();
         }
       });
