@@ -231,11 +231,19 @@ export class OrderService {
       );
   }
 
-  public editPackage(item: IPackage) {
+  public editPackage(item: IPackage, dirty: string) {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/update`;
-    return this.http.post<any>(url, item)
+    return this.http.post<any>(url, {dirty: dirty, value: item[dirty]})
       .pipe(
         catchError(this.handleError('editPackage', item))
+      );
+  }
+
+  public deletePackage(item: IPackage) {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/delete/${item.id}`;
+    return this.http.post<any>(url, {})
+      .pipe(
+        catchError(this.handleError('deletePackage', item))
       );
   }
 

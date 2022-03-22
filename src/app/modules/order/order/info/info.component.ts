@@ -32,7 +32,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   constructor(public orderService: OrderService, private route: ActivatedRoute,
               public authService: AuthService, private modalService: BsModalService) {
     this.reNewPackage();
-    this.reNewCart();
+    this.reNewOrder();
     this.comment = {
       id: null,
       order_id: null,
@@ -44,12 +44,10 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     };
     this.getStatus();
     this.getPkStatus();
-    this.route.params.subscribe(params => {
-      this.getChat();
-    });
+    this.getChat();
   }
 
-  reNewCart() {
+  reNewOrder() {
     this.orderItem = new OrderItem();
   }
 
@@ -108,8 +106,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
 
   public deletePackage(item: IPackage) {
     this.orderService.showLoading(true);
-    item.is_deleted = 1;
-    this.orderService.editPackage(item)
+    this.orderService.deletePackage(item)
       .subscribe(res => {
         this.getOrder();
       });
@@ -131,9 +128,9 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  public updatePackage(template: TemplateRef<any>) {
+  public updatePackage(template: TemplateRef<any>, dirty: string) {
     this.orderService.showLoading(true);
-    this.orderService.editPackage(this.package)
+    this.orderService.editPackage(this.package, dirty)
       .subscribe(res => {
         if (res.status) {
           this.getOrder();
@@ -147,7 +144,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
 
   public hideInput() {
     this.reNewPackage();
-    this.reNewCart();
+    this.reNewOrder();
   }
 
   public selectOrderItem(item: IOrderItem, col: string) {
@@ -180,15 +177,8 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     this.orderService.editOrder(this.orderService.orderRe, dirty)
       .subscribe(res => {
         if (res.status) {
-          this.updatePak();
+          this.getOrder();
         }
-      });
-  }
-
-  private updatePak() {
-    this.orderService.editPackage(this.orderService.orderRe.package[0])
-      .subscribe(res => {
-        this.getOrder();
       });
   }
 
