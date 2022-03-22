@@ -226,9 +226,9 @@
                 <input
                   *ngIf="editPhiDichVu"
                   [(ngModel)]="orderService.orderRe.phi_dat_hang_cs"
-                  #phi_dich_vu="ngModel" class="form-control"
-                  id="phi_dich_vu"
-                  name="phi_dich_vu"
+                  #phi_dat_hang_cs="ngModel" class="form-control"
+                  id="phi_dat_hang_cs"
+                  name="phi_dat_hang_cs"
                   (change)="updateOrder('phi_dat_hang_cs')"
                   (blur)="phiDichVuEdit(false)"
                   appAutofocus
@@ -251,15 +251,15 @@
                 <input
                   *ngIf="editPhiKiemDem"
                   [(ngModel)]="orderService.orderRe.phi_kiem_dem_cs"
-                  #phi_kiem_dem="ngModel" class="form-control"
-                  id="phi_kiem_dem"
-                  name="phi_kiem_dem"
+                  #phi_kiem_dem_cs="ngModel" class="form-control"
+                  id="phi_kiem_dem_cs"
+                  name="phi_kiem_dem_cs"
                   (change)="updateOrder('phi_kiem_dem_cs')"
                   (blur)="phiKiemDemEdit(false)"
                   appAutofocus
                   type="number">
                 <p *ngIf="!editPhiKiemDem">
-                  {{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice: 1 : 1 : false}}
+                  {{orderService.orderRe.phi_kiem_dem_cs.toString() | tempPrice: 1 : 1 : false}}
                   <sup>đ </sup> <!--<span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->
                 </p>
               </td>
