@@ -232,7 +232,7 @@ export class OrderService {
   }
 
   public editPackage(item: IPackage, dirty: string) {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/update`;
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/update/${item.id}`;
     return this.http.post<any>(url, {dirty: dirty, value: item[dirty]})
       .pipe(
         catchError(this.handleError('editPackage', item))
