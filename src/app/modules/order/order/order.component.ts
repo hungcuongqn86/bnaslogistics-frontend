@@ -112,7 +112,7 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   openModal(template: TemplateRef<any>, order: IOrder) {
     this.inputPhanCong.id = order.id;
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
   }
 
   confirmPc(): void {
