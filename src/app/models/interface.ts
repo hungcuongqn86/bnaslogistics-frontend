@@ -307,6 +307,12 @@ export interface IPackage {
   ck_vc_tt: number;
   tien_can_tt: number;
   cal_option: number;
+  dg_1_price: number;
+  dg_2_price: number;
+  tien_dong_go: number;
+  chong_soc_1_price: number;
+  chong_soc_2_price: number;
+  tien_chong_soc: number;
   phi_van_phat_sinh: number;
   bill_id: number;
   created_at: string;

@@ -121,7 +121,8 @@
                   class="packages-inf text-right packages-code"><strong>{{item.order.code}}</strong></span></a>
                 </p>
                 <p><span class="packages-inf">Khách hàng</span><span
-                  class="packages-inf text-right"><strong>{{item.order.user.code}} - {{item.order.user.name}}</strong></span>
+                  class="packages-inf text-right"><strong>{{item.order.user.code}}
+                  - {{item.order.user.name}}</strong></span>
                 </p>
                 <p><span class="packages-inf">Email</span><span
                   class="packages-inf text-right"><strong>{{item.order.user.email}}</strong></span>
@@ -219,7 +220,52 @@
                 </p>
               </td>
               <td>
-
+                <p>
+                  <span class="packages-inf">Giá đóng gỗ (vnđ)</span>
+                  <span class="packages-inf text-right badge badge-info">
+                    <span>
+                      <span *ngIf="item.dg_1_price">
+                        {{item.dg_1_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                      </span>
+                      <span *ngIf="item.dg_2_price">
+                        + {{item.dg_2_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                      </span>
+                    </span>
+                  </span>
+                </p>
+                <p>
+                  <span class="packages-inf">Phí đóng gỗ (vnđ)</span>
+                  <span class="packages-inf text-right badge badge-info">
+                    <span>
+                      <span *ngIf="item.tien_dong_go">
+                        {{item.tien_dong_go.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                      </span>
+                    </span>
+                  </span>
+                </p>
+                <p>
+                  <span class="packages-inf">Giá chống sốc (ndt)</span>
+                  <span class="packages-inf text-right badge badge-info">
+                    <span>
+                      <span *ngIf="item.chong_soc_1_price"><span>¥</span>
+                        {{item.chong_soc_1_price.toString() | tempPrice: 1 : 1: true}}
+                      </span>
+                      <span *ngIf="item.chong_soc_2_price">
+                        + {{item.chong_soc_2_price.toString() | tempPrice: 1 : 1: true}}
+                      </span>
+                    </span>
+                  </span>
+                </p>
+                <p>
+                  <span class="packages-inf">Phí chống sốc (ndt)</span>
+                  <span class="packages-inf text-right badge badge-info">
+                    <span>
+                      <span *ngIf="item.tien_chong_soc"><span>¥</span>
+                        {{item.tien_chong_soc.toString() | tempPrice: 1 : 1: true}}
+                      </span>
+                    </span>
+                  </span>
+                </p>
               </td>
             </tr>
             </tbody>

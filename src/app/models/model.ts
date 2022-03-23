@@ -280,6 +280,12 @@ export class Package implements IPackage {
   tien_can_tt: number;
   cal_option: number;
   phi_van_phat_sinh: number;
+  dg_1_price: number;
+  dg_2_price: number;
+  tien_dong_go: number;
+  chong_soc_1_price: number;
+  chong_soc_2_price: number;
+  tien_chong_soc: number;
   bill_id: number;
   is_deleted: number;
   created_at: string;
