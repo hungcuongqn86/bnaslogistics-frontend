@@ -1,204 +1,147 @@
 <div *ngIf="!authService.hasRole('custumer')" class="container-fluid">
-  <div class="animated fadeIn">
-    <div class="row">
-      <div class="col-sm-12">
-        <span style="position: absolute;left: 100px;top: 15px;font-weight: bold;">Chọn số ngày</span>
-        <ul class="timeline timeline-horizontal">
-          <li class="timeline-item">
-            <div class="timeline-badge {{(dateNumber === '7')? 'primary':''}}" (click)="setDateNumber('7')"><i
-              class="glyphicon glyphicon-check"></i>7
-            </div>
-          </li>
-          <li class="timeline-item">
-            <div class="timeline-badge {{(dateNumber === '10')? 'primary':''}}" (click)="setDateNumber('10')"><i
-              class="glyphicon glyphicon-check"></i>10
-            </div>
-          </li>
-          <li class="timeline-item">
-            <div class="timeline-badge {{(dateNumber === '15')? 'primary':''}}" (click)="setDateNumber('15')"><i
-              class="glyphicon glyphicon-check"></i>15
-            </div>
-          </li>
-          <li class="timeline-item">
-            <div class="timeline-badge {{(dateNumber === '20')? 'primary':''}}" (click)="setDateNumber('20')"><i
-              class="glyphicon glyphicon-check"></i>20
-            </div>
-          </li>
-          <li class="timeline-item">
-            <div class="timeline-badge {{(dateNumber === '30')? 'primary':''}}" (click)="setDateNumber('30')"><i
-              class="glyphicon glyphicon-check"></i>30
-            </div>
-          </li>
-        </ul>
-      </div>
+  <div class="animated fadeIn bg-white p-20 entry-list">
+    <div class="title-list mb-30">
+      <span>Danh sách đơn hàng</span>
     </div>
     <div class="row">
       <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-info">
-          <div class="card-body pb-0">
-            <button class="btn btn-transparent p-0 float-right" style="font-size: 42px;" type="button">
-              <i class="fa fa-link" aria-hidden="true"></i></button>
-            <div class="text-value">{{newLink.toString() | tempPrice: 1 : 1: true}}</div>
-            <div>Link sản phẩm mới</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-primary">
-          <div class="card-body pb-0">
-            <div class="btn-group float-right">
-              <button class="btn btn-transparent p-0" style="font-size: 42px;" type="button"
-                      aria-haspopup="true"><i class="fa fa-handshake-o" aria-hidden="true"></i></button><!----></div>
-            <div class="text-value">{{newOrder.toString() | tempPrice: 1 : 1: true}}</div>
-            <div>Đơn hàng mới</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-warning">
-          <div class="card-body pb-0">
-            <div class="btn-group float-right">
-              <button class="btn btn-transparent p-0" style="font-size: 42px;" type="button"
-                      aria-haspopup="true"><i class="fa fa-user-plus" aria-hidden="true"></i></button><!----></div>
-            <div class="text-value">{{newUser.toString() | tempPrice: 1 : 1: true}}</div>
-            <div>Thành viên mới</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-danger">
-          <div class="card-body pb-0">
-            <div class="btn-group float-right">
-              <button class="btn btn-transparent p-0" style="font-size: 42px;" type="button"
-                      aria-haspopup="true"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></button><!---->
+        <div class="card bg-orange-transparent widget">
+          <div class="card-body">
+            <div class="bg-orange inner-icon text-white">
+              <i class="iconsax isax-link"></i>
             </div>
-            <div class="text-value">{{newComplain.toString() | tempPrice: 1 : 1: true}}</div>
-            <div>Khiếu nại</div>
+            <span class="inner-desc">Link sản phẩm mới</span>
+            <div class="inner-value">{{newLink.toString() | tempPrice: 1 : 1: true}}</div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-sm-5">
-            <h4 class="card-title mb-0">Biểu đồ tình hình kết đơn</h4>
-          </div>
-        </div>
-        <div class="chart-wrapper" style="height:300px;margin-top:40px;">
-          <ngx-charts-bar-vertical
-            [scheme]="colorScheme"
-            [results]="orderstatistic"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            (select)="onSelect($event)">
-          </ngx-charts-bar-vertical>
-        </div>
-      </div>
-      <div class="card-footer">
-        <div class="row text-center">
-          <div *ngFor="let item of orderstatusstatistic" class="col-sm-12 col-md mb-sm-2 mb-0">
-            <div class="text-muted">{{item.name}}</div>
-            <strong>{{item.val}} ({{item.valp}}%)</strong>
-            <div class="progress progress-xs mt-2">
-              <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-foursquare"
-                   [style.width.%]="item.valp"
-                   role="progressbar"></div>
-              <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-success"
-                   [style.width.%]="item.valsub"
-                   role="progressbar"></div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card bg-violet-transparent widget">
+          <div class="card-body">
+            <div class="bg-violet inner-icon text-white">
+              <i class="iconsax isax-d-rotate"></i>
             </div>
+            <span class="inner-desc">Đơn hàng mới</span>
+            <div class="inner-value">{{newOrder.toString() | tempPrice: 1 : 1: true}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-blue-transparent widget">
+          <div class="card-body">
+            <div class="bg-blue inner-icon text-white">
+              <i class="iconsax isax-profile-2user"></i>
+            </div>
+            <span class="inner-desc">Thành viên mới</span>
+            <div class="inner-value">{{newUser.toString() | tempPrice: 1 : 1: true}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card bg-light-blue-transparent widget">
+          <div class="card-body">
+            <div class="bg-light-blue inner-icon text-white">
+              <i class="iconsax isax-dislike"></i>
+            </div>
+            <span class="inner-desc">Khiếu nại</span>
+            <div class="inner-value">{{newComplain.toString() | tempPrice: 1 : 1: true}}</div>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 col-lg-4">
-        <div class="brand-card">
-          <div class="brand-card-header bg-twitter">TAOBAO
-            <div class="chart-wrapper">
-              <div class="chartjs-size-monitor">
-                <div class="chartjs-size-monitor-expand">
-                  <div class=""></div>
-                </div>
-                <div class="chartjs-size-monitor-shrink">
-                  <div class=""></div>
+      <div class="col-sm-8 col-lg-8">
+        <div class="card p-0">
+          <div class="card-header p-0">
+            <div class="row justify-content-between align-items-center">
+              <div class="col-12 col-md-8">
+                <div class="title-list">
+                  <span>Biểu đồ tình hình kết đơn</span>
                 </div>
               </div>
-              <canvas basechart="" class="chart chartjs-render-monitor" width="326" height="96"
-                      style="display: block; width: 326px; height: 96px;"></canvas>
             </div>
           </div>
-          <div class="brand-card-body">
-            <div>
-              <div class="text-value">{{statisticTaobao.link.toString() | tempPrice: 1 : 1: true}}</div>
-              <div class="text-uppercase text-muted small">Link sản phẩm</div>
+          <div class="card-body p-0">
+            <div class="chart-wrapper" style="height:300px;margin-top:40px;">
+              <ngx-charts-bar-vertical
+                [scheme]="colorScheme"
+                [results]="orderstatistic"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
             </div>
-            <div>
-              <div class="text-value">{{statisticTaobao.order.toString() | tempPrice: 1 : 1: true}}</div>
-              <div class="text-uppercase text-muted small">Đơn hàng</div>
+          </div>
+          <div class="card-footer p-0">
+            <div class="row text-center">
+              <div *ngFor="let item of orderstatusstatistic" class="col-sm-12 col-md mb-sm-2 mb-0">
+                <div class="text-muted">{{item.name}}</div>
+                <strong>{{item.val}} ({{item.valp}}%)</strong>
+                <div class="progress progress-xs mt-2">
+                  <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-foursquare"
+                       [style.width.%]="item.valp"
+                       role="progressbar"></div>
+                  <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-success"
+                       [style.width.%]="item.valsub"
+                       role="progressbar"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="brand-card">
-          <div class="brand-card-header bg-linkedin">TMALL
-            <div class="chart-wrapper">
-              <div class="chartjs-size-monitor">
-                <div class="chartjs-size-monitor-expand">
-                  <div class=""></div>
-                </div>
-                <div class="chartjs-size-monitor-shrink">
-                  <div class=""></div>
-                </div>
-              </div>
-              <canvas basechart="" class="chart chartjs-render-monitor" width="326" height="96"
-                      style="display: block; width: 326px; height: 96px;"></canvas>
-            </div>
+      <div class="col-sm-4 col-lg-4">
+        <div class="brand-card bg-gray p-15">
+          <div class="title-list mb-30">
+            <span>TAOBAO</span>
           </div>
+        
           <div class="brand-card-body">
-            <div>
-              <div class="text-value">{{statisticTmall.link.toString() | tempPrice: 1 : 1: true}}</div>
-              <div class="text-uppercase text-muted small">Link sản phẩm</div>
+            <div class="text-left">
+              <span class="text-value">{{statisticTaobao.link.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">link</span>
             </div>
             <div>
-              <div class="text-value">{{statisticTmall.order.toString() | tempPrice: 1 : 1: true}}</div>
-              <div class="text-uppercase text-muted small">Đơn hàng</div>
+              <span class="text-value">{{statisticTaobao.order.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">đơn</span>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <div class="brand-card">
-          <div class="brand-card-header bg-google-plus">1688
-            <div class="chart-wrapper">
-              <div class="chartjs-size-monitor">
-                <div class="chartjs-size-monitor-expand">
-                  <div class=""></div>
-                </div>
-                <div class="chartjs-size-monitor-shrink">
-                  <div class=""></div>
-                </div>
-              </div>
-              <canvas basechart="" class="chart chartjs-render-monitor" width="326" height="96"
-                      style="display: block; width: 326px; height: 96px;"></canvas>
+        <div class="brand-card bg-gray p-15">
+          <div class="title-list mb-30">
+            <span>TMALL</span>
+          </div>
+        
+          <div class="brand-card-body">
+            <div class="text-left">
+              <span class="text-value">{{statisticTmall.link.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">link</span>
+            </div>
+            <div>
+              <span class="text-value">{{statisticTmall.order.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">đơn</span>
             </div>
           </div>
+        </div>
+        <div class="brand-card bg-gray p-15">
+          <div class="title-list mb-30">
+            <span>1688</span>
+          </div>
+        
           <div class="brand-card-body">
-            <div>
-              <div class="text-value">{{statistic1688.link.toString() | tempPrice: 1 : 1: true}}</div>
-              <div class="text-uppercase text-muted small">Link sản phẩm</div>
+            <div class="text-left">
+              <span class="text-value">{{statistic1688.link.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">link</span>
             </div>
             <div>
-              <div class="text-value">{{statistic1688.order.toString() | tempPrice: 1 : 1: true}}</div>
-              <div class="text-uppercase text-muted small">Đơn hàng</div>
+              <span class="text-value">{{statistic1688.order.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">đơn</span>
             </div>
           </div>
         </div>
