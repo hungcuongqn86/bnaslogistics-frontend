@@ -123,9 +123,6 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   public selectPackage(item: IPackage, firt: number, col: string) {
     this.col = col;
     this.package = item;
-    if (firt === 0) {
-      this.package.tra_shop = this.orderService.orderRe.tien_hang;
-    }
   }
 
   public updatePackage(template: TemplateRef<any>, dirty: string) {
