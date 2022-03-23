@@ -198,6 +198,16 @@
                   </span>
                 </p>
                 <p>
+                  <span class="packages-inf">VIP</span>
+                  <span class="packages-inf text-right badge badge-info">
+                    <span>
+                      <span *ngIf="item.ck_vc_tt">
+                        {{item.ck_vc_tt.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                      </span>
+                    </span>
+                  </span>
+                </p>
+                <p>
                   <span class="packages-inf">Phí vận (vnđ)</span>
                   <span class="packages-inf text-right badge badge-info">
                     <span>
