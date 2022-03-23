@@ -135,7 +135,7 @@
                   (click)="selectPackage(item,'weight')"
                   class="packages-inf text-right badge badge-info">
                                     <input *ngIf="((package.id === item.id) && (col === 'weight'))"
-                                           [(ngModel)]="package.weight"
+                                           [(ngModel)]="item.weight"
                                            #weight="ngModel"
                                            class="form-control"
                                            id="weight"
@@ -152,7 +152,7 @@
                   (click)="selectPackage(item,'weight_qd')"
                   class="packages-inf text-right badge badge-info">
                                     <input *ngIf="((package.id === item.id) && (col === 'weight_qd'))"
-                                           [(ngModel)]="package.weight_qd"
+                                           [(ngModel)]="item.weight_qd"
                                            #weight_qd="ngModel"
                                            class="form-control"
                                            id="weight_qd"
@@ -169,7 +169,7 @@
                   (click)="selectPackage(item,'size')"
                   class="packages-inf text-right badge badge-info">
                                     <input *ngIf="((package.id === item.id) && (col === 'size'))"
-                                           [(ngModel)]="package.size"
+                                           [(ngModel)]="item.size"
                                            #size="ngModel"
                                            class="form-control"
                                            id="size"
@@ -186,7 +186,7 @@
               <td>
                 <p><span class="packages-inf">Áp giá theo</span>
                   <span (click)="selectPackage(item,'cal_option')" class="packages-inf text-right badge badge-info">
-                      <select [(ngModel)]="package.cal_option" #cal_option="ngModel"
+                      <select [(ngModel)]="item.cal_option" #cal_option="ngModel"
                               class="form-control"
                               (change)="updatePackage(template, 'cal_option')"
                               name="cal_option" id="cal_option">
@@ -199,7 +199,7 @@
                   (click)="selectPackage(item,'gia_can')"
                   class="packages-inf text-right badge badge-info">
                                     <input *ngIf="((package.id === item.id) && (col === 'gia_can'))"
-                                           [(ngModel)]="package.gia_can"
+                                           [(ngModel)]="item.gia_can"
                                            #gia_can="ngModel"
                                            class="form-control"
                                            id="gia_can"
