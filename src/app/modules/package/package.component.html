@@ -94,8 +94,7 @@
               <th style="width: 20%">Đơn hàng</th>
               <th style="width: 15%">Khối lượng</th>
               <th style="width: 15%">Phí vận</th>
-              <th style="width: 15%">Đóng gỗ</th>
-              <th style="width: 7%; min-width: 80px;">Tác vụ</th>
+              <th style="width: 15%">Đóng gỗ/ chống sốc</th>
             </tr>
             </thead>
             <tbody>
@@ -195,17 +194,9 @@
               <td>
 
               </td>
-              <td>
-                <button (click)="editPackages(item.id)" class="btn btn-sm btn-ghost-primary"
-                        type="button">
-                  <i class="fa fa-info-circle" aria-hidden="true"></i>
-                  Chi tiết
-                </button>
-              </td>
             </tr>
             </tbody>
           </table>
-
         </div>
         <div class="card-footer">
           <pagination [boundaryLinks]="true" [totalItems]="totalItems"
