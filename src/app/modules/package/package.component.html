@@ -220,8 +220,8 @@
                 </p>
               </td>
               <td>
-                <p>
-                  <span class="packages-inf">Giá đóng gỗ (vnđ)</span>
+                <p *ngIf="item.order.dong_go">
+                  <span class="packages-inf">Giá đóng gỗ</span>
                   <span class="packages-inf text-right badge badge-info">
                     <span>
                       <span *ngIf="item.dg_1_price">
@@ -233,8 +233,8 @@
                     </span>
                   </span>
                 </p>
-                <p>
-                  <span class="packages-inf">Phí đóng gỗ (vnđ)</span>
+                <p *ngIf="item.order.dong_go">
+                  <span class="packages-inf">Phí đóng gỗ</span>
                   <span class="packages-inf text-right badge badge-info">
                     <span>
                       <span *ngIf="item.tien_dong_go">
@@ -243,8 +243,8 @@
                     </span>
                   </span>
                 </p>
-                <p>
-                  <span class="packages-inf">Giá chống sốc (ndt)</span>
+                <p *ngIf="item.order.bao_hiem">
+                  <span class="packages-inf">Giá chống sốc</span>
                   <span class="packages-inf text-right badge badge-info">
                     <span>
                       <span *ngIf="item.chong_soc_1_price"><span>¥</span>
@@ -256,8 +256,8 @@
                     </span>
                   </span>
                 </p>
-                <p>
-                  <span class="packages-inf">Phí chống sốc (ndt)</span>
+                <p *ngIf="item.order.bao_hiem">
+                  <span class="packages-inf">Phí chống sốc</span>
                   <span class="packages-inf text-right badge badge-info">
                     <span>
                       <span *ngIf="item.tien_chong_soc"><span>¥</span>
