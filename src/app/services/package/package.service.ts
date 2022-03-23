@@ -57,9 +57,9 @@ export class PackageService {
       );
   }
 
-  public editPackage(item: IPackage) {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-    return this.http.post<any>(url, item)
+  public editPackage(item: IPackage, dirty: string) {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}update/${item.id}`;
+    return this.http.post<any>(url, {dirty: dirty, value: item[dirty]})
       .pipe(
         catchError(this.handleError('editPackage', item))
       );

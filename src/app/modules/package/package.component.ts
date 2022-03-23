@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewEncapsulation, TemplateRef, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PackageService} from '../../services/package/package.service';
 import {IPackage, PackageStatus} from '../../models/interface';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../auth.service';
 import {Package} from "../../models/model";
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
 
 @Component({
   selector: 'app-package',
@@ -23,8 +24,10 @@ export class PackageComponent implements OnInit, OnDestroy {
   counts: { status: number, total: number }[];
   sub: Subscription;
 
+  modalRef: BsModalRef;
+
   constructor(public packageService: PackageService, private route: ActivatedRoute, public authService: AuthService,
-              private router: Router) {
+              private router: Router, private modalService: BsModalService) {
     this.route.params.subscribe(params => {
       if (params['package_code']) {
         this.packageService.search.package_code = params['package_code'];
@@ -94,11 +97,11 @@ export class PackageComponent implements OnInit, OnDestroy {
     this.reNewPackage();
   }
 
-  reNewPackage() {
+  private reNewPackage() {
     this.package = new Package();
   }
 
-  public updatePackage() {
+  public updatePackage(template: TemplateRef<any>, dirty: string) {
     this.packageService.showLoading(true);
     if (!this.package.weight_qd) {
       if (this.package.weight < 0.5) {
@@ -107,10 +110,25 @@ export class PackageComponent implements OnInit, OnDestroy {
         this.package.weight_qd = this.package.weight;
       }
     }
-    this.packageService.editPackage(this.package)
+    this.sub = this.packageService.editPackage(this.package, dirty)
       .subscribe(res => {
-        this.searchPackages();
+        if (res.status) {
+          this.searchPackages();
+        } else {
+          this.errorMessage = res.data;
+          this.openErrorModal(template);
+          this.searchPackages();
+        }
+        this.sub.unsubscribe();
       });
+  }
+
+  openErrorModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+  }
+
+  declineError(): void {
+    this.modalRef.hide();
   }
 
   ngOnDestroy() {

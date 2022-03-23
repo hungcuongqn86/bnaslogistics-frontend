@@ -140,7 +140,7 @@
                                            class="form-control"
                                            id="weight"
                                            name="weight"
-                                           (change)="updatePackage()"
+                                           (change)="updatePackage(template, 'weight')"
                                            (blur)="hideInput()"
                                            appAutofocus
                                            type="number">
@@ -157,7 +157,7 @@
                                            class="form-control"
                                            id="weight_qd"
                                            name="weight_qd"
-                                           (change)="updatePackage()"
+                                           (change)="updatePackage(template, 'weight_qd')"
                                            (blur)="hideInput()"
                                            appAutofocus
                                            type="number">
@@ -176,7 +176,7 @@
                                            class="form-control"
                                            id="gia_can"
                                            name="gia_can"
-                                           (change)="updatePackage()"
+                                           (change)="updatePackage(template, 'gia_can')"
                                            (blur)="hideInput()"
                                            appAutofocus
                                            type="number">
@@ -212,3 +212,17 @@
     <!--/.col-->
   </div>
 </div><!-- /.container-fluid -->
+
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title">Thông báo lỗi</h5>
+  </div>
+  <div class="modal-body">
+    <alert type="danger" *ngIf="errorMessage.length > 0">
+      <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="declineError()">OK</button>
+  </div>
+</ng-template>
