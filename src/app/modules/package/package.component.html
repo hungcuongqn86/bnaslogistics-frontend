@@ -44,8 +44,8 @@
                         </div>
                       </div>
                       <input [(ngModel)]="packageService.search.code" type="text" id="code" name="code"
-                       class="form-control"
-                       placeholder="Mã đơn hàng">
+                             class="form-control"
+                             placeholder="Mã đơn hàng">
                     </div>
                   </div>
                   <div class="col-md">
@@ -56,9 +56,9 @@
                         </div>
                       </div>
                       <input [(ngModel)]="packageService.search.package_code" type="text" id="package_code"
-                       name="package_code"
-                       class="form-control"
-                       placeholder="Mã vận đơn">
+                             name="package_code"
+                             class="form-control"
+                             placeholder="Mã vận đơn">
                     </div>
                   </div>
                 </div>
@@ -73,14 +73,14 @@
                         </div>
                       </div>
                       <input [(ngModel)]="packageService.search.key" type="text" id="key" name="key"
-                       class="form-control"
-                       placeholder="Tìm kiếm theo tên khách hàng, email, số điện thoại">
+                             class="form-control"
+                             placeholder="Tìm kiếm theo tên khách hàng, email, số điện thoại">
                     </div>
                   </div>
                   <div class="col-md-1">
                     <button type="submit" (click)="searchPackages()"
-                        class="btn btn-primary">
-                        <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
+                            class="btn btn-primary">
+                      <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
                     </button>
                   </div>
                 </div>
@@ -184,22 +184,16 @@
                 </p>
               </td>
               <td>
-                <p><span class="packages-inf">Áp giá theo</span><span
-                  (click)="selectPackage(item,'cal_option')"
-                  class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'cal_option'))"
-                                           [(ngModel)]="package.cal_option"
-                                           #cal_option="ngModel"
-                                           class="form-control"
-                                           id="cal_option"
-                                           name="cal_option"
-                                           (change)="updatePackage(template, 'cal_option')"
-                                           (blur)="hideInput()"
-                                           appAutofocus
-                                           type="number">
-                                <span
-                                  *ngIf="((package.id !== item.id) || (col !== 'cal_option'))">{{item.cal_option ? item.cal_option : '0'}}</span>
-                                </span>
+                <p><span class="packages-inf">Áp giá theo</span>
+                  <span (click)="selectPackage(item,'cal_option')" class="packages-inf text-right badge badge-info">
+                      <select [(ngModel)]="package.cal_option" #cal_option="ngModel"
+                              class="form-control"
+                              (change)="updatePackage(template, 'cal_option')"
+                              name="cal_option" id="cal_option">
+                        <option value="0">Cân nặng</option>
+                        <option value="1">Thể tích</option>
+                      </select>
+                  </span>
                 </p>
                 <p><span class="packages-inf">Giá vận (vnđ)</span><span
                   (click)="selectPackage(item,'gia_can')"
