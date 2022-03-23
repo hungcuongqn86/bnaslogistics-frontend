@@ -166,39 +166,39 @@
                                 </span>
                 </p>
                 <p><span class="packages-inf">Thể tích (m3)</span><span
-                  (click)="selectPackage(item,'weight_qd')"
+                  (click)="selectPackage(item,'size')"
                   class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'weight_qd'))"
-                                           [(ngModel)]="package.weight_qd"
-                                           #weight_qd="ngModel"
+                                    <input *ngIf="((package.id === item.id) && (col === 'size'))"
+                                           [(ngModel)]="package.size"
+                                           #size="ngModel"
                                            class="form-control"
-                                           id="weight_qd"
-                                           name="weight_qd"
-                                           (change)="updatePackage(template, 'weight_qd')"
+                                           id="size"
+                                           name="size"
+                                           (change)="updatePackage(template, 'size')"
                                            (blur)="hideInput()"
                                            appAutofocus
                                            type="number">
                                 <span
-                                  *ngIf="((package.id !== item.id) || (col !== 'weight_qd'))">{{item.weight_qd ? item.weight_qd : '0.00'}}</span>
+                                  *ngIf="((package.id !== item.id) || (col !== 'size'))">{{item.size ? item.size : '0.00'}}</span>
                                 </span>
                 </p>
               </td>
               <td>
-                <p><span class="packages-inf">Tính theo</span><span
-                  (click)="selectPackage(item,'gia_can')"
+                <p><span class="packages-inf">Áp giá theo</span><span
+                  (click)="selectPackage(item,'cal_option')"
                   class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'gia_can'))"
-                                           [(ngModel)]="package.gia_can"
-                                           #gia_can="ngModel"
+                                    <input *ngIf="((package.id === item.id) && (col === 'cal_option'))"
+                                           [(ngModel)]="package.cal_option"
+                                           #cal_option="ngModel"
                                            class="form-control"
-                                           id="gia_can"
-                                           name="gia_can"
-                                           (change)="updatePackage(template, 'gia_can')"
+                                           id="cal_option"
+                                           name="cal_option"
+                                           (change)="updatePackage(template, 'cal_option')"
                                            (blur)="hideInput()"
                                            appAutofocus
                                            type="number">
                                 <span
-                                  *ngIf="((package.id !== item.id) || (col !== 'gia_can'))">{{item.gia_can ? item.gia_can : '0'}}</span>
+                                  *ngIf="((package.id !== item.id) || (col !== 'cal_option'))">{{item.cal_option ? item.cal_option : '0'}}</span>
                                 </span>
                 </p>
                 <p><span class="packages-inf">Giá vận (vnđ)</span><span

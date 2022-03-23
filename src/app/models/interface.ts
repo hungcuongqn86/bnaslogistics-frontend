@@ -305,6 +305,7 @@ export interface IPackage {
   gia_can: number;
   tien_kt: number;
   gia_kt: number;
+  cal_option: number;
   tien_thanh_ly: number;
   phi_van_phat_sinh: number;
   bill_id: number;
