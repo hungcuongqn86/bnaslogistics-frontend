@@ -104,11 +104,17 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       });
   }
 
-  public deletePackage(item: IPackage) {
+  public deletePackage(template: TemplateRef<any>, item: IPackage) {
     this.orderService.showLoading(true);
     this.orderService.deletePackage(item)
       .subscribe(res => {
-        this.getOrder();
+        if (res.status) {
+          this.getOrder();
+        } else {
+          this.errorMessage = res.data;
+          this.openErrorModal(template);
+          this.getOrder();
+        }
       });
   }
 
