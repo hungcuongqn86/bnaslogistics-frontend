@@ -35,7 +35,7 @@ export class MyorderComponent implements OnInit {
               private router: Router) {
     this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
     this.order = new Order();
-    this.vip = new Vip();
+    // this.vip = new Vip();
     this.arrDeposit = this.auth.user.deposit.split(',');
     this.counts = null;
     this.route.params.subscribe(params => {
@@ -99,14 +99,14 @@ export class MyorderComponent implements OnInit {
     this.orderService.showLoading(true);
 
     const getOrderObs: Observable<any> = this.orderService.getOrder(order.id);
-    const getVipObs: Observable<any> = this.settingService.getVip(this.auth.user.vip);
+    // const getVipObs: Observable<any> = this.settingService.getVip(this.auth.user.vip);
 
     const listSub = forkJoin([
       getOrderObs,
-      getVipObs
+      // getVipObs
     ]).subscribe(([order, vip]) => {
       this.order = order.data;
-      this.vip = vip.data;
+      // this.vip = vip.data;
       this.orderService.showLoading(false);
       listSub.unsubscribe();
       this.openDatCocModal(template);
@@ -116,7 +116,7 @@ export class MyorderComponent implements OnInit {
   private openDatCocModal(template: TemplateRef<any>) {
     this.inputDatCoc.id = this.order.id;
     this.inputDatCoc.tien_hang = this.order.tien_hang + this.order.phi_kiem_dem_tt + this.order.phi_dat_hang_tt;
-    this.inputDatCoc.dc_percent_value = this.vip.deposit;
+    this.inputDatCoc.dc_percent_value = this.order.deposit;
     this.calTienCoc();
     this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
   }

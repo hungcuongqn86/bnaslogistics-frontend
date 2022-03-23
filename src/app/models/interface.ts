@@ -234,6 +234,8 @@ export interface IOrder {
   vip_id: number;
   ck_dv: number;
   ck_dv_tt: number;
+  ck_vc: number;
+  deposit: number;
   phi_dat_hang_cs: number;
   phi_dat_hang: number;
   phi_dat_hang_tt: number;
