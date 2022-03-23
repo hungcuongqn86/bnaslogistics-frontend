@@ -92,7 +92,7 @@
             <tr>
               <th style="width: 20%">Kiện hàng</th>
               <th style="width: 20%">Đơn hàng</th>
-              <th style="width: 15%">Khối lượng</th>
+              <th style="width: 15%">Thông số</th>
               <th style="width: 15%">Phí vận</th>
               <th style="width: 15%">Đóng gỗ/ chống sốc</th>
             </tr>
@@ -148,7 +148,24 @@
                                   *ngIf="((package.id !== item.id) || (col !== 'weight'))">{{item.weight ? item.weight : '0.00'}}</span>
                                 </span>
                 </p>
-                <p><span class="packages-inf">Quy đổi (kg)</span><span
+                <p><span class="packages-inf">Cân nặng QĐ (kg)</span><span
+                  (click)="selectPackage(item,'weight_qd')"
+                  class="packages-inf text-right badge badge-info">
+                                    <input *ngIf="((package.id === item.id) && (col === 'weight_qd'))"
+                                           [(ngModel)]="package.weight_qd"
+                                           #weight_qd="ngModel"
+                                           class="form-control"
+                                           id="weight_qd"
+                                           name="weight_qd"
+                                           (change)="updatePackage(template, 'weight_qd')"
+                                           (blur)="hideInput()"
+                                           appAutofocus
+                                           type="number">
+                                <span
+                                  *ngIf="((package.id !== item.id) || (col !== 'weight_qd'))">{{item.weight_qd ? item.weight_qd : '0.00'}}</span>
+                                </span>
+                </p>
+                <p><span class="packages-inf">Thể tích (m3)</span><span
                   (click)="selectPackage(item,'weight_qd')"
                   class="packages-inf text-right badge badge-info">
                                     <input *ngIf="((package.id === item.id) && (col === 'weight_qd'))"
@@ -167,6 +184,23 @@
                 </p>
               </td>
               <td>
+                <p><span class="packages-inf">Tính theo</span><span
+                  (click)="selectPackage(item,'gia_can')"
+                  class="packages-inf text-right badge badge-info">
+                                    <input *ngIf="((package.id === item.id) && (col === 'gia_can'))"
+                                           [(ngModel)]="package.gia_can"
+                                           #gia_can="ngModel"
+                                           class="form-control"
+                                           id="gia_can"
+                                           name="gia_can"
+                                           (change)="updatePackage(template, 'gia_can')"
+                                           (blur)="hideInput()"
+                                           appAutofocus
+                                           type="number">
+                                <span
+                                  *ngIf="((package.id !== item.id) || (col !== 'gia_can'))">{{item.gia_can ? item.gia_can : '0'}}</span>
+                                </span>
+                </p>
                 <p><span class="packages-inf">Giá vận (vnđ)</span><span
                   (click)="selectPackage(item,'gia_can')"
                   class="packages-inf text-right badge badge-info">

@@ -110,7 +110,7 @@ export class PackageComponent implements OnInit, OnDestroy {
         this.package.weight_qd = this.package.weight;
       }
     }
-    this.sub = this.packageService.editPackage(this.package, dirty)
+    const updatesub = this.packageService.editPackage(this.package, dirty)
       .subscribe(res => {
         if (res.status) {
           this.searchPackages();
@@ -119,7 +119,7 @@ export class PackageComponent implements OnInit, OnDestroy {
           this.openErrorModal(template);
           this.searchPackages();
         }
-        this.sub.unsubscribe();
+        updatesub.unsubscribe();
       });
   }
 
