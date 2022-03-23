@@ -1,18 +1,19 @@
 import {
+  History,
   ICart,
   ICartItem,
   IChinaWarehouse,
   IInspectionFee,
   IOrder,
   IOrderItem,
+  IPackage,
   IRole,
   IServiceFee,
   ISetting,
   IShop,
   ITransportFee,
   IUser,
-  IVip,
-  History, IPackage
+  IVip
 } from "./interface";
 import {Partner} from "./Partner";
 import {Transaction} from "./Transaction";
@@ -273,13 +274,11 @@ export class Package implements IPackage {
   weight: number;
   weight_qd: number;
   size: number;
-  size_qd: number;
   tien_can: number;
   gia_can: number;
-  tien_kt: number;
-  gia_kt: number;
+  ck_vc_tt: number;
+  tien_can_tt: number;
   cal_option: number;
-  tien_thanh_ly: number;
   phi_van_phat_sinh: number;
   bill_id: number;
   is_deleted: number;

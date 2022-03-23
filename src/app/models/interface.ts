@@ -302,16 +302,13 @@ export interface IPackage {
   weight: number;
   weight_qd: number;
   size: number;
-  size_qd: number;
-  tien_can: number;
   gia_can: number;
-  tien_kt: number;
-  gia_kt: number;
+  tien_can: number;
+  ck_vc_tt: number;
+  tien_can_tt: number;
   cal_option: number;
-  tien_thanh_ly: number;
   phi_van_phat_sinh: number;
   bill_id: number;
-  is_deleted: number;
   created_at: string;
   updated_at: string;
 }
