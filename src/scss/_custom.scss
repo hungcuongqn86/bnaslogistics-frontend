@@ -584,9 +584,10 @@ body.app:not(.header-fixed) {
     .inner-desc{
       font-size: 14px;
       line-height: 45px;
+      margin-left: 5px;
     }
     .inner-value {
-      margin-left: 60px;
+      margin-left: 45px;
       font-size: 38px;
     }
   }
@@ -601,6 +602,9 @@ body.app:not(.header-fixed) {
     }
   }
   .entry-list {
+    .badge{
+      font-size: 11px;
+    }
     thead {
       th {
         font-size: 12px;
@@ -610,6 +614,7 @@ body.app:not(.header-fixed) {
       .nav-tabs {
         .nav-link {
           font-size: 14px;
+          padding: 5px;
         }
       }
     }
