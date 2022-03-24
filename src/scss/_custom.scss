@@ -317,6 +317,15 @@ body.app:not(.header-fixed) {
         top: -1px;
         left: 0;
       }
+      &.highlight-violet::before{
+        background-color: $violet;
+      }
+      &.highlight-blue::before{
+        background-color: $blue;
+      }
+      &.highlight-orange::before{
+        background-color: $orange;
+      }
     }
   }
   .card-header {
@@ -558,7 +567,59 @@ body.app:not(.header-fixed) {
     font-size: 34px;
     line-height: 1;
   }
+  .text-desc {
+    font-size: 16px;
+  }
 }
 .brand-card-body > *:not(:last-child){
   border-color: $color-text;
+}
+@media (max-width: 1366px) {
+  .widget {
+    .inner-icon {
+      width: 45px;
+      height: 45px;
+      line-height: 45px;
+    }
+    .inner-desc{
+      font-size: 14px;
+      line-height: 45px;
+    }
+    .inner-value {
+      margin-left: 60px;
+      font-size: 38px;
+    }
+  }
+  .filter-advanced {
+    .input-group-text{
+      padding: 0px 10px;
+    }
+    .btn {
+      height: 36px;
+      width: 33px;
+      line-height: 36px;
+    }
+  }
+  .entry-list {
+    thead {
+      th {
+        font-size: 12px;
+      }
+    }
+    .card-header {
+      .nav-tabs {
+        .nav-link {
+          font-size: 14px;
+        }
+      }
+    }
+    .title-list {
+      font-size: 18px;
+      span{
+        &::before {
+          height: 23px;
+        }
+      }
+    }
+  }
 }
