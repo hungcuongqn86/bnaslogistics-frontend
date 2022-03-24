@@ -1,18 +1,19 @@
 import {
+  History,
   ICart,
   ICartItem,
   IChinaWarehouse,
   IInspectionFee,
   IOrder,
   IOrderItem,
+  IPackage,
   IRole,
   IServiceFee,
   ISetting,
   IShop,
   ITransportFee,
   IUser,
-  IVip,
-  History, IPackage
+  IVip
 } from "./interface";
 import {Partner} from "./Partner";
 import {Transaction} from "./Transaction";
@@ -230,6 +231,8 @@ export class Order implements IOrder {
   vip_id: number;
   ck_dv: number;
   ck_dv_tt: number;
+  ck_vc: number;
+  deposit: number;
   phi_dat_hang_cs: number;
   phi_dat_hang: number;
   phi_dat_hang_tt: number;
@@ -271,14 +274,18 @@ export class Package implements IPackage {
   weight: number;
   weight_qd: number;
   size: number;
-  size_qd: number;
   tien_can: number;
   gia_can: number;
-  tien_kt: number;
-  gia_kt: number;
+  ck_vc_tt: number;
+  tien_can_tt: number;
   cal_option: number;
-  tien_thanh_ly: number;
   phi_van_phat_sinh: number;
+  dg_1_price: number;
+  dg_2_price: number;
+  tien_dong_go: number;
+  chong_soc_1_price: number;
+  chong_soc_2_price: number;
+  tien_chong_soc: number;
   bill_id: number;
   is_deleted: number;
   created_at: string;
