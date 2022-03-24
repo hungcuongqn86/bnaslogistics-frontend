@@ -61,7 +61,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.bill.package.length; i++) {
       this.report.tong_can_nang = Number(this.report.tong_can_nang) + Number(this.bill.package[i].weight_qd);
       this.report.tong_tien_can = Number(this.report.tong_tien_can) + Number(this.bill.package[i].tien_can);
-      this.report.tong_thanh_ly = Number(this.report.tong_thanh_ly) + Number(this.bill.package[i].tien_thanh_ly);
+      // this.report.tong_thanh_ly = Number(this.report.tong_thanh_ly) + Number(this.bill.package[i].tien_thanh_ly);
       this.report.tong_van_phi_ps = Number(this.report.tong_van_phi_ps) + Number(this.bill.package[i].phi_van_phat_sinh);
 
       for (let j = 0; j < this.bill.package[i].order.cart.length; j++) {

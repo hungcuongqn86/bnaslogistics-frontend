@@ -92,7 +92,7 @@ export class WaitComponent implements OnInit, OnDestroy {
     public checkBill(item: WarehouseWait) {
         let tien_xuat_kho = 0;
         for (let i = 0; i < item.package.length; i++) {
-            tien_xuat_kho = tien_xuat_kho + Number(item.package[i].tien_can) + Number(item.package[i].tien_thanh_ly);
+            // tien_xuat_kho = tien_xuat_kho + Number(item.package[i].tien_can) + Number(item.package[i].tien_thanh_ly);
         }
         item.tien_xuat_kho = tien_xuat_kho;
         item.tien_thieu_xuat_kho = Number(item.debt) - Number(item.tien_xuat_kho);
