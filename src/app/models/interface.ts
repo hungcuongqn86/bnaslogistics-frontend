@@ -302,6 +302,9 @@ export interface IPackage {
   weight: number;
   weight_qd: number;
   size: number;
+  c_d: number;
+  c_r: number;
+  c_c: number;
   gia_can: number;
   tien_can: number;
   ck_vc_tt: number;

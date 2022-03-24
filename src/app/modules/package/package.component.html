@@ -140,10 +140,11 @@
                               name="cal_option" id="cal_option">
                         <option value="0">Cân nặng</option>
                         <option value="1">Thể tích</option>
+                        <option value="2">Quy đổi</option>
                       </select>
                   </span>
                 </p>
-                <p><span class="packages-inf">Cân nặng (kg)</span><span
+                <p *ngIf="item.cal_option===0"><span class="packages-inf">Cân nặng (kg)</span><span
                   (click)="selectPackage(item,'weight')"
                   class="packages-inf text-right badge badge-info">
                                     <input *ngIf="((package.id === item.id) && (col === 'weight'))"
@@ -160,7 +161,7 @@
                                   *ngIf="((package.id !== item.id) || (col !== 'weight'))">{{item.weight ? item.weight : '0.00'}}</span>
                                 </span>
                 </p>
-                <p><span class="packages-inf">Thể tích (m3)</span><span
+                <p *ngIf="item.cal_option===1"><span class="packages-inf">Thể tích (m3)</span><span
                   (click)="selectPackage(item,'size')"
                   class="packages-inf text-right badge badge-info">
                                     <input *ngIf="((package.id === item.id) && (col === 'size'))"
@@ -176,6 +177,63 @@
                                 <span
                                   *ngIf="((package.id !== item.id) || (col !== 'size'))">{{item.size ? item.size : '0.00'}}</span>
                                 </span>
+                </p>
+
+                <p *ngIf="item.cal_option===2"><span class="packages-inf">Dài (cm)</span><span
+                  (click)="selectPackage(item,'c_d')"
+                  class="packages-inf text-right badge badge-info">
+                                    <input *ngIf="((package.id === item.id) && (col === 'c_d'))"
+                                           [(ngModel)]="item.c_d"
+                                           #c_d="ngModel"
+                                           class="form-control"
+                                           id="c_d"
+                                           name="c_d"
+                                           (change)="updatePackage(template, 'c_d')"
+                                           (blur)="hideInput()"
+                                           appAutofocus
+                                           type="number">
+                                <span
+                                  *ngIf="((package.id !== item.id) || (col !== 'c_d'))">{{item.c_d ? item.c_d : '0.00'}}</span>
+                                </span>
+                </p>
+                <p *ngIf="item.cal_option===2"><span class="packages-inf">Rộng (cm)</span><span
+                  (click)="selectPackage(item,'c_r')"
+                  class="packages-inf text-right badge badge-info">
+                                    <input *ngIf="((package.id === item.id) && (col === 'c_r'))"
+                                           [(ngModel)]="item.c_r"
+                                           #c_r="ngModel"
+                                           class="form-control"
+                                           id="c_r"
+                                           name="c_r"
+                                           (change)="updatePackage(template, 'c_r')"
+                                           (blur)="hideInput()"
+                                           appAutofocus
+                                           type="number">
+                                <span
+                                  *ngIf="((package.id !== item.id) || (col !== 'c_r'))">{{item.c_r ? item.c_r : '0.00'}}</span>
+                                </span>
+                </p>
+                <p *ngIf="item.cal_option===2"><span class="packages-inf">Cao (cm)</span><span
+                  (click)="selectPackage(item,'c_c')"
+                  class="packages-inf text-right badge badge-info">
+                                    <input *ngIf="((package.id === item.id) && (col === 'c_c'))"
+                                           [(ngModel)]="item.c_c"
+                                           #c_c="ngModel"
+                                           class="form-control"
+                                           id="c_c"
+                                           name="c_c"
+                                           (change)="updatePackage(template, 'c_c')"
+                                           (blur)="hideInput()"
+                                           appAutofocus
+                                           type="number">
+                                <span
+                                  *ngIf="((package.id !== item.id) || (col !== 'c_c'))">{{item.c_c ? item.c_c : '0.00'}}</span>
+                                </span>
+                </p>
+                <p *ngIf="item.cal_option===2"><span class="packages-inf">Quy đổi (Kg)</span>
+                  <span class="packages-inf text-right badge badge-info">
+                    <span>{{item.weight_qd ? item.weight_qd : '0.00'}}</span>
+                  </span>
                 </p>
               </td>
               <td>
