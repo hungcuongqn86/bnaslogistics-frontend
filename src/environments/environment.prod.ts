@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   basename: '',
   backend: 'https://nguonhang.net/order/api/public/',
-  apiUrl: './order/api/public/api/',
+  apiUrl: '../order/api/public/api/',
   apiV1Url: '../order/api/public/api/v1/',
   appId: "nguonhang",
   firebase: {
