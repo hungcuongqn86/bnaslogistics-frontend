@@ -1,7 +1,27 @@
 <div *ngIf="!authService.hasRole('custumer')" class="container-fluid">
   <div class="animated fadeIn bg-white p-20 entry-list">
-    <div class="title-list mb-30">
-      <span>Danh sách đơn hàng</span>
+    <div class="row mb-30 justify-content-between align-items-center">
+      <div class="col-sm-6 col-lg-3">
+        <div class="title-list ">
+          <span>Danh sách đơn hàng</span>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 ml-auto">
+        <div class="text-right d-flex">
+          <button class="btn btn-info mr-2 text-white px-2 btn-rounded" type="button"><strong>Tất cả</strong></button>
+
+          <div class="input-group filter-advanced">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="iconsax isax-calendar"></i>
+              </div>
+            </div>
+            <input type="text" id="" name=""
+                   class="form-control"
+                   placeholder="MM/YY - MM/YY">
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-sm-6 col-lg-3">
@@ -58,6 +78,13 @@
                 <div class="title-list">
                   <span class="highlight-violet">Biểu đồ tình hình kết đơn</span>
                 </div>
+              </div>
+              <div class="col-12 col-md-2 ml-auto">
+                <select class="form-control" name="" id="">
+                  <option value="">Tuần này</option>
+                  <option value="">Tháng này</option>
+                  <option value="">Năm này</option>
+                </select>
               </div>
             </div>
           </div>
