@@ -228,6 +228,7 @@ export class Order implements IOrder {
   chinh_ngach: boolean;
   vat: boolean;
   tien_hang: number;
+  tra_shop: number;
   vip_id: number;
   ck_dv: number;
   ck_dv_tt: number;
@@ -270,6 +271,7 @@ export class Package implements IPackage {
   tra_shop: number;
   thanh_toan: number;
   status: number;
+  is_main: number;
   note_tl: string;
   weight: number;
   weight_qd: number;

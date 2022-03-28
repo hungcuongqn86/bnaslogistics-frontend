@@ -10,9 +10,12 @@
         </p>
         <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.code}}</p>
         <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
-        <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
+        <p *ngIf="orderService.orderRe.tra_shop"><i class="fa fa-money"></i> Tiền hàng:
+          <span>¥</span> {{orderService.orderRe.tra_shop.toString() | tempPrice : 1:1 : true}}</p>
+
+        <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup></p>
         <p *ngIf="orderService.orderRe.dat_coc"><i class="fa fa-money"></i> Đã thanh
-          toán: {{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup>
+          toán: {{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup></p>
         <p><i class="fa fa-money"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
         </p>
         <p><i class="fa fa-edge"></i> Đặt tại website: <span
@@ -99,7 +102,8 @@
                  (blur)="hideInput()"
                  appAutofocus
                  type="number">
-          <p *ngIf="((package.id !== item.id) || (col !== 'ship_khach'))"><span>¥</span> {{item.ship_khach | tempPrice: 1 : 1 : false}}</p>
+          <p *ngIf="((package.id !== item.id) || (col !== 'ship_khach'))">
+            <span>¥</span> {{item.ship_khach | tempPrice: 1 : 1 : false}}</p>
         </td>
         <td (click)="selectPackage(item,i,'ship_tt')">
           <input *ngIf="((package.id === item.id) && (col === 'ship_tt'))"
@@ -112,7 +116,8 @@
                  (blur)="hideInput()"
                  appAutofocus
                  type="number">
-          <p *ngIf="((package.id !== item.id) || (col !== 'ship_tt'))"><span>¥</span> {{item.ship_tt | tempPrice: 1 : 1 : false}}</p>
+          <p *ngIf="((package.id !== item.id) || (col !== 'ship_tt'))">
+            <span>¥</span> {{item.ship_tt | tempPrice: 1 : 1 : false}}</p>
         </td>
         <td (click)="selectPackage(item,i,'thanh_toan')">
           <input *ngIf="((package.id === item.id) && (col === 'thanh_toan'))"
@@ -391,7 +396,8 @@
             </tr>
             <tr>
               <td colspan="7" class="text-right">Phí dịch vụ mua hàng thành tiền</td>
-              <td colspan="3">{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup>
+              <td colspan="3">{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+                <sup>đ</sup>
               </td>
             </tr>
             <tr *ngIf="orderService.orderRe.kiem_hang">
