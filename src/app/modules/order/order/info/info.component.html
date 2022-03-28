@@ -16,8 +16,6 @@
         <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup></p>
         <p *ngIf="orderService.orderRe.dat_coc"><i class="fa fa-money"></i> Đã thanh
           toán: {{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup></p>
-        <p><i class="fa fa-money"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
-        </p>
         <p><i class="fa fa-edge"></i> Đặt tại website: <span
           *ngIf="orderService.orderRe.order_items && orderService.orderRe.order_items[0]"
           class="badge badge-danger"> {{orderService.orderRe.order_items[0].site}}</span>
