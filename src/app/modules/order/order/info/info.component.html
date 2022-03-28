@@ -202,9 +202,9 @@
           <p *ngIf="((package.id !== item.id) || (col !== 'note_tl'))">{{item.note_tl}}</p>
         </td>
         <td>
-          <p *ngIf="i!==0" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
-                                                                     (click)="deletePackage(template, item);"
-                                                                     href="javascript:void(0);">Hủy</a>
+          <p *ngIf="item.is_main!=1" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
+                                                                                  (click)="deletePackage(template, item);"
+                                                                                  href="javascript:void(0);">Hủy</a>
           </p>
         </td>
       </tr>
