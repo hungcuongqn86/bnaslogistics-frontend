@@ -126,7 +126,7 @@
                  appAutofocus
                  type="number">
           <p *ngIf="((package.id !== item.id) || (col !== 'thanh_toan')) && item.thanh_toan">
-            {{item.thanh_toan | tempPrice: 1 : 1 : false}}<sup>đ</sup></p>
+            <span>¥</span> {{item.thanh_toan | tempPrice: 1 : 1 : false}}</p>
         </td>
         <td (click)="selectPackage(item,i,'package_code')">
           <input *ngIf="((package.id === item.id) && (col === 'package_code'))"
