@@ -320,6 +320,7 @@ export interface IPackage {
   tien_chong_soc: number;
   phi_van_phat_sinh: number;
   bill_id: number;
+  tien_thanh_ly: number;
   created_at: string;
   updated_at: string;
 }

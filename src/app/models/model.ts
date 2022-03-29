@@ -292,6 +292,7 @@ export class Package implements IPackage {
   chong_soc_2_price: number;
   tien_chong_soc: number;
   bill_id: number;
+  tien_thanh_ly: number;
   is_deleted: number;
   created_at: string;
   updated_at: string;
