@@ -25,6 +25,7 @@ export interface Warehouse {
 
 export interface Bill {
     id: number;
+    code: string;
     user_id: number;
     user: IUser;
     bill_date: string;

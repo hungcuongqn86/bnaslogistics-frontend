@@ -17,7 +17,7 @@
         </div>
         <div *ngIf="bill" id="printarea" class="card-body">
           <h3 class="text-center">PHIẾU XUẤT KHO</h3>
-          <p class="text-center"><i>(Mã phiếu <b>{{bill.id}}</b>)</i> Hà Nội</p>
+          <p class="text-center"><i>(Mã phiếu <b>{{bill.code}}</b>)</i> Hà Nội</p>
           <div class="row">
             <div class="col-sm-5">
               <h4 class="">Thông tin khách</h4>
@@ -29,17 +29,17 @@
                 </tr>
                 <tr>
                   <td>Email</td>
-                  <td><p *ngIf="authService.hasRole('admin')">{{bill.user.email}}</p></td>
+                  <td><p>{{bill.user.email}}</p></td>
                 </tr>
                 <tr>
                   <td>Điện thoại</td>
-                  <td><p *ngIf="authService.hasRole('admin')">{{bill.user.phone_number}}</p></td>
+                  <td><p>{{bill.user.phone_number}}</p></td>
                 </tr>
                 </tbody>
               </table>
             </div>
             <div class="col-sm-7">
-              <h4>Tiền cần thanh toán (đơn vị đ)</h4>
+              <h4>Tiền cần thanh toán (đơn vị VNĐ)</h4>
               <table class="table">
                 <thead>
                 </thead>
@@ -66,7 +66,7 @@
           </div>
           <div class="row">
             <div class="col-sm-12">
-              <h4 class="">Thông tin phiếu xuất (đơn vị đ)</h4>
+              <h4 class="">Thông tin phiếu xuất (đơn vị VNĐ)</h4>
               <table class="table table-bordered">
                 <thead>
                 <tr class="">
