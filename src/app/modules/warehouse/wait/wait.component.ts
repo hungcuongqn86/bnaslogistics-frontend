@@ -93,7 +93,7 @@ export class WaitComponent implements OnInit, OnDestroy {
     if (show) {
       let tien_xuat_kho = 0;
       for (let i = 0; i < item.package.length; i++) {
-        tien_xuat_kho = tien_xuat_kho + Number(item.package[i].tien_can) + Number(item.package[i].tien_thanh_ly);
+        tien_xuat_kho = tien_xuat_kho + Number(item.package[i].tien_can_tt) + Number(item.package[i].tien_dong_go) + Number(item.package[i].tien_chong_soc) + Number(item.package[i].phi_van_phat_sinh) + Number(item.package[i].tien_thanh_ly);
       }
       item.tien_xuat_kho = tien_xuat_kho;
       item.tien_thieu_xuat_kho = Number(item.debt) - Number(item.tien_xuat_kho);
