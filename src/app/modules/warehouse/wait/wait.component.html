@@ -114,7 +114,7 @@
                 <table class="table table-bordered">
                   <thead>
                   <tr>
-                    <th>Số lượng</th>
+                    <th>SL</th>
                     <th class="text-left">Mã vận đơn</th>
                   </tr>
                   </thead>
@@ -122,8 +122,17 @@
                   <tr>
                     <td>{{item.package.length}}</td>
                     <td class="text-left">
-                      <p *ngFor="let package of item.package">{{package.package_code}} /
-                        {{package.weight_qd ? package.weight_qd : '0.00'}}</p>
+                      <p *ngFor="let package of item.package">
+                        <span *ngIf="package.is_main" class="badge badge-primary">{{package.package_code}}</span>
+                        <span *ngIf="!package.is_main" class="badge badge-info">{{package.package_code}}</span>
+                        <span *ngIf="package.cal_option == 0"
+                              class="badge badge-info">Cân nặng: {{package.weight ? package.weight : '0.00'}} kg</span>
+                        <span *ngIf="package.cal_option == 1"
+                              class="badge badge-info">Kích thước: {{package.size ? package.size : '0.00'}} m3</span>
+                        <span *ngIf="package.cal_option == 2"
+                              class="badge badge-info">Quy đổi: {{package.weight_qd ? package.weight_qd : '0.00'}}
+                          kg</span>
+                      </p>
                     </td>
                   </tr>
                   </tbody>
