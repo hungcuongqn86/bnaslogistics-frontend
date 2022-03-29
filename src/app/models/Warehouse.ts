@@ -2,12 +2,14 @@ import {IOrder, IPackage, IUser} from './interface';
 
 export interface WarehouseWait {
     id: number;
+    code: string;
     name: string;
     email: string;
     phone_number: string;
     debt: number;
     cost_percent: number;
     package: IPackage[];
+    show_tc: boolean;
     tien_xuat_kho: number;
     tien_thieu_xuat_kho: number;
     rate: number;
