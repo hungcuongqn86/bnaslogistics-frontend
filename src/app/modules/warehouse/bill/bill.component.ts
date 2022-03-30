@@ -57,8 +57,7 @@ export class BillComponent implements OnInit, OnDestroy {
   }
 
   public gotoDetail(id) {
-    const win = window.open(`./warehouse/bill/detail/${id}`, '_blank');
-    win.focus();
+    this.router.navigate([`/warehouse/bill/detail/${id}`]);
   }
 
   public deleteBill(item: Bill, template: TemplateRef<any>) {

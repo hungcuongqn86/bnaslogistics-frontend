@@ -97,20 +97,19 @@
             </div>
           </div>
           <div>
-            <h4 class="g-no-print">Thông tin gói hàng</h4>
-            <p class="text-right"><i>Công thức quy đổi: (kg) = Dài (cm) x rộng (cm) x cao (cm)/ 6000</i></p>
+            <h4 class="g-no-print">Thông tin kiện hàng <span style="font-size: 10pt;"><i>(Công thức quy đổi: (kg) = Dài (cm) x rộng (cm) x cao (cm)/ 6000)</i></span></h4>
             <table class="table table-bordered  lading_table" style="cursor: pointer;">
               <thead>
               <tr>
                 <th class="text-center">#</th>
                 <th>Mã kiện</th>
-                <th>Đơn hàng</th>
-                <th class="text-center">Thanh lý(vnđ)</th>
-                <th class="text-center">Cân nặng(kg)</th>
-                <th class="text-center">Quy đổi(kg)</th>
+                <th>Mã đơn</th>
+                <th class="text-center">Thanh lý</th>
+                <th class="text-center">Cân nặng</th>
+                <th class="text-center">Quy đổi</th>
                 <th class="text-center">KT(m3)</th>
-                <th class="text-center">Vận giá(vnđ)</th>
-                <th class="text-center">Cước vận(vnđ)</th>
+                <th class="text-center">Vận giá</th>
+                <th class="text-center">Cước vận</th>
                 <th class="text-center">Cước vận PS</th>
                 <th class="text-center">Đóng Gỗ</th>
                 <th class="text-center">Chống sốc</th>
@@ -172,8 +171,7 @@
               <tr>
                 <th>Mã đơn</th>
                 <th>Mã link</th>
-                <th>Mô tả màu sắc</th>
-                <th>Kích thước</th>
+                <th>Màu sắc, Kích thước</th>
                 <th>Ghi chú</th>
                 <th>Giá</th>
                 <th>SL đặt</th>
@@ -190,8 +188,10 @@
                   <td>
                     <a href="{{item.pro_link}}"
                        target="_blank"> {{item.id}}</a></td>
-                  <td>{{item.colortxt}}</td>
-                  <td>{{item.sizetxt}}</td>
+                  <td>
+                    <p>{{item.colortxt}}</p>
+                    <p>{{item.sizetxt}}</p>
+                  </td>
                   <td>{{item.note}}</td>
                   <td class="text-right">{{item.price | tempPrice: 1 : 1 : false}}</td>
                   <td class="text-right">{{item.amount}}</td>
