@@ -69,32 +69,29 @@
           <table class="table table-hover">
             <thead>
             <tr>
-              <th rowspan="2">Mã phiếu</th>
-              <th rowspan="2">Ngày tạo</th>
-              <th rowspan="2">Khách hàng</th>
-              <th rowspan="2">Tổng cân</th>
-              <th rowspan="2">Tiền cân nặng</th>
-              <th rowspan="2">Tiền hoàn thành đơn</th>
-              <th rowspan="2">Nhân viên xuất</th>
-              <th rowspan="2">Số mã</th>
-              <th rowspan="2">Trạng thái</th>
-              <th rowspan="2" class="text-right">Tác vụ</th>
+              <th>Mã phiếu</th>
+              <th>Ngày tạo</th>
+              <th>Khách hàng</th>
+              <th>Phí vận</th>
+              <th>Tiền hoàn thành đơn</th>
+              <th>Nhân viên xuất</th>
+              <th>Số mã</th>
+              <th>Trạng thái</th>
+              <th class="text-right">Tác vụ</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let item of bills">
-              <td>{{item.id}}</td>
-              <td>{{item.created_at}}</td>
+              <td>{{item.code}}</td>
+              <td>{{item.created_at | tempDate}}</td>
               <td>
-                <p title="Name">{{item.user.name}}</p>
-                <p *ngIf="authService.hasRole('admin')" title="Email">{{item.user.email}}</p>
-                <p *ngIf="authService.hasRole('admin')" title="Số điện thoại">{{item.user.phone_number}}</p>
+                <p title="Name">{{item.user.code}} - {{item.user.name}}</p>
+                <p title="Số điện thoại">{{item.user.phone_number}}</p>
               </td>
-              <td class="text-right">{{item.tong_can}}</td>
-              <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can | tempPrice: 1 : 1}}</p>
+              <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can.toString() | tempPrice: 1 : 1: true}}</p>
               </td>
-              <td class="text-right"><p *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly | tempPrice: 1 :
-                1}}</p></td>
+              <td class="text-right"><p *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly.toString() | tempPrice: 1 :
+                1: true}}</p></td>
               <td>{{item.employee.name}}</td>
               <td>{{item.so_ma}}</td>
               <td>

@@ -30,10 +30,11 @@ export interface Bill {
     user: IUser;
     bill_date: string;
     created_at: string;
-    tong_can: number;
     tien_can: number;
-    gia_can_nang: number;
     tien_thanh_ly: number;
+    tien_dong_go: number;
+    tien_chong_soc: number;
+    phi_van_phat_sinh: number;
     status: number;
     employee_id: number;
     employee: IUser;
