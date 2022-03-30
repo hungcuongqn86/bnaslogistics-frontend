@@ -18,7 +18,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
   bill: Bill = null;
   id: number;
   date: string;
-  report: { tong_tien_can: number, tong_tien_dong_go: number, tong_tien_chong_soc: number, tong_thanh_ly: number, tong_van_phi_ps: number };
+  report: { tong_tien_can: number, tong_tien_dong_go: number, tong_tien_chong_soc: number, tong_tien_chong_soc_tt: number, tong_thanh_ly: number, tong_van_phi_ps: number };
   carts: Cart[] = [];
   sub: Subscription;
   errorMessage: string[] = [];
@@ -30,6 +30,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
       tong_tien_can: 0,
       tong_tien_dong_go: 0,
       tong_tien_chong_soc: 0,
+      tong_tien_chong_soc_tt: 0,
       tong_thanh_ly: 0,
       tong_van_phi_ps: 0
     };
@@ -67,6 +68,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
       tong_tien_can: 0,
       tong_tien_dong_go: 0,
       tong_tien_chong_soc: 0,
+      tong_tien_chong_soc_tt: 0,
       tong_thanh_ly: 0,
       tong_van_phi_ps: 0
     };
@@ -74,6 +76,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
       this.report.tong_tien_can = Number(this.report.tong_tien_can) + Number(this.bill.package[i].tien_can_tt);
       this.report.tong_tien_dong_go = Number(this.report.tong_tien_dong_go) + Number(this.bill.package[i].tien_dong_go);
       this.report.tong_tien_chong_soc = Number(this.report.tong_tien_chong_soc) + Number(this.bill.package[i].tien_chong_soc);
+      this.report.tong_tien_chong_soc_tt = Number(this.report.tong_tien_chong_soc_tt) + Number(this.bill.package[i].tien_chong_soc_tt);
       this.report.tong_thanh_ly = Number(this.report.tong_thanh_ly) + Number(this.bill.package[i].tien_thanh_ly);
       this.report.tong_van_phi_ps = Number(this.report.tong_van_phi_ps) + Number(this.bill.package[i].phi_van_phat_sinh);
 
@@ -89,6 +92,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
     this.report.tong_tien_can = Math.round(this.report.tong_tien_can * 100) / 100;
     this.report.tong_tien_dong_go = Math.round(this.report.tong_tien_dong_go * 100) / 100;
     this.report.tong_tien_chong_soc = Math.round(this.report.tong_tien_chong_soc * 100) / 100;
+    this.report.tong_tien_chong_soc_tt = Math.round(this.report.tong_tien_chong_soc_tt * 100) / 100;
     this.report.tong_thanh_ly = Math.round(this.report.tong_thanh_ly * 100) / 100;
     this.report.tong_van_phi_ps = Math.round(this.report.tong_van_phi_ps * 100) / 100;
   }

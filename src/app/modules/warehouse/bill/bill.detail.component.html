@@ -47,7 +47,7 @@
                 <tr>
                   <td>a. Tiền (1+2+3+4+5)</td>
                   <td class="text-right">
-                    {{(report.tong_tien_can + report.tong_thanh_ly + report.tong_van_phi_ps).toString() | tempPrice: 1 : 1 : true}}
+                    {{(report.tong_tien_can + report.tong_tien_dong_go + report.tong_tien_chong_soc_tt + report.tong_thanh_ly + report.tong_van_phi_ps).toString() | tempPrice: 1 : 1 : true}}
                   </td>
                 </tr>
                 <tr>
@@ -56,7 +56,8 @@
                 </tr>
                 <tr *ngIf="bill && bill.status===1">
                   <td>Số dư sau khi xuất kho (b - a)</td>
-                  <td class="text-right">{{(bill.user.debt - (report.tong_tien_can +
+                  <td
+                    class="text-right">{{(bill.user.debt - (report.tong_tien_can + report.tong_tien_dong_go + report.tong_tien_chong_soc_tt +
                     report.tong_thanh_ly + report.tong_van_phi_ps)).toString() | tempPrice: 1 : 1 : true}}
                   </td>
                 </tr>
@@ -83,7 +84,7 @@
                   </td>
                   <td class="text-right  bold">{{report.tong_tien_dong_go.toString() | tempPrice: 1 : 1: true}}
                   </td>
-                  <td class="text-right  bold">{{report.tong_tien_chong_soc.toString() | tempPrice: 1 : 1: true}}
+                  <td class="text-right  bold">{{report.tong_tien_chong_soc_tt.toString() | tempPrice: 1 : 1: true}}
                   </td>
                   <td class="bold text-right">{{report.tong_van_phi_ps.toString() | tempPrice: 1 : 1: true}}</td>
                   <td class="text-right bold "> {{report.tong_thanh_ly.toString() | tempPrice: 1 : 1:true}}
