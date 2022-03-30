@@ -241,9 +241,7 @@ export class Order implements IOrder {
   phi_bao_hiem_tt: number;
   phi_kiem_dem_cs: number;
   phi_kiem_dem_tt: number;
-  tong: number;
   dat_coc: number;
-  con_thieu: number;
   dat_coc_content: string;
   handle: IUser;
   content_pc: string;
