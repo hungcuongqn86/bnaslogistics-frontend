@@ -74,7 +74,7 @@
                   <th>1. Tiền cân</th>
                   <th>2. Tiền đóng gỗ</th>
                   <th>3. Tiền chống sốc</th>
-                  <th>4. Phí Vận phát sinh</th>
+                  <th>4. Cước Vận phát sinh</th>
                   <th>5. Thanh lý</th>
                 </tr>
                 </thead>
@@ -100,15 +100,17 @@
             <table class="table table-bordered  lading_table" style="cursor: pointer;">
               <thead>
               <tr>
-                <th>##</th>
-                <th class="text-center">Mã kiện</th>
-                <th class="text-center">Đơn hàng</th>
-                <th class="text-center">Thanh lý(đ)</th>
-                <th class="text-center">Cân nặng</th>
+                <th class="text-center">#</th>
+                <th>Mã kiện</th>
+                <th>Đơn hàng</th>
+                <th class="text-center">Thanh lý(vnđ)</th>
+                <th class="text-center">Cân nặng(kg)</th>
                 <th class="text-center">Quy đổi(kg)</th>
-                <th class="text-center">Đơn giá(đ)</th>
-                <th class="text-center">Thành tiền(đ)</th>
-                <th class="text-center">Cước vận chuyển <br> phát sinh</th>
+                <th class="text-center">Kích thước(m3)</th>
+                <th class="text-center">Vận giá(vnđ)</th>
+                <th class="text-center">Cước vận(vnđ)</th>
+                <th class="text-center">Cước vận PS</th>
+                <th class="text-center">Đóng Gỗ</th>
               </tr>
               </thead>
               <tbody>
@@ -125,15 +127,16 @@
                   </td>
                   <td>
                     <a href="./order/list/detail/{{item.order.id}}"
-                       target="_blank">{{item.order.id}}</a>
+                       target="_blank">{{item.order.code}}</a>
                   </td>
                   <td class="text-right"><p *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
                     tempPrice: 1 : 1: false}}</p></td>
                   <td class="text-right">{{item.weight}}</td>
                   <td class="text-right">{{item.weight_qd}}</td>
+                  <td class="text-right">{{item.size}}</td>
                   <td class="text-right"><p *ngIf="item.gia_can">{{item.gia_can |
                     tempPrice: 1 : 1: false}}</p></td>
-                  <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can |
+                  <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can_tt |
                     tempPrice: 1 : 1: false}}</p>
                   </td>
                   <td class="text-right ">{{item.phi_van_phat_sinh |
@@ -142,10 +145,10 @@
               </ng-template>
               <tr>
                 <td colspan="3"></td>
-                <td class="text-right ">{{report.tong_thanh_ly | tempPrice: 1 : 1: false}}</td>
+                <td class="text-right ">{{report.tong_thanh_ly.toString() | tempPrice: 1 : 1: false}}</td>
                 <td colspan="3"></td>
-                <td class="text-right ">{{report.tong_tien_can | tempPrice: 1 : 1: false}}</td>
-                <td class="text-right ">{{report.tong_van_phi_ps | tempPrice: 1 : 1: false}}</td>
+                <td class="text-right ">{{report.tong_tien_can.toString() | tempPrice: 1 : 1: false}}</td>
+                <td class="text-right ">{{report.tong_van_phi_ps.toString() | tempPrice: 1 : 1: false}}</td>
               </tr>
               </tbody>
             </table>
