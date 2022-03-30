@@ -2,11 +2,11 @@ import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WarehouseService} from '../../../services/order/warehouse.service';
 import {Bill} from '../../../models/Warehouse';
-import {Cart} from '../../../models/Cart';
 import {Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
+import {IOrderItem} from "../../../models/interface";
 
 @Component({
   selector: 'app-bill-detail',
@@ -19,7 +19,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
   id: number;
   date: string;
   report: { tong_tien_can: number, tong_tien_dong_go: number, tong_tien_chong_soc: number, tong_tien_chong_soc_tt: number, tong_thanh_ly: number, tong_van_phi_ps: number };
-  carts: Cart[] = [];
+  order_items: IOrderItem[] = [];
   sub: Subscription;
   errorMessage: string[] = [];
   modalRef: BsModalRef;
@@ -80,11 +80,10 @@ export class BillDetailComponent implements OnInit, OnDestroy {
       this.report.tong_thanh_ly = Number(this.report.tong_thanh_ly) + Number(this.bill.package[i].tien_thanh_ly);
       this.report.tong_van_phi_ps = Number(this.report.tong_van_phi_ps) + Number(this.bill.package[i].phi_van_phat_sinh);
 
-      for (let j = 0; j < this.bill.package[i].order.cart.length; j++) {
-        const checkExit = this.carts.findIndex(x => x.id === this.bill.package[i].order.cart[j].id);
+      for (let j = 0; j < this.bill.package[i].order.order_items.length; j++) {
+        const checkExit = this.order_items.findIndex(x => x.id === this.bill.package[i].order.order_items[j].id);
         if (checkExit < 0) {
-          // this.carts.push(this.bill.package[i].order.cart[j]);
-          // Todo
+          this.order_items.push(this.bill.package[i].order.order_items[j]);
         }
       }
     }
