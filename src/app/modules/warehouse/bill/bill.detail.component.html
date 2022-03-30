@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                  <td>a. Tiền (1+2+3)</td>
+                  <td>a. Tiền (1+2+3+4+5)</td>
                   <td class="text-right">
                     {{(report.tong_tien_can + report.tong_thanh_ly + report.tong_van_phi_ps).toString() | tempPrice: 1 : 1 : true}}
                   </td>
@@ -71,16 +71,22 @@
                 <thead>
                 <tr class="">
                   <th>1. Tiền cân</th>
-                  <th>2. Vận chuyển phát sinh</th>
-                  <th>3. Thanh lý</th>
+                  <th>2. Tiền đóng gỗ</th>
+                  <th>3. Tiền chống sốc</th>
+                  <th>4. Phí Vận phát sinh</th>
+                  <th>5. Thanh lý</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                  <td class="text-right  bold">{{report.tong_tien_can | tempPrice: 1 : 1}}
+                  <td class="text-right  bold">{{report.tong_tien_can.toString() | tempPrice: 1 : 1: true}}
                   </td>
-                  <td class="bold text-right">{{report.tong_van_phi_ps | tempPrice: 1 : 1}}</td>
-                  <td class="text-right bold "> {{report.tong_thanh_ly | tempPrice: 1 : 1}}
+                  <td class="text-right  bold">{{report.tong_tien_dong_go.toString() | tempPrice: 1 : 1: true}}
+                  </td>
+                  <td class="text-right  bold">{{report.tong_tien_chong_soc.toString() | tempPrice: 1 : 1: true}}
+                  </td>
+                  <td class="bold text-right">{{report.tong_van_phi_ps.toString() | tempPrice: 1 : 1: true}}</td>
+                  <td class="text-right bold "> {{report.tong_thanh_ly.toString() | tempPrice: 1 : 1:true}}
                   </td>
                 </tr>
                 </tbody>
@@ -109,12 +115,12 @@
                 <tr>
                   <td class="text-center">{{i + 1}}</td>
                   <td>
-                                        <span>
-                                            <a target="_blank"
-                                               href="./package/{{item.package_code}}">
-                                                {{item.package_code}}
-                                            </a>
-                                        </span>
+                      <span>
+                          <a target="_blank"
+                             href="./package/{{item.package_code}}">
+                              {{item.package_code}}
+                          </a>
+                      </span>
                   </td>
                   <td>
                     <a href="./order/list/detail/{{item.order.id}}"
