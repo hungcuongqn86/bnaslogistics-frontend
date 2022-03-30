@@ -133,9 +133,9 @@
                   </td>
                   <td class="text-right"><p *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
                     tempPrice: 1 : 1: false}}</p></td>
-                  <td class="text-right">{{item.weight}}</td>
-                  <td class="text-right">{{item.weight_qd}}</td>
-                  <td class="text-right">{{item.size}}</td>
+                  <td class="text-right"><span *ngIf="item.cal_option==0">{{item.weight}}</span></td>
+                  <td class="text-right"><span *ngIf="item.cal_option==2">{{item.weight_qd}}</span></td>
+                  <td class="text-right"><span *ngIf="item.cal_option==1">{{item.size}}</span></td>
                   <td class="text-right"><p *ngIf="item.gia_can">{{item.gia_can |
                     tempPrice: 1 : 1: false}}</p></td>
                   <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can_tt |
