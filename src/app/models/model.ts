@@ -267,7 +267,9 @@ export class Package implements IPackage {
   package_code: string;
   contract_code: string;
   ship_khach: number;
+  ship_khach_tt: number;
   ship_tt: number;
+  ship_tt_tt: number;
   tra_shop: number;
   thanh_toan: number;
   status: number;
@@ -291,6 +293,7 @@ export class Package implements IPackage {
   chong_soc_1_price: number;
   chong_soc_2_price: number;
   tien_chong_soc: number;
+  tien_chong_soc_tt: number;
   bill_id: number;
   tien_thanh_ly: number;
   is_deleted: number;
