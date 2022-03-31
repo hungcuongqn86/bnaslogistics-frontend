@@ -1,5 +1,7 @@
 import {
-  History, ICarrier, ICarrierPackage,
+  History,
+  ICarrier,
+  ICarrierPackage,
   ICart,
   ICartItem,
   IChinaWarehouse,
@@ -324,6 +326,7 @@ export class Carrier implements ICarrier {
   carrier_package: ICarrierPackage[];
 
   constructor() {
+    this.carrier_package = [];
   }
 }
 

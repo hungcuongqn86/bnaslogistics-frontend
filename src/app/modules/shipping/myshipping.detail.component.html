@@ -32,121 +32,85 @@
                 </tr>
                 </thead>
                 <tbody
-                  *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
-                <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
+                  *ngIf="carrier && carrier.carrier_package">
+                <ng-template ngFor let-item [ngForOf]="carrier.carrier_package" let-i="index">
                   <tr>
-                    <td>{{item.id}}</td>
-                    <td (click)="selectPackage(item,i,'ship_khach')">
-                      <input *ngIf="((package.id === item.id) && (col === 'ship_khach'))"
-                             [(ngModel)]="package.ship_khach"
-                             #ship_khach="ngModel"
-                             class="form-control"
-                             id="ship_khach"
-                             name="ship_khach"
-                             (change)="updatePackage(template, 'ship_khach')"
-                             (blur)="hideInput()"
-                             appAutofocus
-                             type="number">
-                      <p *ngIf="((package.id !== item.id) || (col !== 'ship_khach'))">
-                        <span>¥</span> {{item.ship_khach | tempPrice: 1 : 1 : false}}</p>
-                    </td>
-                    <td (click)="selectPackage(item,i,'ship_tt')">
-                      <input *ngIf="((package.id === item.id) && (col === 'ship_tt'))"
-                             [(ngModel)]="package.ship_tt"
-                             #ship_tt="ngModel"
-                             class="form-control"
-                             id="ship_tt"
-                             name="ship_tt"
-                             (change)="updatePackage(template, 'ship_tt')"
-                             (blur)="hideInput()"
-                             appAutofocus
-                             type="number">
-                      <p *ngIf="((package.id !== item.id) || (col !== 'ship_tt'))">
-                        <span>¥</span> {{item.ship_tt | tempPrice: 1 : 1 : false}}</p>
-                    </td>
-                    <td (click)="selectPackage(item,i,'thanh_toan')">
-                      <input *ngIf="((package.id === item.id) && (col === 'thanh_toan'))"
-                             [(ngModel)]="package.thanh_toan"
-                             #thanh_toan="ngModel"
-                             class="form-control"
-                             id="thanh_toan"
-                             name="thanh_toan"
-                             (change)="updatePackage(template, 'thanh_toan')"
-                             (blur)="hideInput()"
-                             appAutofocus
-                             type="number">
-                      <p *ngIf="((package.id !== item.id) || (col !== 'thanh_toan')) && item.thanh_toan">
-                        <span>¥</span> {{item.thanh_toan | tempPrice: 1 : 1 : false}}</p>
-                    </td>
-                    <td (click)="selectPackage(item,i,'package_code')">
-                      <input *ngIf="((package.id === item.id) && (col === 'package_code'))"
-                             [(ngModel)]="package.package_code"
+                    <td (click)="selectPackage(item,'package_code')">
+                      <input *ngIf="((carrierPackage.id === item.id) && (col === 'package_code'))"
+                             [(ngModel)]="carrierPackage.package_code"
                              #package_code="ngModel"
                              class="form-control"
                              id="package_code"
                              name="package_code"
-                             (change)="updatePackage(template, 'package_code')"
                              (blur)="hideInput()"
                              appAutofocus
                              type="text">
-                      <p *ngIf="((package.id !== item.id) || (col !== 'package_code'))">{{item.package_code}}</p>
+                      <p *ngIf="((carrierPackage.id !== item.id) || (col !== 'package_code'))">{{item.package_code}}</p>
                     </td>
-                    <td (click)="selectPackage(item,i,'contract_code')">
-                      <input *ngIf="((package.id === item.id) && (col === 'contract_code'))"
-                             [(ngModel)]="package.contract_code"
-                             #contract_code="ngModel"
+                    <td (click)="selectPackage(item,'product_name')">
+                      <input *ngIf="((carrierPackage.id === item.id) && (col === 'product_name'))"
+                             [(ngModel)]="carrierPackage.product_name"
+                             #product_name="ngModel"
                              class="form-control"
-                             id="contract_code"
-                             name="contract_code"
-                             (change)="updatePackage(template, 'contract_code')"
+                             id="product_name"
+                             name="product_name"
                              (blur)="hideInput()"
                              appAutofocus
                              type="text">
-                      <p *ngIf="((package.id !== item.id) || (col !== 'contract_code'))">
-                        {{item.contract_code}}</p>
+                      <p *ngIf="((carrierPackage.id !== item.id) || (col !== 'product_name'))">{{item.product_name}}</p>
                     </td>
-                    <td (click)="selectPackage(item,i,'status')">
-                      <select *ngIf="((package.id === item.id) && (col === 'status'))"
-                              [(ngModel)]="package.status"
-                              #status="ngModel"
-                              id="status"
-                              name="status"
-                              (change)="updatePackage(template, 'status')"
-                              (blur)="hideInput()"
-                              appAutofocus
-                              class="form-control">
-                        <option *ngFor="let item of pkStatus" value="{{item.id}}">{{item.name}}</option>
-                      </select>
-                      <p *ngIf="((package.id !== item.id) || (col !== 'status'))">{{item.status | tempPkStatus :
-                        pkStatus}}</p>
-                    </td>
-                    <td (click)="selectPackage(item,i,'phi_van_phat_sinh')">
-                      <input *ngIf="((package.id === item.id) && (col === 'phi_van_phat_sinh'))"
-                             [(ngModel)]="package.phi_van_phat_sinh"
-                             #phi_van_phat_sinh="ngModel"
+                    <td (click)="selectPackage(item,'product_count')">
+                      <input *ngIf="((carrierPackage.id === item.id) && (col === 'product_count'))"
+                             [(ngModel)]="carrierPackage.product_count"
+                             #product_count="ngModel"
                              class="form-control"
-                             id="phi_van_phat_sinh"
-                             name="phi_van_phat_sinh"
-                             (change)="updatePackage(template, 'phi_van_phat_sinh')"
+                             id="product_count"
+                             name="product_count"
+                             (blur)="hideInput()"
+                             appAutofocus
+                             type="number">
+                      <p
+                        *ngIf="((carrierPackage.id !== item.id) || (col !== 'product_count'))">{{item.product_count}}</p>
+                    </td>
+                    <td (click)="selectPackage(item,'carrier_brand')">
+                      <input *ngIf="((carrierPackage.id === item.id) && (col === 'carrier_brand'))"
+                             [(ngModel)]="carrierPackage.carrier_brand"
+                             #carrier_brand="ngModel"
+                             class="form-control"
+                             id="carrier_brand"
+                             name="carrier_brand"
                              (blur)="hideInput()"
                              appAutofocus
                              type="text">
-                      <p *ngIf="((package.id !== item.id) || (col !== 'phi_van_phat_sinh'))">
-                        {{item.phi_van_phat_sinh | tempPrice: 1 : 1 : false}}<sup>đ</sup></p>
+                      <p
+                        *ngIf="((carrierPackage.id !== item.id) || (col !== 'carrier_brand'))">{{item.carrier_brand}}</p>
                     </td>
-                    <td (click)="selectPackage(item,i,'note_tl')">
-                    <textarea *ngIf="((package.id === item.id) && (col === 'note_tl'))"
-                              [(ngModel)]="package.note_tl"
-                              #note_tl="ngModel"
-                              id="note_tl"
-                              name="note_tl"
-                              rows="3"
-                              class="form-control"
-                              (change)="updatePackage(template, 'note_tl')"
-                              (blur)="hideInput()"
-                              appAutofocus>
-                    </textarea>
-                      <p *ngIf="((package.id !== item.id) || (col !== 'note_tl'))">{{item.note_tl}}</p>
+
+                    <td (click)="selectPackage(item,'description')">
+                      <textarea *ngIf="((carrierPackage.id === item.id) && (col === 'description'))"
+                                [(ngModel)]="carrierPackage.description"
+                                #description="ngModel"
+                                id="description"
+                                name="description"
+                                rows="3"
+                                class="form-control"
+                                (blur)="hideInput()"
+                                appAutofocus>
+                      </textarea>
+                      <p *ngIf="((carrierPackage.id !== item.id) || (col !== 'description'))">{{item.description}}</p>
+                    </td>
+                    <td (click)="selectPackage(item,'note')">
+                      <textarea *ngIf="((carrierPackage.id === item.id) && (col === 'note'))"
+                                [(ngModel)]="carrierPackage.note"
+                                #note="ngModel"
+                                id="note"
+                                name="note"
+                                rows="3"
+                                class="form-control"
+                                (blur)="hideInput()"
+                                appAutofocus>
+                      </textarea>
+                      <p *ngIf="((carrierPackage.id !== item.id) || (col !== 'note'))">{{item.note}}</p>
                     </td>
                     <td>
                       <p *ngIf="item.is_main!=1" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
@@ -157,8 +121,8 @@
                   </tr>
                 </ng-template>
                 <tr>
-                  <td colspan="15" class="text-right"><a (click)="addPackage();" style="cursor: pointer;"
-                                                         href="javascript:void(0);"><i
+                  <td colspan="7" class="text-right"><a (click)="addPackage();" style="cursor: pointer;"
+                                                        href="javascript:void(0);"><i
                     class="fa fa-plus-square"></i> Thêm mã vận đơn</a></td>
                 </tr>
                 </tbody>
