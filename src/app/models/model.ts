@@ -1,5 +1,5 @@
 import {
-  History,
+  History, ICarrier, ICarrierPackage,
   ICart,
   ICartItem,
   IChinaWarehouse,
@@ -295,6 +295,48 @@ export class Package implements IPackage {
   bill_id: number;
   tien_thanh_ly: number;
   is_deleted: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+  }
+}
+
+export class Carrier implements ICarrier {
+  id: number;
+  user_id: number;
+  count_product: number;
+  kiem_hang: boolean;
+  dong_go: boolean;
+  bao_hiem: boolean;
+  chinh_ngach: boolean;
+  vat: boolean;
+  vip_id: number;
+  ck_vc: number;
+  phi_kiem_dem_cs: number;
+  phi_kiem_dem_tt: number;
+  china_warehouses_id: number;
+  china_warehouses_address: string;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  user: IUser;
+  carrier_package: ICarrierPackage[];
+
+  constructor() {
+  }
+}
+
+export class CarrierPackage implements ICarrierPackage {
+  id: number;
+  carrier_id: number;
+  package_code: string;
+  product_name: string;
+  product_count: number;
+  carrier_brand: string;
+  description: string;
+  note: string;
+  status: number;
   created_at: string;
   updated_at: string;
 
