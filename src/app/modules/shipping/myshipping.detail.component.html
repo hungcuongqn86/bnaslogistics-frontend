@@ -18,52 +18,6 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-lg-12" style="text-align: right;">
-              <div class="col-form-label">
-                <div class="form-check form-check-inline mr-1">
-                  <input type="checkbox" id="kiem_hang" name="kiem_hang"
-                         value="1"
-                         [(ngModel)]="carrier.kiem_hang"
-                         (change)="updateOrder('kiem_hang')"
-                         class="form-check-input">
-                  <label class="form-check-label">Kiểm hàng</label>
-                </div>
-                <div class="form-check form-check-inline mr-1">
-                  <input type="checkbox" id="dong_go" name="dong_go"
-                         value="1"
-                         [(ngModel)]="carrier.dong_go"
-                         (change)="updateOrder('dong_go')"
-                         class="form-check-input">
-                  <label class="form-check-label">Đóng gỗ</label>
-                </div>
-                <div class="form-check form-check-inline mr-1">
-                  <input type="checkbox" id="bao_hiem" name="bao_hiem"
-                         value="1"
-                         [(ngModel)]="carrier.bao_hiem"
-                         (change)="updateOrder('bao_hiem')"
-                         class="form-check-input">
-                  <label class="form-check-label">Chống sốc</label>
-                </div>
-                <!--<div class="form-check form-check-inline mr-1">
-                  <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
-                         value="1"
-                         [(ngModel)]="carrier.chinh_ngach"
-                         (change)="updateOrder('chinh_ngach')"
-                         class="form-check-input">
-                  <label class="form-check-label">Chính ngạch</label>
-                </div>
-                <div class="form-check form-check-inline mr-1">
-                  <input type="checkbox" id="vat" name="vat"
-                         value="1"
-                         (change)="updateOrder('vat')"
-                         [(ngModel)]="carrier.vat"
-                         class="form-check-input">
-                  <label class="form-check-label">VAT</label>
-                </div>-->
-              </div>
-            </div>
-          </div>
-          <div class="row">
             <div class="col-md-12 mb-4">
               <form novalidate #form="ngForm" class="form-horizontal">
                 <table class="table table-bordered table-sm">
@@ -176,8 +130,69 @@
                   </tr>
                   </tbody>
                 </table>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="col-form-label">
+                      <div class="form-check form-check-inline mr-1">
+                        <input type="checkbox" id="kiem_hang" name="kiem_hang"
+                               value="1"
+                               [(ngModel)]="carrier.kiem_hang"
+                               (change)="updateOrder('kiem_hang')"
+                               class="form-check-input">
+                        <label class="form-check-label">Kiểm hàng</label>
+                      </div>
+                      <div class="form-check form-check-inline mr-1">
+                        <input type="checkbox" id="dong_go" name="dong_go"
+                               value="1"
+                               [(ngModel)]="carrier.dong_go"
+                               (change)="updateOrder('dong_go')"
+                               class="form-check-input">
+                        <label class="form-check-label">Đóng gỗ</label>
+                      </div>
+                      <div class="form-check form-check-inline mr-1">
+                        <input type="checkbox" id="bao_hiem" name="bao_hiem"
+                               value="1"
+                               [(ngModel)]="carrier.bao_hiem"
+                               (change)="updateOrder('bao_hiem')"
+                               class="form-check-input">
+                        <label class="form-check-label">Chống sốc</label>
+                      </div>
+                      <!--<div class="form-check form-check-inline mr-1">
+                        <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
+                               value="1"
+                               [(ngModel)]="carrier.chinh_ngach"
+                               (change)="updateOrder('chinh_ngach')"
+                               class="form-check-input">
+                        <label class="form-check-label">Chính ngạch</label>
+                      </div>
+                      <div class="form-check form-check-inline mr-1">
+                        <input type="checkbox" id="vat" name="vat"
+                               value="1"
+                               (change)="updateOrder('vat')"
+                               [(ngModel)]="carrier.vat"
+                               class="form-check-input">
+                        <label class="form-check-label">VAT</label>
+                      </div>-->
+                    </div>
+                  </div>
+                </div>
               </form>
             </div><!--/.col-->
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header"><i class="fa fa-anchor"></i>Kho Trung Quốc nhận hàng</div>
+                <div class="card-body">
+                  <div class="col-form-label">
+                    <div *ngFor="let item of chinaWarehouses" class="form-check form-check-inline mr-1">
+                      <input type="radio" name="chinaWarehouses" class="form-check-input">
+                      <label class="form-check-label">{{item.name}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
