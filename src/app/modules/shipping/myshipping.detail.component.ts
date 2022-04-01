@@ -1,9 +1,12 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ShippingService} from '../../services/shipping/shipping.service';
-import {ICarrier, ICarrierPackage, IPackage} from "../../models/interface";
+import {ICarrier, ICarrierPackage, IChinaWarehouse, IPackage} from "../../models/interface";
 import {Carrier, CarrierPackage} from "../../models/model";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {forkJoin, Observable} from "rxjs";
+import {SettingService} from "../../services/setting/setting.service";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-myshipping-detail',
@@ -17,10 +20,12 @@ export class MyshippingDetailComponent implements OnInit {
   public col = '';
   public errorMessage: string[] = [];
 
-  modalRef: BsModalRef;
+  private modalRef: BsModalRef;
+  public chinaWarehouses: IChinaWarehouse[];
 
-  constructor(private router: Router, private route: ActivatedRoute
+  constructor(private router: Router, private route: ActivatedRoute, public settingService: SettingService, private auth: AuthService
     , public shippingService: ShippingService, private modalService: BsModalService) {
+    this.carrierPackage = new CarrierPackage();
     this.carrier = new Carrier();
     this.carrier.carrier_package.push(new CarrierPackage());
     this.route.params.subscribe(params => {
@@ -32,6 +37,7 @@ export class MyshippingDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getChinaWarehouses();
   }
 
   private getOrder() {
@@ -58,6 +64,28 @@ export class MyshippingDetailComponent implements OnInit {
 
   public deletePackage(template: TemplateRef<any>, item: IPackage) {
 
+  }
+
+  private getChinaWarehouses() {
+    this.settingService.showLoading(true);
+    const getChinaWarehousesObs: Observable<any> = this.settingService.getChinaWarehouses();
+
+    const listSub = forkJoin([
+      getChinaWarehousesObs
+    ]).subscribe(([chinaWarehouses]) => {
+      this.chinaWarehouses = chinaWarehouses.data.data;
+      this.setWarehouseInfo();
+      this.settingService.showLoading(false);
+      listSub.unsubscribe();
+    });
+  }
+
+  private setWarehouseInfo() {
+    const code = this.auth.user.code;
+    this.chinaWarehouses.forEach(item => {
+      item.address = item.address.replace('#code#', code);
+      item.receiver = item.receiver.replace('#code#', code);
+    });
   }
 
   public backlist() {

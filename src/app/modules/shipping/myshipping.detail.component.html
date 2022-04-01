@@ -133,6 +133,44 @@
       </div>
     </div>
   </div><!--/.row-->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Danh sách địa chỉ kho nhận hàng tại Trung Quốc</strong>
+        </div>
+        <div class="card-body">
+          <div *ngFor="let item of chinaWarehouses" class="card">
+            <div class="card-header"><i class="fa fa-check"></i>{{item.name}} <span *ngIf="item.note">({{item.note}}
+              )</span></div>
+            <div class="card-body">
+              <table class="table table-bordered table-striped table-sm">
+                <tbody>
+                <tr>
+                  <td width="30%">Địa chỉ nhận hàng</td>
+                  <td>{{item.address}}</td>
+                </tr>
+                <tr>
+                  <td>Người nhận</td>
+                  <td>{{item.receiver}}</td>
+                </tr>
+                <tr>
+                  <td>Mã bưu điện</td>
+                  <td>{{item.zipcode}}</td>
+                </tr>
+                <tr>
+                  <td>Số điện thoại</td>
+                  <td>{{item.phone}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!--/.row-->
 </div>
 
 <ng-template #template>

@@ -9,6 +9,7 @@ import {MyshippingComponent} from './myshipping.component';
 import {MyshippingDetailComponent} from './myshipping.detail.component';
 import {ShippingRoutingModule} from './shipping.routing.module';
 import {SharedModule} from '../../shared.module';
+import {SettingService} from "../../services/setting/setting.service";
 
 @NgModule({
   imports: [CommonModule, FormsModule, ShippingRoutingModule, SharedModule, CollapseModule.forRoot()],
@@ -18,7 +19,7 @@ import {SharedModule} from '../../shared.module';
     MyshippingDetailComponent
   ],
   exports: [],
-  providers: [ShippingService]
+  providers: [ShippingService, SettingService]
 })
 export class ShippingModule {
 }
