@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ShippingService} from '../../services/shipping/shipping.service';
-import {ICarrier, ICarrierPackage} from "../../models/interface";
+import {ICarrier, ICarrierPackage, IPackage} from "../../models/interface";
 import {Carrier, CarrierPackage} from "../../models/model";
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
 
 @Component({
   selector: 'app-myshipping-detail',
@@ -14,10 +15,14 @@ export class MyshippingDetailComponent implements OnInit {
   public carrier: ICarrier;
   public carrierPackage: ICarrierPackage;
   public col = '';
+  public errorMessage: string[] = [];
+
+  modalRef: BsModalRef;
 
   constructor(private router: Router, private route: ActivatedRoute
-    , public shippingService: ShippingService) {
+    , public shippingService: ShippingService, private modalService: BsModalService) {
     this.carrier = new Carrier();
+    this.carrier.carrier_package.push(new CarrierPackage());
     this.route.params.subscribe(params => {
       /*if (params['id']) {
         this.orderService.orderRe.id = params['id'];
@@ -38,6 +43,10 @@ export class MyshippingDetailComponent implements OnInit {
     }*/
   }
 
+  public addPackage() {
+
+  }
+
   public selectPackage(item: ICarrierPackage, col: string) {
     this.col = col;
     this.carrierPackage = item;
@@ -47,7 +56,19 @@ export class MyshippingDetailComponent implements OnInit {
     this.carrierPackage = new CarrierPackage();
   }
 
+  public deletePackage(template: TemplateRef<any>, item: IPackage) {
+
+  }
+
   public backlist() {
     this.router.navigate(['/shipping/myshipping']);
+  }
+
+  public openErrorModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+  }
+
+  public declineError(): void {
+    this.modalRef.hide();
   }
 }

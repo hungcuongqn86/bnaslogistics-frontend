@@ -113,9 +113,9 @@
                       <p *ngIf="((carrierPackage.id !== item.id) || (col !== 'note'))">{{item.note}}</p>
                     </td>
                     <td>
-                      <p *ngIf="item.is_main!=1" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
-                                                                                           (click)="deletePackage(template, item);"
-                                                                                           href="javascript:void(0);">Hủy</a>
+                      <p class="text-center" style="margin: 0;"><a style="cursor: pointer;"
+                                                                   (click)="deletePackage(template, item);"
+                                                                   href="javascript:void(0);">Hủy</a>
                       </p>
                     </td>
                   </tr>
@@ -134,3 +134,17 @@
     </div>
   </div><!--/.row-->
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title">Thông báo lỗi</h5>
+  </div>
+  <div class="modal-body">
+    <alert type="danger" *ngIf="errorMessage.length > 0">
+      <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="declineError()">OK</button>
+  </div>
+</ng-template>
