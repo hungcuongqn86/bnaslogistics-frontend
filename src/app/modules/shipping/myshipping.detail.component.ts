@@ -50,7 +50,7 @@ export class MyshippingDetailComponent implements OnInit {
   }
 
   public addPackage() {
-
+    this.carrier.carrier_package.push(new CarrierPackage());
   }
 
   public selectPackage(item: ICarrierPackage, col: string) {
