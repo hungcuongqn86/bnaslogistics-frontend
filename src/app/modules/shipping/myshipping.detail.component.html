@@ -116,7 +116,7 @@
                         <p *ngIf="((carrierPackage !== item) || (col !== 'note'))">{{item.note}}</p>
                       </td>
                       <td>
-                        <p class="text-center" style="margin: 0;"><a style="cursor: pointer;"
+                        <p *ngIf="item.is_main==0" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
                                                                      (click)="deletePackage(template, item);"
                                                                      href="javascript:void(0);">Hủy</a>
                         </p>

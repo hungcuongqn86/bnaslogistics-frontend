@@ -69,8 +69,11 @@ export class MyshippingDetailComponent implements OnInit {
     this.carrier.china_warehouses_address = address;
   }
 
-  public deletePackage(template: TemplateRef<any>, item: IPackage) {
-
+  public deletePackage(template: TemplateRef<any>, item: ICarrierPackage) {
+    const index = this.carrier.carrier_package.indexOf(item);
+    if (index > -1) {
+      this.carrier.carrier_package.splice(index, 1);
+    }
   }
 
   public carrierSave() {
