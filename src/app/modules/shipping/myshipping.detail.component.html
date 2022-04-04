@@ -184,7 +184,9 @@
                   <div class="col-form-label">
                     <div *ngFor="let item of chinaWarehouses" class="form-check form-check-inline mr-1">
                       <input type="radio" name="chinaWarehouses" id="chinaWarehouses{{item.id}}" [value]="item.id"
-                             [(ngModel)]="carrier.china_warehouses_id" class="form-check-input">
+                             [(ngModel)]="carrier.china_warehouses_id"
+                             (ngModelChange)="setAddress(item.address)"
+                             class="form-check-input">
                       <label for="chinaWarehouses{{item.id}}" class="form-check-label">{{item.name}}</label>
                     </div>
                   </div>

@@ -27,7 +27,9 @@ export class MyshippingDetailComponent implements OnInit {
     , public shippingService: ShippingService, private modalService: BsModalService) {
     this.carrierPackage = new CarrierPackage();
     this.carrier = new Carrier();
-    this.carrier.carrier_package.push(new CarrierPackage());
+    const newPk = new CarrierPackage();
+    newPk.is_main = 1;
+    this.carrier.carrier_package.push(newPk);
     this.route.params.subscribe(params => {
       /*if (params['id']) {
         this.orderService.orderRe.id = params['id'];
@@ -63,12 +65,22 @@ export class MyshippingDetailComponent implements OnInit {
     this.carrierPackage = new CarrierPackage();
   }
 
+  public setAddress(address: string) {
+    this.carrier.china_warehouses_address = address;
+  }
+
   public deletePackage(template: TemplateRef<any>, item: IPackage) {
 
   }
 
   public carrierSave() {
-    console.log(this.carrier);
+    this.shippingService.showLoading(true);
+    this.shippingService.addShipping(this.carrier).subscribe(
+      res => {
+        console.log(res);
+        this.shippingService.showLoading(false);
+      }
+    );
   }
 
   private getChinaWarehouses() {
@@ -90,6 +102,10 @@ export class MyshippingDetailComponent implements OnInit {
     this.chinaWarehouses.forEach(item => {
       item.address = item.address.replace('#code#', code);
       item.receiver = item.receiver.replace('#code#', code);
+      if (item.id == 2) {
+        this.carrier.china_warehouses_id = item.id;
+        this.carrier.china_warehouses_address = item.address;
+      }
     });
   }
 

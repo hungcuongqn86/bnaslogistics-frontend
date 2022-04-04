@@ -357,6 +357,7 @@ export interface ICarrierPackage {
   carrier_brand: string;
   description: string;
   note: string;
+  is_main: number;
   status: number;
   created_at: string;
   updated_at: string;

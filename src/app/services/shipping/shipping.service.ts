@@ -9,6 +9,7 @@ import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
 import {Shipping} from '../../models/Shipping';
+import {ICarrier} from "../../models/interface";
 
 @Injectable()
 export class ShippingService {
@@ -95,7 +96,7 @@ export class ShippingService {
       );
   }
 
-  public addShipping(data: Shipping): Observable<any> {
+  public addShipping(data: ICarrier): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
     return this.http.post<any>(url, data)
       .pipe(

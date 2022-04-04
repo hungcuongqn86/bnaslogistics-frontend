@@ -326,7 +326,6 @@ export class Carrier implements ICarrier {
   carrier_package: ICarrierPackage[];
 
   constructor() {
-    this.china_warehouses_id = 2;
     this.carrier_package = [];
   }
 }
@@ -340,10 +339,12 @@ export class CarrierPackage implements ICarrierPackage {
   carrier_brand: string;
   description: string;
   note: string;
+  is_main: number;
   status: number;
   created_at: string;
   updated_at: string;
 
   constructor() {
+    this.is_main = 0;
   }
 }
