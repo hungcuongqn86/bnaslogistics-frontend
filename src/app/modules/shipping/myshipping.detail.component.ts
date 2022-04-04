@@ -59,11 +59,16 @@ export class MyshippingDetailComponent implements OnInit {
   }
 
   public hideInput() {
+    this.col = "";
     this.carrierPackage = new CarrierPackage();
   }
 
   public deletePackage(template: TemplateRef<any>, item: IPackage) {
 
+  }
+
+  public carrierSave() {
+    console.log(this.carrier);
   }
 
   private getChinaWarehouses() {

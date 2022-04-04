@@ -326,6 +326,7 @@ export class Carrier implements ICarrier {
   carrier_package: ICarrierPackage[];
 
   constructor() {
+    this.china_warehouses_id = 2;
     this.carrier_package = [];
   }
 }

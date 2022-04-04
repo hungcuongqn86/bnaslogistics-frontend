@@ -137,25 +137,22 @@
                         <input type="checkbox" id="kiem_hang" name="kiem_hang"
                                value="1"
                                [(ngModel)]="carrier.kiem_hang"
-                               (change)="updateOrder('kiem_hang')"
                                class="form-check-input">
-                        <label class="form-check-label">Kiểm hàng</label>
+                        <label for="kiem_hang" class="form-check-label">Kiểm hàng</label>
                       </div>
                       <div class="form-check form-check-inline mr-1">
                         <input type="checkbox" id="dong_go" name="dong_go"
                                value="1"
                                [(ngModel)]="carrier.dong_go"
-                               (change)="updateOrder('dong_go')"
                                class="form-check-input">
-                        <label class="form-check-label">Đóng gỗ</label>
+                        <label for="dong_go" class="form-check-label">Đóng gỗ</label>
                       </div>
                       <div class="form-check form-check-inline mr-1">
                         <input type="checkbox" id="bao_hiem" name="bao_hiem"
                                value="1"
                                [(ngModel)]="carrier.bao_hiem"
-                               (change)="updateOrder('bao_hiem')"
                                class="form-check-input">
-                        <label class="form-check-label">Chống sốc</label>
+                        <label for="bao_hiem" class="form-check-label">Chống sốc</label>
                       </div>
                       <!--<div class="form-check form-check-inline mr-1">
                         <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
@@ -186,8 +183,9 @@
                 <div class="card-body">
                   <div class="col-form-label">
                     <div *ngFor="let item of chinaWarehouses" class="form-check form-check-inline mr-1">
-                      <input type="radio" name="chinaWarehouses" class="form-check-input">
-                      <label class="form-check-label">{{item.name}}</label>
+                      <input type="radio" name="chinaWarehouses" id="chinaWarehouses{{item.id}}" [value]="item.id"
+                             [(ngModel)]="carrier.china_warehouses_id" class="form-check-input">
+                      <label for="chinaWarehouses{{item.id}}" class="form-check-label">{{item.name}}</label>
                     </div>
                   </div>
                 </div>
@@ -198,7 +196,7 @@
         <div class="card-footer">
           <div class="form-group">
             <div class="controls" style="text-align: right;">
-              <button class="btn btn-info" type="button">Cập nhật</button>
+              <button class="btn btn-info" (click)="carrierSave()" type="button">Cập nhật</button>
             </div>
           </div>
         </div>
@@ -214,7 +212,8 @@
         </div>
         <div class="card-body">
           <div *ngFor="let item of chinaWarehouses" class="card">
-            <div class="card-header"><i class="fa fa-map-marker"></i>{{item.name}} <span *ngIf="item.note">({{item.note}}
+            <div class="card-header"><i class="fa fa-map-marker"></i>{{item.name}} <span
+              *ngIf="item.note">({{item.note}}
               )</span></div>
             <div class="card-body">
               <table class="table table-bordered table-striped table-sm">
