@@ -37,7 +37,7 @@
                   <ng-template ngFor let-item [ngForOf]="carrier.carrier_package" let-i="index">
                     <tr>
                       <td (click)="selectPackage(item,'package_code')">
-                        <input *ngIf="((carrierPackage.id === item.id) && (col === 'package_code'))"
+                        <input *ngIf="((carrierPackage === item) && (col === 'package_code'))"
                                [(ngModel)]="carrierPackage.package_code"
                                #package_code="ngModel"
                                class="form-control"
@@ -47,10 +47,10 @@
                                appAutofocus
                                type="text">
                         <p
-                          *ngIf="((carrierPackage.id !== item.id) || (col !== 'package_code'))">{{item.package_code}}</p>
+                          *ngIf="((carrierPackage !== item) || (col !== 'package_code'))">{{item.package_code}}</p>
                       </td>
                       <td (click)="selectPackage(item,'product_name')">
-                        <input *ngIf="((carrierPackage.id === item.id) && (col === 'product_name'))"
+                        <input *ngIf="((carrierPackage === item) && (col === 'product_name'))"
                                [(ngModel)]="carrierPackage.product_name"
                                #product_name="ngModel"
                                class="form-control"
@@ -60,10 +60,10 @@
                                appAutofocus
                                type="text">
                         <p
-                          *ngIf="((carrierPackage.id !== item.id) || (col !== 'product_name'))">{{item.product_name}}</p>
+                          *ngIf="((carrierPackage !== item) || (col !== 'product_name'))">{{item.product_name}}</p>
                       </td>
                       <td (click)="selectPackage(item,'product_count')">
-                        <input *ngIf="((carrierPackage.id === item.id) && (col === 'product_count'))"
+                        <input *ngIf="((carrierPackage === item) && (col === 'product_count'))"
                                [(ngModel)]="carrierPackage.product_count"
                                #product_count="ngModel"
                                class="form-control"
@@ -73,10 +73,10 @@
                                appAutofocus
                                type="number">
                         <p
-                          *ngIf="((carrierPackage.id !== item.id) || (col !== 'product_count'))">{{item.product_count}}</p>
+                          *ngIf="((carrierPackage !== item) || (col !== 'product_count'))">{{item.product_count}}</p>
                       </td>
                       <td (click)="selectPackage(item,'carrier_brand')">
-                        <input *ngIf="((carrierPackage.id === item.id) && (col === 'carrier_brand'))"
+                        <input *ngIf="((carrierPackage === item) && (col === 'carrier_brand'))"
                                [(ngModel)]="carrierPackage.carrier_brand"
                                #carrier_brand="ngModel"
                                class="form-control"
@@ -86,11 +86,11 @@
                                appAutofocus
                                type="text">
                         <p
-                          *ngIf="((carrierPackage.id !== item.id) || (col !== 'carrier_brand'))">{{item.carrier_brand}}</p>
+                          *ngIf="((carrierPackage !== item) || (col !== 'carrier_brand'))">{{item.carrier_brand}}</p>
                       </td>
 
                       <td (click)="selectPackage(item,'description')">
-                      <textarea *ngIf="((carrierPackage.id === item.id) && (col === 'description'))"
+                      <textarea *ngIf="((carrierPackage === item) && (col === 'description'))"
                                 [(ngModel)]="carrierPackage.description"
                                 #description="ngModel"
                                 id="description"
@@ -100,10 +100,10 @@
                                 (blur)="hideInput()"
                                 appAutofocus>
                       </textarea>
-                        <p *ngIf="((carrierPackage.id !== item.id) || (col !== 'description'))">{{item.description}}</p>
+                        <p *ngIf="((carrierPackage !== item) || (col !== 'description'))">{{item.description}}</p>
                       </td>
                       <td (click)="selectPackage(item,'note')">
-                      <textarea *ngIf="((carrierPackage.id === item.id) && (col === 'note'))"
+                      <textarea *ngIf="((carrierPackage === item) && (col === 'note'))"
                                 [(ngModel)]="carrierPackage.note"
                                 #note="ngModel"
                                 id="note"
@@ -113,7 +113,7 @@
                                 (blur)="hideInput()"
                                 appAutofocus>
                       </textarea>
-                        <p *ngIf="((carrierPackage.id !== item.id) || (col !== 'note'))">{{item.note}}</p>
+                        <p *ngIf="((carrierPackage !== item) || (col !== 'note'))">{{item.note}}</p>
                       </td>
                       <td>
                         <p class="text-center" style="margin: 0;"><a style="cursor: pointer;"
