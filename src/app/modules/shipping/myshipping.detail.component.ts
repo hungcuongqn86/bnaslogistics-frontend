@@ -76,11 +76,17 @@ export class MyshippingDetailComponent implements OnInit {
     }
   }
 
-  public carrierSave() {
+  public carrierSave(template: TemplateRef<any>) {
     this.shippingService.showLoading(true);
     this.shippingService.addShipping(this.carrier).subscribe(
       res => {
-        console.log(res);
+        if (res.status) {
+
+        } else {
+          this.errorMessage = res.data;
+          this.openErrorModal(template);
+          this.getOrder();
+        }
         this.shippingService.showLoading(false);
       }
     );
