@@ -56,7 +56,7 @@ export class ShippingComponent {
   }
 
   public confirm() {
-    this.shippingService.showLoading(true);
+    /*this.shippingService.showLoading(true);
     if (this.shippingService.shipping.id === null) {
       this.shippingService.addShipping(this.shippingService.shipping).subscribe(
         res => {
@@ -71,7 +71,7 @@ export class ShippingComponent {
           this.getShippings();
         }
       );
-    }
+    }*/
   }
 
   public decline(): void {

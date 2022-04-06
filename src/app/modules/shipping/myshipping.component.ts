@@ -2,9 +2,9 @@ import {Component, TemplateRef} from '@angular/core';
 import {ShippingService} from '../../services/shipping/shipping.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {Shipping} from '../../models/Shipping';
 import {AuthService} from '../../auth.service';
 import {Router} from "@angular/router";
+import {ICarrier} from "../../models/interface";
 
 @Component({
   selector: 'app-shipping',
@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 })
 
 export class MyshippingComponent {
-  shippings: Shipping[] = [];
+  shippings: ICarrier[] = [];
   modalRef: BsModalRef;
   title = '';
   totalItems = 0;
@@ -51,7 +51,7 @@ export class MyshippingComponent {
   }
 
   public confirm() {
-    this.shippingService.showLoading(true);
+    /*this.shippingService.showLoading(true);
     if (this.shippingService.shipping.id === null) {
       this.shippingService.addShipping(this.shippingService.shipping).subscribe(
         res => {
@@ -66,15 +66,15 @@ export class MyshippingComponent {
           this.getShippings();
         }
       );
-    }
+    }*/
   }
 
   public decline(): void {
     this.modalRef.hide();
   }
 
-  public openModalDelete(template: TemplateRef<any>, shipping: Shipping) {
-    this.shippingService.shipping = shipping;
+  public openModalDelete(template: TemplateRef<any>, shipping: ICarrier) {
+    // this.shippingService.shipping = shipping;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
