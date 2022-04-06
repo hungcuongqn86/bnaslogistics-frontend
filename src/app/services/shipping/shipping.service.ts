@@ -15,13 +15,13 @@ import {ICarrier} from "../../models/interface";
 export class ShippingService {
   static instance: ShippingService;
   private handleError: HandleError;
-  private moduleUri = 'shipping/';
+  private moduleUri = 'carrier/';
   public search = {code: '', key: '', status: '', limit: 20, page: 1};
   public shipping: Shipping;
 
   constructor(private loadingService: LoadingService,
               private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
-      this.handleError = httpErrorHandler.createHandleError('OrderService');
+      this.handleError = httpErrorHandler.createHandleError('ShippingService');
     if (!this.shipping) {
           this.reset();
       }
