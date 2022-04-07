@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header"><i class="cui-user icons"></i> <strong>{{userService.user.name}}</strong>
+    <div class="card-header p-0">
         <div class="card-header-actions">
             <button *ngIf="authService.hasRole('admin')" (click)="addTransaction(templateAddTransaction)"
                     class="btn btn-block btn-outline-primary btn-sm"
@@ -8,15 +8,15 @@
         </div>
     </div>
     <div class="card-body">
-        <table class="table table-bordered table-striped table-sm">
+        <table class="table table-hover">
             <thead>
             <tr>
-                <th>Ngày giao dịch</th>
-                <th>Mã giao dịch</th>
-                <th>Loại giao dịch</th>
-                <th>Nội dung</th>
-                <th class="text-right">Giá trị</th>
-                <th class="text-right">Dư nợ</th>
+                <th rowspan="2">Ngày giao dịch</th>
+                <th rowspan="2">Mã giao dịch</th>
+                <th rowspan="2">Loại giao dịch</th>
+                <th rowspan="2">Nội dung</th>
+                <th rowspan="2" class="text-right">Giá trị</th>
+                <th rowspan="2" class="text-right">Dư nợ</th>
             </tr>
             </thead>
             <tbody>

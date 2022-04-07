@@ -1,23 +1,8 @@
-<!-- Breadcrumb -->
-<ol class="breadcrumb">
-    <app-breadcrumb></app-breadcrumb>
-    <!-- Breadcrumb Menu-->
-    <li class="breadcrumb-menu d-md-down-none">
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn" href="javascript:void(0)" (click)="backlist()"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
-        </div>
-    </li>
-</ol>
-<div class="container-fluid">
+<div class="container-fluid entry-list">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <strong>Lịch sử giao dịch</strong>
-                </div>
-                <div class="card-body">
-                    <app-mcustumer-internal-detail-transaction></app-mcustumer-internal-detail-transaction>
-                </div>
+                <app-mcustumer-internal-detail-transaction></app-mcustumer-internal-detail-transaction>
             </div>
         </div>
     </div><!--/.row-->
