@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'list', component: ShippingComponent, data: { title: 'Yêu cầu ký gửi' }},
   { path: 'myshipping', component: MyshippingComponent, data: { title: 'Yêu cầu ký gửi' }},
   { path: 'myshipping/add', component: MyshippingDetailComponent, data: { title: 'Tạo yêu cầu ký gửi' }},
+  { path: 'myshipping/edit/:id', component: MyshippingDetailComponent, data: { title: 'Hiệu chỉnh yêu cầu ký gửi' }},
 ];
 
 @NgModule({

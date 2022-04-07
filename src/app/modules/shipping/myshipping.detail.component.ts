@@ -1,7 +1,7 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ShippingService} from '../../services/shipping/shipping.service';
-import {ICarrier, ICarrierPackage, IChinaWarehouse, IPackage} from "../../models/interface";
+import {ICarrier, ICarrierPackage, IChinaWarehouse} from "../../models/interface";
 import {Carrier, CarrierPackage} from "../../models/model";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {forkJoin, Observable} from "rxjs";
@@ -31,10 +31,10 @@ export class MyshippingDetailComponent implements OnInit {
     newPk.is_main = 1;
     this.carrier.carrier_package.push(newPk);
     this.route.params.subscribe(params => {
-      /*if (params['id']) {
-        this.orderService.orderRe.id = params['id'];
-        this.getOrder();
-      }*/
+      if (params['id']) {
+        this.shippingService.carrier.id = params['id'];
+        this.getCarrier();
+      }
     });
   }
 
@@ -42,13 +42,13 @@ export class MyshippingDetailComponent implements OnInit {
     this.getChinaWarehouses();
   }
 
-  private getOrder() {
-    /*if (this.orderService.orderRe.id !== null) {
-      this.orderService.getOrder(this.orderService.orderRe.id)
-        .subscribe(order => {
-          this.orderService.orderRe = order.data;
+  private getCarrier() {
+    if (this.shippingService.carrier.id !== null) {
+      this.shippingService.getShipping(this.shippingService.carrier.id)
+        .subscribe(carrier => {
+          this.carrier = carrier.data;
         });
-    }*/
+    }
   }
 
   public addPackage() {
@@ -85,8 +85,8 @@ export class MyshippingDetailComponent implements OnInit {
         } else {
           this.errorMessage = res.data;
           this.openErrorModal(template);
-          this.getOrder();
         }
+        this.getCarrier();
         this.shippingService.showLoading(false);
       }
     );

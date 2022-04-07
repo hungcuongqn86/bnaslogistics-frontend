@@ -33,7 +33,7 @@
                             Tìm kiếm
                           </button>
 
-                          <button type="button" (click)="addShipping(templateShipping)" style="margin-left: 10px;"
+                          <button type="button" (click)="addShipping()" style="margin-left: 10px;"
                                   class="btn btn-primary">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             Thêm yêu cầu
@@ -55,8 +55,8 @@
                         <tbody>
                           <tr *ngFor="let item of shippings">
                             <td>{{item.id}}</td>
-                            <td>{{item.content}}</td>
-                            <td>{{item.package_count}}</td>
+                            <td>{{item.china_warehouses_address}}</td>
+                            <td>{{item.count_product}}</td>
                             <td>{{item.created_at | tempDate}}</td>
                             <td>
                               <p><span class="badge badge-info">{{item.statusname}}</span></p>
@@ -68,7 +68,7 @@
                               </p>
                             </td>
                             <td>
-                              <button (click)="editShipping(item.id, templateShipping)"
+                              <button (click)="editShipping(item.id)"
                                       class="btn btn-sm btn-primary"
                                       style="margin-right: 10px;"
                                       type="button">
@@ -99,60 +99,6 @@
         <!--/.col-->
     </div>
 </div><!-- /.container-fluid -->
-
-<ng-template #templateShipping>
-    <div class="modal-header">
-        <h5 class="modal-title">{{title}}</h5>
-    </div>
-    <div class="modal-body">
-      <form novalidate #form="ngForm">
-        <div class="form-group" *ngIf="shippingService.shipping.id">
-          <label for="content">
-            Mã yêu cầu
-          </label>
-          <input [(ngModel)]="shippingService.shipping.id" class="form-control"
-                 id="id"
-                 name="id"
-                 type="text">
-        </div>
-        <div class="form-group">
-          <label for="content">
-            Thông tin yêu cầu <code class="highlighter-rouge">*</code>
-          </label>
-          <textarea [(ngModel)]="shippingService.shipping.content" #content="ngModel" class="form-control" id="content"
-                    name="content" required
-                    placeholder="..." rows="3"></textarea>
-          <div [hidden]="content.valid || content.untouched">
-            <span *ngIf="content.errors && content.errors.required"
-                  class="badge badge-warning">
-              Phải nhập Nội dung thông tin yêu cầu!
-            </span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="money_request">
-            Số kiện hàng<code class="highlighter-rouge">*</code>
-          </label>
-          <input [(ngModel)]="shippingService.shipping.package_count" #package_count="ngModel" class="form-control"
-                 id="package_count"
-                 name="package_count"
-                 required
-                 placeholder="Nhập Số kiện hàng"
-                 type="number">
-          <div [hidden]="package_count.valid || package_count.untouched">
-            <span *ngIf="package_count.errors && package_count.errors.required"
-                  class="badge badge-warning">
-              Phải nhập Số kiện hàng!
-            </span>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
-        <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
-    </div>
-</ng-template>
 
 <ng-template #deltemplate>
   <div class="modal-body text-center">

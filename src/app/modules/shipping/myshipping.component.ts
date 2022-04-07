@@ -37,17 +37,12 @@ export class MyshippingComponent {
     this.getShippings();
   }
 
-  public addShipping(template) {
+  public addShipping() {
     this.router.navigate([`/shipping/myshipping/add`]);
   }
 
-  public editShipping(id: number, template) {
-    this.title = 'Chi tiết yêu cầu ký gửi';
-    this.shippingService.getShipping(id)
-      .subscribe(res => {
-        this.shippingService.shipping = res.data.shipping;
-        this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
-      });
+  public editShipping(id: number) {
+    this.router.navigate([`/shipping/myshipping/edit/${id}`]);
   }
 
   public confirm() {
@@ -73,8 +68,8 @@ export class MyshippingComponent {
     this.modalRef.hide();
   }
 
-  public openModalDelete(template: TemplateRef<any>, shipping: ICarrier) {
-    // this.shippingService.shipping = shipping;
+  public openModalDelete(template: TemplateRef<any>, carrier: ICarrier) {
+    this.shippingService.carrier = carrier;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
@@ -84,16 +79,15 @@ export class MyshippingComponent {
   }
 
   private delete() {
-    if (this.shippingService.shipping) {
-      this.shippingService.shipping.is_deleted = 1;
-      this.shippingService.editShipping(this.shippingService.shipping)
+    if (this.shippingService.carrier) {
+      this.shippingService.editShipping(this.shippingService.carrier)
         .subscribe(res => {
           this.getShippings();
         });
     }
   }
 
-  gotoOrder(orderId: number) {
+  private gotoOrder(orderId: number) {
     const win = window.open(`./order/myorder/detail/${orderId}`, '_blank');
     win.focus();
   }

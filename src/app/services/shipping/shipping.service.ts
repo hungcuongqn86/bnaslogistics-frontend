@@ -4,12 +4,12 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
-import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
+import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
-import {Shipping} from '../../models/Shipping';
 import {ICarrier} from "../../models/interface";
+import {Carrier} from "../../models/model";
 
 @Injectable()
 export class ShippingService {
@@ -17,42 +17,26 @@ export class ShippingService {
   private handleError: HandleError;
   private moduleUri = 'carrier/';
   public search = {code: '', key: '', status: '', limit: 20, page: 1};
-  public shipping: Shipping;
+  public carrier: ICarrier;
 
   constructor(private loadingService: LoadingService,
               private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
-      this.handleError = httpErrorHandler.createHandleError('ShippingService');
-    if (!this.shipping) {
-          this.reset();
-      }
+    this.handleError = httpErrorHandler.createHandleError('ShippingService');
+    if (!this.carrier) {
+      this.carrier = new Carrier();
+    }
     return ShippingService.instance = ShippingService.instance || this;
   }
 
   showLoading(value: boolean) {
-      this.loadingService.setLoading(value);
-  }
-
-  reset() {
-    this.shipping = {
-      id: null,
-      code: null,
-      user_id: null,
-      is_deleted: 0,
-      created_at: '',
-      updated_at: '',
-      content: null,
-      package_count: null,
-      status: null,
-      order_id: null,
-      order: null
-    };
+    this.loadingService.setLoading(value);
   }
 
   public getShippings(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
     let params = new HttpParams();
     Object.keys(this.search).map((key) => {
-        params = params.append(key, this.search[key]);
+      params = params.append(key, this.search[key]);
     });
     return this.http.get<any>(url, {params: params})
       .pipe(
@@ -66,7 +50,7 @@ export class ShippingService {
     Object.keys(this.search).map((key) => {
       params = params.append(key, this.search[key]);
     });
-    return this.http.get<any>(url, { params: params })
+    return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('getMyShippings', []))
       );
@@ -104,7 +88,7 @@ export class ShippingService {
       );
   }
 
-  public editShipping(data: Shipping): Observable<any> {
+  public editShipping(data: ICarrier): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
     return this.http.post<any>(url, data)
       .pipe(
@@ -112,7 +96,7 @@ export class ShippingService {
       );
   }
 
-  public approveShipping(data: Shipping): Observable<any> {
+  public approveShipping(data: ICarrier): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}approve`;
     return this.http.post<any>(url, data)
       .pipe(
