@@ -78,7 +78,7 @@ export class MyshippingDetailComponent implements OnInit {
 
   public carrierSave(template: TemplateRef<any>) {
     this.shippingService.showLoading(true);
-    this.shippingService.addShipping(this.carrier).subscribe(
+    this.shippingService.updateShipping(this.carrier).subscribe(
       res => {
         if (res.status) {
 
