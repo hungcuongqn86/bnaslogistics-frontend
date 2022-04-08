@@ -29,105 +29,20 @@
                     <th>Hãng vận chuyển</th>
                     <th>Mô tả, link sản phẩm</th>
                     <th>Ghi chú</th>
-                    <th class="text-center">Tác vụ</th>
                   </tr>
                   </thead>
                   <tbody
                     *ngIf="carrier && carrier.carrier_package">
                   <ng-template ngFor let-item [ngForOf]="carrier.carrier_package" let-i="index">
                     <tr>
-                      <td (click)="selectPackage(item,'package_code')">
-                        <input *ngIf="((carrierPackage === item) && (col === 'package_code'))"
-                               [(ngModel)]="carrierPackage.package_code"
-                               #package_code="ngModel"
-                               class="form-control"
-                               id="package_code"
-                               name="package_code"
-                               (blur)="hideInput()"
-                               appAutofocus
-                               type="text">
-                        <p
-                          *ngIf="((carrierPackage !== item) || (col !== 'package_code'))">{{item.package_code}}</p>
-                      </td>
-                      <td (click)="selectPackage(item,'product_name')">
-                        <input *ngIf="((carrierPackage === item) && (col === 'product_name'))"
-                               [(ngModel)]="carrierPackage.product_name"
-                               #product_name="ngModel"
-                               class="form-control"
-                               id="product_name"
-                               name="product_name"
-                               (blur)="hideInput()"
-                               appAutofocus
-                               type="text">
-                        <p
-                          *ngIf="((carrierPackage !== item) || (col !== 'product_name'))">{{item.product_name}}</p>
-                      </td>
-                      <td (click)="selectPackage(item,'product_count')">
-                        <input *ngIf="((carrierPackage === item) && (col === 'product_count'))"
-                               [(ngModel)]="carrierPackage.product_count"
-                               #product_count="ngModel"
-                               class="form-control"
-                               id="product_count"
-                               name="product_count"
-                               (blur)="hideInput()"
-                               appAutofocus
-                               type="number">
-                        <p
-                          *ngIf="((carrierPackage !== item) || (col !== 'product_count'))">{{item.product_count}}</p>
-                      </td>
-                      <td (click)="selectPackage(item,'carrier_brand')">
-                        <input *ngIf="((carrierPackage === item) && (col === 'carrier_brand'))"
-                               [(ngModel)]="carrierPackage.carrier_brand"
-                               #carrier_brand="ngModel"
-                               class="form-control"
-                               id="carrier_brand"
-                               name="carrier_brand"
-                               (blur)="hideInput()"
-                               appAutofocus
-                               type="text">
-                        <p
-                          *ngIf="((carrierPackage !== item) || (col !== 'carrier_brand'))">{{item.carrier_brand}}</p>
-                      </td>
-
-                      <td (click)="selectPackage(item,'description')">
-                      <textarea *ngIf="((carrierPackage === item) && (col === 'description'))"
-                                [(ngModel)]="carrierPackage.description"
-                                #description="ngModel"
-                                id="description"
-                                name="description"
-                                rows="3"
-                                class="form-control"
-                                (blur)="hideInput()"
-                                appAutofocus>
-                      </textarea>
-                        <p *ngIf="((carrierPackage !== item) || (col !== 'description'))">{{item.description}}</p>
-                      </td>
-                      <td (click)="selectPackage(item,'note')">
-                      <textarea *ngIf="((carrierPackage === item) && (col === 'note'))"
-                                [(ngModel)]="carrierPackage.note"
-                                #note="ngModel"
-                                id="note"
-                                name="note"
-                                rows="3"
-                                class="form-control"
-                                (blur)="hideInput()"
-                                appAutofocus>
-                      </textarea>
-                        <p *ngIf="((carrierPackage !== item) || (col !== 'note'))">{{item.note}}</p>
-                      </td>
-                      <td>
-                        <p *ngIf="item.is_main==0" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
-                                                                     (click)="deletePackage(template, item);"
-                                                                     href="javascript:void(0);">Hủy</a>
-                        </p>
-                      </td>
+                      <td><p>{{item.package_code}}</p></td>
+                      <td><p>{{item.product_name}}</p></td>
+                      <td><p>{{item.product_count}}</p></td>
+                      <td><p>{{item.carrier_brand}}</p></td>
+                      <td><p>{{item.description}}</p></td>
+                      <td><p>{{item.note}}</p></td>
                     </tr>
                   </ng-template>
-                  <tr>
-                    <td colspan="7" class="text-right"><a (click)="addPackage();" style="cursor: pointer;"
-                                                          href="javascript:void(0);"><i
-                      class="fa fa-plus-square"></i> Thêm mã vận đơn</a></td>
-                  </tr>
                   </tbody>
                 </table>
                 <div class="row">
@@ -185,7 +100,6 @@
                     <div *ngFor="let item of chinaWarehouses" class="form-check form-check-inline mr-1">
                       <input type="radio" name="chinaWarehouses" id="chinaWarehouses{{item.id}}" [value]="item.id"
                              [(ngModel)]="carrier.china_warehouses_id"
-                             (ngModelChange)="setAddress(item.address)"
                              class="form-check-input">
                       <label for="chinaWarehouses{{item.id}}" class="form-check-label">{{item.name}}</label>
                     </div>
@@ -198,7 +112,8 @@
         <div class="card-footer">
           <div class="form-group">
             <div class="controls" style="text-align: right;">
-              <button class="btn btn-info" (click)="carrierSave(template)" type="button">Cập nhật</button>
+              <button class="btn btn-warning" style="margin-right: 5px;" (click)="carrierSave(template)" type="button">Từ chối</button>
+              <button class="btn btn-info" (click)="carrierSave(template)" type="button">Xác nhận</button>
             </div>
           </div>
         </div>

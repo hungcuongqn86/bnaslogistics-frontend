@@ -77,8 +77,8 @@ export class ShippingDetailComponent implements OnInit {
   }
 
   public carrierSave(template: TemplateRef<any>) {
-    this.shippingService.showLoading(true);
-    this.shippingService.updateShipping(this.carrier).subscribe(
+    // this.shippingService.showLoading(true);
+    /*this.shippingService.updateShipping(this.carrier).subscribe(
       res => {
         if (res.status) {
 
@@ -89,7 +89,7 @@ export class ShippingDetailComponent implements OnInit {
         this.getCarrier();
         this.shippingService.showLoading(false);
       }
-    );
+    );*/
   }
 
   private getChinaWarehouses() {
@@ -119,7 +119,7 @@ export class ShippingDetailComponent implements OnInit {
   }
 
   public backlist() {
-    this.router.navigate(['/shipping/myshipping']);
+    this.router.navigate(['/shipping/list']);
   }
 
   public openErrorModal(template: TemplateRef<any>) {
