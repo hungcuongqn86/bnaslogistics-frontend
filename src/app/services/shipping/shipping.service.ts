@@ -91,6 +91,15 @@ export class ShippingService {
       );
   }
 
+
+  public deleteShipping(data: ICarrier): Observable<any> {
+    let url = Util.getUri(apiV1Url) + `${this.moduleUri}delete/${data.id}`;
+    return this.http.post<any>(url, data)
+      .pipe(
+        catchError(this.handleError('deleteShipping', data))
+      );
+  }
+
   public approveShipping(data: ICarrier): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}approve`;
     return this.http.post<any>(url, data)

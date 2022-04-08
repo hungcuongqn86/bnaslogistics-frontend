@@ -80,7 +80,7 @@ export class MyshippingComponent {
 
   private delete() {
     if (this.shippingService.carrier) {
-      this.shippingService.editShipping(this.shippingService.carrier)
+      this.shippingService.deleteShipping(this.shippingService.carrier)
         .subscribe(res => {
           this.getShippings();
         });
