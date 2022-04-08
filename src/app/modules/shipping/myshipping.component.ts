@@ -19,12 +19,12 @@ export class MyshippingComponent {
   totalItems = 0;
 
   constructor(public shippingService: ShippingService, public authService: AuthService, private modalService: BsModalService, private router: Router) {
-    this.getShippings();
+    this.getMyShippings();
   }
 
-  public getShippings() {
+  public getMyShippings() {
     this.shippingService.showLoading(true);
-    this.shippingService.getShippings()
+    this.shippingService.getMyShippings()
       .subscribe(shippings => {
         this.shippings = shippings.data.data;
         this.totalItems = shippings.data.total;
@@ -34,7 +34,7 @@ export class MyshippingComponent {
 
   pageChanged(event: any): void {
     this.shippingService.search.page = event.page;
-    this.getShippings();
+    this.getMyShippings();
   }
 
   public addShipping() {
@@ -82,7 +82,7 @@ export class MyshippingComponent {
     if (this.shippingService.carrier) {
       this.shippingService.deleteShipping(this.shippingService.carrier)
         .subscribe(res => {
-          this.getShippings();
+          this.getMyShippings();
         });
     }
   }

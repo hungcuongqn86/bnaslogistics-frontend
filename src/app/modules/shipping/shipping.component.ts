@@ -5,6 +5,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {ShippingStatus} from '../../models/Shipping';
 import {AuthService} from '../../auth.service';
 import {ICarrier} from "../../models/interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shipping',
@@ -21,7 +22,7 @@ export class ShippingComponent {
   status: ShippingStatus[] = [];
   counts: { status: number, total: number }[];
 
-  constructor(public shippingService: ShippingService, public authService: AuthService, private modalService: BsModalService) {
+  constructor(public shippingService: ShippingService, private router: Router, public authService: AuthService, private modalService: BsModalService) {
     this.getStatus();
     this.getShippings();
   }
@@ -48,12 +49,7 @@ export class ShippingComponent {
   }
 
   public editShipping(id: number, template) {
-    this.title = 'Chi tiết yêu cầu ký gửi';
-    this.shippingService.getShipping(id)
-      .subscribe(res => {
-        this.shippingService.carrier = res.data.shipping;
-        this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
-      });
+    this.router.navigate([`/shipping/list/detail/${id}`]);
   }
 
   public confirm() {

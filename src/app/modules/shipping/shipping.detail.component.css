@@ -1,0 +1,13 @@
+@media (max-width: 767px) {
+    .card-body {
+        padding: 15px 5px;
+    }
+}
+
+.form-check-label {
+  margin-right: 25px;
+}
+
+td {
+  height: 35px
+}
