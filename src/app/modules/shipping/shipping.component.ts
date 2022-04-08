@@ -37,7 +37,7 @@ export class ShippingComponent {
       });
   }
 
-  pageChanged(event: any): void {
+  public pageChanged(event: any): void {
     this.shippingService.search.page = event.page;
     this.getShippings();
   }

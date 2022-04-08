@@ -59,14 +59,15 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="card-body">
               <table class="table table-hover">
                 <thead>
                   <tr>
                     <th>Mã yêu cầu</th>
+                    <th>Khách hàng</th>
                     <th>Thông tin</th>
-                    <th>Số kiện</th>
+                    <th>Kho nhận</th>
                     <th>Ngày tạo</th>
                     <th>Trạng thái</th>
                     <th width="10%">Tác vụ</th>
@@ -76,19 +77,16 @@
                   <tr *ngFor="let item of shippings">
                     <td>{{item.id}}</td>
                     <td>
-                      <p>Khách hàng: {{item.user.name}} ({{item.user.phone_number}})</p>
-                      <p>Nội dung: {{item.content}}</p>
+                      <p>{{item.user.code}} - {{item.user.name}}</p>
+                      <p>{{item.user.phone_number}}</p>
                     </td>
-                    <td>{{item.package_count}}</td>
+                    <td>
+                      <p *ngFor="let pkitem of item.carrier_package">{{pkitem.package_code}} - {{pkitem.product_name}} ({{pkitem.product_count}})</p>
+                    </td>
+                    <td>{{item.china_warehouses_address}}</td>
                     <td>{{item.created_at | tempDate}}</td>
                     <td>
                       <p><span class="badge badge-info">{{item.statusname}}</span></p>
-                      <p *ngIf="item.status==2">
-                        Mã đơn hàng:
-                        <a href="javascript:void(0);" (click)="gotoOrder(item.order_id)">
-                          <span><strong>{{item.order_id}}</strong></span>
-                        </a>
-                      </p>
                     </td>
                     <td>
                       <button (click)="editShipping(item.id, templateShipping)"
@@ -110,7 +108,6 @@
                   </tr>
                 </tbody>
               </table>
-
             </div>
             <div class="card-footer">
               <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="shippingService.search.limit"
@@ -125,59 +122,6 @@
         <!--/.col-->
     </div>
 </div><!-- /.container-fluid -->
-
-<ng-template #templateShipping>
-    <div class="modal-header">
-        <h5 class="modal-title">{{title}}</h5>
-    </div>
-    <div class="modal-body">
-      <form novalidate #form="ngForm">
-        <div class="form-group" *ngIf="shippingService.shipping.id">
-          <label for="content">
-            Mã yêu cầu
-          </label>
-          <input [(ngModel)]="shippingService.shipping.id" class="form-control"
-                 id="id"
-                 name="id"
-                 type="text">
-        </div>
-        <div class="form-group">
-          <label for="content">
-            Thông tin yêu cầu <code class="highlighter-rouge">*</code>
-          </label>
-          <textarea [(ngModel)]="shippingService.shipping.content" #content="ngModel" class="form-control" id="content"
-                    name="content" required
-                    placeholder="..." rows="3"></textarea>
-          <div [hidden]="content.valid || content.untouched">
-            <span *ngIf="content.errors && content.errors.required"
-                  class="badge badge-warning">
-              Phải nhập Nội dung thông tin yêu cầu!
-            </span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="money_request">
-            Số kiện hàng<code class="highlighter-rouge">*</code>
-          </label>
-          <input [(ngModel)]="shippingService.shipping.package_count" #package_count="ngModel" class="form-control"
-                 id="package_count"
-                 name="package_count"
-                 required
-                 placeholder="Nhập Số kiện hàng"
-                 type="number">
-          <div [hidden]="package_count.valid || package_count.untouched">
-            <span *ngIf="package_count.errors && package_count.errors.required"
-                  class="badge badge-warning">
-              Phải nhập Số kiện hàng!
-            </span>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
-    </div>
-</ng-template>
 
 <ng-template #rejecttemplate>
   <div class="modal-body text-center">
