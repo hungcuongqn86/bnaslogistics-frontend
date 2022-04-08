@@ -329,7 +329,7 @@ export interface IPackage {
 export interface ICarrier {
   id: number;
   user_id: number;
-  count_product: number;
+  product_count: number;
   kiem_hang: boolean;
   dong_go: boolean;
   bao_hiem: boolean;

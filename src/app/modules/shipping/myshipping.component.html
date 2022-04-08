@@ -46,6 +46,7 @@
                         <tr>
                             <th>Mã yêu cầu</th>
                             <th>Thông tin</th>
+                            <th>Nhận hàng</th>
                             <th>Số SP</th>
                             <th>Ngày tạo</th>
                             <th>Trạng thái</th>
@@ -55,8 +56,11 @@
                         <tbody>
                           <tr *ngFor="let item of shippings">
                             <td>{{item.id}}</td>
+                            <td>
+                              <p *ngFor="let pkitem of item.carrier_package">{{pkitem.package_code}} - {{pkitem.product_name}} ({{pkitem.product_count}})</p>
+                            </td>
                             <td>{{item.china_warehouses_address}}</td>
-                            <td>{{item.count_product}}</td>
+                            <td>{{item.product_count}}</td>
                             <td>{{item.created_at | tempDate}}</td>
                             <td>
                               <p><span class="badge badge-info">{{item.statusname}}</span></p>
