@@ -246,6 +246,8 @@ export class Order implements IOrder {
   dat_coc: number;
   dat_coc_content: string;
   handle: IUser;
+  china_warehouses_id: number;
+  china_warehouses_address: string;
   content_pc: string;
   status: number;
   created_at: string;
@@ -274,6 +276,11 @@ export class Package implements IPackage {
   thanh_toan: number;
   status: number;
   is_main: number;
+  product_name: string;
+  product_count: number;
+  carrier_brand: string;
+  description: string;
+  note: string;
   note_tl: string;
   weight: number;
   weight_qd: number;
