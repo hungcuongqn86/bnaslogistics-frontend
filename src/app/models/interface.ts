@@ -342,6 +342,7 @@ export interface ICarrier {
   china_warehouses_id: number;
   china_warehouses_address: string;
   status: number;
+  statusname: string;
   created_at: string;
   updated_at: string;
   user: IUser;

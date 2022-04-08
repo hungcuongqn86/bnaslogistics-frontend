@@ -60,12 +60,6 @@
                             <td>{{item.created_at | tempDate}}</td>
                             <td>
                               <p><span class="badge badge-info">{{item.statusname}}</span></p>
-                              <p *ngIf="item.status==2">
-                                Mã đơn hàng:
-                                <a href="javascript:void(0);" (click)="gotoOrder(item.order_id)">
-                                  <span><strong>{{item.order_id}}</strong></span>
-                                </a>
-                              </p>
                             </td>
                             <td>
                               <button (click)="editShipping(item.id)"
@@ -84,7 +78,6 @@
                           </tr>
                         </tbody>
                     </table>
-
                 </div>
                 <div class="card-footer">
                     <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="shippingService.search.limit"
@@ -102,7 +95,7 @@
 
 <ng-template #deltemplate>
   <div class="modal-body text-center">
-    <p>Bạn có chắc chắn muốn hủy yêu cầu này!?</p>
+    <p>Bạn có chắc chắn muốn hủy!?</p>
     <div class="btn-group btn-group-toggle">
       <button type="button" class="btn btn-warning" (click)="confirmDelete()">Yes</button>
       <button type="button" class="btn btn-primary" (click)="decline()">No</button>

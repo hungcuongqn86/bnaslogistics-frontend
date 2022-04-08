@@ -86,9 +86,4 @@ export class MyshippingComponent {
         });
     }
   }
-
-  private gotoOrder(orderId: number) {
-    const win = window.open(`./order/myorder/detail/${orderId}`, '_blank');
-    win.focus();
-  }
 }
