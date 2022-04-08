@@ -80,19 +80,14 @@ export class ShippingService {
       );
   }
 
-  public addShipping(data: ICarrier): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
+  public updateShipping(data: ICarrier): Observable<any> {
+    let url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
+    if (data.id) {
+      url = Util.getUri(apiV1Url) + `${this.moduleUri}update/${data.id}`;
+    }
     return this.http.post<any>(url, data)
       .pipe(
-        catchError(this.handleError('addShipping', data))
-      );
-  }
-
-  public editShipping(data: ICarrier): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-    return this.http.post<any>(url, data)
-      .pipe(
-        catchError(this.handleError('editShipping', data))
+        catchError(this.handleError('updateShipping', data))
       );
   }
 
