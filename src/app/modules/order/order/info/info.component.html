@@ -2,6 +2,33 @@
   <div class="col-md-4">
     <div class="card">
       <div class="card-header">
+        <i class="fa fa-align-justify"></i> <strong>Thông tin khách hàng</strong>
+      </div>
+      <div class="card-body">
+        <p *ngIf="orderService.orderRe.user"><i class="fa fa-user"></i> {{orderService.orderRe.user.code}}
+          - {{orderService.orderRe.user.name}}</p>
+        <p *ngIf="orderService.orderRe.user"><i class="fa fa-phone-square"></i>
+          {{orderService.orderRe.user.phone_number}}</p>
+        <p *ngIf="orderService.orderRe.user"><i class="fa fa-envelope"></i>
+          {{orderService.orderRe.user.email}}
+        </p>
+        <p *ngIf="orderService.orderRe.user"><i class="fa fa-map-marker" aria-hidden="true"></i>
+          {{orderService.orderRe.user.address}}
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> <strong>Đơn ký gửi</strong>
+      </div>
+      <div class="card-body">
+        <p><i class="fa fa-qrcode"></i> Mã yêu cầu: {{orderService.orderRe.carrier_id}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
         <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
       </div>
       <div class="card-body">
@@ -22,25 +49,6 @@
         </p>
         <p *ngIf="orderService.orderRe.handle"><i class="fa fa-user"></i> Phụ
           trách: {{orderService.orderRe.handle.name}}</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-align-justify"></i> <strong>Thông tin khách hàng</strong>
-      </div>
-      <div class="card-body">
-        <p *ngIf="orderService.orderRe.user"><i class="fa fa-user"></i> {{orderService.orderRe.user.code}}
-          - {{orderService.orderRe.user.name}}</p>
-        <p *ngIf="orderService.orderRe.user"><i class="fa fa-phone-square"></i>
-          {{orderService.orderRe.user.phone_number}}</p>
-        <p *ngIf="orderService.orderRe.user"><i class="fa fa-envelope"></i>
-          {{orderService.orderRe.user.email}}
-        </p>
-        <p *ngIf="orderService.orderRe.user"><i class="fa fa-map-marker" aria-hidden="true"></i>
-          {{orderService.orderRe.user.address}}
-        </p>
       </div>
     </div>
   </div>

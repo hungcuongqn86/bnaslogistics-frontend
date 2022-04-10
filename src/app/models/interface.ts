@@ -222,6 +222,7 @@ export interface IOrder {
   user_id: number;
   code: string;
   cart_id: number;
+  carrier_id: number;
   shipping: number;
   ti_gia: number;
   count_product: number;
