@@ -70,6 +70,11 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  public gotoCarrier(itemId: number) {
+    const win = window.open(`./shipping/list/detail/${itemId}`, '_blank');
+    win.focus();
+  }
+
   public getStatus() {
     this.orderService.showLoading(true);
     this.orderService.getStatus()

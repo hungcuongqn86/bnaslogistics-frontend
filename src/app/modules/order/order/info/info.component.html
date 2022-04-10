@@ -22,7 +22,13 @@
         <i class="fa fa-align-justify"></i> <strong>Đơn ký gửi</strong>
       </div>
       <div class="card-body">
-        <p><i class="fa fa-qrcode"></i> Mã yêu cầu: {{orderService.orderRe.carrier_id}}</p>
+        <p><i class="fa fa-qrcode"></i> Mã yêu cầu:
+          <a href="javascript:void(0);" (click)="gotoCarrier(orderService.orderRe.carrier_id)">
+            <span><strong>#{{orderService.orderRe.carrier_id}}</strong></span>
+          </a>
+        </p>
+        <p><i class="fa fa-info"></i> Số sản phẩm: {{orderService.orderRe.count_product}}</p>
+        <p><i class="fa fa-map-marker"></i> Kho TQ nhận: {{orderService.orderRe.china_warehouses_address}}</p>
       </div>
     </div>
   </div>
@@ -32,7 +38,7 @@
         <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
       </div>
       <div class="card-body">
-        <p><i class="fa fa-map-marker"></i> Trạng thái: <span
+        <p><i class="fa fa-info"></i> Trạng thái: <span
           class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
         </p>
         <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.code}}</p>
