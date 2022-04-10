@@ -117,10 +117,10 @@
             <tbody>
             <tr *ngFor="let item of orders">
               <td>
-                <p *ngIf="item.shipping===1">
-                  <span class="badge badge-warning"> Đơn ký gửi</span>
+                <p>Mã: <span class="badge badge-info">{{item.code}}</span><span *ngIf="item.shipping===1"
+                                                                                style="margin-left: 5px;"
+                                                                                class="badge badge-warning">Đơn ký gửi</span>
                 </p>
-                <p>Mã: <span class="badge badge-info">{{item.code}}</span></p>
                 <p>Ngày tạo: {{item.created_at | tempDate}}</p>
               </td>
               <td>

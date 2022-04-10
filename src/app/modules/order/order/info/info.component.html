@@ -31,7 +31,8 @@
         <i class="fa fa-align-justify"></i> <strong>Thông tin khách hàng</strong>
       </div>
       <div class="card-body">
-        <p *ngIf="orderService.orderRe.user"><i class="fa fa-user"></i> {{orderService.orderRe.user.name}}</p>
+        <p *ngIf="orderService.orderRe.user"><i class="fa fa-user"></i> {{orderService.orderRe.user.code}}
+          - {{orderService.orderRe.user.name}}</p>
         <p *ngIf="orderService.orderRe.user"><i class="fa fa-phone-square"></i>
           {{orderService.orderRe.user.phone_number}}</p>
         <p *ngIf="orderService.orderRe.user"><i class="fa fa-envelope"></i>
@@ -70,6 +71,58 @@
 </div>
 
 <form novalidate #form="ngForm" class="form-horizontal">
+  <div *ngIf="orderService.orderRe"
+       class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-12" style="text-align: right;">
+          <div class="col-form-label">
+            <div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="kiem_hang" name="kiem_hang"
+                     value="1"
+                     [(ngModel)]="orderService.orderRe.kiem_hang"
+                     (change)="updateOrder('kiem_hang')"
+                     class="form-check-input">
+              <label class="form-check-label">Kiểm hàng</label>
+            </div>
+            <div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="dong_go" name="dong_go"
+                     value="1"
+                     [(ngModel)]="orderService.orderRe.dong_go"
+                     (change)="updateOrder('dong_go')"
+                     class="form-check-input">
+              <label class="form-check-label">Đóng gỗ</label>
+            </div>
+            <div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="bao_hiem" name="bao_hiem"
+                     value="1"
+                     [(ngModel)]="orderService.orderRe.bao_hiem"
+                     (change)="updateOrder('bao_hiem')"
+                     class="form-check-input">
+              <label class="form-check-label">Chống sốc</label>
+            </div>
+            <!--<div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
+                     value="1"
+                     [(ngModel)]="orderService.orderRe.chinh_ngach"
+                     (change)="updateOrder('chinh_ngach')"
+                     class="form-check-input">
+              <label class="form-check-label">Chính ngạch</label>
+            </div>
+            <div class="form-check form-check-inline mr-1">
+              <input type="checkbox" id="vat" name="vat"
+                     value="1"
+                     (change)="updateOrder('vat')"
+                     [(ngModel)]="orderService.orderRe.vat"
+                     class="form-check-input">
+              <label class="form-check-label">VAT</label>
+            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <table class="table table-bordered table-sm">
     <thead>
     <tr>
@@ -203,8 +256,8 @@
         </td>
         <td>
           <p *ngIf="item.is_main!=1" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
-                                                                                  (click)="deletePackage(template, item);"
-                                                                                  href="javascript:void(0);">Hủy</a>
+                                                                               (click)="deletePackage(template, item);"
+                                                                               href="javascript:void(0);">Hủy</a>
           </p>
         </td>
       </tr>
@@ -220,52 +273,6 @@
   <div *ngIf="orderService.orderRe && orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0"
        class="card">
     <div class="card-body">
-      <div class="row">
-        <div class="col-lg-12" style="text-align: right;">
-          <div class="col-form-label">
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="kiem_hang" name="kiem_hang"
-                     value="1"
-                     [(ngModel)]="orderService.orderRe.kiem_hang"
-                     (change)="updateOrder('kiem_hang')"
-                     class="form-check-input">
-              <label class="form-check-label">Kiểm hàng</label>
-            </div>
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="dong_go" name="dong_go"
-                     value="1"
-                     [(ngModel)]="orderService.orderRe.dong_go"
-                     (change)="updateOrder('dong_go')"
-                     class="form-check-input">
-              <label class="form-check-label">Đóng gỗ</label>
-            </div>
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="bao_hiem" name="bao_hiem"
-                     value="1"
-                     [(ngModel)]="orderService.orderRe.bao_hiem"
-                     (change)="updateOrder('bao_hiem')"
-                     class="form-check-input">
-              <label class="form-check-label">Chống sốc</label>
-            </div>
-            <!--<div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
-                     value="1"
-                     [(ngModel)]="orderService.orderRe.chinh_ngach"
-                     (change)="updateOrder('chinh_ngach')"
-                     class="form-check-input">
-              <label class="form-check-label">Chính ngạch</label>
-            </div>
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="vat" name="vat"
-                     value="1"
-                     (change)="updateOrder('vat')"
-                     [(ngModel)]="orderService.orderRe.vat"
-                     class="form-check-input">
-              <label class="form-check-label">VAT</label>
-            </div>-->
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-lg-12" style="text-align: right;">
           <table class="table table-bordered table-sm">
