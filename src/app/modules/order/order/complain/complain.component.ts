@@ -77,10 +77,10 @@ export class ComplainComponent {
     this.complain.status = 1;
     this.complain.is_deleted = 0;
     this.complain.complain_products = [];
-    for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
+    for (let i = 0; i < this.orderService.orderRe.order_items.length; i++) {
       const pro: ComplainProducts = {
         id: null, cart_id: null, complain_id: null, note: null, created_at: null, updated_at: null,
-        orderItem: this.orderService.orderRe.order_items[i], is_deleted: null, media: null
+        order_item: this.orderService.orderRe.order_items[i], is_deleted: null, media: null
       };
       this.complain.complain_products.push(pro);
     }

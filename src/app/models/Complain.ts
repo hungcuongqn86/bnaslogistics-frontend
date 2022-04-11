@@ -20,7 +20,7 @@ export interface ComplainProducts {
     id: number;
     complain_id: number;
     cart_id: number;
-    orderItem: IOrderItem;
+    order_item: IOrderItem;
     media: { id: number; url: string }[];
     note: string;
     is_deleted: number;
