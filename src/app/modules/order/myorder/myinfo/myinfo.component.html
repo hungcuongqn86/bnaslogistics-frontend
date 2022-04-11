@@ -30,6 +30,22 @@
       </div>
     </div>
 
+    <div class="card" *ngIf="orderService.orderRe.shipping">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> <strong>Đơn ký gửi</strong>
+      </div>
+      <div class="card-body">
+        <p><i class="fa fa-qrcode"></i> Mã yêu cầu:
+          <a href="javascript:void(0);" (click)="gotoCarrier(orderService.orderRe.carrier_id)">
+            <span><strong>#{{orderService.orderRe.carrier_id}}</strong></span>
+          </a>
+        </p>
+        <p><i class="fa fa-info"></i> Số sản phẩm: {{orderService.orderRe.count_product}}</p>
+        <p><i class="fa fa-money"></i> Phí kiểm đếm: {{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice : 1:1 : true}}<sup> đ</sup></p>
+        <p><i class="fa fa-map-marker"></i> Kho TQ nhận: {{orderService.orderRe.china_warehouses_address}}</p>
+      </div>
+    </div>
+
     <div *ngIf="!nv" class="card bang_phi">
       <div class="card-header">
         <i class="fa fa-align-justify"></i> <strong>Tổng phí</strong>

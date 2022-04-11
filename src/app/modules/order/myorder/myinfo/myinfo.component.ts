@@ -100,6 +100,11 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  public gotoCarrier(itemId: number) {
+    const win = window.open(`./shipping/myshipping/edit/${itemId}`, '_blank');
+    win.focus();
+  }
+
   private getOrder() {
     if (this.orderService.orderRe.id !== null) {
       this.orderService.showLoading(true);
