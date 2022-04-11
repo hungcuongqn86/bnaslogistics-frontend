@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {tokens_key, apiUrl, apiV1Url} from './const';
+import {apiV1Url, tokens_key} from './const';
 
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import {HttpErrorHandler, HandleError} from './http-error-handler.service';
+import {HandleError, HttpErrorHandler} from './http-error-handler.service';
 import {Util} from './helper/lib';
 import {IUser} from "./models/interface";
 
@@ -141,11 +141,23 @@ export class AuthService {
       );
   }
 
+  private _logout(): Observable<{}> {
+    const url = Util.getUri(apiV1Url) + `logout`;
+    return this.http.post(url, {}, httpOptions)
+      .pipe(
+        catchError(this.handleError('_logout'))
+      );
+  }
+
   public logout() {
     const key = this.checkLogin();
     if (key !== '') {
       localStorage.removeItem(key);
     }
+
+    this._logout().subscribe((res: any) => {
+
+    });
     this.router.navigate(['/login']);
   }
 }
