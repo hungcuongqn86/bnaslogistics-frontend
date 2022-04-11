@@ -70,7 +70,7 @@
               class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}
               <sup> đ</sup></strong></span>
             </p>
-            <p>(8) Tiền chống sốc <span
+            <p>(8) Tiền chống sốc <span *ngIf="orderService.orderRe.phi_bao_hiem_tt"
               class="pull-right"><strong>{{orderService.orderRe.phi_bao_hiem_tt.toString() | tempPrice: 1 : 1 : false}}
               <sup> đ</sup></strong></span>
             </p>

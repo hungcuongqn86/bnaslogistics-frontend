@@ -8,9 +8,8 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
-import {IPackage} from '../../models/interface';
+import {History, ICart, IOrder, IOrderItem, IPackage} from '../../models/interface';
 import {Complain} from '../../models/Complain';
-import {History, ICart, IOrder, IOrderItem} from "../../models/interface";
 import {Order} from "../../models/model";
 
 @Injectable()
@@ -268,6 +267,14 @@ export class OrderService {
     return this.http.post<any>(url, data)
       .pipe(
         catchError(this.handleError('editComplain', data))
+      );
+  }
+
+  public deleteComplain(id: number): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/delete/${id}`;
+    return this.http.post<any>(url, {})
+      .pipe(
+        catchError(this.handleError('deleteComplain', {}))
       );
   }
 

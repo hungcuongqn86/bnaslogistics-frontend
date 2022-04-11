@@ -103,9 +103,9 @@
         </thead>
         <tbody>
         <tr *ngFor="let item of complain.complain_products">
-          <td><a target="_blank" rel="noopener noreferrer" href="{{item.cart.pro_link}}"><img
-            src="{{item.cart.image}}"></a></td>
-          <td><p>Đặt: {{item.cart.amount}}</p></td>
+          <td><a target="_blank" rel="noopener noreferrer" href="{{item.order_item.pro_link}}"><img
+            src="{{item.order_item.image}}"></a></td>
+          <td><p>Đặt: {{item.order_item.amount}}</p></td>
           <td>
             <input [hidden]="1" type="file" multiple id="files" name="files" #picked
                    (change)="uploadExc(picked, item)">

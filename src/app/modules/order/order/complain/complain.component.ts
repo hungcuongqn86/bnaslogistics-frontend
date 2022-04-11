@@ -87,6 +87,14 @@ export class ComplainComponent {
     this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
   }
 
+  public deleteComplain(id: number) {
+    this.orderService.showLoading(true);
+    this.orderService.deleteComplain(id)
+      .subscribe(res => {
+        this.getComplains();
+      });
+  }
+
   public editComplain(id: number, template) {
     this.title = 'Chi tiết đơn khiếu nại';
     this.orderService.getComplain(id)

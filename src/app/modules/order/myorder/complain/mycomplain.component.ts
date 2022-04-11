@@ -80,7 +80,7 @@ export class MycomplainComponent {
     for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
       const pro: ComplainProducts = {
         id: null, cart_id: null, complain_id: null, note: null, created_at: null, updated_at: null,
-        orderItem: this.orderService.orderRe.order_items[i], is_deleted: null, media: null
+        order_item: this.orderService.orderRe.order_items[i], is_deleted: null, media: null
       };
       this.complain.complain_products.push(pro);
     }
