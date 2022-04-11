@@ -77,7 +77,7 @@ export class MycomplainComponent {
     this.complain.status = 1;
     this.complain.is_deleted = 0;
     this.complain.complain_products = [];
-    for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
+    for (let i = 0; i < this.orderService.orderRe.order_items.length; i++) {
       const pro: ComplainProducts = {
         id: null, cart_id: null, complain_id: null, note: null, created_at: null, updated_at: null,
         order_item: this.orderService.orderRe.order_items[i], is_deleted: null, media: null
@@ -85,6 +85,14 @@ export class MycomplainComponent {
       this.complain.complain_products.push(pro);
     }
     this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
+  }
+
+  public deleteComplain(id: number) {
+    this.orderService.showLoading(true);
+    this.orderService.deleteComplain(id)
+      .subscribe(res => {
+        this.getComplains();
+      });
   }
 
   public editComplain(id: number, template) {
