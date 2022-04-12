@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(public dashboardService: DashboardService, private router: Router, public authService: AuthService) {
     if (authService.hasRole('custumer')) {
-      this.router.navigate(['/order/myorder/0/od']);
+      this.router.navigate(['/home']);
     }
   }
 

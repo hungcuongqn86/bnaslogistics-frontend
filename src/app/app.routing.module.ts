@@ -32,6 +32,13 @@ const appRoutes: Routes = [
         }
       },
       {
+        path: 'home',
+        loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+        data: {
+          title: 'Bảng điều khiển'
+        }
+      },
+      {
         path: 'notification',
         loadChildren: './modules/notification/notification.module#NotificationModule',
         data: {
