@@ -300,9 +300,6 @@ body.app:not(.header-fixed) {
 }
 .entry-list{
   border: 0;
-  .card {
-    border: 0;
-  }
   select {
     border-radius:10px;
     font-weight: 500;
@@ -335,59 +332,106 @@ body.app:not(.header-fixed) {
       }
     }
   }
-  .card-header {
-    border-bottom: 0;
-    background-color: transparent;
-    font-size: 24px;
-    font-weight: bold;
-    .nav-tabs {
-      margin: 0;
-      justify-content: flex-end;
-      .nav-link {
-        border: 0;
-        font-size: 16px;
-        font-weight: 400;
-        padding: 10px 10px;
-        @include border-radius(10px);
-      }
-      .nav-item{
-        &.active {
-          a {
-            background-color: $blue;
-            color: $white;
-            font-weight: bold;
-          }
-        }
+  &.detail {
+    >.card-header {
+      border-bottom: 0;
+      background-color: transparent;
+      font-size: 24px;
+      font-weight: bold;
+      .nav-tabs {
+        margin: 0;
+        justify-content: flex-end;
         .nav-link {
-          .tab-title {
-            padding: 0;
+          border: 0;
+          font-size: 16px;
+          font-weight: 400;
+          padding: 10px 10px;
+          @include border-radius(10px);
+        }
+        .nav-item{
+          &.active {
+            a {
+              background-color: $blue;
+              color: $white;
+              font-weight: bold;
+            }
+          }
+          .nav-link {
+            .tab-title {
+              padding: 0;
+            }
+          }
+          &:first-child {
+            margin-left: 0;
           }
         }
-        &:first-child {
-          margin-left: 0;
+      }
+      .tab-content{
+        border: 0;
+        .tab-pane {
+          padding: 0;
         }
       }
     }
-    .tab-content{
-      border: 0;
-      .tab-pane {
-        padding: 0;
+  }
+  
+  &:not(.detail){
+    .card-header {
+      border-bottom: 0;
+      background-color: transparent;
+      font-size: 24px;
+      font-weight: bold;
+      .nav-tabs {
+        margin: 0;
+        justify-content: flex-end;
+        .nav-link {
+          border: 0;
+          font-size: 16px;
+          font-weight: 400;
+          padding: 10px 10px;
+          @include border-radius(10px);
+        }
+        .nav-item{
+          &.active {
+            a {
+              background-color: $blue;
+              color: $white;
+              font-weight: bold;
+            }
+          }
+          .nav-link {
+            .tab-title {
+              padding: 0;
+            }
+          }
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+      .tab-content{
+        border: 0;
+        .tab-pane {
+          padding: 0;
+        }
       }
     }
-    
-  }
-  thead {
-    th {
-      font-size: 16px;
-      text-transform: uppercase;
+    .card {
       border: 0;
     }
-  }
-  table {
-    td {
-      border-color: $color-grey;
-      a {
-        color: $color-text;
+    thead {
+      th {
+        font-size: 16px;
+        text-transform: uppercase;
+        border: 0;
+      }
+    }
+    table {
+      td {
+        border-color: $color-grey;
+        a {
+          color: $color-text;
+        }
       }
     }
   }

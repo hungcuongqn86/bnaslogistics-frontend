@@ -1,19 +1,20 @@
-<!-- Breadcrumb -->
-<ol class="breadcrumb">
-  <app-breadcrumb></app-breadcrumb>
-  <!-- Breadcrumb Menu-->
-  <li class="breadcrumb-menu d-md-down-none">
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-      <a class="btn" href="javascript:void(0)" (click)="backlist()"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
-    </div>
-  </li>
-</ol>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
+      <div class="card entry-list detail">
         <div class="card-header">
-          <strong>Phiếu xuất kho</strong>
+          <div class="row justify-content-between align-items-center">
+            <div class="col-12 col-md-6">
+              <div class="title-list">
+                  <span>Phiếu xuất kho</span>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 text-right d-md-down-none">
+              <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <a class="btn" href="javascript:void(0)" (click)="backlist()"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
+              </div>
+            </div>
+          </div>
         </div>
         <div *ngIf="bill" id="printarea" class="card-body">
           <h3 class="text-center">PHIẾU XUẤT KHO</h3>
