@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
     }
-    this.sub = this.dashboardService.orderstatisticbystatus(this.search.key)
+    this.sub = this.dashboardService.googleTranslate(this.search.key)
       .subscribe(data => {
           console.log(data);
           this.sub.unsubscribe();
