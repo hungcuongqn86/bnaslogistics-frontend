@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DashboardService} from '../../services/dashboard.service';
-import {AuthService} from "../../auth.service";
+import {AuthService} from '../../auth.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,8 @@ import {AuthService} from "../../auth.service";
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  sub: Subscription;
   public search = {
     web: '1688.com',
     key: ''
@@ -24,6 +26,29 @@ export class HomeComponent implements OnInit {
   }
 
   public searchProduct() {
-    console.log(1111);
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+    this.sub = this.dashboardService.orderstatisticbystatus(this.search.key)
+      .subscribe(data => {
+          console.log(data);
+          this.sub.unsubscribe();
+        },
+        error => {
+          if (this.sub) {
+            this.sub.unsubscribe();
+          }
+        },
+        () => {
+          if (this.sub) {
+            this.sub.unsubscribe();
+          }
+        });
+  }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

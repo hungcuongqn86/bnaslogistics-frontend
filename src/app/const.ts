@@ -1,4 +1,4 @@
-import {environment} from "../environments/environment";
+import {environment} from '../environments/environment';
 
 export const clientid = 1;
 export const apiUrl = environment.apiUrl;

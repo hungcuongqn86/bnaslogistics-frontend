@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {Util} from "../helper/lib";
-import {apiV1Url} from "../const";
-import {catchError} from "rxjs/operators";
-import {HandleError, HttpErrorHandler} from "../http-error-handler.service";
+import {Observable} from 'rxjs';
+import {Util} from '../helper/lib';
+import {apiV1Url} from '../const';
+import {catchError} from 'rxjs/operators';
+import {HandleError, HttpErrorHandler} from '../http-error-handler.service';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class DashboardService {
@@ -90,5 +91,15 @@ export class DashboardService {
       .pipe(
         catchError(this.handleError('orderstatisticbystatus', []))
       );
+  }
+
+  googleTranslate(textSourc: string): Observable<any> {
+    const url = `https://translation.googleapis.com/language/translate/v2?key=${environment.service_key}`;
+    return this.http.post<any>(url, {
+      q: [textSourc],
+      target: 'zh-CN'
+    }).pipe(
+      catchError(this.handleError('googleTranslate', {textSourc}))
+    );
   }
 }
