@@ -21,12 +21,8 @@ export class AuthInterceptor implements HttpInterceptor {
     });
     */
     // Clone the request and set the new header in one step.
-    if (req.url.indexOf('api/v1') > 0) {
-      const authReq = req.clone({setHeaders: {Authorization: authToken}});
-      // send cloned request with header to the next handler.
-      return next.handle(authReq);
-    }
-
-    return next.handle(req);
+    const authReq = req.clone({setHeaders: {Authorization: authToken}});
+    // send cloned request with header to the next handler.
+    return next.handle(authReq);
   }
 }
