@@ -9,7 +9,6 @@ export const environment = {
   apiUrl: './api/',
   apiV1Url: '../api/v1/',
   appId: 'bnaslogistics',
-  service_key: 'AIzaSyAuZIpp9yLCKRuKhp4oJF4EFj-3cpzrytg',
   firebase: {
     apiKey: 'AIzaSyBtTPUa19nLkReMDWXTFr6U43D166n9MVE',
     authDomain: 'banhangqc.firebaseapp.com',

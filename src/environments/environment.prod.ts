@@ -5,7 +5,6 @@ export const environment = {
   apiUrl: '../order/api/public/api/',
   apiV1Url: '../order/api/public/api/v1/',
   appId: 'nguonhang',
-  service_key: 'AIzaSyAuZIpp9yLCKRuKhp4oJF4EFj-3cpzrytg',
   firebase: {
     apiKey: 'AIzaSyBtTPUa19nLkReMDWXTFr6U43D166n9MVE',
     authDomain: 'banhangqc.firebaseapp.com',
