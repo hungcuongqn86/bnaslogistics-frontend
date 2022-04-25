@@ -14,7 +14,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   sub: Subscription;
   public search = {
     web: '1688.com',
-    key: ''
+    key: '',
+    cn_key: ''
   };
 
   constructor(public dashboardService: DashboardService, private router: Router, public authService: AuthService) {
@@ -31,7 +32,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     this.sub = this.dashboardService.googleTranslate(this.search.key)
       .subscribe(data => {
-          console.log(data);
+          if (data.data && data.data.translations && data.data.translations.length > 0) {
+            this.search.cn_key = data.data.translations[0].translatedText;
+          }
+          this.redirectToSearch();
           this.sub.unsubscribe();
         },
         error => {
@@ -44,6 +48,21 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.sub.unsubscribe();
           }
         });
+  }
+
+  private redirectToSearch() {
+    if (this.search.cn_key != '') {
+      let rdUrl = '';
+      if (this.search.web == 'taobao.com') {
+        rdUrl = `https://s.taobao.com/search?q=${this.search.cn_key}`;
+      }
+      if (this.search.web == '1688.com') {
+        const key = encodeURIComponent(this.search.cn_key);
+        rdUrl = `https://s.1688.com/selloffer/offer_search.htm?keywords=${key}&spm=a26352.13672862.searchbox.input`;
+      }
+      const win = window.open(rdUrl, '_blank');
+      win.focus();
+    }
   }
 
   ngOnDestroy() {
