@@ -5,7 +5,6 @@ import {Util} from '../helper/lib';
 import {apiV1Url} from '../const';
 import {catchError} from 'rxjs/operators';
 import {HandleError, HttpErrorHandler} from '../http-error-handler.service';
-import {environment} from '../../environments/environment';
 
 @Injectable()
 export class DashboardService {
@@ -94,12 +93,10 @@ export class DashboardService {
   }
 
   googleTranslate(textSourc: string): Observable<any> {
-    const url = `https://translation.googleapis.com/language/translate/v2?key=${environment.service_key}`;
-    return this.http.post<any>(url, {
-      q: [textSourc],
-      target: 'zh-CN'
-    }).pipe(
-      catchError(this.handleError('googleTranslate', {textSourc}))
-    );
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}translation?key=${textSourc}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('googleTranslate', []))
+      );
   }
 }
