@@ -62,9 +62,9 @@
   background: #ffffff;
 }
 
-.sidebar .nav-link:hover.nav-dropdown-toggle::before {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='%2373818f' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E");
-}
+// .sidebar .nav-link:hover.nav-dropdown-toggle::before {
+//   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='%2373818f' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E");
+// }
 
 .sidebar .sidebar-minimizer {
   display: none;
@@ -225,33 +225,46 @@ body.app:not(.header-fixed) {
 }
 
 .sidebar {
+  background-color: #5586ef;
+  .nav-dropdown-toggle::before{
+    font-family: 'iconsax';
+    content: "\e940";
+    top: calc(50% - 12px);
+    background-image: none;
+    margin-top: 0;
+    height: auto;
+    width: auto;
+  }
+  .nav-dropdown.open > .nav-dropdown-toggle::before {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
   .nav-item {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    &:first-child {
+      margin-top: 0;
+    }
     i.iconsax{
       font-size: 24px;
       vertical-align: sub;
-      color: #6D6D6D
+      color: #fff
     }
   }
   .nav-link{
     font-size: 16px;
     font-weight:500;
-    color: #6D6D6D;
+    color: #fff !important;
+    padding: 10px 15px;
     .nav-icon{
       width: auto;
     }
-    &.active {
-      font-weight: 700;
-      background-color: #F1F1F1;
-      color: #101C36;
+    &.active,
+    &:hover {
+      background-color: #fff;
+      color: #5586ef !important;
       .nav-icon {
-        color: #101C36;
-      }
-    }
-    &:hover{
-      background-color: #F1F1F1;
-      color: #101C36;
-      i.iconsax {
-        color: #101C36;
+        color: #5586ef;
       }
     }
   }
@@ -272,7 +285,7 @@ body.app:not(.header-fixed) {
       > .nav-item {
         > .nav-link {
           position:relative;
-          margin: 0 15px;
+          margin: 2px 15px;
           @include border-radius(10px);
           &::before{
             content: '';
