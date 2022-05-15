@@ -1,5 +1,10 @@
 // Here you can add other styles
-
+.fs-14{
+  font-size: 14px !important;
+}
+.fs-16{
+  font-size: 16px !important;
+}
 .loading-over {
   position: fixed;
   display: flex;
@@ -147,7 +152,7 @@ pagination.pagination-sm.pull-right.ng-untouched {
   line-height: 20px;
 }
 
-.card, .form-control, .btn {
+.card, .btn {
   border-radius: 0
 }
 
@@ -169,7 +174,87 @@ body.app:not(.header-fixed) {
 .modal-dialog.modal-sm {
   margin: calc(50vh - 50px) auto;
 }
+.card-header-actions{
+  margin-right: 0;
+}
+.nav-tabs .nav-item{
+  margin: 0;
+}
 //genera
+.check-label {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    text-align: left;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.check-label > input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.check-label > input:checked ~ span {
+    border: 1px solid #c8cfdd;
+}
+.check-label:hover > input:not([disabled]):checked ~ span, 
+.check-label > input:checked ~ span {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.check-label > input:checked ~ span {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background: none;
+    background: var(--blue);
+}
+.check-label > span {
+    border: 1px solid #d1d7e2;
+}
+.check-label > span {
+    border-radius: 3px;
+    background: none;
+    position: absolute;
+    top: 1px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+}
+.check-label > input:checked ~ span:after {
+    display: block;
+}
+.check-label > span:after {
+    border: solid #fff;
+}
+.check-label > span:after {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    margin-left: -2px;
+    margin-top: -6px;
+    width: 5px;
+    height: 10px;
+    border-width: 0 2px 2px 0/*rtl:ignore*/ !important;
+    -webkit-transform: rotate(45deg)/*rtl:ignore*/;
+    transform: rotate(45deg)/*rtl:ignore*/;
+}
+.btn-info:hover,
+.btn-info:focus{
+  background-color: #77a0f9;
+  border-color: #77a0f9;
+  color: #fff;
+}
+
+.btn i {
+  vertical-align: middle;
+}
+.text-danger {
+  color: $orange !important;
+}
 .bg-orange{
   background-color: $orange !important;
 }
@@ -213,6 +298,7 @@ body.app:not(.header-fixed) {
 .app-header {
   height: auto;
   padding: 10px 0;
+  background-color: var(--blue);
   .navbar-nav {
     padding-right: 15px;
   }
@@ -225,7 +311,10 @@ body.app:not(.header-fixed) {
 }
 
 .sidebar {
-  background-color: #5586ef;
+  background-color: var(--blue);
+  .nav {
+    margin-top: 15px;
+  }
   .nav-dropdown-toggle::before{
     font-family: 'iconsax';
     content: "\e940";
@@ -255,7 +344,8 @@ body.app:not(.header-fixed) {
     font-size: 16px;
     font-weight:500;
     color: #fff !important;
-    padding: 10px 15px;
+    padding: 5px 15px;
+    @include border-radius(10px);
     .nav-icon{
       width: auto;
     }
@@ -285,8 +375,8 @@ body.app:not(.header-fixed) {
       > .nav-item {
         > .nav-link {
           position:relative;
-          margin: 2px 15px;
-          @include border-radius(10px);
+          margin: 3px 15px;
+          padding: 11px 15px;
           &::before{
             content: '';
             position: absolute;
@@ -311,6 +401,77 @@ body.app:not(.header-fixed) {
 .btn-rounded {
   border-radius: 10px;
 }
+.entry-detail{
+  .nav-tabs {
+    margin: 0 0 30px 0;
+    justify-content: flex-end;
+    border:0;
+    .nav-link {
+      border: 0;
+      font-size: 16px;
+      font-weight: 400;
+      padding: 10px 10px;
+      @include border-radius(10px);
+    }
+    .nav-item{
+      &.active {
+        a {
+          background-color: $blue;
+          color: $white;
+        }
+      }
+      .nav-link {
+        .tab-title {
+          padding: 0;
+        }
+      }
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+  .tab-content{
+    border: 0;
+    .tab-pane {
+      padding: 0;
+    }
+  }
+}
+.badge{
+    font-size: 14px;
+    font-weight: 400;
+    padding: 7px 10px;
+    @include border-radius(5px);
+    &.badge-danger{
+      background-color: #FFE0D5;
+      color: #FF7643;
+    }
+    &.badge-info{
+      background-color: #D5E3FF;
+      color: #438EFF;
+    }
+    &.badge-warning{
+      background-color: #F6E5C5;
+      color: #C88500;
+    }
+    &.badge-success{
+      background-color: #EAFAE5;
+      color: #83BF6E;
+    }
+  }
+  .btn-violet {
+    color: $white;
+    background-color: $violet;
+    border-color: $violet;
+  }
+  .btn-info{
+    color: $white;
+    background-color: $blue;
+    border-color: $blue;
+  }
+  .btn.btn-sm {
+    @include border-radius(5px);
+  }
 .entry-list{
   border: 0;
   select {
@@ -342,6 +503,20 @@ body.app:not(.header-fixed) {
       }
       &.highlight-orange::before{
         background-color: $orange;
+      }
+    }
+  }
+  thead {
+    th {
+      font-size: 16px;
+      border: 0;
+    }
+  }
+  table {
+    td {
+      border-color: $color-grey;
+      a {
+        color: $color-text;
       }
     }
   }
@@ -386,6 +561,7 @@ body.app:not(.header-fixed) {
         }
       }
     }
+
   }
   
   &:not(.detail){
@@ -432,21 +608,7 @@ body.app:not(.header-fixed) {
     .card {
       border: 0;
     }
-    thead {
-      th {
-        font-size: 16px;
-        text-transform: uppercase;
-        border: 0;
-      }
-    }
-    table {
-      td {
-        border-color: $color-grey;
-        a {
-          color: $color-text;
-        }
-      }
-    }
+    
   }
   .table-hover {
     tbody {
@@ -458,41 +620,7 @@ body.app:not(.header-fixed) {
       }
     }
   }
-  .badge{
-    font-size: 14px;
-    font-weight: 400;
-    padding: 7px 10px;
-    @include border-radius(5px);
-    &.badge-danger{
-      background-color: #FFE0D5;
-      color: #FF7643;
-    }
-    &.badge-info{
-      background-color: #D5E3FF;
-      color: #438EFF;
-    }
-    &.badge-warning{
-      background-color: #F6E5C5;
-      color: #C88500;
-    }
-    &.badge-success{
-      background-color: #EAFAE5;
-      color: #83BF6E;
-    }
-  }
-  .btn-violet {
-    color: $white;
-    background-color: $violet;
-    border-color: $violet;
-  }
-  .btn-info{
-    color: $white;
-    background-color: $blue;
-    border-color: $blue;
-  }
-  .btn.btn-sm {
-    @include border-radius(5px);
-  }
+  
   .card-footer{
     background-color: #fff;
   }
@@ -528,7 +656,16 @@ body.app:not(.header-fixed) {
       font-weight: 700;
     }
   }
-
+}
+.widget-item{
+  border: 0;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  min-height: 280px;
+  .card-footer{
+    background-color: #f9f9f9;
+    border-radius: inherit;
+  }
 }
 .entry-search{
   .input-group-text,
@@ -637,6 +774,16 @@ body.app:not(.header-fixed) {
 }
 .brand-card-body > *:not(:last-child){
   border-color: $color-text;
+}
+@media(min-width: 992px) {
+  .order-detail{
+    .nav-tabs .nav-item {
+      margin-left: 15px;
+    }
+    .entry-detail{
+      margin-top: -50px;
+    }
+  }
 }
 @media (max-width: 1366px) {
   .widget {

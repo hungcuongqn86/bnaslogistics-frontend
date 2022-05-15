@@ -1,19 +1,20 @@
-<div class="card">
-  <div class="card-header"><i class="fa fa-cubes"></i> <strong>Danh sách lịch sử</strong>
+<div class="card entry-list">
+  <div class="card-header p-0 mb-3">
+    <strong>Danh sách lịch sử</strong>
     <div class="card-header-actions">
-      <button (click)="addHistory(template_history)" class="btn btn-block btn-outline-primary btn-sm"
+      <button (click)="addHistory(template_history)" class="btn btn-block btn-outline-primary rounded"
               type="button">Thêm
       </button>
     </div>
   </div>
-  <div *ngIf="orderService.orderRe && orderService.orderRe.history" class="card-body">
-    <table class="table table-bordered">
+  <div *ngIf="orderService.orderRe && orderService.orderRe.history" class="card-body p-0">
+    <table class="table table-hover">
       <thead>
       <tr>
-        <th>Ngày giờ</th>
-        <th>Người thực hiện</th>
-        <th>Công việc</th>
-        <th>Nội dung</th>
+        <th rowspan="2">Ngày giờ</th>
+        <th rowspan="2">Người thực hiện</th>
+        <th rowspan="2">Công việc</th>
+        <th rowspan="2">Nội dung</th>
       </tr>
       </thead>
       <tbody>

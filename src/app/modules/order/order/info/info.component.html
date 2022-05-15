@@ -1,162 +1,192 @@
 <div class="row">
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-align-justify"></i> <strong>Thông tin khách hàng</strong>
-      </div>
+  <div class="col-md-3">
+    <strong class="mb-3 d-block fs-16">Thông tin khách hàng</strong>
+    <div class="card widget-item">
       <div class="card-body">
-        <p *ngIf="orderService.orderRe.user"><i class="fa fa-user"></i> {{orderService.orderRe.user.code}}
-          - {{orderService.orderRe.user.name}}</p>
-        <p *ngIf="orderService.orderRe.user"><i class="fa fa-phone-square"></i>
-          {{orderService.orderRe.user.phone_number}}</p>
-        <p *ngIf="orderService.orderRe.user"><i class="fa fa-envelope"></i>
+        <p class="" *ngIf="orderService.orderRe.user">
+          <i class="mr-2 iconsax isax-user fs-16"></i> {{orderService.orderRe.user.code}}
+          - {{orderService.orderRe.user.name}}
+        </p>
+        <p class="" *ngIf="orderService.orderRe.user">
+          <i class="mr-2 iconsax isax-mobile fs-16"></i> {{orderService.orderRe.user.phone_number}}
+        </p>
+        <p class="" *ngIf="orderService.orderRe.user">
+          <i class="mr-2 iconsax isax-sms fs-16"></i>
           {{orderService.orderRe.user.email}}
         </p>
-        <p *ngIf="orderService.orderRe.user"><i class="fa fa-map-marker" aria-hidden="true"></i>
+        <p class="" *ngIf="orderService.orderRe.user">
+          <i class="mr-2 iconsax isax-location fs-16"></i>
           {{orderService.orderRe.user.address}}
         </p>
       </div>
     </div>
-    <div class="card" *ngIf="orderService.orderRe.shipping">
-      <div class="card-header">
-        <i class="fa fa-align-justify"></i> <strong>Đơn ký gửi</strong>
-      </div>
+  </div>
+  <div class="col-md-3">
+    <strong class="mb-3 d-block fs-16">Thông tin đơn hàng</strong>
+    <div class="card widget-item">
       <div class="card-body">
-        <p><i class="fa fa-qrcode"></i> Mã yêu cầu:
+        <p class="">
+          <i class="mr-2 iconsax isax-warning-2 fs-16"></i> Trạng thái: 
+          <span class="text-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
+        </p>
+        <p class=""> 
+          <i class="mr-2 iconsax isax-receipt fs-16"></i> Mã đơn: {{orderService.orderRe.code}}
+        </p>
+        <p class="">
+          <i class="mr-2 iconsax isax-menu-board fs-16"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}
+        </p>
+        <p class="" *ngIf="orderService.orderRe.tra_shop">
+          <i class="mr-2 iconsax isax-coin fs-16"></i> Tiền hàng:
+          <span>¥</span> {{orderService.orderRe.tra_shop.toString() | tempPrice : 1:1 : true}}
+        </p>
+
+        <p class="">
+          <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
+        </p>
+        <p class="" *ngIf="orderService.orderRe.dat_coc">
+          <i class="mr-2 iconsax isax-coin fs-16"></i> Đã thanh toán: {{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup>
+        </p>
+        <p class="">
+          <i class="mr-2 iconsax isax-global-search fs-16"></i> Đặt tại website: <span *ngIf="orderService.orderRe.order_items && orderService.orderRe.order_items[0]"
+          class="text-danger"> {{orderService.orderRe.order_items[0].site}}</span>
+        </p>
+        <p class="" *ngIf="orderService.orderRe.handle">
+          <i class="mr-2 iconsax isax-user-edit fs-16"></i> Phụ trách: {{orderService.orderRe.handle.name}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <strong class="mb-3 d-block fs-16">Đơn ký gửi</strong>
+    <div class="card widget-item" *ngIf="orderService.orderRe.shipping">
+      <div class="card-body">
+        <p class="">
+          <i class="mr-2 iconsax isax-ticket fs-16"></i> Mã yêu cầu:
           <a href="javascript:void(0);" (click)="gotoCarrier(orderService.orderRe.carrier_id)">
             <span><strong>#{{orderService.orderRe.carrier_id}}</strong></span>
           </a>
         </p>
-        <p><i class="fa fa-info"></i> Số sản phẩm: {{orderService.orderRe.count_product}}</p>
-        <p><i class="fa fa-money"></i> Phí kiểm đếm: {{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice : 1:1 : true}}<sup> đ</sup></p>
-        <p><i class="fa fa-map-marker"></i> Kho TQ nhận: {{orderService.orderRe.china_warehouses_address}}</p>
+        <p class="">
+          <i class="mr-2 iconsax isax-warning-2 fs-16"></i> Số sản phẩm: {{orderService.orderRe.count_product}}
+        </p>
+        <p class="">
+          <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Phí kiểm đếm: {{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice : 1:1 : true}}<sup> đ</sup>
+        </p>
+        <p>
+          <i class="mr-2 iconsax isax-global-search fs-16"></i> Kho TQ nhận: {{orderService.orderRe.china_warehouses_address}}
+        </p>
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
-      </div>
+  <div class="col-md-3">
+    <strong class="mb-3 d-block fs-16">Thông tin trao đổi</strong>
+    <div class="card widget-item">
       <div class="card-body">
-        <p><i class="fa fa-info"></i> Trạng thái: <span
-          class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
-        </p>
-        <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.code}}</p>
-        <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
-        <p *ngIf="orderService.orderRe.tra_shop"><i class="fa fa-money"></i> Tiền hàng:
-          <span>¥</span> {{orderService.orderRe.tra_shop.toString() | tempPrice : 1:1 : true}}</p>
-
-        <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup></p>
-        <p *ngIf="orderService.orderRe.dat_coc"><i class="fa fa-money"></i> Đã thanh
-          toán: {{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup></p>
-        <p><i class="fa fa-edge"></i> Đặt tại website: <span
-          *ngIf="orderService.orderRe.order_items && orderService.orderRe.order_items[0]"
-          class="badge badge-danger"> {{orderService.orderRe.order_items[0].site}}</span>
-        </p>
-        <p *ngIf="orderService.orderRe.handle"><i class="fa fa-user"></i> Phụ
-          trách: {{orderService.orderRe.handle.name}}</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <i class="cui-comment-square icons"></i> <strong>Thông tin trao đổi</strong>
-      </div>
-      <div #scrollMe class="card-body comment-content">
-        <div *ngFor="let item of comments" class="comment-item {{item.is_admin? 'admin-comment-item': ''}}"
-             title="{{item.created_at}}">
-          <b>{{item.user_name}}: </b>{{item.content}}
+        <div #scrollMe class="comment-content">
+          <div *ngFor="let item of comments" class="comment-item {{item.is_admin? 'admin-comment-item': ''}}"
+               title="{{item.created_at}}">
+            <b>{{item.user_name}}: </b>{{item.content}}
+          </div>
         </div>
-      </div>
-      <div class="card-footer">
-        <div class="form-group">
+        <div class="form-group mb-0">
           <div class="controls">
-            <div class="input-group"><input [(ngModel)]="comment.content" #content="ngModel"
+            <div class="input-group">
+              <input [(ngModel)]="comment.content" #content="ngModel"
                                             class="form-control" id="content" name="content" size="16"
-                                            type="text"><span class="input-group-append"><button
-              (click)="addComment()"
-              class="btn btn-secondary" type="button">Gửi đi</button></span></div>
+                                            type="text">
+              <span class="input-group-append">
+                <button (click)="addComment()" class="btn btn-info rounded input-group-text" type="button">Gửi đi</button>
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<div class="border-top mt-3 mb-3"></div>
 
 <form novalidate #form="ngForm" class="form-horizontal">
-  <div *ngIf="orderService.orderRe"
-       class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-lg-12" style="text-align: right;">
-          <div class="col-form-label">
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="kiem_hang" name="kiem_hang"
+  <div *ngIf="orderService.orderRe" class="card border-0">
+    <div class="card-body p-0">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-3">
+          <a class="btn btn-info mr-2 text-white px-2 btn-rounded" (click)="addPackage();" href="javascript:void(0);">
+            <i class="iconsax isax-add"></i> Thêm mã vận đơn
+          </a>
+        </div>
+        <div class="col-lg-9">
+          <div class="col-form-label text-right">
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="kiem_hang" name="kiem_hang"
                      value="1"
                      [(ngModel)]="orderService.orderRe.kiem_hang"
-                     (change)="updateOrder('kiem_hang')"
-                     class="form-check-input">
-              <label class="form-check-label">Kiểm hàng</label>
+                     (change)="updateOrder('kiem_hang')"> Kiểm hàng
+                <span></span>
+              </label>
             </div>
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="dong_go" name="dong_go"
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="dong_go" name="dong_go"
                      value="1"
                      [(ngModel)]="orderService.orderRe.dong_go"
-                     (change)="updateOrder('dong_go')"
-                     class="form-check-input">
-              <label class="form-check-label">Đóng gỗ</label>
+                     (change)="updateOrder('dong_go')"> Đóng gỗ
+                <span></span>
+              </label>
             </div>
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="bao_hiem" name="bao_hiem"
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="bao_hiem" name="bao_hiem"
                      value="1"
                      [(ngModel)]="orderService.orderRe.bao_hiem"
-                     (change)="updateOrder('bao_hiem')"
-                     class="form-check-input">
-              <label class="form-check-label">Chống sốc</label>
+                     (change)="updateOrder('bao_hiem')"> Chống sốc
+                <span></span>
+              </label>
             </div>
-            <!--<div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
+<!--             <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
                      value="1"
                      [(ngModel)]="orderService.orderRe.chinh_ngach"
-                     (change)="updateOrder('chinh_ngach')"
-                     class="form-check-input">
-              <label class="form-check-label">Chính ngạch</label>
+                     (change)="updateOrder('chinh_ngach')"> Chính ngạch
+                <span></span>
+              </label>
             </div>
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="vat" name="vat"
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="vat" name="vat"
                      value="1"
                      (change)="updateOrder('vat')"
-                     [(ngModel)]="orderService.orderRe.vat"
-                     class="form-check-input">
-              <label class="form-check-label">VAT</label>
-            </div>-->
+                     [(ngModel)]="orderService.orderRe.vat"> VAT
+                <span></span>
+              </label>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <table class="table table-bordered table-sm">
+  <table class="table table-hover">
     <thead>
     <tr>
-      <th>Mã KS</th>
-      <th *ngIf="!orderService.orderRe.shipping">Ship khách</th>
-      <th *ngIf="!orderService.orderRe.shipping">Ship TT (Nội bộ)</th>
-      <th *ngIf="!orderService.orderRe.shipping">Thanh toán shop (Nội bộ)</th>
-      <th>Mã vận đơn</th>
-      <th *ngIf="!orderService.orderRe.shipping">Mã hợp đồng</th>
-      <th *ngIf="orderService.orderRe.shipping">Tên sản phẩm</th>
-      <th *ngIf="orderService.orderRe.shipping">Số lượng</th>
-      <th *ngIf="orderService.orderRe.shipping">Hãng VC</th>
-      <th *ngIf="orderService.orderRe.shipping">Mô tả</th>
-      <th *ngIf="orderService.orderRe.shipping">Ghi chú</th>
-      <th>Trạng thái shop</th>
-      <th>Phí vận phát sinh</th>
-      <th>Ghi chú thanh lý</th>
-      <th class="text-center">Tác vụ</th>
-    </tr>
+        <th class="fs-14" rowspan="2">Mã KS</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ship khách</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ship TT (Nội bộ)</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Thanh toán shop (Nội bộ)</th>
+        <th class="fs-14" rowspan="2">Mã vận đơn</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Mã hợp đồng</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Tên sản phẩm</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Số lượng</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Hãng VC</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Mô tả</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Ghi chú</th>
+        <th class="fs-14" rowspan="2">Trạng thái shop</th>
+        <th class="fs-14" rowspan="2">Phí vận phát sinh</th>
+        <th class="fs-14" rowspan="2">Ghi chú thanh lý</th>
+        <th rowspan="2" class="text-center fs-14">Tác vụ</th>
+      </tr>
     </thead>
     <tbody *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
     <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
@@ -354,38 +384,38 @@
         </td>
       </tr>
     </ng-template>
-    <tr>
-      <td colspan="15" class="text-right"><a (click)="addPackage();" style="cursor: pointer;"
-                                             href="javascript:void(0);"><i
-        class="fa fa-plus-square"></i> Thêm mã vận đơn</a></td>
-    </tr>
     </tbody>
   </table>
 
   <div *ngIf="orderService.orderRe && orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0"
-       class="card">
-    <div class="card-body">
+       class="card border-0 entry-list">
+    <div class="card-header pl-0">
+      <div class="title-list">
+          <span>Giỏ hàng của bạn</span>
+        </div>
+    </div>
+    <div class="card-body p-0 border-0">
       <div class="row">
-        <div class="col-lg-12" style="text-align: right;">
-          <table class="table table-bordered table-sm">
+        <div class="col-lg-12">
+          <table class="table table-hover">
             <thead>
             <tr>
-              <th style="text-align: center;">STT</th>
-              <th>Link</th>
-              <th>Hình ảnh</th>
-              <th>Màu sắc</th>
-              <th>Size/mẫu</th>
-              <th>Khách đặt</th>
-              <th>Đơn giá</th>
-              <th>Thành tiền</th>
-              <th>Ghi chú của khách</th>
-              <th>Ghi chú của NV</th>
+              <th class="fs-14" rowspan="2">STT</th>
+              <th class="fs-14" rowspan="2">Link</th>
+              <th class="fs-14" rowspan="2">Hình ảnh</th>
+              <th class="fs-14" rowspan="2">Màu sắc</th>
+              <th class="fs-14" rowspan="2">Size/mẫu</th>
+              <th class="fs-14" rowspan="2">Khách đặt</th>
+              <th class="fs-14" rowspan="2">Đơn giá</th>
+              <th class="fs-14" rowspan="2">Thành tiền</th>
+              <th class="fs-14" rowspan="2">Ghi chú của khách</th>
+              <th class="fs-14" rowspan="2">Ghi chú của NV</th>
             </tr>
             </thead>
             <tbody>
             <ng-template ngFor let-item [ngForOf]="orderService.orderRe.order_items" let-i="index">
               <tr class="{{item.amount? '' : 'yl-bg'}}">
-                <td style="text-align: center;">{{i + 1}}</td>
+                <td>{{i + 1}}</td>
                 <td>
                   <p><a target="_blank" rel="noopener noreferrer" href="{{item.pro_link}}">Xem</a></p>
                 </td>
