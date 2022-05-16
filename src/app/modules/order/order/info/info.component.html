@@ -26,10 +26,10 @@
     <div class="card widget-item">
       <div class="card-body">
         <p class="">
-          <i class="mr-2 iconsax isax-warning-2 fs-16"></i> Trạng thái: 
+          <i class="mr-2 iconsax isax-warning-2 fs-16"></i> Trạng thái:
           <span class="text-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
         </p>
-        <p class=""> 
+        <p class="">
           <i class="mr-2 iconsax isax-receipt fs-16"></i> Mã đơn: {{orderService.orderRe.code}}
         </p>
         <p class="">
@@ -406,11 +406,11 @@
               <th class="fs-14" rowspan="2">Hình ảnh</th>
               <th class="fs-14" rowspan="2">Màu sắc</th>
               <th class="fs-14" rowspan="2">Size/mẫu</th>
+              <th class="fs-14" rowspan="2">Ghi chú của khách</th>
+              <th class="fs-14" rowspan="2">Ghi chú của NV</th>
               <th class="fs-14" rowspan="2">Khách đặt</th>
               <th class="fs-14" rowspan="2">Đơn giá</th>
               <th class="fs-14" rowspan="2">Thành tiền</th>
-              <th class="fs-14" rowspan="2">Ghi chú của khách</th>
-              <th class="fs-14" rowspan="2">Ghi chú của NV</th>
             </tr>
             </thead>
             <tbody>
@@ -423,6 +423,21 @@
                 <td><img src="{{item.image}}"></td>
                 <td><p *ngIf="item.colortxt" class="pull-left m-1">{{item.colortxt}}</p></td>
                 <td><p *ngIf="item.sizetxt" class="pull-left m-1">{{item.sizetxt}}</p></td>
+                <td>{{item.note}}</td>
+                <td (click)="selectOrderItem(item,'nv_note')">
+                    <textarea
+                      *ngIf="((orderItem.id === item.id) && (col === 'nv_note'))"
+                      [(ngModel)]="orderItem.nv_note"
+                      #nv_note="ngModel"
+                      id="nv_note"
+                      name="nv_note"
+                      (change)="editOrderConfirm(template, col)"
+                      (blur)="hideInput()"
+                      appAutofocus
+                      rows="3"
+                      class="form-control"></textarea>
+                  <p *ngIf="((orderItem.id !== item.id) || (col !== 'nv_note'))">{{item.nv_note}}</p>
+                </td>
                 <td (click)="selectOrderItem(item,'amount')">
                   <input
                     *ngIf="((orderItem.id === item.id) && (col === 'amount'))"
@@ -458,26 +473,11 @@
                   <p>{{item.price | tempPrice: orderService.orderRe.ti_gia : item.amount: false}}<sup>đ</sup></p>
                   <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount : false}}</p>
                 </td>
-                <td>{{item.note}}</td>
-                <td (click)="selectOrderItem(item,'nv_note')">
-                    <textarea
-                      *ngIf="((orderItem.id === item.id) && (col === 'nv_note'))"
-                      [(ngModel)]="orderItem.nv_note"
-                      #nv_note="ngModel"
-                      id="nv_note"
-                      name="nv_note"
-                      (change)="editOrderConfirm(template, col)"
-                      (blur)="hideInput()"
-                      appAutofocus
-                      rows="3"
-                      class="form-control"></textarea>
-                  <p *ngIf="((orderItem.id !== item.id) || (col !== 'nv_note'))">{{item.nv_note}}</p>
-                </td>
               </tr>
             </ng-template>
             <tr>
-              <td colspan="7" class="text-right">Tỉ giá (VNĐ)</td>
-              <td colspan="3" (click)="tigiaEdit(true)">
+              <td colspan="9" class="text-right">Tỉ giá (VNĐ)</td>
+              <td (click)="tigiaEdit(true)">
                 <input
                   *ngIf="editTigia"
                   [(ngModel)]="orderService.orderRe.ti_gia"
@@ -495,12 +495,12 @@
               </td>
             </tr>
             <tr>
-              <td colspan="7" class="text-right">Tiền hàng</td>
-              <td colspan="3">{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup></td>
+              <td colspan="9" class="text-right">Tiền hàng</td>
+              <td>{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup></td>
             </tr>
             <tr>
-              <td colspan="7" class="text-right">Phí dịch vụ mua hàng (%)</td>
-              <td colspan="3" (click)="phiDichVuEdit(true)">
+              <td colspan="9" class="text-right">Phí dịch vụ mua hàng (%)</td>
+              <td (click)="phiDichVuEdit(true)">
                 <input
                   *ngIf="editPhiDichVu"
                   [(ngModel)]="orderService.orderRe.phi_dat_hang_cs"
@@ -518,20 +518,19 @@
               </td>
             </tr>
             <tr>
-              <td colspan="7" class="text-right">VIP</td>
-              <td colspan="3">{{orderService.orderRe.ck_dv_tt.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup>
+              <td colspan="9" class="text-right">VIP</td>
+              <td>{{orderService.orderRe.ck_dv_tt.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup>
               </td>
             </tr>
             <tr>
-              <td colspan="7" class="text-right">Phí dịch vụ mua hàng thành tiền</td>
-              <td colspan="3">{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+              <td colspan="9" class="text-right">Phí dịch vụ mua hàng thành tiền</td>
+              <td>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
                 <sup>đ</sup>
               </td>
             </tr>
             <tr *ngIf="orderService.orderRe.kiem_hang">
-              <td colspan="7" class="text-right">Phí kiểm đếm (VNĐ)</td>
-              <td colspan="3"
-                  (click)="phiKiemDemEdit(true)">
+              <td colspan="9" class="text-right">Phí kiểm đếm (VNĐ)</td>
+              <td (click)="phiKiemDemEdit(true)">
                 <input
                   *ngIf="editPhiKiemDem"
                   [(ngModel)]="orderService.orderRe.phi_kiem_dem_cs"
@@ -549,8 +548,8 @@
               </td>
             </tr>
             <tr *ngIf="orderService.orderRe.kiem_hang">
-              <td colspan="7" class="text-right">Phí kiểm đếm thành tiền</td>
-              <td colspan="3">
+              <td colspan="9" class="text-right">Phí kiểm đếm thành tiền</td>
+              <td>
                 {{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice: 1 : 1 : false}} <sup>đ</sup>
               </td>
             </tr>
