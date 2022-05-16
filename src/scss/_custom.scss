@@ -248,6 +248,11 @@ body.app:not(.header-fixed) {
   border-color: #77a0f9;
   color: #fff;
 }
+.btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active, .show > .btn-info.dropdown-toggle{
+  background-color: #77a0f9;
+  border-color: #77a0f9;
+  color: #fff;
+}
 
 .btn i {
   vertical-align: middle;
@@ -289,7 +294,7 @@ body.app:not(.header-fixed) {
   line-height: 46px;
   @include border-radius(10px);
 }
-.navbar-brand-full{padding-left: 15px;}
+.navbar-brand-full{padding-left: 15px;height: 32px !important;}
 .header-fixed {
   .app-body{
     margin-top: 76px;
@@ -776,7 +781,10 @@ body.app:not(.header-fixed) {
   border-color: $color-text;
 }
 @media(min-width: 992px) {
-  .order-detail{
+  .app-header .navbar-toggler-icon{
+    display: none;
+  }
+  .tab-detail{
     .nav-tabs .nav-item {
       margin-left: 15px;
     }

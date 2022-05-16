@@ -1,20 +1,21 @@
-<div class="card">
-  <div class="card-header"><i class="fa fa-cubes"></i> <strong>Danh sách khiếu nại</strong>
+<div class="card entry-list">
+  <div class="card-header p-0 mb-3">
+    <strong>Danh sách khiếu nại</strong>
     <div class="card-header-actions">
-      <button (click)="addComplain(templateComplain)" class="btn btn-block btn-outline-primary btn-sm"
+      <button (click)="addComplain(templateComplain)" class="btn btn-block btn-outline-primary rounded"
               type="button">Thêm
       </button>
     </div>
   </div>
-  <div class="card-body">
-    <table class="table table-bordered table-data">
+  <div class="card-body p-0">
+    <table class="table table-hover">
       <thead>
       <tr>
-        <th>Ngày tạo</th>
-        <th>Khiếu nại về</th>
-        <th>Số tiền mong muốn</th>
-        <th>Nội dung</th>
-        <th width="5%">Tác vụ</th>
+        <th rowspan="2">Ngày tạo</th>
+        <th rowspan="2">Khiếu nại về</th>
+        <th rowspan="2">Số tiền mong muốn</th>
+        <th rowspan="2">Nội dung</th>
+        <th rowspan="2" width="5%">Tác vụ</th>
       </tr>
       </thead>
       <tbody>

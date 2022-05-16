@@ -147,9 +147,7 @@
                 <p><span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span></p>
               </td>
               <td>
-                <button (click)="editOrder(item.id)" class="btn btn-sm btn-ghost-primary"
-                        type="button">
-                  <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <button (click)="editOrder(item.id)" class="btn btn-sm btn-info mr-1 text-white" type="button">
                   Chi tiết
                 </button>
                 <button *ngIf="authService.hasRole('admin')" (click)="openModal(templatePc,item)"

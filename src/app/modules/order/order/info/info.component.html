@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md col-12">
     <strong class="mb-3 d-block fs-16">Thông tin khách hàng</strong>
     <div class="card widget-item">
       <div class="card-body">
@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md col-12">
     <strong class="mb-3 d-block fs-16">Thông tin đơn hàng</strong>
     <div class="card widget-item">
       <div class="card-body">
@@ -56,9 +56,9 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md col-12" *ngIf="orderService.orderRe.shipping">
     <strong class="mb-3 d-block fs-16">Đơn ký gửi</strong>
-    <div class="card widget-item" *ngIf="orderService.orderRe.shipping">
+    <div class="card widget-item">
       <div class="card-body">
         <p class="">
           <i class="mr-2 iconsax isax-ticket fs-16"></i> Mã yêu cầu:
@@ -78,7 +78,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md col-12">
     <strong class="mb-3 d-block fs-16">Thông tin trao đổi</strong>
     <div class="card widget-item">
       <div class="card-body">
@@ -144,7 +144,7 @@
                 <span></span>
               </label>
             </div>
-<!--             <div class="form-check form-check-inline mr-3">
+<!--        <div class="form-check form-check-inline mr-3">
               <label class="check-label">
                 <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
                      value="1"
@@ -377,9 +377,10 @@
           <p *ngIf="((package.id !== item.id) || (col !== 'note_tl'))">{{item.note_tl}}</p>
         </td>
         <td>
-          <p *ngIf="item.is_main!=1" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
-                                                                               (click)="deletePackage(template, item);"
-                                                                               href="javascript:void(0);">Hủy</a>
+          <p *ngIf="item.is_main!=1" class="text-center" style="margin: 0;">
+            <a style="cursor: pointer;" (click)="deletePackage(template, item);" href="javascript:void(0);" class="text-danger">
+              Hủy
+            </a>
           </p>
         </td>
       </tr>

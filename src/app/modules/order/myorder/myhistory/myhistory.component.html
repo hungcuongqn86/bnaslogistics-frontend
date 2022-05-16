@@ -1,28 +1,24 @@
-<div class="row">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-body">
-        <table class="table table-bordered table-data">
-          <thead>
-          <tr>
-            <th>Ngày giờ</th>
-            <th>Người thực hiện</th>
-            <th>Công việc</th>
-            <th>Nội dung</th>
-          </tr>
-          </thead>
-          <tbody>
-          <ng-template ngFor let-item [ngForOf]="orderService.orderRe.history" let-i="index">
-            <tr *ngIf="!item.hide">
-              <td><p>{{item.created_at}}</p></td>
-              <td><p><i class="fa fa-user"></i> {{item.user_name}}</p></td>
-              <td><p *ngIf="types">{{item.type | tempHistoryType : types}}</p></td>
-              <td><p>{{item.content}}</p></td>
-            </tr>
-          </ng-template>
-          </tbody>
-        </table>
-      </div>
-    </div>
+<div class="card entry-list">
+  <div class="card-body p-0 mb-3">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th rowspan="2">Ngày giờ</th>
+        <th rowspan="2">Người thực hiện</th>
+        <th rowspan="2">Công việc</th>
+        <th rowspan="2">Nội dung</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-template ngFor let-item [ngForOf]="orderService.orderRe.history" let-i="index">
+        <tr *ngIf="!item.hide">
+          <td><p>{{item.created_at}}</p></td>
+          <td><p><i class="fa fa-user"></i> {{item.user_name}}</p></td>
+          <td><p *ngIf="types">{{item.type | tempHistoryType : types}}</p></td>
+          <td><p>{{item.content}}</p></td>
+        </tr>
+      </ng-template>
+      </tbody>
+    </table>
   </div>
 </div>

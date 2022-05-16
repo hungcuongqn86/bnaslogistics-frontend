@@ -1,39 +1,36 @@
 <div class="row">
-  <div class="col-md-8">
-    <div class="card">
-      <div class="card-header">
-        <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
-      </div>
+  <div class="col-md col-12">
+    <strong class="mb-3 d-block fs-16">Thông tin khách hàng</strong>
+    <div class="card widget-item">
       <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.code}} <i
-              class="fa fa-calendar"></i></p>
-            <p><i class="fa fa-map-marker"></i> Trạng thái: <span
-              class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
-            </p>
-            <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
-            <p *ngIf="orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0"><i
-              class="fa fa-edge"></i>
-              Đặt tại website: <span
-                class="badge badge-danger"> {{orderService.orderRe.order_items[0].site}}</span></p>
-          </div>
-          <div class="col-md-6">
-            <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
-            <p><i class="fa fa-money"></i> Đã thanh
-              toán: <span
-                *ngIf="orderService.orderRe.dat_coc">{{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}}
-                <sup> đ</sup></span>
-            <p><i class="fa fa-money"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
-          </div>
-        </div>
+        <p>
+          <i class="mr-2 iconsax isax-receipt fs-16"></i> Mã đơn: {{orderService.orderRe.code}}
+        </p>
+        <p>
+          <i class="mr-2 iconsax isax-warning-2 fs-16"></i> Trạng thái: <span class="text-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
+        </p>
+        <p>
+          <i class="mr-2 iconsax isax-menu-board fs-16"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}
+        </p>
+        <p *ngIf="orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0">
+          <i class="mr-2 iconsax isax-global-search fs-16"></i>
+          Đặt tại website: <span class="text-danger"> {{orderService.orderRe.order_items[0].site}}</span>
+        </p>
+        <p>
+          <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
+        </p>
+        <p>
+          <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Đã thanh toán: <span *ngIf="orderService.orderRe.dat_coc">{{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup></span>
+        </p>
+        <p>
+          <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
+        </p>
       </div>
     </div>
-
-    <div class="card" *ngIf="orderService.orderRe.shipping">
-      <div class="card-header">
-        <i class="fa fa-align-justify"></i> <strong>Đơn ký gửi</strong>
-      </div>
+  </div>
+  <div class="col-md col-12" *ngIf="orderService.orderRe.shipping">
+    <strong class="mb-3 d-block fs-16">Đơn ký gửi</strong>
+    <div class="card widget-item">
       <div class="card-body">
         <p><i class="fa fa-qrcode"></i> Mã yêu cầu:
           <a href="javascript:void(0);" (click)="gotoCarrier(orderService.orderRe.carrier_id)">
@@ -46,83 +43,82 @@
         <p><i class="fa fa-map-marker"></i> Kho TQ nhận: {{orderService.orderRe.china_warehouses_address}}</p>
       </div>
     </div>
-
-    <div *ngIf="!nv" class="card bang_phi">
-      <div class="card-header">
-        <i class="fa fa-align-justify"></i> <strong>Tổng phí</strong>
-        <div class="card-header-actions">
-          <p class="text-right"><span>Tỉ giá: {{orderService.orderRe.ti_gia}}</span></p>
-        </div>
-      </div>
-      <div *ngIf="orderService.orderRe" class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <p><strong>Tiền hàng</strong></p>
-            <p>(1) Tiền hàng <span *ngIf="orderService.orderRe.tien_hang"
-                                   class="pull-right"><strong>{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}}
-              <sup> đ</sup></strong></span></p>
-            <p>(2) Phí mua hàng<span
-              *ngIf="orderService.orderRe.phi_dat_hang_cs"> ({{orderService.orderRe.phi_dat_hang_cs}}%)</span><span
-              *ngIf="orderService.orderRe.phi_dat_hang_tt"
-              class="pull-right"><strong>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
-              <sup> đ</sup></strong></span></p>
-            <p>(3) Ship nội địa TQ <span class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 3}}<sup> đ</sup></strong></span>
-            </p>
-            <p>(4) Phí kiểm đếm<span
-              *ngIf="orderService.orderRe.phi_kiem_dem_cs"> ({{orderService.orderRe.phi_kiem_dem_cs | currency:'VND':''}}
-              <sup> đ</sup>)</span> <span *ngIf="orderService.orderRe.phi_kiem_dem_tt"
-                                          class="pull-right"><strong>{{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice: 1 : 1 : false}}
-              <sup> đ</sup></strong></span></p>
-            <p>(5) Tổng = 1 + 2 + 3 + 4 <span
-              class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 1}} <sup>
-                            đ</sup></strong></span></p>
-          </div>
-          <div class="col-md-6">
-            <p>Số cân nặng <span
-              class="pull-right"><strong>{{orderService.bang_phi.tong_can_nang}}</strong></span></p>
-            <p>Cân nặng quy đổi <span
-              class="pull-right"><strong>{{orderService.bang_phi.tong_can_nang_qd}}</strong></span>
-            </p>
-            <p>(6) Phí cân nặng <span
-              class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}
-              <sup> đ</sup></strong></span>
-            </p>
-            <p>(7) Tiền đóng gỗ <span
-              class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}
-              <sup> đ</sup></strong></span>
-            </p>
-            <p>(8) Tiền chống sốc <span *ngIf="orderService.orderRe.phi_bao_hiem_tt"
-                                        class="pull-right"><strong>{{orderService.orderRe.phi_bao_hiem_tt.toString() | tempPrice: 1 : 1 : false}}
-              <sup> đ</sup></strong></span>
-            </p>
-            <p>(9) Cước vận phát sinh<span
-              class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 4}}<sup> đ</sup></strong></span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <i class="cui-comment-square icons"></i> <strong>Thông tin trao đổi</strong>
-      </div>
+
+  <div class="col-md col-12">
+    <strong class="mb-3 d-block fs-16">Thông tin khách hàng</strong>
+    <div class="card widget-item">
       <div #scrollMe class="card-body comment-content">
         <div *ngFor="let item of comments" class="comment-item {{item.is_admin? 'admin-comment-item': ''}}"
              title="{{item.created_at}}">
           <b>{{item.user_name}}: </b>{{item.content}}
         </div>
       </div>
-      <div class="card-footer">
-        <div class="form-group">
-          <div class="controls">
-            <div class="input-group"><input [(ngModel)]="comment.content" #content="ngModel"
-                                            class="form-control" id="content" name="content" size="16"
-                                            type="text"><span class="input-group-append"><button
-              (click)="addComment()"
-              class="btn btn-secondary" type="button">Gửi đi</button></span></div>
+      <div class="form-group mb-0">
+        <div class="controls">
+          <div class="input-group">
+            <input [(ngModel)]="comment.content" #content="ngModel"
+                                          class="form-control" id="content" name="content" size="16"
+                                          type="text">
+            <span class="input-group-append">
+              <button (click)="addComment()" class="btn btn-info rounded input-group-text" type="button">Gửi đi</button>
+            </span>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!nv">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <strong class="d-block fs-16">Tổng phí</strong>
+    <div class="">Tỉ giá: {{orderService.orderRe.ti_gia}}</div>
+  </div>
+  <div class="card bang_phi widget-item" style="min-height: auto;">
+    <div *ngIf="orderService.orderRe" class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Tiền hàng</strong></p>
+          <p>(1) Tiền hàng <span *ngIf="orderService.orderRe.tien_hang"
+                                 class="pull-right"><strong>{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}}
+            <sup> đ</sup></strong></span></p>
+          <p>(2) Phí mua hàng<span
+            *ngIf="orderService.orderRe.phi_dat_hang_cs"> ({{orderService.orderRe.phi_dat_hang_cs}}%)</span><span
+            *ngIf="orderService.orderRe.phi_dat_hang_tt"
+            class="pull-right"><strong>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+            <sup> đ</sup></strong></span></p>
+          <p>(3) Ship nội địa TQ <span class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 3}}<sup> đ</sup></strong></span>
+          </p>
+          <p>(4) Phí kiểm đếm<span
+            *ngIf="orderService.orderRe.phi_kiem_dem_cs"> ({{orderService.orderRe.phi_kiem_dem_cs | currency:'VND':''}}
+            <sup> đ</sup>)</span> <span *ngIf="orderService.orderRe.phi_kiem_dem_tt"
+                                        class="pull-right"><strong>{{orderService.orderRe.phi_kiem_dem_tt.toString() | tempPrice: 1 : 1 : false}}
+            <sup> đ</sup></strong></span></p>
+          <p>(5) Tổng = 1 + 2 + 3 + 4 <span
+            class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 1}} <sup>
+                          đ</sup></strong></span></p>
+        </div>
+        <div class="col-md-6">
+          <p>Số cân nặng <span
+            class="pull-right"><strong>{{orderService.bang_phi.tong_can_nang}}</strong></span></p>
+          <p>Cân nặng quy đổi <span
+            class="pull-right"><strong>{{orderService.bang_phi.tong_can_nang_qd}}</strong></span>
+          </p>
+          <p>(6) Phí cân nặng <span
+            class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}
+            <sup> đ</sup></strong></span>
+          </p>
+          <p>(7) Tiền đóng gỗ <span
+            class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}
+            <sup> đ</sup></strong></span>
+          </p>
+          <p>(8) Tiền chống sốc <span *ngIf="orderService.orderRe.phi_bao_hiem_tt"
+                                      class="pull-right"><strong>{{orderService.orderRe.phi_bao_hiem_tt.toString() | tempPrice: 1 : 1 : false}}
+            <sup> đ</sup></strong></span>
+          </p>
+          <p>(9) Cước vận phát sinh<span
+            class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 4}}<sup> đ</sup></strong></span>
+          </p>
         </div>
       </div>
     </div>
@@ -131,50 +127,55 @@
 
 <form novalidate #form="ngForm" class="form-horizontal">
   <div *ngIf="orderService.orderRe"
-       class="card">
-    <div class="card-body">
+       class="card border-0">
+    <div class="card-body p-0">
       <div class="row">
-        <div class="col-lg-12" style="text-align: right;">
-          <div class="col-form-label">
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="kiem_hang" name="kiem_hang"
+        <div class="col-lg-12">
+          <div class="col-form-label text-right">
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="kiem_hang" name="kiem_hang"
                      value="1"
                      readonly
-                     [checked]="orderService.orderRe.kiem_hang"
-                     class="form-check-input">
-              <label class="form-check-label">Kiểm hàng</label>
+                     [(ngModel)]="orderService.orderRe.kiem_hang"> Kiểm hàng
+                <span></span>
+              </label>
             </div>
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="dong_go" name="dong_go"
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="dong_go" name="dong_go"
                      value="1"
                      readonly
-                     [checked]="orderService.orderRe.dong_go"
-                     class="form-check-input">
-              <label class="form-check-label">Đóng gỗ</label>
+                     [(ngModel)]="orderService.orderRe.dong_go"> Đóng gỗ
+                <span></span>
+              </label>
             </div>
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="bao_hiem" name="bao_hiem"
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="bao_hiem" name="bao_hiem"
                      value="1"
                      readonly
-                     [checked]="orderService.orderRe.bao_hiem"
-                     class="form-check-input">
-              <label class="form-check-label">Chống sốc</label>
+                     [(ngModel)]="orderService.orderRe.bao_hiem"> Chống sốc
+                <span></span>
+              </label>
             </div>
-            <!--<div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
+            <!--<div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
                      value="1"
                      readonly
-                     [checked]="orderService.orderRe.chinh_ngach"
-                     class="form-check-input">
-              <label class="form-check-label">Chính ngạch</label>
+                     [(ngModel)]="orderService.orderRe.chinh_ngach"> Chính ngạch
+                <span></span>
+              </label>
             </div>
-            <div class="form-check form-check-inline mr-1">
-              <input type="checkbox" id="vat" name="vat"
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="vat" name="vat"
                      value="1"
                      readonly
-                     [checked]="orderService.orderRe.vat"
-                     class="form-check-input">
-              <label class="form-check-label">VAT</label>
+                     (change)="updateOrder('vat')"> VAT
+                <span></span>
+              </label>
             </div>-->
           </div>
         </div>
@@ -182,69 +183,70 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-body">
-      <table class="table table-bordered table-sm table-data">
-        <thead>
-        <tr>
-          <th>Mã KS</th>
-          <th *ngIf="!orderService.orderRe.shipping">Tên shop</th>
-          <th *ngIf="!orderService.orderRe.shipping">Ghi chú</th>
-          <th *ngIf="!orderService.orderRe.shipping">Tg SL</th>
-          <th *ngIf="!orderService.orderRe.shipping">Ship khách</th>
-          <th *ngIf="!orderService.orderRe.shipping">Trả shop</th>
-          <th>Mã vận đơn</th>
-          <th *ngIf="!orderService.orderRe.shipping">Mã hợp đồng</th>
-          <th *ngIf="orderService.orderRe.shipping">Tên sản phẩm</th>
-          <th *ngIf="orderService.orderRe.shipping">Số lượng</th>
-          <th *ngIf="orderService.orderRe.shipping">Hãng VC</th>
-          <th *ngIf="orderService.orderRe.shipping">Mô tả</th>
-          <th *ngIf="orderService.orderRe.shipping">Ghi chú</th>
-          <th>Cước vận phát sinh</th>
-          <th>Trạng thái shop</th>
-        </tr>
-        </thead>
-        <tbody *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
-        <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
-          <tr>
-            <td>{{item.id}}</td>
-            <td *ngIf="!orderService.orderRe.shipping"></td>
-            <td *ngIf="!orderService.orderRe.shipping"></td>
-            <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="i===0">
-              {{orderService.orderRe.count_product}}</p>
-            </td>
-            <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv">{{item.ship_khach}}</p></td>
-            <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv && item.tra_shop"><span>¥</span>{{item.tra_shop | tempPrice: 1 : 1 : false}}</p></td>
-            <td>{{item.package_code}}</td>
-            <td *ngIf="!orderService.orderRe.shipping">{{item.contract_code}}</td>
-            <td *ngIf="orderService.orderRe.shipping">{{item.product_name}}</td>
-            <td *ngIf="orderService.orderRe.shipping">{{item.product_count}}</td>
-            <td *ngIf="orderService.orderRe.shipping">{{item.carrier_brand}}</td>
-            <td *ngIf="orderService.orderRe.shipping">{{item.description}}</td>
-            <td *ngIf="orderService.orderRe.shipping">{{item.note}}</td>
-            <td>{{item.phi_van_phat_sinh | tempPrice: 1 : 1 : false}}<sup>đ</sup></td>
-            <td>{{item.status | tempPkStatus : pkStatus}}</td>
-          </tr>
-        </ng-template>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th class="fs-14" rowspan="2">Mã KS</th>
+      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Tên shop</th>
+      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ghi chú</th>
+      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Tg SL</th>
+      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ship khách</th>
+      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Trả shop</th>
+      <th class="fs-14" rowspan="2">Mã vận đơn</th>
+      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Mã hợp đồng</th>
+      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Tên sản phẩm</th>
+      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Số lượng</th>
+      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Hãng VC</th>
+      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Mô tả</th>
+      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Ghi chú</th>
+      <th class="fs-14" rowspan="2">Cước vận phát sinh</th>
+      <th class="fs-14" rowspan="2">Trạng thái shop</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
+    <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
+      <tr>
+        <td>{{item.id}}</td>
+        <td *ngIf="!orderService.orderRe.shipping"></td>
+        <td *ngIf="!orderService.orderRe.shipping"></td>
+        <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="i===0">
+          {{orderService.orderRe.count_product}}</p>
+        </td>
+        <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv">{{item.ship_khach}}</p></td>
+        <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv && item.tra_shop"><span>¥</span>{{item.tra_shop | tempPrice: 1 : 1 : false}}</p></td>
+        <td>{{item.package_code}}</td>
+        <td *ngIf="!orderService.orderRe.shipping">{{item.contract_code}}</td>
+        <td *ngIf="orderService.orderRe.shipping">{{item.product_name}}</td>
+        <td *ngIf="orderService.orderRe.shipping">{{item.product_count}}</td>
+        <td *ngIf="orderService.orderRe.shipping">{{item.carrier_brand}}</td>
+        <td *ngIf="orderService.orderRe.shipping">{{item.description}}</td>
+        <td *ngIf="orderService.orderRe.shipping">{{item.note}}</td>
+        <td>{{item.phi_van_phat_sinh | tempPrice: 1 : 1 : false}}<sup>đ</sup></td>
+        <td>{{item.status | tempPkStatus : pkStatus}}</td>
+      </tr>
+    </ng-template>
+    </tbody>
+  </table>
 
-  <div *ngIf="orderService.orderRe && orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0"
-       class="card">
-    <div class="card-body">
-      <table class="table table-bordered table-sm table-data">
+  <div *ngIf="orderService.orderRe && orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0" 
+    class="card border-0 entry-list">
+    <div class="card-header pl-0">
+      <div class="title-list">
+          <span>Giỏ hàng của bạn</span>
+        </div>
+    </div>
+    <div class="card-body p-0 border-0">
+      <table class="table table-hover">
         <thead>
         <tr>
-          <th>Mã, link</th>
-          <th>Hình ảnh</th>
-          <th>Màu sắc</th>
-          <th>Size/mẫu</th>
-          <th>SL đặt</th>
-          <th>Đơn giá</th>
-          <th>Thành tiền</th>
-          <th>Ghi chú</th>
+          <th class="fs-14" rowspan="2">Mã, link</th>
+          <th class="fs-14" rowspan="2">Hình ảnh</th>
+          <th class="fs-14" rowspan="2">Màu sắc</th>
+          <th class="fs-14" rowspan="2">Size/mẫu</th>
+          <th class="fs-14" rowspan="2">SL đặt</th>
+          <th class="fs-14" rowspan="2">Đơn giá</th>
+          <th class="fs-14" rowspan="2">Thành tiền</th>
+          <th class="fs-14" rowspan="2">Ghi chú</th>
         </tr>
         </thead>
         <tbody>
