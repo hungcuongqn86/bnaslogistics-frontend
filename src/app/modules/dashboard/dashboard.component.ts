@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DashboardService} from '../../services/dashboard.service';
-import {AuthService} from "../../auth.service";
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,6 +10,8 @@ import {AuthService} from "../../auth.service";
 })
 
 export class DashboardComponent implements OnInit {
+  bsConfig = Object.assign({}, {containerClass: 'theme-dark-blue'});
+
   newLink = 0;
   newOrder = 0;
   newUser = 0;
