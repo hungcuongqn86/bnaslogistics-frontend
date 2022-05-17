@@ -4,9 +4,6 @@ import {DashboardService} from '../../services/dashboard.service';
 import {AuthService} from "../../auth.service";
 import {BsDatepickerConfig} from "ngx-bootstrap";
 
-import { defineLocale } from "ngx-bootstrap/chronos";
-import { nbLocale } from "ngx-bootstrap/locale";
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
