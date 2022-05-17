@@ -42,13 +42,13 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>Khách hàng</th>
-                            <th>Đơn hàng</th>
-                            <th>Ngày tạo khiếu nại</th>
-                            <th>Khiếu nại về</th>
-                            <th>Số tiền mong muốn</th>
-                            <th>Nội dung</th>
-                            <th>Tác vụ</th>
+                            <th rowspan="2">Khách hàng</th>
+                            <th rowspan="2">Đơn hàng</th>
+                            <th rowspan="2">Ngày tạo khiếu nại</th>
+                            <th rowspan="2">Khiếu nại về</th>
+                            <th rowspan="2">Số tiền mong muốn</th>
+                            <th rowspan="2">Nội dung</th>
+                            <th rowspan="2">Tác vụ</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -71,7 +71,7 @@
                             <td>{{item.content}}</td>
                             <td>
                                 <button (click)="editComplain(item.id, templateComplain)"
-                                        class="btn btn-sm btn-ghost-primary"
+                                        class="btn btn-sm btn-info mr-1 text-white"
                                         type="button">
                                     Chi tiết
                                 </button>

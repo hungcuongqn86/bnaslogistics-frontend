@@ -12,7 +12,7 @@
             <div class="col-12 col-md-6 text-right d-md-down-none">
               <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                 <a class="btn" (click)="backlist()"
-                   target="_blank"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
+                   target="_blank">Quay lại</a>
               </div>
             </div>
           </div>
@@ -21,15 +21,15 @@
           <div class="row">
             <div class="col-md-12 mb-4">
               <form novalidate #form="ngForm" class="form-horizontal">
-                <table class="table table-bordered table-sm">
+                <table class="table table-hover">
                   <thead>
                   <tr>
-                    <th>Mã vận đơn</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Số lượng SP</th>
-                    <th>Hãng vận chuyển</th>
-                    <th>Mô tả, link sản phẩm</th>
-                    <th>Ghi chú</th>
+                    <th rowspan="2">Mã vận đơn</th>
+                    <th rowspan="2">Tên sản phẩm</th>
+                    <th rowspan="2">Số lượng SP</th>
+                    <th rowspan="2">Hãng vận chuyển</th>
+                    <th rowspan="2">Mô tả, link sản phẩm</th>
+                    <th rowspan="2">Ghi chú</th>
                   </tr>
                   </thead>
                   <tbody
@@ -48,43 +48,48 @@
                 </table>
                 <div class="row">
                   <div class="col-lg-12">
-                    <div class="col-form-label">
-                      <div class="form-check form-check-inline mr-1">
-                        <input type="checkbox" id="kiem_hang" name="kiem_hang"
+                    <div class="col-form-label text-right">
+                      <div class="form-check form-check-inline mr-3">
+                        <label class="check-label">
+                          <input type="checkbox" id="kiem_hang" name="kiem_hang"
                                value="1"
-                               [(ngModel)]="carrier.kiem_hang"
-                               class="form-check-input">
-                        <label for="kiem_hang" class="form-check-label">Kiểm hàng</label>
+                               [(ngModel)]="carrier.kiem_hang"> Kiểm hàng
+                          <span></span>
+                        </label>
                       </div>
-                      <div class="form-check form-check-inline mr-1">
-                        <input type="checkbox" id="dong_go" name="dong_go"
+                      <div class="form-check form-check-inline mr-3">
+                        <label class="check-label">
+                          <input type="checkbox" id="dong_go" name="dong_go"
                                value="1"
-                               [(ngModel)]="carrier.dong_go"
-                               class="form-check-input">
-                        <label for="dong_go" class="form-check-label">Đóng gỗ</label>
+                               [(ngModel)]="carrier.dong_go"> Đóng gỗ
+                          <span></span>
+                        </label>
                       </div>
-                      <div class="form-check form-check-inline mr-1">
-                        <input type="checkbox" id="bao_hiem" name="bao_hiem"
+                      <div class="form-check form-check-inline mr-3">
+                        <label class="check-label">
+                          <input type="checkbox" id="bao_hiem" name="bao_hiem"
                                value="1"
-                               [(ngModel)]="carrier.bao_hiem"
-                               class="form-check-input">
-                        <label for="bao_hiem" class="form-check-label">Chống sốc</label>
+                               [(ngModel)]="carrier.bao_hiem"> Chống sốc
+                          <span></span>
+                        </label>
                       </div>
-                      <!--<div class="form-check form-check-inline mr-1">
-                        <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
+                      <!--<div class="form-check form-check-inline mr-3">
+                        <label class="check-label">
+                          <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
                                value="1"
                                [(ngModel)]="carrier.chinh_ngach"
-                               (change)="updateOrder('chinh_ngach')"
-                               class="form-check-input">
-                        <label class="form-check-label">Chính ngạch</label>
+                               (change)="updateOrder('chinh_ngach')"> Chính ngạch
+                          <span></span>
+                        </label>
                       </div>
-                      <div class="form-check form-check-inline mr-1">
-                        <input type="checkbox" id="vat" name="vat"
+                      <div class="form-check form-check-inline mr-3">
+                        <label class="check-label">
+                          <input type="checkbox" id="vat" name="vat"
                                value="1"
                                (change)="updateOrder('vat')"
-                               [(ngModel)]="carrier.vat"
-                               class="form-check-input">
-                        <label class="form-check-label">VAT</label>
+                               [(ngModel)]="carrier.vat"> VAT
+                          <span></span>
+                        </label>
                       </div>-->
                     </div>
                   </div>
@@ -94,9 +99,9 @@
           </div>
           <div class="row">
             <div class="col-lg-12">
-              <div class="card">
-                <div class="card-header"><i class="fa fa-anchor"></i>Kho Trung Quốc nhận hàng</div>
-                <div class="card-body">
+              <strong class="mb-3 d-block fs-16">Kho Trung Quốc nhận hàng</strong>
+              <div class="card entry-list mb-0">
+                <div class="card-body p-0">
                   <div class="col-form-label">
                     <div *ngFor="let item of chinaWarehouses" class="form-check form-check-inline mr-1">
                       <input type="radio" name="chinaWarehouses" id="chinaWarehouses{{item.id}}" [value]="item.id"
@@ -112,7 +117,7 @@
         </div>
         <div class="card-footer">
           <div class="form-group">
-            <div class="controls" style="text-align: right;">
+            <div class="controls">
               <button class="btn btn-warning" style="margin-right: 5px;" (click)="carrierSave(template)" type="button">Từ chối</button>
               <button class="btn btn-info" (click)="carrierSave(template)" type="button">Xác nhận</button>
             </div>
@@ -124,37 +129,35 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <strong>Danh sách địa chỉ kho nhận hàng tại Trung Quốc</strong>
+      <div class="card entry-list detail tab-detail">
+        <div class="card-header mt-3">
+          <div class="title-list">
+            <span>Danh sách địa chỉ kho nhận hàng tại Trung Quốc</span>
+          </div>
         </div>
         <div class="card-body">
-          <div *ngFor="let item of chinaWarehouses" class="card">
-            <div class="card-header"><i class="fa fa-map-marker"></i>{{item.name}} <span
-              *ngIf="item.note">({{item.note}}
-              )</span></div>
-            <div class="card-body">
-              <table class="table table-bordered table-striped table-sm">
-                <tbody>
-                <tr>
-                  <td width="30%">Địa chỉ nhận hàng</td>
-                  <td>{{item.address}}</td>
-                </tr>
-                <tr>
-                  <td>Người nhận</td>
-                  <td>{{item.receiver}}</td>
-                </tr>
-                <tr>
-                  <td>Mã bưu điện</td>
-                  <td>{{item.zipcode}}</td>
-                </tr>
-                <tr>
-                  <td>Số điện thoại</td>
-                  <td>{{item.phone}}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
+          <div *ngFor="let item of chinaWarehouses">
+            <strong class="mb-3 d-block fs-16">{{item.name}} <span *ngIf="item.note">({{item.note}})</span></strong>
+            <table class="table table-hover">
+              <tbody>
+              <tr>
+                <td width="30%">Địa chỉ nhận hàng</td>
+                <td>{{item.address}}</td>
+              </tr>
+              <tr>
+                <td>Người nhận</td>
+                <td>{{item.receiver}}</td>
+              </tr>
+              <tr>
+                <td>Mã bưu điện</td>
+                <td>{{item.zipcode}}</td>
+              </tr>
+              <tr>
+                <td>Số điện thoại</td>
+                <td>{{item.phone}}</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

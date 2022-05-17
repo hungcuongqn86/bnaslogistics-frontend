@@ -1,23 +1,32 @@
 <!--
 // Service Fee
  -->
-<div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí dịch vụ</strong>
-    <div class="card-header-actions">
-      <button (click)="serviceFeeModalOpen(serviceFeeModal)" class="btn btn-block btn-primary btn-sm"
-              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
-      </button>
+<div class="card entry-list">
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-12 col-md-6">
+        <div class="title-list">
+          <span>Phí dịch vụ</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-header-actions">
+          <button (click)="serviceFeeModalOpen(serviceFeeModal)" class="btn btn-block btn-primary"
+                  type="button">Thêm
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-bordered table-striped table-sm">
+    <table class="table table-hover">
       <thead>
       <tr>
-        <th>Dịch vụ</th>
-        <th>Mức tiền hàng (Triệu VNĐ)</th>
-        <th>Tính phí (%)</th>
-        <th>Ghi chú</th>
-        <th class="text-right" style="width: 90px;">Tác vụ</th>
+        <th rowspan="2">Dịch vụ</th>
+        <th rowspan="2">Mức tiền hàng (Triệu VNĐ)</th>
+        <th rowspan="2">Tính phí (%)</th>
+        <th rowspan="2">Ghi chú</th>
+        <th rowspan="2" class="text-right">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
@@ -27,11 +36,11 @@
         <td>{{item.val}}</td>
         <td>{{item.note}}</td>
         <td class="text-right">
-          <button (click)="serviceFeeModalOpen(serviceFeeModal, item)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="serviceFeeModalOpen(serviceFeeModal, item)" class="btn btn-sm btn-info mr-1 text-white"
                   type="button">
             Sửa
           </button>
-          <button (click)="serviceFeeDelModalOpen(serviceFeeDelModal, item)" class="btn btn-sm btn-ghost-danger"
+          <button (click)="serviceFeeDelModalOpen(serviceFeeDelModal, item)" class="btn btn-sm btn-violet"
                   type="button">
             Xóa
           </button>
@@ -149,12 +158,21 @@
 // Transport Fee
  -->
 
-<div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí vận chuyển</strong>
-    <div class="card-header-actions">
-      <button (click)="transportFeeModalOpen(transportFeeModal)" class="btn btn-block btn-primary btn-sm"
-              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
-      </button>
+<div class="card entry-list">
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-12 col-md-6">
+        <div class="title-list">
+          <span>Phí vận chuyển</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-header-actions">
+          <button (click)="transportFeeModalOpen(transportFeeModal)" class="btn btn-block btn-primary"
+                  type="button">Thêm
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card-body">
@@ -176,14 +194,14 @@
         </select>
       </div>
     </div>
-    <table class="table table-bordered table-striped table-sm">
+    <table class="table table-hover">
       <thead>
       <tr>
-        <th>Dịch vụ</th>
-        <th>Mức cân nặng (Kg)</th>
-        <th>Phí (VNĐ)</th>
-        <th>Ghi chú</th>
-        <th class="text-right" style="width: 90px;">Tác vụ</th>
+        <th rowspan="2">Dịch vụ</th>
+        <th rowspan="2">Mức cân nặng (Kg)</th>
+        <th rowspan="2">Phí (VNĐ)</th>
+        <th rowspan="2">Ghi chú</th>
+        <th rowspan="2" class="text-right">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
@@ -193,11 +211,11 @@
         <td>{{item.val | currency:'VND':'' }} đ</td>
         <td>{{item.note}}</td>
         <td class="text-right">
-          <button (click)="transportFeeModalOpen(transportFeeModal, item)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="transportFeeModalOpen(transportFeeModal, item)" class="btn btn-sm btn-info mr-1 text-white"
                   type="button">
             Sửa
           </button>
-          <button (click)="transportFeeDelModalOpen(transportFeeDelModal, item)" class="btn btn-sm btn-ghost-danger"
+          <button (click)="transportFeeDelModalOpen(transportFeeDelModal, item)" class="btn btn-sm btn-violet"
                   type="button">
             Xóa
           </button>
@@ -353,23 +371,33 @@
 // Inspection Fee
  -->
 
-<div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Phí kiểm đếm</strong>
-    <div class="card-header-actions">
-      <button (click)="inspectionFeeModalOpen(inspectionFeeModal)" class="btn btn-block btn-primary btn-sm"
-              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
-      </button>
+<div class="card entry-list">
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-12 col-md-6">
+        <div class="title-list">
+          <span>Phí kiểm đếm</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-header-actions">
+          <button (click)="inspectionFeeModalOpen(inspectionFeeModal)" class="btn btn-block btn-primary"
+              type="button">Thêm
+          </button>
+        </div>
+      </div>
     </div>
   </div>
+
   <div class="card-body">
-    <table class="table table-bordered table-striped table-sm">
+    <table class="table table-hover">
       <thead>
       <tr>
-        <th>Dịch vụ</th>
-        <th>Số lượng SP</th>
-        <th>Phí (VNĐ)</th>
-        <th>Ghi chú</th>
-        <th class="text-right" style="width: 90px;">Tác vụ</th>
+        <th rowspan="2">Dịch vụ</th>
+        <th rowspan="2">Số lượng SP</th>
+        <th rowspan="2">Phí (VNĐ)</th>
+        <th rowspan="2">Ghi chú</th>
+        <th rowspan="2" class="text-right">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
@@ -379,11 +407,11 @@
         <td>{{item.val | currency:'VND':'' }} đ</td>
         <td>{{item.note}}</td>
         <td class="text-right">
-          <button (click)="inspectionFeeModalOpen(inspectionFeeModal, item)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="inspectionFeeModalOpen(inspectionFeeModal, item)" class="btn btn-sm btn-info mr-1 text-white"
                   type="button">
             Sửa
           </button>
-          <button (click)="inspectionFeeDelModalOpen(inspectionFeeDelModal, item)" class="btn btn-sm btn-ghost-danger"
+          <button (click)="inspectionFeeDelModalOpen(inspectionFeeDelModal, item)" class="btn btn-sm btn-violet"
                   type="button">
             Xóa
           </button>
@@ -500,26 +528,35 @@
 // =====================================================================================================================
 // CHINA Warehouse
  -->
-<div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Kho Trung Quốc</strong>
-    <div class="card-header-actions">
-      <button (click)="chinaWarehouseModalOpen(chinaWarehouseModal)" class="btn btn-block btn-primary btn-sm"
-              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
-      </button>
+<div class="card entry-list">
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-12 col-md-6">
+        <div class="title-list">
+          <span>Kho Trung Quốc</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-header-actions">
+          <button (click)="chinaWarehouseModalOpen(chinaWarehouseModal)" class="btn btn-block btn-primary"
+              type="button">Thêm
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-bordered table-striped table-sm">
+    <table class="table table-hover">
       <thead>
       <tr>
-        <th>Tên kho</th>
-        <th>Ghi chú</th>
-        <th>Địa chỉ</th>
-        <th>Người nhận</th>
-        <th>Số điện thoại</th>
-        <th>ZipCode</th>
-        <th>Hoạt động</th>
-        <th class="text-right" style="width: 90px;">Tác vụ</th>
+        <th rowspan="2">Tên kho</th>
+        <th rowspan="2">Ghi chú</th>
+        <th rowspan="2">Địa chỉ</th>
+        <th rowspan="2">Người nhận</th>
+        <th rowspan="2">Số điện thoại</th>
+        <th rowspan="2">ZipCode</th>
+        <th rowspan="2">Hoạt động</th>
+        <th rowspan="2" class="text-right">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
@@ -532,11 +569,11 @@
         <td>{{item.zipcode}}</td>
         <td>{{item.status}}</td>
         <td class="text-right">
-          <button (click)="chinaWarehouseModalOpen(chinaWarehouseModal, item)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="chinaWarehouseModalOpen(chinaWarehouseModal, item)" class="btn btn-sm btn-info mr-1 text-white"
                   type="button">
             Sửa
           </button>
-          <button (click)="chinaWarehouseDelModalOpen(chinaWarehouseModal, item)" class="btn btn-sm btn-ghost-danger"
+          <button (click)="chinaWarehouseDelModalOpen(chinaWarehouseModal, item)" class="btn btn-sm btn-violet"
                   type="button">
             Xóa
           </button>
@@ -647,25 +684,34 @@
 // =====================================================================================================================
 // VIP
  -->
-<div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>VIP</strong>
-    <div class="card-header-actions">
-      <button (click)="vipModalOpen(vipModal)" class="btn btn-block btn-primary btn-sm"
-              type="button"><i class="fa fa-plus"></i> &nbsp;Thêm
-      </button>
+<div class="card entry-list">
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-12 col-md-6">
+        <div class="title-list">
+          <span>VIP</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-header-actions">
+          <button (click)="vipModalOpen(vipModal)" class="btn btn-block btn-primary"
+              type="button">Thêm
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-bordered table-striped table-sm">
+    <table class="table table-hover">
       <thead>
       <tr>
-        <th>VIP</th>
-        <th>Tổng giao dịch (Triệu VNĐ)</th>
-        <th>CK phí dịch vụ (%)</th>
-        <th>CK phí vận chuyển (%)</th>
-        <th>Đặt cọc tiền hàng (%)</th>
-        <th>Ghi chú</th>
-        <th class="text-right" style="width: 90px;">Tác vụ</th>
+        <th rowspan="2">VIP</th>
+        <th rowspan="2">Tổng giao dịch (Triệu VNĐ)</th>
+        <th rowspan="2">CK phí dịch vụ (%)</th>
+        <th rowspan="2">CK phí vận chuyển (%)</th>
+        <th rowspan="2">Đặt cọc tiền hàng (%)</th>
+        <th rowspan="2">Ghi chú</th>
+        <th rowspan="2" class="text-right">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
@@ -677,11 +723,11 @@
         <td>{{item.deposit}}</td>
         <td>{{item.note}}</td>
         <td class="text-right">
-          <button (click)="vipModalOpen(vipModal, item)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="vipModalOpen(vipModal, item)" class="btn btn-sm btn-info mr-1 text-white"
                   type="button">
             Sửa
           </button>
-          <button (click)="vipDelModalOpen(vipDelModal, item)" class="btn btn-sm btn-ghost-danger"
+          <button (click)="vipDelModalOpen(vipDelModal, item)" class="btn btn-sm btn-violet"
                   type="button">
             Xóa
           </button>
@@ -827,15 +873,23 @@
 // =====================================================================================================================
 // Other
  -->
-<div class="card">
-  <div class="card-header"><i class="fa fa-cogs"></i> <strong>Tham số khác</strong></div>
+<div class="card entry-list">
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-12 col-md-6">
+        <div class="title-list">
+          <span>Tham số khác</span>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="card-body">
-    <table class="table table-bordered table-striped table-sm">
+    <table class="table table-hover">
       <thead>
       <tr>
-        <th>Tham số</th>
-        <th>Giá trị</th>
-        <th class="text-right" style="width: 70px;">Tác vụ</th>
+        <th rowspan="2">Tham số</th>
+        <th rowspan="2">Giá trị</th>
+        <th rowspan="2" class="text-right">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
@@ -843,7 +897,7 @@
         <td>{{item.title}}</td>
         <td>{{item.value}}</td>
         <td class="text-right">
-          <button (click)="settingModalOpen(settingModal, item)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="settingModalOpen(settingModal, item)" class="btn btn-sm btn-info mr-1 text-white"
                   type="button">
             Sửa
           </button>

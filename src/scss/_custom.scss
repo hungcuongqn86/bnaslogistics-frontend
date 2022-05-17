@@ -1,4 +1,7 @@
 // Here you can add other styles
+.comment-content[_ngcontent-c2]{
+  height: calc(100% - 27px) !important;
+}
 .fs-14{
   font-size: 14px !important;
 }
@@ -667,6 +670,7 @@ body.app:not(.header-fixed) {
   background-color: #f9f9f9;
   border-radius: 10px;
   min-height: 280px;
+  height: calc(100% - 64px);
   .card-footer{
     background-color: #f9f9f9;
     border-radius: inherit;

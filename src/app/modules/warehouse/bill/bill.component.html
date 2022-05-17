@@ -97,7 +97,7 @@
                 *ngIf="item.status==2">{{(item.tien_thanh_ly + item.tien_can + item.tien_chong_soc + item.tien_dong_go + item.cuoc_van_phat_sinh).toString() | tempPrice: 1 :
                 1: true}}</p></td>
               <td class="text-right">
-                <button (click)="gotoDetail(item.id)" class="btn btn-sm btn-ghost-primary"
+                <button (click)="gotoDetail(item.id)" class="btn btn-sm btn-info mr-1 text-white"
                         type="button">
                   Chi tiết
                 </button>
