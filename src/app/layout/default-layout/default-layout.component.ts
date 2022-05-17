@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../auth.service';
 import {FirebaseService} from '../../firebase.service';
 import {OrderService} from '../../services/order/order.service';
-import {BsModalRef} from "ngx-bootstrap/modal/bs-modal-ref.service";
-import {BsModalService} from "ngx-bootstrap/modal";
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {BsModalService} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,17 +37,17 @@ export class DefaultLayoutComponent {
   }
 
   private setupNotification() {
-    this.notificationDatabase = this.firebaseService.setDatabase("comment/" + this.auth.user.id);
+    this.notificationDatabase = this.firebaseService.setDatabase('comment/' + this.auth.user.id);
     const myjs = this;
     this.notificationDatabase
-      .on("value", function (snapshot) {
+      .on('value', function (snapshot) {
         if (snapshot.val()) {
           myjs.notify = Object.values(snapshot.val());
         } else {
           myjs.notify = [];
         }
       }, function (errorObject) {
-        console.log("Notification failed: " + errorObject.code);
+        console.log('Notification failed: ' + errorObject.code);
       });
   }
 
@@ -97,17 +97,17 @@ export class DefaultLayoutComponent {
   public getMyCountByStatus() {
     for (let i = 0; i < this.navItems.length; i++) {
       if (this.navItems[i].url === '/order/myorder') {
-        this.countByStatusDatabase = this.firebaseService.setDatabase("mycount/" + this.auth.user.id);
+        this.countByStatusDatabase = this.firebaseService.setDatabase('mycount/' + this.auth.user.id);
         const myjs = this;
         this.countByStatusDatabase
-          .on("value", function (snapshot) {
+          .on('value', function (snapshot) {
             if (snapshot.val()) {
               myjs.genMenuText(Object.values(snapshot.val()));
             } else {
               myjs.genMenuText(Object.values([]));
             }
           }, function (errorObject) {
-            console.log("getMyCountByStatus failed: " + errorObject.code);
+            console.log('getMyCountByStatus failed: ' + errorObject.code);
           });
       }
     }

@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorHandler, HandleError} from './http-error-handler.service';
-import { environment } from '../environments/environment';
-import * as firebase from 'firebase';
-import {IUser} from "./models/interface";
+import {environment} from '../environments/environment';
+import {initializeApp} from 'firebase/app';
+import {getDatabase, ref, set} from 'firebase/database';
+import {IUser} from './models/interface';
 
 // declare const firebase: any;
 
@@ -16,7 +17,7 @@ export class FirebaseService {
 
   constructor(httpErrorHandler: HttpErrorHandler) {
     if (!this.appFirebase) {
-      this.appFirebase = firebase.initializeApp(environment.firebase);
+      this.appFirebase = initializeApp(environment.firebase);
     }
     this.handleError = httpErrorHandler.createHandleError('FirebaseService');
     return FirebaseService.instance = FirebaseService.instance || this;
@@ -24,6 +25,6 @@ export class FirebaseService {
 
   public setDatabase(name: string) {
     const path = environment.appId + '/' + name;
-    return this.appFirebase.database().ref(path);
+    return ref(getDatabase(this.appFirebase), path);
   }
 }

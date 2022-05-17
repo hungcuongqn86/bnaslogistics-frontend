@@ -27,7 +27,7 @@
     "angular-in-memory-web-api": "^0.6.1",
     "bootstrap": "^4.1.1",
     "core-js": "^2.6.12",
-    "firebase": "^4.6.2",
+    "firebase": "^9.8.1",
     "flag-icon-css": "^3.5.0",
     "font-awesome": "^4.7.0",
     "moment": "^2.29.1",

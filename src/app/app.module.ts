@@ -27,12 +27,6 @@ import {SharedModule} from './shared.module';
 import {OrderService} from './services/order/order.service';
 
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
-import {PERFECT_SCROLLBAR_CONFIG} from 'ngx-perfect-scrollbar';
-import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 
 // Import containers
 import {DefaultLayoutComponent} from './layout';
@@ -51,8 +45,6 @@ import {
 import {httpInterceptorProviders} from './http-interceptors';
 import {routing} from './app.routing.module';
 import {AppGuard} from './app.guard.service';
-
-import {captchar_key} from './const';
 
 @NgModule({
   imports: [
