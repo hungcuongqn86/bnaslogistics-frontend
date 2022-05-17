@@ -141,4 +141,4 @@ const appRoutes: Routes = [
   {path: '**', component: Error404Component, pathMatch: 'full'}
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const routing: ModuleWithProviders<any> = RouterModule.forRoot(appRoutes);

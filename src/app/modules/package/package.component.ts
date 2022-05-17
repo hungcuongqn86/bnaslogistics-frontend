@@ -4,8 +4,8 @@ import {PackageService} from '../../services/package/package.service';
 import {IPackage, PackageStatus} from '../../models/interface';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../auth.service';
-import {Package} from "../../models/model";
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {Package} from '../../models/model';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-package',

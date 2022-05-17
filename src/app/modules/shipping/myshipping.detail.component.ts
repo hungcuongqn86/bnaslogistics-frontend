@@ -1,12 +1,12 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ShippingService} from '../../services/shipping/shipping.service';
-import {ICarrier, ICarrierPackage, IChinaWarehouse} from "../../models/interface";
-import {Carrier, CarrierPackage} from "../../models/model";
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {forkJoin, Observable} from "rxjs";
-import {SettingService} from "../../services/setting/setting.service";
-import {AuthService} from "../../auth.service";
+import {ICarrier, ICarrierPackage, IChinaWarehouse} from '../../models/interface';
+import {Carrier, CarrierPackage} from '../../models/model';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {forkJoin, Observable} from 'rxjs';
+import {SettingService} from '../../services/setting/setting.service';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-myshipping-detail',
@@ -61,7 +61,7 @@ export class MyshippingDetailComponent implements OnInit {
   }
 
   public hideInput() {
-    this.col = "";
+    this.col = '';
     this.carrierPackage = new CarrierPackage();
   }
 
@@ -111,7 +111,7 @@ export class MyshippingDetailComponent implements OnInit {
     this.chinaWarehouses.forEach(item => {
       item.address = item.address.replace('#code#', code);
       item.receiver = item.receiver.replace('#code#', code);
-      if (item.id == 2) {
+      if (item.id === 2) {
         this.carrier.china_warehouses_id = item.id;
         this.carrier.china_warehouses_address = item.address;
       }

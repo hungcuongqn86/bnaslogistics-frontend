@@ -2,7 +2,7 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {MessageDirective} from './messages/message.directive';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {TabsModule} from 'ngx-bootstrap/tabs';
-import {ProgressbarModule} from 'ngx-bootstrap';
+import {ProgressbarModule} from 'ngx-bootstrap/progressbar';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {AlertModule} from 'ngx-bootstrap/alert';
@@ -19,7 +19,7 @@ import {AutofocusDirective} from './directive/autoFocus';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
-  imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(),NgxChartsModule,
+  imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(), NgxChartsModule,
     ModalModule.forRoot(), ProgressbarModule.forRoot(), TabsModule.forRoot(), BsDatepickerModule.forRoot(), AlertModule.forRoot()],
   declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe, TempCountByStatusPipe
     , TempDatePipe, TempHistoryTypePipe, AutofocusDirective],
@@ -30,7 +30,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
   providers: []
 })
 export class SharedModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<any> {
     return {
       ngModule: SharedModule
     };

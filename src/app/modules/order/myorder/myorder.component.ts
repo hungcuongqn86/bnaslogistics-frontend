@@ -5,8 +5,8 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
 import {email_nv} from '../../../const';
-import {History, IOrder, IVip, OrderStatus} from "../../../models/interface";
-import {Order, Vip} from "../../../models/model";
+import {History, IOrder, IVip, OrderStatus} from '../../../models/interface';
+import {Order} from '../../../models/model';
 import {forkJoin, Observable} from 'rxjs';
 import {SettingService} from '../../../services/setting/setting.service';
 
@@ -30,7 +30,9 @@ export class MyorderComponent implements OnInit {
   arrDeposit = [];
   nv = false;
 
-  constructor(public orderService: OrderService, private settingService: SettingService, private modalService: BsModalService, private route: ActivatedRoute,
+  constructor(public orderService: OrderService, private settingService: SettingService,
+              private modalService: BsModalService,
+              private route: ActivatedRoute,
               public auth: AuthService,
               private router: Router) {
     this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
@@ -104,8 +106,8 @@ export class MyorderComponent implements OnInit {
     const listSub = forkJoin([
       getOrderObs,
       // getVipObs
-    ]).subscribe(([order, vip]) => {
-      this.order = order.data;
+    ]).subscribe(([rorder]) => {
+      this.order = rorder.data;
       // this.vip = vip.data;
       this.orderService.showLoading(false);
       listSub.unsubscribe();
