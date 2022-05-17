@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DashboardService} from '../../services/dashboard.service';
 import {AuthService} from "../../auth.service";
-import {BsDatepickerConfig} from "ngx-bootstrap";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,9 +10,6 @@ import {BsDatepickerConfig} from "ngx-bootstrap";
 })
 
 export class DashboardComponent implements OnInit {
-  colorTheme = 'theme-dark-blue';
-  bsConfig?: Partial<BsDatepickerConfig>;
-
   newLink = 0;
   newOrder = 0;
   newUser = 0;
@@ -51,7 +47,6 @@ export class DashboardComponent implements OnInit {
   dateNumber = '7';
 
   constructor(public dashboardService: DashboardService, private router: Router, public authService: AuthService) {
-    this.bsConfig = Object.assign({}, { containerClass: this.colorTheme });
     if (authService.hasRole('custumer')) {
       this.router.navigate(['/home']);
     }
