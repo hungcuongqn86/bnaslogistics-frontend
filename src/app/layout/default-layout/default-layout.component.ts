@@ -5,6 +5,7 @@ import {FirebaseService} from '../../firebase.service';
 import {OrderService} from '../../services/order/order.service';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
+import {onValue} from 'firebase/database';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,16 +40,13 @@ export class DefaultLayoutComponent {
   private setupNotification() {
     this.notificationDatabase = this.firebaseService.setDatabase('comment/' + this.auth.user.id);
     const myjs = this;
-    this.notificationDatabase
-      .on('value', function (snapshot) {
-        if (snapshot.val()) {
-          myjs.notify = Object.values(snapshot.val());
-        } else {
-          myjs.notify = [];
-        }
-      }, function (errorObject) {
-        console.log('Notification failed: ' + errorObject.code);
-      });
+    onValue(this.notificationDatabase, (snapshot) => {
+      if (snapshot.val()) {
+        myjs.notify = Object.values(snapshot.val());
+      } else {
+        myjs.notify = [];
+      }
+    });
   }
 
   public getNavItems() {
@@ -99,16 +97,13 @@ export class DefaultLayoutComponent {
       if (this.navItems[i].url === '/order/myorder') {
         this.countByStatusDatabase = this.firebaseService.setDatabase('mycount/' + this.auth.user.id);
         const myjs = this;
-        this.countByStatusDatabase
-          .on('value', function (snapshot) {
-            if (snapshot.val()) {
-              myjs.genMenuText(Object.values(snapshot.val()));
-            } else {
-              myjs.genMenuText(Object.values([]));
-            }
-          }, function (errorObject) {
-            console.log('getMyCountByStatus failed: ' + errorObject.code);
-          });
+        onValue(this.countByStatusDatabase, (snapshot) => {
+          if (snapshot.val()) {
+            myjs.genMenuText(Object.values(snapshot.val()));
+          } else {
+            myjs.genMenuText(Object.values([]));
+          }
+        });
       }
     }
   }
