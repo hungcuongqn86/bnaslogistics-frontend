@@ -1,27 +1,36 @@
-<div class="card">
-  <div class="card-header"><i class="cui-user icons"></i> <strong>{{authService.user.name}}</strong>
-    <div class="card-header-actions">
-      <button (click)="rutTien(templateRutTien)"
+<div class="card entry-list detail">
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-12 col-md-6">
+        <div class="title-list">
+          <span>{{authService.user.name}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-header-actions">
+          <button (click)="rutTien(templateRutTien)"
               class="btn btn-block btn-outline-primary btn-sm"
               type="button">Rút tiền
-      </button>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="card-body">
+  <div class="card-body entry-detail">
     <tabset class="tab-container">
       <tab>
-        <ng-template tabHeading><i class="icon-list"></i> &nbsp;Lịch sử giao dịch</ng-template>
+        <ng-template tabHeading>Lịch sử giao dịch</ng-template>
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-bordered table-striped table-sm table-data">
+            <table class="table table-hover">
               <thead>
               <tr>
-                <th>Ngày giao dịch</th>
-                <th>Mã giao dịch</th>
-                <th>Loại giao dịch</th>
-                <th>Nội dung</th>
-                <th class="text-right">Giá trị</th>
-                <th class="text-right">Dư nợ</th>
+                <th rowspan="2">Ngày giao dịch</th>
+                <th rowspan="2">Mã giao dịch</th>
+                <th rowspan="2">Loại giao dịch</th>
+                <th rowspan="2">Nội dung</th>
+                <th rowspan="2" class="text-right">Giá trị</th>
+                <th rowspan="2" class="text-right">Dư nợ</th>
               </tr>
               </thead>
               <tbody>
@@ -58,18 +67,18 @@
         </div>
       </tab>
       <tab>
-        <ng-template tabHeading><i class="icon-list"></i> &nbsp;Yêu cầu rút tiền</ng-template>
+        <ng-template tabHeading>Yêu cầu rút tiền</ng-template>
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-bordered table-striped table-sm table-data">
+            <table class="table table-hover">
               <thead>
               <tr>
-                <th>Mã</th>
-                <th>Ngày yêu cầu</th>
-                <th>Số tiền</th>
-                <th>Nội dung</th>
-                <th>Trạng thái</th>
-                <th class="text-right">Tác vụ</th>
+                <th rowspan="2">Mã</th>
+                <th rowspan="2">Ngày yêu cầu</th>
+                <th rowspan="2">Số tiền</th>
+                <th rowspan="2">Nội dung</th>
+                <th rowspan="2">Trạng thái</th>
+                <th rowspan="2" class="text-right">Tác vụ</th>
               </tr>
               </thead>
               <tbody>
@@ -109,76 +118,59 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
+      <div class="card entry-list">
         <div class="card-header">
-          <strong><i class="fa fa-university" aria-hidden="true"></i> Thông tin nạp tiền</strong>
+          <div class="title-list">
+            <span>Thông tin nạp tiền</span>
+          </div>
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-header"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                  <strong>Agribank </strong>
-                </div>
-                <div class="card-body" style="min-height: 150px;">
-                  <p>Số tài khoản: <b>1507205xxxxxx</b></p>
-                  <p>Người thụ hưởng: <b>Hà Hương Giang</b></p>
-                  <p>Chi nhánh: <b>Agribank Cầu Giấy</b></p>
-                  <p style="color: brown;">Nội dung nạp tiền: <b>BNAS [dấu cách] [Số điện thoại]</b></p>
-                  <p style="color: brown;">Ví dụ: <b>BNAS 0974845678</b></p>
-                </div>
-                <div class="card-footer">
+            <div class="col-md col-12">
+              <div class="h-100">
+                <strong class="mb-3 d-block fs-16">Agribank</strong>
+                <div class="card widget-item">
+                  <div class="card-body">
+                    <p>Số tài khoản: <b>1507205xxxxxx</b></p>
+                    <p>Người thụ hưởng: <b>Hà Hương Giang</b></p>
+                    <p>Chi nhánh: <b>Agribank Cầu Giấy</b></p>
+                    <p style="color: brown;">Nội dung nạp tiền: <b>BNAS [dấu cách] [Số điện thoại]</b></p>
+                    <p style="color: brown;">Ví dụ: <b>BNAS 0974845678</b></p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-header"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> <strong>TP
-                  bank </strong>
-                </div>
-                <div class="card-body" style="min-height: 150px;">
-                  <p>Số tài khoản: <b>0365637xxxxxx</b></p>
-                  <p>Người thụ hưởng: <b>Hà Hương Giang</b></p>
-                  <p>&#160;</p>
-                  <p style="color: brown;">Nội dung nạp tiền: <b>BNAS [dấu cách] [Số điện thoại]</b></p>
-                  <p style="color: brown;">Ví dụ: <b>BNAS 0974845678</b></p>
-                </div>
-                <div class="card-footer">
+            <div class="col-md col-12">
+              <div class="h-100">
+                <strong class="mb-3 d-block fs-16">TP bank</strong>
+                <div class="card widget-item">
+                  <div class="card-body">
+                    <p>Số tài khoản: <b>0365637xxxxxx</b></p>
+                    <p>Người thụ hưởng: <b>Hà Hương Giang</b></p>
+                    <p style="color: brown;">Nội dung nạp tiền: <b>BNAS [dấu cách] [Số điện thoại]</b></p>
+                    <p style="color: brown;">Ví dụ: <b>BNAS 0974845678</b></p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-header"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                  <strong>Vietcombank </strong>
-                </div>
-                <div class="card-body" style="min-height: 150px;">
-                  <p>Số tài khoản: <b>1014576xxxxxx</b></p>
-                  <p>Người thụ hưởng: <b>Hà Hương Giang</b></p>
-                  <p>&#160;</p>
-                  <p style="color: brown;">Nội dung nạp tiền: <b>BNAS [dấu cách] [Số điện thoại]</b></p>
-                  <p style="color: brown;">Ví dụ: <b>BNAS 0974845678</b></p>
-                </div>
-                <div class="card-footer">
+            <div class="col-md col-12">
+              <div class="h-100">
+                <strong class="mb-3 d-block fs-16">Vietcombank</strong>
+                <div class="card widget-item">
+                  <div class="card-body">
+                    <p>Số tài khoản: <b>1014576xxxxxx</b></p>
+                    <p>Người thụ hưởng: <b>Hà Hương Giang</b></p>
+                    <p style="color: brown;">Nội dung nạp tiền: <b>BNAS [dấu cách] [Số điện thoại]</b></p>
+                    <p style="color: brown;">Ví dụ: <b>BNAS 0974845678</b></p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div><!--/.row-->
-</div>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <strong><i class="fa fa-envelope" aria-hidden="true"></i> Hỗ trợ kỹ thuật</strong>
-        </div>
-        <div class="card-body">
-          <p>Email: <a href="mailto:hotro.dathang@gmail.com">: hotro.dathang@gmail.com</a></p>
+          <div>
+            <strong class="mb-3 d-block fs-16">Hỗ trợ kỹ thuật</strong>
+            <p>Email: <a href="mailto:hotro.dathang@gmail.com">: hotro.dathang@gmail.com</a></p>
+          </div>
         </div>
       </div>
     </div>

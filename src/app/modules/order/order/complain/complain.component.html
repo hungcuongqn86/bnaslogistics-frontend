@@ -15,7 +15,7 @@
         <th rowspan="2">Khiếu nại về</th>
         <th rowspan="2">Số tiền mong muốn</th>
         <th rowspan="2">Nội dung</th>
-        <th rowspan="2" width="5%">Tác vụ</th>
+        <th rowspan="2" class="text-right">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
@@ -24,12 +24,12 @@
         <td>{{item.otype.name}}</td>
         <td>{{item.money_request.toString() | tempPrice: 1 : 1: true}} <sup> đ</sup></td>
         <td>{{item.content}}</td>
-        <td>
-          <button (click)="editComplain(item.id, templateComplain)" class="btn btn-sm btn-ghost-primary"
+        <td class="text-right">
+          <button (click)="editComplain(item.id, templateComplain)" class="btn btn-sm btn-info mr-1 text-white"
                   type="button">
             Chi tiết
           </button>
-          <button (click)="deleteComplain(item.id)" class="btn btn-sm btn-ghost-primary"
+          <button (click)="deleteComplain(item.id)" class="btn btn-sm btn-violet"
                   type="button">
             Hủy khiếu nại
           </button>

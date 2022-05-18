@@ -69,14 +69,14 @@
           <div class="row">
             <div class="col-sm-12">
               <h4 class="">Thông tin phiếu xuất (đơn vị VNĐ)</h4>
-              <table class="table table-bordered">
+              <table class="table table-hover">
                 <thead>
                 <tr class="">
-                  <th>1. Tiền cân</th>
-                  <th>2. Tiền đóng gỗ</th>
-                  <th>3. Tiền chống sốc</th>
-                  <th>4. Cước Vận phát sinh</th>
-                  <th>5. Thanh lý</th>
+                  <th rowspan="2">1. Tiền cân</th>
+                  <th rowspan="2">2. Tiền đóng gỗ</th>
+                  <th rowspan="2">3. Tiền chống sốc</th>
+                  <th rowspan="2">4. Cước Vận phát sinh</th>
+                  <th rowspan="2">5. Thanh lý</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -99,21 +99,21 @@
           </div>
           <div>
             <h4 class="g-no-print">Thông tin kiện hàng <span style="font-size: 10pt;"><i>(Công thức quy đổi: (kg) = Dài (cm) x rộng (cm) x cao (cm)/ 6000)</i></span></h4>
-            <table class="table table-bordered  lading_table" style="cursor: pointer;">
+            <table class="table table-hover  lading_table" style="cursor: pointer;">
               <thead>
               <tr>
-                <th class="text-center">#</th>
-                <th>Mã kiện</th>
-                <th>Mã đơn</th>
-                <th class="text-center">Thanh lý</th>
-                <th class="text-center">Cân nặng</th>
-                <th class="text-center">Quy đổi</th>
-                <th class="text-center">KT(m3)</th>
-                <th class="text-center">Vận giá</th>
-                <th class="text-center">Cước vận</th>
-                <th class="text-center">Cước vận PS</th>
-                <th class="text-center">Đóng Gỗ</th>
-                <th class="text-center">Chống sốc</th>
+                <th rowspan="2" class="text-center">#</th>
+                <th rowspan="2">Mã kiện</th>
+                <th rowspan="2">Mã đơn</th>
+                <th rowspan="2" class="text-center">Thanh lý</th>
+                <th rowspan="2" class="text-center">Cân nặng</th>
+                <th rowspan="2" class="text-center">Quy đổi</th>
+                <th rowspan="2" class="text-center">KT(m3)</th>
+                <th rowspan="2" class="text-center">Vận giá</th>
+                <th rowspan="2" class="text-center">Cước vận</th>
+                <th rowspan="2" class="text-center">Cước vận PS</th>
+                <th rowspan="2" class="text-center">Đóng Gỗ</th>
+                <th rowspan="2" class="text-center">Chống sốc</th>
               </tr>
               </thead>
               <tbody>
@@ -167,23 +167,23 @@
           </div>
           <div id="detail-link">
             <h4>Chi tiết link</h4>
-            <table class="table table-bordered">
+            <table class="table table-hover">
               <thead>
               <tr>
-                <th>Mã đơn</th>
-                <th>Mã link</th>
-                <th>Màu sắc, Kích thước</th>
-                <th>Ghi chú</th>
-                <th>Giá</th>
-                <th>SL đặt</th>
-                <th>Còn lại</th>
-                <th>Xuất kho</th>
-                <th>Ghi chú kho</th>
+                <th rowspan="2">Mã đơn</th>
+                <th rowspan="2">Mã link</th>
+                <th rowspan="2">Màu sắc, Kích thước</th>
+                <th rowspan="2">Ghi chú</th>
+                <th rowspan="2">Giá</th>
+                <th rowspan="2">SL đặt</th>
+                <th rowspan="2">Còn lại</th>
+                <th rowspan="2">Xuất kho</th>
+                <th rowspan="2">Ghi chú kho</th>
               </tr>
               </thead>
               <tbody>
               <ng-template ngFor let-item [ngForOf]="order_items" let-i="index">
-                <tr class="bg-success">
+                <tr>
                   <td><a href="./order/list/detail/{{item.order_id}}"
                          target="_blank">{{item.order_id}}</a></td>
                   <td>
