@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
     domain: ['#5AA454']
   };
 
-  dateNumber = 7;
+  dateNumber = 30;
   startValue = new Date();
   bsRangeValue: Date[];
   finishDate = new Date();

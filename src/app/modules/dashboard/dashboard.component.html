@@ -82,11 +82,13 @@
                   <span class="highlight-violet">Biểu đồ tình hình kết đơn</span>
                 </div>
               </div>
-              <div class="col-12 col-md-2 ml-auto">
-                <select class="form-control" name="" id="">
-                  <option value="">Tuần này</option>
-                  <option value="">Tháng này</option>
-                  <option value="">Năm này</option>
+              <div class="col-12 col-md-3 ml-auto">
+                <select [(ngModel)]="dateNumber" (change)="loadData()" class="form-control" name="dateNumber"
+                        id="dateNumber">
+                  <option value="7">7 ngày gần đây</option>
+                  <option value="10">10 ngày gần đây</option>
+                  <option value="15">15 ngày gần đây</option>
+                  <option value="30">30 ngày gần đây</option>
                 </select>
               </div>
             </div>
