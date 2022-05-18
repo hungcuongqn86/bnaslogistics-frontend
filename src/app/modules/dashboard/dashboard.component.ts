@@ -2,6 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DashboardService} from '../../services/dashboard.service';
 import {AuthService} from '../../auth.service';
+import {BsLocaleService} from 'ngx-bootstrap/datepicker';
+import {viLocale} from 'ngx-bootstrap/locale';
+import {defineLocale} from 'ngx-bootstrap/chronos';
+
+defineLocale('vi', viLocale);
 
 @Component({
   selector: 'app-dashboard',
@@ -48,7 +53,10 @@ export class DashboardComponent implements OnInit {
 
   dateNumber = '7';
 
-  constructor(public dashboardService: DashboardService, private router: Router, public authService: AuthService) {
+  constructor(public dashboardService: DashboardService, private router: Router,
+              private localeService: BsLocaleService,
+              public authService: AuthService) {
+    this.localeService.use('vi');
     if (authService.hasRole('custumer')) {
       this.router.navigate(['/home']);
     }
