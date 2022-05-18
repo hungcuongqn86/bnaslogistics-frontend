@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {DashboardService} from '../../services/dashboard.service';
 import {AuthService} from '../../auth.service';
@@ -15,7 +15,7 @@ defineLocale('vi', viLocale);
 })
 
 export class DashboardComponent implements OnInit {
-  bsConfig = Object.assign({}, {containerClass: 'theme-dark-blue'});
+  bsConfig = {containerClass: 'theme-dark-blue', showPreviousMonth: true};
 
   newLink = 0;
   newOrder = 0;
@@ -51,22 +51,37 @@ export class DashboardComponent implements OnInit {
     domain: ['#5AA454']
   };
 
-  dateNumber = '7';
+  dateNumber = 7;
+  startValue = new Date();
+  bsRangeValue: Date[];
+  finishDate = new Date();
+  today = new Date();
+
+  @ViewChild('rangePicker') rangePicker;
 
   constructor(public dashboardService: DashboardService, private router: Router,
               private localeService: BsLocaleService,
               public authService: AuthService) {
-    this.localeService.use('vi');
     if (authService.hasRole('custumer')) {
       this.router.navigate(['/home']);
     }
+    this.localeService.use('vi');
+    this.startValue.setDate(this.startValue.getDate() - this.dateNumber);
+    this.bsRangeValue = [this.startValue, this.finishDate];
   }
 
   ngOnInit() {
     this.loadData();
   }
 
-  setDateNumber(value: string) {
+  onDateRangePickerShow() {
+    // This is a workaround to show previous month
+    const prevMonth = new Date();
+    prevMonth.setMonth(prevMonth.getMonth() - 1);
+    this.rangePicker._datepicker.instance.monthSelectHandler({ date: prevMonth });
+  }
+
+  setDateNumber(value: number) {
     this.dateNumber = value;
     this.loadData();
   }
@@ -88,63 +103,63 @@ export class DashboardComponent implements OnInit {
   }
 
   public getNewLinkCount() {
-    this.dashboardService.getNewLinkCount(this.dateNumber)
+    this.dashboardService.getNewLinkCount(this.dateNumber.toString())
       .subscribe(data => {
         this.newLink = data.data.newlinks;
       });
   }
 
   public getNewOrderCount() {
-    this.dashboardService.getNewOrderCount(this.dateNumber)
+    this.dashboardService.getNewOrderCount(this.dateNumber.toString())
       .subscribe(data => {
         this.newOrder = data.data.neworders;
       });
   }
 
   public getNewUserCount() {
-    this.dashboardService.getNewUserCount(this.dateNumber)
+    this.dashboardService.getNewUserCount(this.dateNumber.toString())
       .subscribe(data => {
         this.newUser = data.data.newusers;
       });
   }
 
   public getNewComplainCount() {
-    this.dashboardService.getNewComplainCount(this.dateNumber)
+    this.dashboardService.getNewComplainCount(this.dateNumber.toString())
       .subscribe(data => {
         this.newComplain = data.data.newcomplains;
       });
   }
 
   public getStatisticTaobao() {
-    this.dashboardService.getStatisticTaobao(this.dateNumber)
+    this.dashboardService.getStatisticTaobao(this.dateNumber.toString())
       .subscribe(data => {
         this.statisticTaobao = data.data;
       });
   }
 
   public getStatisticTmall() {
-    this.dashboardService.getStatisticTmall(this.dateNumber)
+    this.dashboardService.getStatisticTmall(this.dateNumber.toString())
       .subscribe(data => {
         this.statisticTmall = data.data;
       });
   }
 
   public getStatistic1688() {
-    this.dashboardService.getStatistic1688(this.dateNumber)
+    this.dashboardService.getStatistic1688(this.dateNumber.toString())
       .subscribe(data => {
         this.statistic1688 = data.data;
       });
   }
 
   public orderstatisticbyday() {
-    this.dashboardService.orderstatisticbyday(this.dateNumber)
+    this.dashboardService.orderstatisticbyday(this.dateNumber.toString())
       .subscribe(data => {
         this.orderstatistic = data.data;
       });
   }
 
   public orderstatisticbystatus() {
-    this.dashboardService.orderstatisticbystatus(this.dateNumber)
+    this.dashboardService.orderstatisticbystatus(this.dateNumber.toString())
       .subscribe(data => {
         this.orderstatusstatistic = data.data;
       });

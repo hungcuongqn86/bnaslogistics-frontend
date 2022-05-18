@@ -8,7 +8,8 @@
       </div>
       <div class="col-sm-6 col-lg-6 ml-auto">
         <div class="text-right d-flex">
-          <button class="btn btn-info mr-2 text-white px-2 btn-rounded" style="width: 80px;" type="button"><strong>Tất cả</strong></button>
+          <button class="btn btn-info mr-2 text-white px-2 btn-rounded" style="width: 80px;" type="button"><strong>Tất
+            cả</strong></button>
 
           <div class="input-group filter-advanced">
             <div class="input-group-prepend">
@@ -16,7 +17,10 @@
                 <i class="iconsax isax-calendar"></i>
               </div>
             </div>
-            <input title="" class="form-control" #drp="bsDaterangepicker" placeholder="MM/YY - MM/YY" bsDaterangepicker
+            <input title="" class="form-control" #rangePicker="bsDaterangepicker" [(ngModel)]="bsRangeValue"
+                   [maxDate]="today"
+                   placeholder="DD/MM/YY - DD/MM/YY" bsDaterangepicker
+                   (onShown)="onDateRangePickerShow()"
                    [bsConfig]="bsConfig">
           </div>
         </div>
