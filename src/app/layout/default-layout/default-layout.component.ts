@@ -41,6 +41,7 @@ export class DefaultLayoutComponent {
     this.notificationDatabase = this.firebaseService.setDatabase('comment/' + this.auth.user.id);
     const myjs = this;
     onValue(this.notificationDatabase, (snapshot) => {
+      console.log(snapshot.val());
       if (snapshot.val()) {
         myjs.notify = Object.values(snapshot.val());
       } else {

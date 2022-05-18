@@ -4,7 +4,7 @@ export const environment = {
   backend: 'https://nguonhang.net/order/api/public/',
   apiUrl: '../order/api/public/api/',
   apiV1Url: '../order/api/public/api/v1/',
-  appId: 'nguonhang',
+  appId: 'nguonhangnet',
   firebase: {
     apiKey: 'AIzaSyBtTPUa19nLkReMDWXTFr6U43D166n9MVE',
     authDomain: 'banhangqc.firebaseapp.com',

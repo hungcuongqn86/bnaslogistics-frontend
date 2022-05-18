@@ -10,20 +10,22 @@
       <a class="nav-link icon-topbar bg-orange" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
          dropdownToggle (click)="false">
          <img src="assets/img/iconsax/vuesax-bold-message.svg" alt="message">
-         <span class="badge badge-pill badge-info"><span *ngIf="notify.length">{{notify.length}}</span></span>
+         <span class="badge badge-pill badge-danger"><span *ngIf="notify.length">{{notify.length}}</span></span>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
-        <a href="#" class="dropdown-item">
+        <a *ngFor="let item of notify" href="javascript:void(0);" class="dropdown-item" (click)="gotoOrder(item.order_id)">
+          <!--<i class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order_id}}</strong>
+          <span>{{item.created_at}}</span>-->
             <div class="message">
-                <div class="py-3 mr-3 float-left">
+                <!--<div class="py-3 mr-3 float-left">
                     <div class="avatar"><img src="assets/img/avatars/7.jpg" alt="a" class="img-avatar" /><span class="avatar-status badge-success"></span></div>
-                </div>
-                <div><small class="text-muted">John Doe</small><small class="text-muted float-right mt-1">Just now</small></div>
-                <div class="text-truncate font-weight-bold"><span class="fa fa-exclamation text-danger"></span> Important message</div>
-                <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</div>
+                </div>-->
+                <div><small class="text-muted">{{item.order_id}}</small><small class="text-muted float-right mt-1">{{item.created_at}}</small></div>
+                <div class="text-truncate font-weight-bold" style="width: 100%;"><span class="fa fa-exclamation text-danger"></span> Tin nhắn từ {{item.user_name}}</div>
+                <div class="small text-muted text-truncate">{{item.content}}...</div>
             </div>
         </a>
-        <a href="#" class="dropdown-item text-center" (click)="gotoNotification()"><strong>Xem tất cả</strong></a>
+        <a href="javascript:void(0);" class="dropdown-item text-center" (click)="gotoNotification()"><strong>Xem tất cả</strong></a>
       </div>
     </li>
     <li dropdown placement="bottom right" class="nav-item ml-2 dropdown">
@@ -31,7 +33,7 @@
          dropdownToggle (click)="false" class="nav-link icon-topbar bg-blue">
          <img src="assets/img/iconsax/vuesax-bold-notification-bing.svg" alt="notification">
       </a>
-      <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
+      <!--<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
         <div class="dropdown-header text-center"><strong>You have 5 notifications</strong></div>
         <a *ngFor="let item of notify" class="dropdown-item" href="javascript:void(0);"
            (click)="gotoOrder(item.order_id)">
@@ -39,7 +41,7 @@
           <span>{{item.created_at}}</span>
         </a>
         <a href="#" class="dropdown-item text-center" (click)="gotoNotification()"><strong>Xem tất cả</strong></a>
-      </div>
+      </div>-->
     </li>
     <li *ngIf="auth.user" class="nav-item dropdown ml-2" dropdown placement="bottom right">
       <a class="nav-link icon-topbar bg-blue-violet text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
