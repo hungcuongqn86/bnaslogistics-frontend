@@ -142,21 +142,21 @@ export class DashboardComponent implements OnInit {
   public getStatisticTaobao() {
     this.dashboardService.getStatisticTaobao(this.dateNumber.toString())
       .subscribe(data => {
-        //this.statisticTaobao = data.data;
+        this.statisticTaobao = data.data;
       });
   }
 
   public getStatisticTmall() {
     this.dashboardService.getStatisticTmall(this.dateNumber.toString())
       .subscribe(data => {
-        //this.statisticTmall = data.data;
+        this.statisticTmall = data.data;
       });
   }
 
   public getStatistic1688() {
     this.dashboardService.getStatistic1688(this.dateNumber.toString())
       .subscribe(data => {
-        //this.statistic1688 = data.data;
+        this.statistic1688 = data.data;
       });
   }
 
