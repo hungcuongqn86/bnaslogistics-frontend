@@ -18,20 +18,21 @@ export class DashboardComponent implements OnInit {
   bsConfig = {containerClass: 'theme-dark-blue', showPreviousMonth: true};
 
   newLink = 0;
+  completeOrder = 0;
   newOrder = 0;
   newUser = 0;
   newComplain = 0;
   statisticTaobao = {
-    link: 0,
-    order: 0
+    new: 0,
+    complete: 0
   };
   statisticTmall = {
-    link: 0,
-    order: 0
+    new: 0,
+    complete: 0
   };
   statistic1688 = {
-    link: 0,
-    order: 0
+    new: 0,
+    complete: 0
   };
 
   orderstatistic: any;
@@ -87,8 +88,9 @@ export class DashboardComponent implements OnInit {
   }
 
   loadData() {
-    this.getNewLinkCount();
+    // this.getNewLinkCount();
     this.getNewOrderCount();
+    this.getCompleteOrderCount();
     this.getNewUserCount();
     this.getNewComplainCount();
     this.getStatisticTaobao();
@@ -99,7 +101,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onSelect(event) {
-    console.log(event);
+
   }
 
   public getNewLinkCount() {
@@ -113,6 +115,13 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getNewOrderCount(this.dateNumber.toString())
       .subscribe(data => {
         this.newOrder = data.data.neworders;
+      });
+  }
+
+  public getCompleteOrderCount() {
+    this.dashboardService.getCompleteOrderCount(this.dateNumber.toString())
+      .subscribe(data => {
+        this.completeOrder = data.data.completeOrders;
       });
   }
 
@@ -133,21 +142,21 @@ export class DashboardComponent implements OnInit {
   public getStatisticTaobao() {
     this.dashboardService.getStatisticTaobao(this.dateNumber.toString())
       .subscribe(data => {
-        this.statisticTaobao = data.data;
+        //this.statisticTaobao = data.data;
       });
   }
 
   public getStatisticTmall() {
     this.dashboardService.getStatisticTmall(this.dateNumber.toString())
       .subscribe(data => {
-        this.statisticTmall = data.data;
+        //this.statisticTmall = data.data;
       });
   }
 
   public getStatistic1688() {
     this.dashboardService.getStatistic1688(this.dateNumber.toString())
       .subscribe(data => {
-        this.statistic1688 = data.data;
+        //this.statistic1688 = data.data;
       });
   }
 

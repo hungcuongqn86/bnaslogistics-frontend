@@ -25,7 +25,6 @@ export class DashboardService {
       );
   }
 
-
   getNewOrderCount(dateNumber: string): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}neworders?dn=${dateNumber}`;
     return this.http.get<any>(url)
@@ -34,6 +33,13 @@ export class DashboardService {
       );
   }
 
+  getCompleteOrderCount(dateNumber: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}completeOrders?dn=${dateNumber}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getCompleteOrderCount', []))
+      );
+  }
 
   getNewUserCount(dateNumber: string): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}newusers?dn=${dateNumber}`;
@@ -42,7 +48,6 @@ export class DashboardService {
         catchError(this.handleError('getNewUserCount', []))
       );
   }
-
 
   getNewComplainCount(dateNumber: string): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}newcomplains?dn=${dateNumber}`;

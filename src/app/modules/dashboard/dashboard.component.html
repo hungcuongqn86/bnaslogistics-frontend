@@ -28,13 +28,24 @@
     </div>
     <div class="row">
       <div class="col-sm-6 col-lg-3">
+        <div class="card text-white bg-blue-transparent widget">
+          <div class="card-body">
+            <div class="bg-blue inner-icon text-white">
+              <i class="iconsax isax-profile-2user"></i>
+            </div>
+            <span class="inner-desc">Đăng ký mới</span>
+            <div class="inner-value">{{newUser.toString() | tempPrice: 1 : 1: true}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
         <div class="card bg-orange-transparent widget">
           <div class="card-body">
             <div class="bg-orange inner-icon text-white">
               <i class="iconsax isax-link"></i>
             </div>
-            <span class="inner-desc">Link sản phẩm mới</span>
-            <div class="inner-value">{{newLink.toString() | tempPrice: 1 : 1: true}}</div>
+            <span class="inner-desc">Đơn mới</span>
+            <div class="inner-value">{{newOrder.toString() | tempPrice: 1 : 1: true}}</div>
           </div>
         </div>
       </div>
@@ -44,19 +55,8 @@
             <div class="bg-violet inner-icon text-white">
               <i class="iconsax isax-d-rotate"></i>
             </div>
-            <span class="inner-desc">Đơn hàng mới</span>
-            <div class="inner-value">{{newOrder.toString() | tempPrice: 1 : 1: true}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="card text-white bg-blue-transparent widget">
-          <div class="card-body">
-            <div class="bg-blue inner-icon text-white">
-              <i class="iconsax isax-profile-2user"></i>
-            </div>
-            <span class="inner-desc">Thành viên mới</span>
-            <div class="inner-value">{{newUser.toString() | tempPrice: 1 : 1: true}}</div>
+            <span class="inner-desc">Đơn hoàn thành</span>
+            <div class="inner-value">{{completeOrder.toString() | tempPrice: 1 : 1: true}}</div>
           </div>
         </div>
       </div>
@@ -136,12 +136,12 @@
 
           <div class="brand-card-body">
             <div class="text-left">
-              <span class="text-value">{{statisticTaobao.link.toString() | tempPrice: 1 : 1: true}}</span>
-              <span class="text-desc">link</span>
+              <span class="text-value">{{statisticTaobao.new.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">mới</span>
             </div>
             <div>
-              <span class="text-value">{{statisticTaobao.order.toString() | tempPrice: 1 : 1: true}}</span>
-              <span class="text-desc">đơn</span>
+              <span class="text-value">{{statisticTaobao.complete.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">hoàn thành</span>
             </div>
           </div>
         </div>
@@ -152,12 +152,12 @@
 
           <div class="brand-card-body">
             <div class="text-left">
-              <span class="text-value">{{statisticTmall.link.toString() | tempPrice: 1 : 1: true}}</span>
-              <span class="text-desc">link</span>
+              <span class="text-value">{{statisticTmall.new.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">mới</span>
             </div>
             <div>
-              <span class="text-value">{{statisticTmall.order.toString() | tempPrice: 1 : 1: true}}</span>
-              <span class="text-desc">đơn</span>
+              <span class="text-value">{{statisticTmall.complete.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">hoàn thành</span>
             </div>
           </div>
         </div>
@@ -168,12 +168,12 @@
 
           <div class="brand-card-body">
             <div class="text-left">
-              <span class="text-value">{{statistic1688.link.toString() | tempPrice: 1 : 1: true}}</span>
-              <span class="text-desc">link</span>
+              <span class="text-value">{{statistic1688.new.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">mới</span>
             </div>
             <div>
-              <span class="text-value">{{statistic1688.order.toString() | tempPrice: 1 : 1: true}}</span>
-              <span class="text-desc">đơn</span>
+              <span class="text-value">{{statistic1688.complete.toString() | tempPrice: 1 : 1: true}}</span>
+              <span class="text-desc">hoàn thành</span>
             </div>
           </div>
         </div>
