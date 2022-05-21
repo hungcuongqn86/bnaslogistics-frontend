@@ -1,11 +1,19 @@
 // Here you can add other styles
 .form-control{height: auto;}
- 
+.transform-90{
+  -webkit-transform: rotate(45deg);
+   -moz-transform: rotate(45deg);
+   -o-transform: rotate(45deg); 
+   transform: rotate(45deg);
+}
 .fs-14{
   font-size: 14px !important;
 }
 .fs-16{
   font-size: 16px !important;
+}
+.fs-20{
+  font-size: 20px !important;
 }
 .loading-over {
   position: fixed;
@@ -281,6 +289,9 @@ body.app:not(.header-fixed) {
 }
 .bg-violet{
   background-color: $violet !important;
+}
+.bg-yellow{
+  background-color: $yellow !important;
 }
 
 .bg-orange-transparent{
@@ -794,6 +805,9 @@ body.app:not(.header-fixed) {
 .brand-card-body > *:not(:last-child){
   border-color: $color-text;
 }
+.app-header .navbar-toggler-icon{
+  filter: brightness(0) invert(1);
+}
 @media(min-width: 992px) {
   .app-header .navbar-toggler-icon{
     display: none;
@@ -859,5 +873,11 @@ body.app:not(.header-fixed) {
         }
       }
     }
+  }
+}
+@media (max-width: 991.98px) {
+  .app-header .navbar-brand {
+      position: initial;
+      margin-left: 0;
   }
 }

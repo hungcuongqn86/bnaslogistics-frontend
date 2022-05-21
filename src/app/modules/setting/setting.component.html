@@ -11,14 +11,14 @@
       </div>
       <div class="col-12 col-md-6">
         <div class="card-header-actions">
-          <button (click)="serviceFeeModalOpen(serviceFeeModal)" class="btn btn-block btn-primary"
+          <button (click)="serviceFeeModalOpen(serviceFeeModal)" class="btn btn-block btn-primary btn-rounded"
                   type="button">Thêm
           </button>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-body">
+  <div class="card-body table-responsive">
     <table class="table table-hover">
       <thead>
       <tr>
@@ -124,9 +124,9 @@
     </div>
     <div class="modal-footer">
       <button type="button" [disabled]="!serviceFeeForm.form.valid || (serviceFeeSub && !serviceFeeSub.closed)"
-              class="btn btn-primary" (click)="serviceFeeConfirm()">Cập nhật
+              class="btn btn-primary btn-rounded" (click)="serviceFeeConfirm()">Cập nhật
       </button>
-      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+      <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
     </div>
   </form>
 </ng-template>
@@ -147,9 +147,9 @@
   </div>
   <div class="modal-footer">
     <button type="button" [disabled]="(serviceFeeSub && !serviceFeeSub.closed)"
-            class="btn btn-primary" (click)="serviceFeeDelConfirm()">Xóa
+            class="btn btn-primary btn-rounded" (click)="serviceFeeDelConfirm()">Xóa
     </button>
-    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
   </div>
 </ng-template>
 
@@ -168,7 +168,7 @@
       </div>
       <div class="col-12 col-md-6">
         <div class="card-header-actions">
-          <button (click)="transportFeeModalOpen(transportFeeModal)" class="btn btn-block btn-primary"
+          <button (click)="transportFeeModalOpen(transportFeeModal)" class="btn btn-block btn-primary btn-rounded"
                   type="button">Thêm
           </button>
         </div>
@@ -194,35 +194,38 @@
         </select>
       </div>
     </div>
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th rowspan="2">Dịch vụ</th>
-        <th rowspan="2">Mức cân nặng (Kg)</th>
-        <th rowspan="2">Phí (VNĐ)</th>
-        <th rowspan="2">Ghi chú</th>
-        <th rowspan="2" class="text-right">Tác vụ</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let item of transportFees">
-        <td>{{item.title}}</td>
-        <td>{{item.min_r}} - {{item.max_r}}</td>
-        <td>{{item.val | currency:'VND':'' }} đ</td>
-        <td>{{item.note}}</td>
-        <td class="text-right">
-          <button (click)="transportFeeModalOpen(transportFeeModal, item)" class="btn btn-sm btn-info mr-1 text-white"
-                  type="button">
-            Sửa
-          </button>
-          <button (click)="transportFeeDelModalOpen(transportFeeDelModal, item)" class="btn btn-sm btn-violet"
-                  type="button">
-            Xóa
-          </button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th rowspan="2">Dịch vụ</th>
+          <th rowspan="2">Mức cân nặng (Kg)</th>
+          <th rowspan="2">Phí (VNĐ)</th>
+          <th rowspan="2">Ghi chú</th>
+          <th rowspan="2" class="text-right">Tác vụ</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of transportFees">
+          <td>{{item.title}}</td>
+          <td>{{item.min_r}} - {{item.max_r}}</td>
+          <td>{{item.val | currency:'VND':'' }} đ</td>
+          <td>{{item.note}}</td>
+          <td class="text-right">
+            <button (click)="transportFeeModalOpen(transportFeeModal, item)" class="btn btn-sm btn-info mr-1 text-white"
+                    type="button">
+              Sửa
+            </button>
+            <button (click)="transportFeeDelModalOpen(transportFeeDelModal, item)" class="btn btn-sm btn-violet"
+                    type="button">
+              Xóa
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      
+    </div>
   </div>
 </div>
 
@@ -337,9 +340,9 @@
     </div>
     <div class="modal-footer">
       <button type="button" [disabled]="!transportFeeForm.form.valid || (transportFeeSub && !transportFeeSub.closed)"
-              class="btn btn-primary" (click)="transportFeeConfirm()">Cập nhật
+              class="btn btn-primary btn-rounded" (click)="transportFeeConfirm()">Cập nhật
       </button>
-      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+      <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
     </div>
   </form>
 </ng-template>
@@ -360,9 +363,9 @@
   </div>
   <div class="modal-footer">
     <button type="button" [disabled]="(transportFeeSub && !transportFeeSub.closed)"
-            class="btn btn-primary" (click)="transportFeeDelConfirm()">Xóa
+            class="btn btn-primary btn-rounded" (click)="transportFeeDelConfirm()">Xóa
     </button>
-    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
   </div>
 </ng-template>
 
@@ -381,7 +384,7 @@
       </div>
       <div class="col-12 col-md-6">
         <div class="card-header-actions">
-          <button (click)="inspectionFeeModalOpen(inspectionFeeModal)" class="btn btn-block btn-primary"
+          <button (click)="inspectionFeeModalOpen(inspectionFeeModal)" class="btn btn-block btn-primary btn-rounded"
               type="button">Thêm
           </button>
         </div>
@@ -389,7 +392,7 @@
     </div>
   </div>
 
-  <div class="card-body">
+  <div class="card-body table-responsive">
     <table class="table table-hover">
       <thead>
       <tr>
@@ -495,9 +498,9 @@
     </div>
     <div class="modal-footer">
       <button type="button" [disabled]="!inspectionFeeForm.form.valid || (inspectionFeeSub && !inspectionFeeSub.closed)"
-              class="btn btn-primary" (click)="inspectionFeeConfirm()">Cập nhật
+              class="btn btn-primary btn-rounded" (click)="inspectionFeeConfirm()">Cập nhật
       </button>
-      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+      <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
     </div>
   </form>
 </ng-template>
@@ -518,9 +521,9 @@
   </div>
   <div class="modal-footer">
     <button type="button" [disabled]="(inspectionFeeSub && !inspectionFeeSub.closed)"
-            class="btn btn-primary" (click)="inspectionFeeDelConfirm()">Xóa
+            class="btn btn-primary btn-rounded" (click)="inspectionFeeDelConfirm()">Xóa
     </button>
-    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
   </div>
 </ng-template>
 
@@ -538,14 +541,14 @@
       </div>
       <div class="col-12 col-md-6">
         <div class="card-header-actions">
-          <button (click)="chinaWarehouseModalOpen(chinaWarehouseModal)" class="btn btn-block btn-primary"
+          <button (click)="chinaWarehouseModalOpen(chinaWarehouseModal)" class="btn btn-block btn-primary btn-rounded"
               type="button">Thêm
           </button>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-body">
+  <div class="card-body table-responsive">
     <table class="table table-hover">
       <thead>
       <tr>
@@ -651,9 +654,9 @@
     </div>
     <div class="modal-footer">
       <button type="button" [disabled]="!chinaWarehouseForm.form.valid || (chinaWarehouseSub && !chinaWarehouseSub.closed)"
-              class="btn btn-primary" (click)="chinaWarehouseConfirm()">Cập nhật
+              class="btn btn-primary btn-rounded" (click)="chinaWarehouseConfirm()">Cập nhật
       </button>
-      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+      <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
     </div>
   </form>
 </ng-template>
@@ -674,9 +677,9 @@
   </div>
   <div class="modal-footer">
     <button type="button" [disabled]="(chinaWarehouseSub && !chinaWarehouseSub.closed)"
-            class="btn btn-primary" (click)="chinaWarehouseDelConfirm()">Xóa
+            class="btn btn-primary btn-rounded" (click)="chinaWarehouseDelConfirm()">Xóa
     </button>
-    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
   </div>
 </ng-template>
 
@@ -694,14 +697,14 @@
       </div>
       <div class="col-12 col-md-6">
         <div class="card-header-actions">
-          <button (click)="vipModalOpen(vipModal)" class="btn btn-block btn-primary"
+          <button (click)="vipModalOpen(vipModal)" class="btn btn-block btn-primary btn-rounded"
               type="button">Thêm
           </button>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-body">
+  <div class="card-body table-responsive">
     <table class="table table-hover">
       <thead>
       <tr>
@@ -841,9 +844,9 @@
     </div>
     <div class="modal-footer">
       <button type="button" [disabled]="!vipForm.form.valid || (vipSub && !vipSub.closed)"
-              class="btn btn-primary" (click)="vipConfirm()">Cập nhật
+              class="btn btn-primary btn-rounded" (click)="vipConfirm()">Cập nhật
       </button>
-      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+      <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
     </div>
   </form>
 </ng-template>
@@ -864,9 +867,9 @@
   </div>
   <div class="modal-footer">
     <button type="button" [disabled]="(vipSub && !vipSub.closed)"
-            class="btn btn-primary" (click)="vipDelConfirm()">Xóa
+            class="btn btn-primary btn-rounded" (click)="vipDelConfirm()">Xóa
     </button>
-    <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+    <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
   </div>
 </ng-template>
 <!--
@@ -883,7 +886,7 @@
       </div>
     </div>
   </div>
-  <div class="card-body">
+  <div class="card-body table-responsive">
     <table class="table table-hover">
       <thead>
       <tr>
@@ -957,9 +960,9 @@
     </div>
     <div class="modal-footer">
       <button type="button" [disabled]="!settingForm.form.valid || (settingSub && !settingSub.closed)"
-              class="btn btn-primary" (click)="settingConfirm()">Cập nhật
+              class="btn btn-primary btn-rounded" (click)="settingConfirm()">Cập nhật
       </button>
-      <button type="button" class="btn btn-warning" (click)="declineModal()">Quay lại</button>
+      <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
     </div>
   </form>
 </ng-template>

@@ -188,51 +188,52 @@
       </div>
     </div>
   </div>
-
-  <table class="table table-hover">
-    <thead>
-    <tr>
-      <th class="fs-14" rowspan="2">Mã KS</th>
-      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Tên shop</th>
-      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ghi chú</th>
-      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Tg SL</th>
-      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ship khách</th>
-      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Trả shop</th>
-      <th class="fs-14" rowspan="2">Mã vận đơn</th>
-      <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Mã hợp đồng</th>
-      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Tên sản phẩm</th>
-      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Số lượng</th>
-      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Hãng VC</th>
-      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Mô tả</th>
-      <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Ghi chú</th>
-      <th class="fs-14" rowspan="2">Cước vận phát sinh</th>
-      <th class="fs-14" rowspan="2">Trạng thái shop</th>
-    </tr>
-    </thead>
-    <tbody *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
-    <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
       <tr>
-        <td>{{item.id}}</td>
-        <td *ngIf="!orderService.orderRe.shipping"></td>
-        <td *ngIf="!orderService.orderRe.shipping"></td>
-        <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="i===0">
-          {{orderService.orderRe.count_product}}</p>
-        </td>
-        <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv">{{item.ship_khach}}</p></td>
-        <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv && item.tra_shop"><span>¥</span>{{item.tra_shop | tempPrice: 1 : 1 : false}}</p></td>
-        <td>{{item.package_code}}</td>
-        <td *ngIf="!orderService.orderRe.shipping">{{item.contract_code}}</td>
-        <td *ngIf="orderService.orderRe.shipping">{{item.product_name}}</td>
-        <td *ngIf="orderService.orderRe.shipping">{{item.product_count}}</td>
-        <td *ngIf="orderService.orderRe.shipping">{{item.carrier_brand}}</td>
-        <td *ngIf="orderService.orderRe.shipping">{{item.description}}</td>
-        <td *ngIf="orderService.orderRe.shipping">{{item.note}}</td>
-        <td>{{item.phi_van_phat_sinh | tempPrice: 1 : 1 : false}}<sup>đ</sup></td>
-        <td>{{item.status | tempPkStatus : pkStatus}}</td>
+        <th class="fs-14" rowspan="2">Mã KS</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Tên shop</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ghi chú</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Tg SL</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ship khách</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Trả shop</th>
+        <th class="fs-14" rowspan="2">Mã vận đơn</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Mã hợp đồng</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Tên sản phẩm</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Số lượng</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Hãng VC</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Mô tả</th>
+        <th class="fs-14" rowspan="2" *ngIf="orderService.orderRe.shipping">Ghi chú</th>
+        <th class="fs-14" rowspan="2">Cước vận phát sinh</th>
+        <th class="fs-14" rowspan="2">Trạng thái shop</th>
       </tr>
-    </ng-template>
-    </tbody>
-  </table>
+      </thead>
+      <tbody *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
+      <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
+        <tr>
+          <td>{{item.id}}</td>
+          <td *ngIf="!orderService.orderRe.shipping"></td>
+          <td *ngIf="!orderService.orderRe.shipping"></td>
+          <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="i===0">
+            {{orderService.orderRe.count_product}}</p>
+          </td>
+          <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv">{{item.ship_khach}}</p></td>
+          <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv && item.tra_shop"><span>¥</span>{{item.tra_shop | tempPrice: 1 : 1 : false}}</p></td>
+          <td>{{item.package_code}}</td>
+          <td *ngIf="!orderService.orderRe.shipping">{{item.contract_code}}</td>
+          <td *ngIf="orderService.orderRe.shipping">{{item.product_name}}</td>
+          <td *ngIf="orderService.orderRe.shipping">{{item.product_count}}</td>
+          <td *ngIf="orderService.orderRe.shipping">{{item.carrier_brand}}</td>
+          <td *ngIf="orderService.orderRe.shipping">{{item.description}}</td>
+          <td *ngIf="orderService.orderRe.shipping">{{item.note}}</td>
+          <td>{{item.phi_van_phat_sinh | tempPrice: 1 : 1 : false}}<sup>đ</sup></td>
+          <td>{{item.status | tempPkStatus : pkStatus}}</td>
+        </tr>
+      </ng-template>
+      </tbody>
+    </table>
+  </div>
 
   <div *ngIf="orderService.orderRe && orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0" 
     class="card border-0 entry-list">
@@ -241,7 +242,7 @@
           <span>Giỏ hàng của bạn</span>
         </div>
     </div>
-    <div class="card-body p-0 border-0">
+    <div class="card-body p-0 border-0 table-responsive">
       <table class="table table-hover">
         <thead>
         <tr>

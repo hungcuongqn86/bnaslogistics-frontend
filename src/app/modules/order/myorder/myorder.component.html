@@ -50,74 +50,76 @@
               </div>
             </div>
           </form>
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th>Đơn hàng</th>
-              <th>Sản phẩm</th>
-              <th width="18%">Tiền hàng</th>
-              <th style="width: 10%; min-width: 150px;">Trạng thái</th>
-              <th width="8%" class="text-right">Tác vụ</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of orders">
-              <td>
-                <p>Mã: <span class="badge badge-info">{{item.code}}</span><span *ngIf="item.shipping===1"
-                                                                                style="margin-left: 5px;"
-                                                                                class="badge badge-warning">Đơn ký gửi</span>
-                </p>
-                <p>Ngày tạo: {{item.created_at | tempDate}}</p>
-              </td>
-              <td>
-                <p *ngFor="let cart of item.order_items">
-                  <a target="_blank" href="{{cart.pro_link}}"><img style="max-width: 50px;" src="{{cart.image}}"></a>
-                  <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
-                  <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
-                  <span> - Số lượng: {{cart.amount}}</span>
-                </p>
-
-                <div *ngIf="item.shipping">
-                  <p *ngFor="let pkitem of item.package">
-                    {{pkitem.product_name}}
-                    <span> - Số lượng: {{pkitem.product_count}}</span>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>Đơn hàng</th>
+                <th>Sản phẩm</th>
+                <th width="18%">Tiền hàng</th>
+                <th style="width: 10%; min-width: 150px;">Trạng thái</th>
+                <th width="8%" class="text-right">Tác vụ</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of orders">
+                <td>
+                  <p>Mã: <span class="badge badge-info">{{item.code}}</span><span *ngIf="item.shipping===1"
+                                                                                  style="margin-left: 5px;"
+                                                                                  class="badge badge-warning">Đơn ký gửi</span>
                   </p>
-                </div>
-              </td>
-              <td class="text-right">
-                <p *ngIf="!nv"><span class="pull-left">Tiền hàng</span> <span
-                  class="money">{{item | tempTongTienHang: 1}}</span>
-                  <sup> đ</sup></p>
-                <p *ngIf="!nv"><span class="pull-left">Thanh toán</span> <span *ngIf="item.dat_coc"
-                                                                               class="money">{{item.dat_coc.toString() | tempPrice: 1 : 1 : false}}</span>
-                  <sup> đ</sup></p>
-                <p *ngIf="!nv"><span class="pull-left">Còn thiếu</span> <span
-                  *ngIf="item.tien_hang && item.dat_coc"
-                  class="money">{{item | tempTongTienHang: 2}}</span>
-                  <sup> đ</sup></p>
-              </td>
-              <td>
-                <p><span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span></p>
-              </td>
-              <td class="text-right">
-                <button (click)="editOrder(item.id)" class="btn btn-sm btn-ghost-primary"
-                        type="button">
-                  Chi tiết
-                </button>
-                <button *ngIf="!nv && item.status===2" (click)="datCoc(template,item)"
-                        class="btn btn-sm btn-ghost-primary"
-                        type="button">
-                  Đặt cọc
-                </button>
-                <button *ngIf="!nv && item.status < 3" (click)="openDeleteModal(delete_template,item)"
-                        class="btn btn-sm btn-ghost-primary"
-                        type="button">
-                  Hủy
-                </button>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+                  <p>Ngày tạo: {{item.created_at | tempDate}}</p>
+                </td>
+                <td>
+                  <p *ngFor="let cart of item.order_items">
+                    <a target="_blank" href="{{cart.pro_link}}"><img style="max-width: 50px;" src="{{cart.image}}"></a>
+                    <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
+                    <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
+                    <span> - Số lượng: {{cart.amount}}</span>
+                  </p>
+
+                  <div *ngIf="item.shipping">
+                    <p *ngFor="let pkitem of item.package">
+                      {{pkitem.product_name}}
+                      <span> - Số lượng: {{pkitem.product_count}}</span>
+                    </p>
+                  </div>
+                </td>
+                <td class="text-right">
+                  <p *ngIf="!nv"><span class="pull-left">Tiền hàng</span> <span
+                    class="money">{{item | tempTongTienHang: 1}}</span>
+                    <sup> đ</sup></p>
+                  <p *ngIf="!nv"><span class="pull-left">Thanh toán</span> <span *ngIf="item.dat_coc"
+                                                                                 class="money">{{item.dat_coc.toString() | tempPrice: 1 : 1 : false}}</span>
+                    <sup> đ</sup></p>
+                  <p *ngIf="!nv"><span class="pull-left">Còn thiếu</span> <span
+                    *ngIf="item.tien_hang && item.dat_coc"
+                    class="money">{{item | tempTongTienHang: 2}}</span>
+                    <sup> đ</sup></p>
+                </td>
+                <td>
+                  <p><span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span></p>
+                </td>
+                <td class="text-right">
+                  <button (click)="editOrder(item.id)" class="btn btn-sm btn-ghost-primary"
+                          type="button">
+                    Chi tiết
+                  </button>
+                  <button *ngIf="!nv && item.status===2" (click)="datCoc(template,item)"
+                          class="btn btn-sm btn-ghost-primary"
+                          type="button">
+                    Đặt cọc
+                  </button>
+                  <button *ngIf="!nv && item.status < 3" (click)="openDeleteModal(delete_template,item)"
+                          class="btn btn-sm btn-ghost-primary"
+                          type="button">
+                    Hủy
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="card-footer">
           <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="orderService.search.page"

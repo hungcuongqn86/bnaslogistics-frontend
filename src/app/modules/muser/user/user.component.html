@@ -10,9 +10,10 @@
                       </div>
                     </div>
                     <div class="col-12 col-md-6 text-right">
-                        <div class="btn-group " role="group" aria-label="Button group with nested dropdown">
-                            <a class="btn" href="javascript:void(0)" (click)="addPartner()"><i class="fa fa-plus"></i> &nbsp;Thêm</a>
-                            <a class="btn" href="javascript:void(0)"><i class="fa fa-remove"></i> &nbsp;Xóa</a>
+                        <div class="" role="group" aria-label="Button group with nested dropdown">
+                            <a class="btn btn-sm btn-info text-white btn-rounded mr-2 fs-14" href="javascript:void(0)" (click)="addPartner()"><i class="mr-1 iconsax isax-add fs-20"></i>Thêm</a>
+                            <a class="btn btn-sm btn-violet btn-rounded fs-14" href="javascript:void(0)">
+                                <span class="transform-90 d-inline-block mr-1"><i class="iconsax isax-add fs-20"></i></span>Xóa</a>
                         </div>
                     </div>
                   </div>
@@ -40,42 +41,44 @@
                             </div>
                         </div>
                     </form>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th rowspan="2">Tên</th>
-                            <th rowspan="2">Phone number</th>
-                            <th rowspan="2">Email</th>
-                            <th rowspan="2">Vai trò</th>
-                            <th rowspan="2" class="text-right">Tác vụ</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let item of users">
-                            <td>
-                                {{item.name}}
-                            </td>
-                            <td>
-                                <a *ngIf="item.phone_number" href="{{item.phone_number}}">
-                                {{item.phone_number}}</a>
-                            </td>
-                            <td>
-                                <a href="{{item.email}}"> {{item.email}}</a>
-                            </td>
-                            <td>
-                                <p *ngFor="let role of item.roles">{{role.position}}</p>
-                            </td>
-                            <td class="text-right">
-                                <button (click)="editPartner(item.id)" class="btn btn-sm btn-info mr-1 text-white" type="button">
-                                    Sửa
-                                </button>
-                                <button (click)="openModal(template,item)" class="btn btn-sm btn-violet" type="button">
-                                    Xóa
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th rowspan="2">Tên</th>
+                                <th rowspan="2">Phone number</th>
+                                <th rowspan="2">Email</th>
+                                <th rowspan="2">Vai trò</th>
+                                <th rowspan="2" class="text-right">Tác vụ</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let item of users">
+                                <td>
+                                    {{item.name}}
+                                </td>
+                                <td>
+                                    <a *ngIf="item.phone_number" href="{{item.phone_number}}">
+                                    {{item.phone_number}}</a>
+                                </td>
+                                <td>
+                                    <a href="{{item.email}}"> {{item.email}}</a>
+                                </td>
+                                <td>
+                                    <p *ngFor="let role of item.roles">{{role.position}}</p>
+                                </td>
+                                <td class="text-right">
+                                    <button (click)="editPartner(item.id)" class="btn btn-sm btn-info mr-1 text-white" type="button">
+                                        Sửa
+                                    </button>
+                                    <button (click)="openModal(template,item)" class="btn btn-sm btn-violet" type="button">
+                                        Xóa
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.search.page" [itemsPerPage]="userService.search.limit"
                                 (pageChanged)="pageChanged($event)"
                                 class="pagination-sm pull-right" [maxSize]="6"
@@ -91,8 +94,8 @@
     <div class="modal-body text-center">
         <p>Bạn có chắc chắn muốn xóa người dùng này!?</p>
         <div class="btn-group btn-group-toggle">
-            <button type="button" class="btn btn-warning" (click)="confirm()">Yes</button>
-            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+            <button type="button" class="btn btn-warning btn-rounded" (click)="confirm()">Yes</button>
+            <button type="button" class="btn btn-primary btn-rounded" (click)="decline()">No</button>
         </div>
     </div>
 </ng-template>

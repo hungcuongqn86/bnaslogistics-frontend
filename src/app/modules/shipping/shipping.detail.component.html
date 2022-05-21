@@ -11,7 +11,7 @@
             </div>
             <div class="col-12 col-md-6 text-right d-md-down-none">
               <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <a class="btn" (click)="backlist()"
+                <a class="btn btn-sm btn-warning btn-rounded fs-14" (click)="backlist()"
                    target="_blank">Quay lại</a>
               </div>
             </div>
@@ -21,31 +21,34 @@
           <div class="row">
             <div class="col-md-12 mb-4">
               <form novalidate #form="ngForm" class="form-horizontal">
-                <table class="table table-hover">
-                  <thead>
-                  <tr>
-                    <th rowspan="2">Mã vận đơn</th>
-                    <th rowspan="2">Tên sản phẩm</th>
-                    <th rowspan="2">Số lượng SP</th>
-                    <th rowspan="2">Hãng vận chuyển</th>
-                    <th rowspan="2">Mô tả, link sản phẩm</th>
-                    <th rowspan="2">Ghi chú</th>
-                  </tr>
-                  </thead>
-                  <tbody
-                    *ngIf="carrier && carrier.carrier_package">
-                  <ng-template ngFor let-item [ngForOf]="carrier.carrier_package" let-i="index">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
                     <tr>
-                      <td><p>{{item.package_code}}</p></td>
-                      <td><p>{{item.product_name}}</p></td>
-                      <td><p>{{item.product_count}}</p></td>
-                      <td><p>{{item.carrier_brand}}</p></td>
-                      <td><p>{{item.description}}</p></td>
-                      <td><p>{{item.note}}</p></td>
+                      <th rowspan="2">Mã vận đơn</th>
+                      <th rowspan="2">Tên sản phẩm</th>
+                      <th rowspan="2">Số lượng SP</th>
+                      <th rowspan="2">Hãng vận chuyển</th>
+                      <th rowspan="2">Mô tả, link sản phẩm</th>
+                      <th rowspan="2">Ghi chú</th>
                     </tr>
-                  </ng-template>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody
+                      *ngIf="carrier && carrier.carrier_package">
+                    <ng-template ngFor let-item [ngForOf]="carrier.carrier_package" let-i="index">
+                      <tr>
+                        <td><p>{{item.package_code}}</p></td>
+                        <td><p>{{item.product_name}}</p></td>
+                        <td><p>{{item.product_count}}</p></td>
+                        <td><p>{{item.carrier_brand}}</p></td>
+                        <td><p>{{item.description}}</p></td>
+                        <td><p>{{item.note}}</p></td>
+                      </tr>
+                    </ng-template>
+                    </tbody>
+                  </table>
+
+                </div>
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="col-form-label text-right">
@@ -118,8 +121,8 @@
         <div class="card-footer">
           <div class="form-group">
             <div class="controls">
-              <button class="btn btn-warning" style="margin-right: 5px;" (click)="carrierSave(template)" type="button">Từ chối</button>
-              <button class="btn btn-info" (click)="carrierSave(template)" type="button">Xác nhận</button>
+              <button class="btn btn-warning btn-rounded" style="margin-right: 5px;" (click)="carrierSave(template)" type="button">Từ chối</button>
+              <button class="btn btn-info btn-rounded" (click)="carrierSave(template)" type="button">Xác nhận</button>
             </div>
           </div>
         </div>
@@ -135,7 +138,7 @@
             <span>Danh sách địa chỉ kho nhận hàng tại Trung Quốc</span>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
           <div *ngFor="let item of chinaWarehouses">
             <strong class="mb-3 d-block fs-16">{{item.name}} <span *ngIf="item.note">({{item.note}})</span></strong>
             <table class="table table-hover">

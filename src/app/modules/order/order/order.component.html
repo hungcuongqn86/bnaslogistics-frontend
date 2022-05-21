@@ -103,63 +103,65 @@
               </div>
             </div>
           </form>
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th>Đơn hàng</th>
-              <th>Khách hàng</th>
-              <th style="width: 25%; min-width: 250px;">Tiền hàng</th>
-              <th style="width: 10%; min-width: 150px;">Phụ trách</th>
-              <th style="width: 10%; min-width: 150px;">Trạng thái</th>
-              <th style="width: 7%; min-width: 80px;">Tác vụ</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of orders">
-              <td>
-                <p>Mã: <span class="badge badge-info">{{item.code}}</span><span *ngIf="item.shipping===1"
-                                                                                style="margin-left: 5px;"
-                                                                                class="badge badge-warning">Đơn ký gửi</span>
-                </p>
-                <p>Ngày tạo: {{item.created_at | tempDate}}</p>
-              </td>
-              <td>
-                <p><i class="fa fa-user"></i> {{item.user.code}} <span>- {{item.user.name}}</span></p>
-                <p><i class="fa fa-phone"></i> <span> {{item.user.phone_number}}</span></p>
-                <p><i class="fa fa-envelope"></i> {{item.user.email}}</p>
-              </td>
-              <td class="text-right">
-                <p><span class="pull-left">Tổng tiền</span> <span
-                  class="money">{{item | tempTongTienHang: 1}}</span>
-                  <sup> đ</sup></p>
-                <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.dat_coc"
-                                                                   class="money">{{item.dat_coc.toString() | tempPrice: 1 : 1: true}}</span>
-                  <sup> đ</sup></p>
-                <p><span class="pull-left">Còn thiếu</span> <span *ngIf="item.tien_hang && item.dat_coc"
-                                                                  class="money">{{item | tempTongTienHang: 2}}</span>
-                  <sup> đ</sup></p>
-              </td>
-              <td>
-                <p *ngIf="item.handle">{{item.handle.name}}</p>
-                <p *ngIf="item.content_pc"><i>{{item.content_pc}}</i></p>
-              </td>
-              <td>
-                <p><span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span></p>
-              </td>
-              <td>
-                <button (click)="editOrder(item.id)" class="btn btn-sm btn-info mr-1 text-white" type="button">
-                  Chi tiết
-                </button>
-                <button *ngIf="authService.hasRole('admin')" (click)="openModal(templatePc,item)"
-                        class="btn btn-sm btn-ghost-primary"
-                        type="button">
-                  <i class="fa fa-cog" aria-hidden="true"></i>
-                  Phân công
-                </button>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>Đơn hàng</th>
+                <th>Khách hàng</th>
+                <th style="width: 25%; min-width: 250px;">Tiền hàng</th>
+                <th style="width: 10%; min-width: 150px;">Phụ trách</th>
+                <th style="width: 10%; min-width: 150px;">Trạng thái</th>
+                <th style="width: 7%; min-width: 80px;">Tác vụ</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of orders">
+                <td>
+                  <p>Mã: <span class="badge badge-info">{{item.code}}</span><span *ngIf="item.shipping===1"
+                                                                                  style="margin-left: 5px;"
+                                                                                  class="badge badge-warning">Đơn ký gửi</span>
+                  </p>
+                  <p>Ngày tạo: {{item.created_at | tempDate}}</p>
+                </td>
+                <td>
+                  <p><i class="fa fa-user"></i> {{item.user.code}} <span>- {{item.user.name}}</span></p>
+                  <p><i class="fa fa-phone"></i> <span> {{item.user.phone_number}}</span></p>
+                  <p><i class="fa fa-envelope"></i> {{item.user.email}}</p>
+                </td>
+                <td class="text-right">
+                  <p><span class="pull-left">Tổng tiền</span> <span
+                    class="money">{{item | tempTongTienHang: 1}}</span>
+                    <sup> đ</sup></p>
+                  <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.dat_coc"
+                                                                     class="money">{{item.dat_coc.toString() | tempPrice: 1 : 1: true}}</span>
+                    <sup> đ</sup></p>
+                  <p><span class="pull-left">Còn thiếu</span> <span *ngIf="item.tien_hang && item.dat_coc"
+                                                                    class="money">{{item | tempTongTienHang: 2}}</span>
+                    <sup> đ</sup></p>
+                </td>
+                <td>
+                  <p *ngIf="item.handle">{{item.handle.name}}</p>
+                  <p *ngIf="item.content_pc"><i>{{item.content_pc}}</i></p>
+                </td>
+                <td>
+                  <p><span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span></p>
+                </td>
+                <td>
+                  <button (click)="editOrder(item.id)" class="btn btn-sm btn-info mr-1 text-white" type="button">
+                    Chi tiết
+                  </button>
+                  <button *ngIf="authService.hasRole('admin')" (click)="openModal(templatePc,item)"
+                          class="btn btn-sm btn-ghost-primary"
+                          type="button">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                    Phân công
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="card-footer">
           <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="orderService.search.page"

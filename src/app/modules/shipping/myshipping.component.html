@@ -57,47 +57,50 @@
                         </div>
                       </div>
                     </form>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th rowspan="2">Mã yêu cầu</th>
-                            <th rowspan="2">Thông tin</th>
-                            <th rowspan="2">Nhận hàng</th>
-                            <th rowspan="2">Số SP</th>
-                            <th rowspan="2">Ngày tạo</th>
-                            <th rowspan="2">Trạng thái</th>
-                            <th rowspan="2" class="text-right">Tác vụ</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let item of shippings">
-                            <td>{{item.id}}</td>
-                            <td>
-                              <p *ngFor="let pkitem of item.carrier_package">{{pkitem.package_code}} - {{pkitem.product_name}} ({{pkitem.product_count}})</p>
-                            </td>
-                            <td>{{item.china_warehouses_address}}</td>
-                            <td>{{item.product_count}}</td>
-                            <td>{{item.created_at | tempDate}}</td>
-                            <td>
-                              <p><span class="badge badge-info">{{item.statusname}}</span></p>
-                            </td>
-                            <td>
-                              <button (click)="editShipping(item.id)"
-                                      class="btn btn-sm btn-primary"
-                                      style="margin-right: 10px;"
-                                      type="button">
-                                Chi tiết
-                              </button>
-                              <button *ngIf="item.status==1" (click)="openModalDelete(deltemplate, item)"
-                                      class="btn btn-sm btn-warning"
-                                      style="margin-right: 10px;"
-                                      type="button">
-                                Hủy
-                              </button>
-                            </td>
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                          <thead>
+                          <tr>
+                              <th rowspan="2">Mã yêu cầu</th>
+                              <th rowspan="2">Thông tin</th>
+                              <th rowspan="2">Nhận hàng</th>
+                              <th rowspan="2">Số SP</th>
+                              <th rowspan="2">Ngày tạo</th>
+                              <th rowspan="2">Trạng thái</th>
+                              <th rowspan="2" class="text-right">Tác vụ</th>
                           </tr>
-                        </tbody>
-                    </table>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of shippings">
+                              <td>{{item.id}}</td>
+                              <td>
+                                <p *ngFor="let pkitem of item.carrier_package">{{pkitem.package_code}} - {{pkitem.product_name}} ({{pkitem.product_count}})</p>
+                              </td>
+                              <td>{{item.china_warehouses_address}}</td>
+                              <td>{{item.product_count}}</td>
+                              <td>{{item.created_at | tempDate}}</td>
+                              <td>
+                                <p><span class="badge badge-info">{{item.statusname}}</span></p>
+                              </td>
+                              <td>
+                                <button (click)="editShipping(item.id)"
+                                        class="btn btn-sm btn-primary"
+                                        style="margin-right: 10px;"
+                                        type="button">
+                                  Chi tiết
+                                </button>
+                                <button *ngIf="item.status==1" (click)="openModalDelete(deltemplate, item)"
+                                        class="btn btn-sm btn-warning"
+                                        style="margin-right: 10px;"
+                                        type="button">
+                                  Hủy
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                      </table>
+
+                    </div>
                 </div>
                 <div class="card-footer">
                     <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="shippingService.search.limit"

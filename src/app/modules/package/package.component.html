@@ -87,247 +87,249 @@
               </div>
             </div>
           </form>
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th style="width: 20%">Kiện hàng</th>
-              <th style="width: 20%">Đơn hàng</th>
-              <th style="width: 15%">Thông số</th>
-              <th style="width: 15%">Phí vận</th>
-              <th style="width: 15%">Đóng gỗ/ chống sốc</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of packages">
-              <td>
-                <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
-                </p>
-                <p><span class="packages-inf">Mã vận đơn</span><span
-                  class="packages-inf text-right packages-code">{{item.package_code ? item.package_code : '--'}}</span>
-                </p>
-                <p><span class="packages-inf">Trạng thái</span><span
-                  class="packages-inf text-right packages-status badge badge-info">{{item.status | tempPkStatus :
-                  pkStatus}}</span>
-                </p>
-                <p *ngIf="item.bill_id"><span class="packages-inf">Phiếu xuất</span><span
-                  class="packages-inf text-right packages-status badge badge-info"><a href="javascript:void(0);"
-                                                                                      (click)="gotoBill(item.bill_id)"><span
-                  class="packages-inf text-right"><strong>{{item.bill_id}}</strong></span></a></span>
-                </p>
-              </td>
-              <td>
-                <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
-                                                                (click)="gotoOrder(item.order_id)"><span
-                  class="packages-inf text-right packages-code"><strong>{{item.order.code}}</strong></span></a>
-                </p>
-                <p><span class="packages-inf">Khách hàng</span><span
-                  class="packages-inf text-right"><strong>{{item.order.user.code}}
-                  - {{item.order.user.name}}</strong></span>
-                </p>
-                <p><span class="packages-inf">Email</span><span
-                  class="packages-inf text-right"><strong>{{item.order.user.email}}</strong></span>
-                </p>
-                <p><span class="packages-inf">Số điện thoại</span><span
-                  class="packages-inf text-right"><strong>{{item.order.user.phone_number}}</strong></span>
-                </p>
-              </td>
-              <td>
-                <p><span class="packages-inf">Áp giá theo</span>
-                  <span (click)="selectPackage(item,'cal_option')" class="packages-inf text-right badge badge-info">
-                      <select [(ngModel)]="item.cal_option" #cal_option="ngModel"
-                              class="form-control"
-                              (change)="updatePackage(template, 'cal_option')"
-                              name="cal_option" id="cal_option">
-                        <option value="0">Cân nặng</option>
-                        <option value="1">Thể tích</option>
-                        <option value="2">Quy đổi</option>
-                      </select>
-                  </span>
-                </p>
-                <p *ngIf="item.cal_option===0"><span class="packages-inf">Cân nặng (kg)</span><span
-                  (click)="selectPackage(item,'weight')"
-                  class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'weight'))"
-                                           [(ngModel)]="item.weight"
-                                           #weight="ngModel"
-                                           class="form-control"
-                                           id="weight"
-                                           name="weight"
-                                           (change)="updatePackage(template, 'weight')"
-                                           (blur)="hideInput()"
-                                           appAutofocus
-                                           type="number">
-                                <span
-                                  *ngIf="((package.id !== item.id) || (col !== 'weight'))">{{item.weight ? item.weight : '0.00'}}</span>
-                                </span>
-                </p>
-                <p *ngIf="item.cal_option===1"><span class="packages-inf">Thể tích (m3)</span><span
-                  (click)="selectPackage(item,'size')"
-                  class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'size'))"
-                                           [(ngModel)]="item.size"
-                                           #size="ngModel"
-                                           class="form-control"
-                                           id="size"
-                                           name="size"
-                                           (change)="updatePackage(template, 'size')"
-                                           (blur)="hideInput()"
-                                           appAutofocus
-                                           type="number">
-                                <span
-                                  *ngIf="((package.id !== item.id) || (col !== 'size'))">{{item.size ? item.size : '0.00'}}</span>
-                                </span>
-                </p>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th style="width: 20%">Kiện hàng</th>
+                <th style="width: 20%">Đơn hàng</th>
+                <th style="width: 15%">Thông số</th>
+                <th style="width: 15%">Phí vận</th>
+                <th style="width: 15%">Đóng gỗ/ chống sốc</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of packages">
+                <td>
+                  <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
+                  </p>
+                  <p><span class="packages-inf">Mã vận đơn</span><span
+                    class="packages-inf text-right packages-code">{{item.package_code ? item.package_code : '--'}}</span>
+                  </p>
+                  <p><span class="packages-inf">Trạng thái</span><span
+                    class="packages-inf text-right packages-status badge badge-info">{{item.status | tempPkStatus :
+                    pkStatus}}</span>
+                  </p>
+                  <p *ngIf="item.bill_id"><span class="packages-inf">Phiếu xuất</span><span
+                    class="packages-inf text-right packages-status badge badge-info"><a href="javascript:void(0);"
+                                                                                        (click)="gotoBill(item.bill_id)"><span
+                    class="packages-inf text-right"><strong>{{item.bill_id}}</strong></span></a></span>
+                  </p>
+                </td>
+                <td>
+                  <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
+                                                                  (click)="gotoOrder(item.order_id)"><span
+                    class="packages-inf text-right packages-code"><strong>{{item.order.code}}</strong></span></a>
+                  </p>
+                  <p><span class="packages-inf">Khách hàng</span><span
+                    class="packages-inf text-right"><strong>{{item.order.user.code}}
+                    - {{item.order.user.name}}</strong></span>
+                  </p>
+                  <p><span class="packages-inf">Email</span><span
+                    class="packages-inf text-right"><strong>{{item.order.user.email}}</strong></span>
+                  </p>
+                  <p><span class="packages-inf">Số điện thoại</span><span
+                    class="packages-inf text-right"><strong>{{item.order.user.phone_number}}</strong></span>
+                  </p>
+                </td>
+                <td>
+                  <p><span class="packages-inf">Áp giá theo</span>
+                    <span (click)="selectPackage(item,'cal_option')" class="packages-inf text-right badge badge-info">
+                        <select [(ngModel)]="item.cal_option" #cal_option="ngModel"
+                                class="form-control"
+                                (change)="updatePackage(template, 'cal_option')"
+                                name="cal_option" id="cal_option">
+                          <option value="0">Cân nặng</option>
+                          <option value="1">Thể tích</option>
+                          <option value="2">Quy đổi</option>
+                        </select>
+                    </span>
+                  </p>
+                  <p *ngIf="item.cal_option===0"><span class="packages-inf">Cân nặng (kg)</span><span
+                    (click)="selectPackage(item,'weight')"
+                    class="packages-inf text-right badge badge-info">
+                                      <input *ngIf="((package.id === item.id) && (col === 'weight'))"
+                                             [(ngModel)]="item.weight"
+                                             #weight="ngModel"
+                                             class="form-control"
+                                             id="weight"
+                                             name="weight"
+                                             (change)="updatePackage(template, 'weight')"
+                                             (blur)="hideInput()"
+                                             appAutofocus
+                                             type="number">
+                                  <span
+                                    *ngIf="((package.id !== item.id) || (col !== 'weight'))">{{item.weight ? item.weight : '0.00'}}</span>
+                                  </span>
+                  </p>
+                  <p *ngIf="item.cal_option===1"><span class="packages-inf">Thể tích (m3)</span><span
+                    (click)="selectPackage(item,'size')"
+                    class="packages-inf text-right badge badge-info">
+                                      <input *ngIf="((package.id === item.id) && (col === 'size'))"
+                                             [(ngModel)]="item.size"
+                                             #size="ngModel"
+                                             class="form-control"
+                                             id="size"
+                                             name="size"
+                                             (change)="updatePackage(template, 'size')"
+                                             (blur)="hideInput()"
+                                             appAutofocus
+                                             type="number">
+                                  <span
+                                    *ngIf="((package.id !== item.id) || (col !== 'size'))">{{item.size ? item.size : '0.00'}}</span>
+                                  </span>
+                  </p>
 
-                <p *ngIf="item.cal_option===2"><span class="packages-inf">Dài (cm)</span><span
-                  (click)="selectPackage(item,'c_d')"
-                  class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'c_d'))"
-                                           [(ngModel)]="item.c_d"
-                                           #c_d="ngModel"
-                                           class="form-control"
-                                           id="c_d"
-                                           name="c_d"
-                                           (change)="updatePackage(template, 'c_d')"
-                                           (blur)="hideInput()"
-                                           appAutofocus
-                                           type="number">
-                                <span
-                                  *ngIf="((package.id !== item.id) || (col !== 'c_d'))">{{item.c_d ? item.c_d : '0.00'}}</span>
-                                </span>
-                </p>
-                <p *ngIf="item.cal_option===2"><span class="packages-inf">Rộng (cm)</span><span
-                  (click)="selectPackage(item,'c_r')"
-                  class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'c_r'))"
-                                           [(ngModel)]="item.c_r"
-                                           #c_r="ngModel"
-                                           class="form-control"
-                                           id="c_r"
-                                           name="c_r"
-                                           (change)="updatePackage(template, 'c_r')"
-                                           (blur)="hideInput()"
-                                           appAutofocus
-                                           type="number">
-                                <span
-                                  *ngIf="((package.id !== item.id) || (col !== 'c_r'))">{{item.c_r ? item.c_r : '0.00'}}</span>
-                                </span>
-                </p>
-                <p *ngIf="item.cal_option===2"><span class="packages-inf">Cao (cm)</span><span
-                  (click)="selectPackage(item,'c_c')"
-                  class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'c_c'))"
-                                           [(ngModel)]="item.c_c"
-                                           #c_c="ngModel"
-                                           class="form-control"
-                                           id="c_c"
-                                           name="c_c"
-                                           (change)="updatePackage(template, 'c_c')"
-                                           (blur)="hideInput()"
-                                           appAutofocus
-                                           type="number">
-                                <span
-                                  *ngIf="((package.id !== item.id) || (col !== 'c_c'))">{{item.c_c ? item.c_c : '0.00'}}</span>
-                                </span>
-                </p>
-                <p *ngIf="item.cal_option===2"><span class="packages-inf">Quy đổi (Kg)</span>
-                  <span class="packages-inf text-right badge badge-info">
-                    <span>{{item.weight_qd ? item.weight_qd : '0.00'}}</span>
-                  </span>
-                </p>
-              </td>
-              <td>
-                <p><span class="packages-inf">Giá vận (vnđ)</span>
-                  <span (click)="selectPackage(item,'gia_can')" class="packages-inf text-right badge badge-info">
-                    <input *ngIf="((package.id === item.id) && (col === 'gia_can'))"
-                           [(ngModel)]="item.gia_can"
-                           #gia_can="ngModel"
-                           class="form-control"
-                           id="gia_can"
-                           name="gia_can"
-                           (change)="updatePackage(template, 'gia_can')"
-                           (blur)="hideInput()"
-                           appAutofocus
-                           type="number">
-                    <span *ngIf="((package.id !== item.id) || (col !== 'gia_can'))">
-                      <span *ngIf="item.gia_can">
-                        {{item.gia_can.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                  <p *ngIf="item.cal_option===2"><span class="packages-inf">Dài (cm)</span><span
+                    (click)="selectPackage(item,'c_d')"
+                    class="packages-inf text-right badge badge-info">
+                                      <input *ngIf="((package.id === item.id) && (col === 'c_d'))"
+                                             [(ngModel)]="item.c_d"
+                                             #c_d="ngModel"
+                                             class="form-control"
+                                             id="c_d"
+                                             name="c_d"
+                                             (change)="updatePackage(template, 'c_d')"
+                                             (blur)="hideInput()"
+                                             appAutofocus
+                                             type="number">
+                                  <span
+                                    *ngIf="((package.id !== item.id) || (col !== 'c_d'))">{{item.c_d ? item.c_d : '0.00'}}</span>
+                                  </span>
+                  </p>
+                  <p *ngIf="item.cal_option===2"><span class="packages-inf">Rộng (cm)</span><span
+                    (click)="selectPackage(item,'c_r')"
+                    class="packages-inf text-right badge badge-info">
+                                      <input *ngIf="((package.id === item.id) && (col === 'c_r'))"
+                                             [(ngModel)]="item.c_r"
+                                             #c_r="ngModel"
+                                             class="form-control"
+                                             id="c_r"
+                                             name="c_r"
+                                             (change)="updatePackage(template, 'c_r')"
+                                             (blur)="hideInput()"
+                                             appAutofocus
+                                             type="number">
+                                  <span
+                                    *ngIf="((package.id !== item.id) || (col !== 'c_r'))">{{item.c_r ? item.c_r : '0.00'}}</span>
+                                  </span>
+                  </p>
+                  <p *ngIf="item.cal_option===2"><span class="packages-inf">Cao (cm)</span><span
+                    (click)="selectPackage(item,'c_c')"
+                    class="packages-inf text-right badge badge-info">
+                                      <input *ngIf="((package.id === item.id) && (col === 'c_c'))"
+                                             [(ngModel)]="item.c_c"
+                                             #c_c="ngModel"
+                                             class="form-control"
+                                             id="c_c"
+                                             name="c_c"
+                                             (change)="updatePackage(template, 'c_c')"
+                                             (blur)="hideInput()"
+                                             appAutofocus
+                                             type="number">
+                                  <span
+                                    *ngIf="((package.id !== item.id) || (col !== 'c_c'))">{{item.c_c ? item.c_c : '0.00'}}</span>
+                                  </span>
+                  </p>
+                  <p *ngIf="item.cal_option===2"><span class="packages-inf">Quy đổi (Kg)</span>
+                    <span class="packages-inf text-right badge badge-info">
+                      <span>{{item.weight_qd ? item.weight_qd : '0.00'}}</span>
+                    </span>
+                  </p>
+                </td>
+                <td>
+                  <p><span class="packages-inf">Giá vận (vnđ)</span>
+                    <span (click)="selectPackage(item,'gia_can')" class="packages-inf text-right badge badge-info">
+                      <input *ngIf="((package.id === item.id) && (col === 'gia_can'))"
+                             [(ngModel)]="item.gia_can"
+                             #gia_can="ngModel"
+                             class="form-control"
+                             id="gia_can"
+                             name="gia_can"
+                             (change)="updatePackage(template, 'gia_can')"
+                             (blur)="hideInput()"
+                             appAutofocus
+                             type="number">
+                      <span *ngIf="((package.id !== item.id) || (col !== 'gia_can'))">
+                        <span *ngIf="item.gia_can">
+                          {{item.gia_can.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                        </span>
                       </span>
                     </span>
-                  </span>
-                </p>
-                <p>
-                  <span class="packages-inf">VIP</span>
-                  <span class="packages-inf text-right badge badge-info">
-                    <span>
-                      <span *ngIf="item.ck_vc_tt">
-                        {{item.ck_vc_tt.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                  </p>
+                  <p>
+                    <span class="packages-inf">VIP</span>
+                    <span class="packages-inf text-right badge badge-info">
+                      <span>
+                        <span *ngIf="item.ck_vc_tt">
+                          {{item.ck_vc_tt.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                        </span>
                       </span>
                     </span>
-                  </span>
-                </p>
-                <p>
-                  <span class="packages-inf">Phí vận (vnđ)</span>
-                  <span class="packages-inf text-right badge badge-info">
-                    <span>
-                      <span *ngIf="item.tien_can_tt">
-                        {{item.tien_can_tt.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                  </p>
+                  <p>
+                    <span class="packages-inf">Phí vận (vnđ)</span>
+                    <span class="packages-inf text-right badge badge-info">
+                      <span>
+                        <span *ngIf="item.tien_can_tt">
+                          {{item.tien_can_tt.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                        </span>
                       </span>
                     </span>
-                  </span>
-                </p>
-              </td>
-              <td>
-                <p *ngIf="item.order.dong_go">
-                  <span class="packages-inf">Giá đóng gỗ</span>
-                  <span class="packages-inf text-right badge badge-info">
-                    <span>
-                      <span *ngIf="item.dg_1_price">
-                        {{item.dg_1_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
-                      </span>
-                      <span *ngIf="item.dg_2_price">
-                        + {{item.dg_2_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
-                      </span>
-                    </span>
-                  </span>
-                </p>
-                <p *ngIf="item.order.dong_go">
-                  <span class="packages-inf">Phí đóng gỗ</span>
-                  <span class="packages-inf text-right badge badge-info">
-                    <span>
-                      <span *ngIf="item.tien_dong_go">
-                        {{item.tien_dong_go.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                  </p>
+                </td>
+                <td>
+                  <p *ngIf="item.order.dong_go">
+                    <span class="packages-inf">Giá đóng gỗ</span>
+                    <span class="packages-inf text-right badge badge-info">
+                      <span>
+                        <span *ngIf="item.dg_1_price">
+                          {{item.dg_1_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                        </span>
+                        <span *ngIf="item.dg_2_price">
+                          + {{item.dg_2_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                        </span>
                       </span>
                     </span>
-                  </span>
-                </p>
-                <p *ngIf="item.order.bao_hiem">
-                  <span class="packages-inf">Giá chống sốc</span>
-                  <span class="packages-inf text-right badge badge-info">
-                    <span>
-                      <span *ngIf="item.chong_soc_1_price"><span>¥</span>
-                        {{item.chong_soc_1_price.toString() | tempPrice: 1 : 1: true}}
-                      </span>
-                      <span *ngIf="item.chong_soc_2_price">
-                        + {{item.chong_soc_2_price.toString() | tempPrice: 1 : 1: true}}
+                  </p>
+                  <p *ngIf="item.order.dong_go">
+                    <span class="packages-inf">Phí đóng gỗ</span>
+                    <span class="packages-inf text-right badge badge-info">
+                      <span>
+                        <span *ngIf="item.tien_dong_go">
+                          {{item.tien_dong_go.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                        </span>
                       </span>
                     </span>
-                  </span>
-                </p>
-                <p *ngIf="item.order.bao_hiem">
-                  <span class="packages-inf">Phí chống sốc</span>
-                  <span class="packages-inf text-right badge badge-info">
-                    <span>
-                      <span *ngIf="item.tien_chong_soc"><span>¥</span>
-                        {{item.tien_chong_soc.toString() | tempPrice: 1 : 1: true}}
+                  </p>
+                  <p *ngIf="item.order.bao_hiem">
+                    <span class="packages-inf">Giá chống sốc</span>
+                    <span class="packages-inf text-right badge badge-info">
+                      <span>
+                        <span *ngIf="item.chong_soc_1_price"><span>¥</span>
+                          {{item.chong_soc_1_price.toString() | tempPrice: 1 : 1: true}}
+                        </span>
+                        <span *ngIf="item.chong_soc_2_price">
+                          + {{item.chong_soc_2_price.toString() | tempPrice: 1 : 1: true}}
+                        </span>
                       </span>
                     </span>
-                  </span>
-                </p>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+                  </p>
+                  <p *ngIf="item.order.bao_hiem">
+                    <span class="packages-inf">Phí chống sốc</span>
+                    <span class="packages-inf text-right badge badge-info">
+                      <span>
+                        <span *ngIf="item.tien_chong_soc"><span>¥</span>
+                          {{item.tien_chong_soc.toString() | tempPrice: 1 : 1: true}}
+                        </span>
+                      </span>
+                    </span>
+                  </p>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="card-footer">
           <pagination [boundaryLinks]="true" [totalItems]="totalItems"

@@ -66,50 +66,53 @@
               </div>
             </div>
           </form>
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th>Mã phiếu</th>
-              <th>Ngày tạo</th>
-              <th>Khách hàng</th>
-              <th>Nhân viên xuất</th>
-              <th>Số mã</th>
-              <th>Trạng thái</th>
-              <th class="text-right">Tổng tiền</th>
-              <th class="text-right">Tác vụ</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of bills">
-              <td>{{item.code}}</td>
-              <td>{{item.created_at | tempDate}}</td>
-              <td>
-                <p title="Name">{{item.user.code}} - {{item.user.name}}</p>
-                <p title="Số điện thoại">{{item.user.phone_number}}</p>
-              </td>
-              <td>{{item.employee.name}}</td>
-              <td>{{item.so_ma}}</td>
-              <td>
-                <span class="packages-status badge badge-info">{{item.status | tempPkStatus :
-                  status}}</span>
-              </td>
-              <td class="text-right"><p
-                *ngIf="item.status==2">{{(item.tien_thanh_ly + item.tien_can + item.tien_chong_soc + item.tien_dong_go + item.cuoc_van_phat_sinh).toString() | tempPrice: 1 :
-                1: true}}</p></td>
-              <td class="text-right">
-                <button (click)="gotoDetail(item.id)" class="btn btn-sm btn-info mr-1 text-white"
-                        type="button">
-                  Chi tiết
-                </button>
-                <button *ngIf="item.status == 1" (click)="deleteBill(item, template)"
-                        class="btn btn-sm btn-ghost-warning"
-                        type="button">
-                  Hủy
-                </button>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>Mã phiếu</th>
+                <th>Ngày tạo</th>
+                <th>Khách hàng</th>
+                <th>Nhân viên xuất</th>
+                <th>Số mã</th>
+                <th>Trạng thái</th>
+                <th class="text-right">Tổng tiền</th>
+                <th class="text-right">Tác vụ</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of bills">
+                <td>{{item.code}}</td>
+                <td>{{item.created_at | tempDate}}</td>
+                <td>
+                  <p title="Name">{{item.user.code}} - {{item.user.name}}</p>
+                  <p title="Số điện thoại">{{item.user.phone_number}}</p>
+                </td>
+                <td>{{item.employee.name}}</td>
+                <td>{{item.so_ma}}</td>
+                <td>
+                  <span class="packages-status badge badge-info">{{item.status | tempPkStatus :
+                    status}}</span>
+                </td>
+                <td class="text-right"><p
+                  *ngIf="item.status==2">{{(item.tien_thanh_ly + item.tien_can + item.tien_chong_soc + item.tien_dong_go + item.cuoc_van_phat_sinh).toString() | tempPrice: 1 :
+                  1: true}}</p></td>
+                <td class="text-right">
+                  <button (click)="gotoDetail(item.id)" class="btn btn-sm btn-info mr-1 text-white"
+                          type="button">
+                    Chi tiết
+                  </button>
+                  <button *ngIf="item.status == 1" (click)="deleteBill(item, template)"
+                          class="btn btn-sm btn-ghost-warning"
+                          type="button">
+                    Hủy
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
           <pagination [boundaryLinks]="true" [totalItems]="totalItems"
                       [(ngModel)]="warehouseService.billSearch.page"
                       [itemsPerPage]="warehouseService.billSearch.limit"
