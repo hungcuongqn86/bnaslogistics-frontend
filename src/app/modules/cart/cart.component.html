@@ -4,7 +4,7 @@
   <!-- Breadcrumb Menu-->
   <li class="breadcrumb-menu d-md-down-none">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-      <a class="btn" href="javascript:void(0)" (click)="addCart();">
+      <a class="btn" href="javascript:void(0)" (click)="openModalAddCart(templateAddCart, cart);">
         <i class="fa fa-plus"></i> &nbsp;Thêm mới
       </a>
     </div>
@@ -250,34 +250,27 @@
       <table class="table table-bordered">
         <thead>
         <tr>
-          <th width="15%">Sản phẩm</th>
-          <th width="15%">Số lượng</th>
-          <th>Ảnh khiếu nại</th>
+          <th width="15%">Hình ảnh</th>
+          <th>Thuộc tính</th>
+          <th width="10%">Đơn giá</th>
+          <th width="10%">Số lượng</th>
+          <th width="20%">Ghi chú</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of complain.complain_products">
-          <td><a target="_blank" rel="noopener noreferrer" href="{{item.order_item.pro_link}}"><img
-            src="{{item.order_item.image}}"></a></td>
-          <td><p>Đặt: {{item.order_item.amount}}</p></td>
-          <td>
-            <input [hidden]="1" type="file" multiple id="files" name="files" #picked
-                   (change)="uploadExc(picked, item)">
-            <a class="btn" (click)="picked.click()"><i class="fa fa-upload"></i> &nbsp;Upload</a>
-            <div class="row">
-              <div *ngFor="let img of item.media" class="col-3">
-                <a target="_blank" rel="noopener noreferrer" href="{{img.url}}"><img style="max-height: 50px;"
-                                                                                     src="{{img.url}}"></a>
-              </div>
-            </div>
-          </td>
+        <tr *ngFor="let cartitem of cart.cart_items">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
         </tbody>
       </table>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
-    <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="addCartConfirm()">Thêm vào giỏ</button>
+    <button type="button" class="btn btn-warning" (click)="addCartDecline()">Quay lại</button>
   </div>
 </ng-template>

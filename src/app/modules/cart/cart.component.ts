@@ -118,4 +118,23 @@ export class CartComponent implements OnInit {
   declineDeleteShop(): void {
     this.modalRef.hide();
   }
+
+  openModalAddCart(template: TemplateRef<any>, cart: ICart) {
+    this.cart = cart;
+    this.modalRef = this.modalService.show(template, {class: 'modal-xl'});
+  }
+
+  addCartConfirm(): void {
+    if (this.cart) {
+      this.cartService.deleteCart(this.cart.id)
+        .subscribe(res => {
+          this.getCarts();
+        });
+    }
+    this.modalRef.hide();
+  }
+
+  addCartDecline(): void {
+    this.modalRef.hide();
+  }
 }
