@@ -8,7 +8,7 @@ import {AuthService} from '../../auth.service';
 import {ErrorMessagesService} from '../../error.messages.service';
 import {email_nv} from '../../const';
 import {ICart, ICartItem, IOrder} from '../../models/interface';
-import {Order} from '../../models/model';
+import {Cart, CartItem, Order} from '../../models/model';
 
 @Component({
   selector: 'app-cart',
@@ -119,9 +119,14 @@ export class CartComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  openModalAddCart(template: TemplateRef<any>, cart: ICart) {
-    this.cart = cart;
+  openModalAddCart(template: TemplateRef<any>) {
+    this.cart = new Cart();
     this.modalRef = this.modalService.show(template, {class: 'modal-xl'});
+  }
+
+  addCartItem() {
+    const newItem = new CartItem();
+    this.cart.cart_items.push(newItem);
   }
 
   addCartConfirm(): void {

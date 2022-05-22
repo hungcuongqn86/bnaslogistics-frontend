@@ -16,9 +16,9 @@ import {
   ITransportFee,
   IUser,
   IVip
-} from "./interface";
-import {Partner} from "./Partner";
-import {Transaction} from "./Transaction";
+} from './interface';
+import {Partner} from './Partner';
+import {Transaction} from './Transaction';
 
 
 export class Setting implements ISetting {
@@ -35,9 +35,22 @@ export class Setting implements ISetting {
   }
 }
 
+export class Shop implements IShop {
+  id: number;
+  name: string;
+  url: string;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+
+  }
+}
+
 export class Cart implements ICart {
   id: number;
-  shop: IShop[];
+  shop: IShop;
   cart_items: ICartItem[];
   kiem_hang: boolean;
   dong_go: boolean;
@@ -58,6 +71,41 @@ export class Cart implements ICart {
   phi_kiem_dem_tt: number;
   ti_gia: number;
   status: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+    this.shop = new Shop();
+    this.cart_items = [];
+  }
+}
+
+export class CartItem implements ICartItem {
+  id: number;
+  user_id: number;
+  shop_id: number;
+  amount: number;
+  begin_amount: number;
+  color: string;
+  colortxt: string;
+  count: number;
+  domain: string;
+  image: string;
+  method: string;
+  name: string;
+  note: string;
+  nv_note: string;
+  kho_note: string;
+  price: string;
+  price_arr: string;
+  pro_link: string;
+  pro_properties: string;
+  rate: string;
+  site: string;
+  size: string;
+  sizetxt: string;
+  status: number;
+  is_deleted: number;
   created_at: string;
   updated_at: string;
 
