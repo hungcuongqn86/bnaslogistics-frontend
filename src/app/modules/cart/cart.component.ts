@@ -121,6 +121,9 @@ export class CartComponent implements OnInit {
 
   openModalAddCart(template: TemplateRef<any>) {
     this.cart = new Cart();
+    this.addCartItem();
+    this.addCartItem();
+    this.addCartItem();
     this.modalRef = this.modalService.show(template, {class: 'modal-xl'});
   }
 

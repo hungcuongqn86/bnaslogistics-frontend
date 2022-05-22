@@ -252,24 +252,75 @@
         <tr>
           <th width="15%">Hình ảnh</th>
           <th>Thuộc tính</th>
-          <th width="10%">Đơn giá</th>
-          <th width="10%">Số lượng</th>
+          <th width="15%">Đơn giá</th>
+          <th width="15%">Số lượng</th>
           <th width="20%">Ghi chú</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let cartitem of cart.cart_items">
-          <td>1</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><input [(ngModel)]="cartitem.image"
+                     #image="ngModel"
+                     class="form-control"
+                     id="image"
+                     name="image"
+                     placeholder="Link ảnh..."
+                     type="text"></td>
+          <td>
+            <input [(ngModel)]="cartitem.pro_link"
+                   #pro_link="ngModel"
+                   class="form-control"
+                   id="pro_link"
+                   name="pro_link"
+                   placeholder="Link sản phẩm..."
+                   type="text">
+            <input [(ngModel)]="cartitem.colortxt"
+                   #colortxt="ngModel"
+                   class="form-control"
+                   id="colortxt"
+                   name="colortxt"
+                   placeholder="Màu sắc..."
+                   type="text">
+            <input [(ngModel)]="cartitem.sizetxt"
+                   #sizetxt="ngModel"
+                   class="form-control"
+                   id="sizetxt"
+                   name="sizetxt"
+                   placeholder="Kích thước..."
+                   type="text">
+          </td>
+          <td><input [(ngModel)]="cartitem.price"
+                     #price="ngModel"
+                     class="form-control"
+                     id="price"
+                     name="price"
+                     placeholder="Giá (NDT)..."
+                     type="number"></td>
+          <td><input [(ngModel)]="cartitem.amount"
+                     #amount="ngModel"
+                     class="form-control"
+                     id="pamount"
+                     name="amount"
+                     placeholder="Số lượng..."
+                     type="number"></td>
+          <td><textarea [(ngModel)]="cartitem.note"
+                        #note="ngModel"
+                        id="note"
+                        name="note"
+                        rows="3"
+                        placeholder="Ghi chú..."
+                        class="form-control">
+                                    </textarea>
+          </td>
         </tr>
-        <tr><td colspan="5" style="text-align: right">
-          <a class="btn btn-primary" (click)="addCartItem();" href="javascript:void(0);" style="line-height: 24px; padding: 0;">
-            <i class="iconsax isax-add"></i>
-          </a>
-        </td></tr>
+        <tr>
+          <td colspan="5" style="text-align: right">
+            <a class="btn btn-primary" (click)="addCartItem();" href="javascript:void(0);"
+               style="line-height: 24px; padding: 0;">
+              <i class="iconsax isax-add"></i>
+            </a>
+          </td>
+        </tr>
         </tbody>
       </table>
     </form>
