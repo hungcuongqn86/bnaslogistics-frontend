@@ -7,8 +7,8 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../auth.service';
 import {ErrorMessagesService} from '../../error.messages.service';
 import {email_nv} from '../../const';
-import {ICart, ICartItem, IOrder} from "../../models/interface";
-import {Order} from "../../models/model";
+import {ICart, ICartItem, IOrder} from '../../models/interface';
+import {Order} from '../../models/model';
 
 @Component({
   selector: 'app-cart',

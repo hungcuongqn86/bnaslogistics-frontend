@@ -1,5 +1,5 @@
-import {Partner} from "./Partner";
-import {Transaction} from "./Transaction";
+import {Partner} from './Partner';
+import {Transaction} from './Transaction';
 
 export interface ISetting {
   id: number;
@@ -22,7 +22,7 @@ export interface IShop {
 
 export interface ICart {
   id: number;
-  shop: IShop[];
+  shop: IShop;
   cart_items: ICartItem[];
   kiem_hang: boolean;
   dong_go: boolean;

@@ -2,13 +2,13 @@
 <ol class="breadcrumb">
   <app-breadcrumb></app-breadcrumb>
   <!-- Breadcrumb Menu-->
-  <!--<li class="breadcrumb-menu d-md-down-none">
-      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <a class="btn" href="javascript:void(0)" (click)="ketDonTatCa();">
-              <i class="fa fa-plus"></i> &nbsp;Kết đơn tất cả
-          </a>
-      </div>
-  </li>-->
+  <li class="breadcrumb-menu d-md-down-none">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+      <a class="btn" href="javascript:void(0)" (click)="addCart();">
+        <i class="fa fa-plus"></i> &nbsp;Thêm mới
+      </a>
+    </div>
+  </li>
 </ol>
 <div class="container-fluid">
   <div class="row">
@@ -202,5 +202,82 @@
       <button type="button" class="btn btn-warning" (click)="confirmDeleteShop()">Yes</button>
       <button type="button" class="btn btn-primary" (click)="declineDeleteShop()">No</button>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #templateAddCart>
+  <div class="modal-header">
+    <h5 class="modal-title">Thêm vào giỏ hàng</h5>
+  </div>
+  <div class="modal-body">
+    <form novalidate #addCartForm="ngForm">
+      <div class="form-group">
+        <label for="name">Tên shop<code
+          class="highlighter-rouge">*</code></label>
+        <input class="form-control"
+               [(ngModel)]="cart.shop.name"
+               #name="ngModel"
+               id="name"
+               name="name"
+               required
+               placeholder="Nhập tên shop..."
+               type="text">
+        <div [hidden]="name.valid || name.untouched">
+                                <span *ngIf="name.errors && name.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập tên shop!
+                                </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="url">Shop link<code
+          class="highlighter-rouge">*</code></label>
+        <input class="form-control"
+               [(ngModel)]="cart.shop.url"
+               #url="ngModel"
+               id="url"
+               name="url"
+               required
+               placeholder="Nhập shop link..."
+               type="text">
+        <div [hidden]="url.valid || url.untouched">
+                                <span *ngIf="url.errors && url.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập shop link!
+                                </span>
+        </div>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th width="15%">Sản phẩm</th>
+          <th width="15%">Số lượng</th>
+          <th>Ảnh khiếu nại</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of complain.complain_products">
+          <td><a target="_blank" rel="noopener noreferrer" href="{{item.order_item.pro_link}}"><img
+            src="{{item.order_item.image}}"></a></td>
+          <td><p>Đặt: {{item.order_item.amount}}</p></td>
+          <td>
+            <input [hidden]="1" type="file" multiple id="files" name="files" #picked
+                   (change)="uploadExc(picked, item)">
+            <a class="btn" (click)="picked.click()"><i class="fa fa-upload"></i> &nbsp;Upload</a>
+            <div class="row">
+              <div *ngFor="let img of item.media" class="col-3">
+                <a target="_blank" rel="noopener noreferrer" href="{{img.url}}"><img style="max-height: 50px;"
+                                                                                     src="{{img.url}}"></a>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+    <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
   </div>
 </ng-template>
