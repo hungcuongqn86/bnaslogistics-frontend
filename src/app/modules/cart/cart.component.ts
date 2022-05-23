@@ -134,7 +134,10 @@ export class CartComponent implements OnInit {
 
   addCartConfirm(): void {
     if (this.cart) {
-      console.log(this.cart);
+      this.cartService.storeCart(this.cart)
+        .subscribe(res => {
+          this.getCarts();
+        });
     }
     this.modalRef.hide();
   }
