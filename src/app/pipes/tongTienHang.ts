@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {IOrder} from "../models/interface";
+import {IOrder} from '../models/interface';
 
 @Pipe({
   name: 'tempTongTienHang'
