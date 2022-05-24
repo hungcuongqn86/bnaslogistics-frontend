@@ -138,29 +138,31 @@
             <span>Danh sách địa chỉ kho nhận hàng tại Trung Quốc</span>
           </div>
         </div>
-        <div class="card-body table-responsive">
+        <div class="card-body">
           <div *ngFor="let item of chinaWarehouses">
             <strong class="mb-3 d-block fs-16">{{item.name}} <span *ngIf="item.note">({{item.note}})</span></strong>
-            <table class="table table-hover">
-              <tbody>
-              <tr>
-                <td width="30%">Địa chỉ nhận hàng</td>
-                <td>{{item.address}}</td>
-              </tr>
-              <tr>
-                <td>Người nhận</td>
-                <td>{{item.receiver}}</td>
-              </tr>
-              <tr>
-                <td>Mã bưu điện</td>
-                <td>{{item.zipcode}}</td>
-              </tr>
-              <tr>
-                <td>Số điện thoại</td>
-                <td>{{item.phone}}</td>
-              </tr>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <tbody>
+                <tr>
+                  <td width="30%">Địa chỉ nhận hàng</td>
+                  <td>{{item.address}}</td>
+                </tr>
+                <tr>
+                  <td>Người nhận</td>
+                  <td>{{item.receiver}}</td>
+                </tr>
+                <tr>
+                  <td>Mã bưu điện</td>
+                  <td>{{item.zipcode}}</td>
+                </tr>
+                <tr>
+                  <td>Số điện thoại</td>
+                  <td>{{item.phone}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

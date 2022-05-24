@@ -1,171 +1,162 @@
-<!-- Breadcrumb -->
-<ol class="breadcrumb">
-  <app-breadcrumb></app-breadcrumb>
-  <!-- Breadcrumb Menu-->
-  <li class="breadcrumb-menu d-md-down-none">
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-      <a class="btn" href="javascript:void(0)" (click)="openModalAddCart(templateAddCart);">
-        <i class="fa fa-plus"></i> &nbsp;Thêm mới
-      </a>
-    </div>
-  </li>
-</ol>
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12">
-      <div *ngFor="let cartf of carts" class="card">
+      <div *ngFor="let cartf of carts" class="card entry-list">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> <strong>{{cartf.shop.name}}</strong>
+          <div class="title-list">
+            <span>{{cartf.shop.name}}</span>
+          </div>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="row">
-                <div class="col-lg-12" style="text-align: right;">
-                  <div class="col-form-label">
-                    <div class="form-check form-check-inline mr-1">
-                      <input type="checkbox" id="kiem_hang" name="kiem_hang"
-                             value="1"
-                             [(ngModel)]="cartf.kiem_hang"
-                             (change)="updateCart(cartf)"
-                             class="form-check-input">
-                      <label class="form-check-label">Kiểm hàng</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input type="checkbox" id="dong_go" name="dong_go"
-                             value="1"
-                             [(ngModel)]="cartf.dong_go"
-                             (change)="updateCart(cartf)"
-                             class="form-check-input">
-                      <label class="form-check-label">Đóng gỗ</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input type="checkbox" id="bao_hiem" name="bao_hiem"
-                             value="1"
-                             [(ngModel)]="cartf.bao_hiem"
-                             (change)="updateCart(cartf)"
-                             class="form-check-input">
-                      <label class="form-check-label">Chống sốc</label>
-                    </div>
-                    <!--<div class="form-check form-check-inline mr-1">
-                      <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
-                             value="1"
-                             [(ngModel)]="cartf.chinh_ngach"
-                             (change)="updateCart(cartf)"
-                             class="form-check-input">
-                      <label class="form-check-label">Chính ngạch</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                      <input type="checkbox" id="vat" name="vat"
-                             value="1"
-                             [(ngModel)]="cartf.vat"
-                             (change)="updateCart(cartf)"
-                             class="form-check-input">
-                      <label class="form-check-label">VAT</label>
-                    </div>-->
-                  </div>
-                </div>
-              </div>
-              <table class="table table-sm">
-                <thead>
-                <tr>
-                  <th width="30%">Sản phẩm</th>
-                  <th>Số lượng</th>
-                  <th>Tỷ giá</th>
-                  <th>Đơn giá</th>
-                  <th>Tiền hàng</th>
-                  <th style="text-align: center;">#</th>
-                </tr>
-                </thead>
-                <tbody *ngIf="cartf.cart_items && cartf.cart_items.length > 0">
-                <ng-template ngFor let-item [ngForOf]="cartf.cart_items" let-i="index">
-                  <tr>
-                    <td rowspan="2">
-                      <div class="pull-left">
-                        <a target="_blank" rel="noopener noreferrer"
-                           href="{{item.pro_link}}"><img src="{{item.image}}"></a>
-                      </div>
-                      <p *ngIf="item.sizetxt" class="pull-left m-1 colortxt">{{item.sizetxt}}</p>
-                      <p *ngIf="item.colortxt" class="pull-left m-1 colortxt">{{item.colortxt}}</p>
-                    </td>
-                    <td>
-                      <p><input title="Số lượng" [(ngModel)]="cartf.cart_items[i].amount" type="number"
-                                (change)="updateCartItem(cartf.cart_items[i]);"
-                                id="amount"
-                                name="amount" class="form-control"></p>
-                    </td>
-                    <td>
-                      <p *ngIf="!nv">{{cartf.ti_gia}}</p>
-                    </td>
-                    <td>
-                      <p *ngIf="!nv">{{item.price | tempPrice: cartf.ti_gia : 1: true}}<sup>đ</sup></p>
-                      <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
-                    </td>
-                    <td>
-                      <p *ngIf="!nv">{{item.price | tempPrice: cartf.ti_gia : cartf.cart_items[i].amount: true}}
-                        <sup>đ</sup>
-                      </p>
-                      <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : cartf.cart_items[i].amount :
-                        false}}</p>
-                    </td>
-                    <td style="text-align: center;"><a href="javascript:void(0)"
-                                                       (click)="openModalDeleteCart(template,item)"><i
-                      class="fa fa-trash-o"
-                      aria-hidden="true"></i></a><br></td>
-                  </tr>
-                  <tr>
-                    <td colspan="5" style="border-top: none;"><input
-                      [(ngModel)]="cartf.cart_items[i].note" type="text"
-                      class="form-control"
-                      placeholder="Ghi chú link"
-                      (change)="updateCartItem(cartf.cart_items[i])"
-                      value=""></td>
-                  </tr>
-                </ng-template>
-                </tbody>
-              </table>
+          <div class="col-form-label text-right">
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="kiem_hang" name="kiem_hang"
+                     value="1"
+                     [(ngModel)]="cartf.kiem_hang"
+                     (change)="updateCart(cartf)"> Kiểm hàng
+                <span></span>
+              </label>
             </div>
-            <div *ngIf="cartf.cart_items && cartf.cart_items.length > 0" class="col-lg-3">
-              <table class="table table-sm">
-                <tbody>
-                <tr *ngIf="!nv">
-                  <td>(I) Tiền hàng</td>
-                  <td>{{cartf.tien_hang | currency:'VND':'' }}<sup>đ</sup></td>
-                </tr>
-                <tr *ngIf="!nv">
-                  <td>(1) Phí đặt hàng ({{cartf.phi_dat_hang_cs}}%)</td>
-                  <td>{{cartf.phi_dat_hang | currency:'VND':'' }}<sup>đ</sup></td>
-                </tr>
-                <tr *ngIf="!nv">
-                  <td>(2) Chiết khấu VIP ({{cartf.ck_dv}}%)</td>
-                  <td>{{cartf.ck_dv_tt | currency:'VND':'' }}<sup>đ</sup></td>
-                </tr>
-                <tr *ngIf="!nv">
-                  <td>(II) Phí đặt hàng phải thanh toán (1) - (2)</td>
-                  <td>{{cartf.phi_dat_hang_tt | currency:'VND':'' }}<sup>đ</sup></td>
-                </tr>
-                <tr *ngIf="!nv">
-                  <td>(III) Kiểm đếm ({{cartf.phi_kiem_dem_cs | currency:'VND':'' }}<sup>đ</sup>)</td>
-                  <td>{{cartf.phi_kiem_dem_tt | currency:'VND':'' }}<sup>đ</sup></td>
-                </tr>
-                <tr *ngIf="!nv">
-                  <td>#</td>
-                  <td></td>
-                </tr>
-                <tr *ngIf="!nv">
-                  <td>Tổng (I) + (II) + (III)</td>
-                  <td>{{(cartf.tien_hang + cartf.phi_dat_hang_tt + cartf.phi_kiem_dem_tt) | currency:'VND':'' }}
-                    <sup>đ</sup></td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <button class="btn btn-block btn-primary" (click)="ketDon(cartf)"
-                            type="button">Tạo đơn
-                    </button>
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="dong_go" name="dong_go"
+                     value="1"
+                     [(ngModel)]="cartf.dong_go"
+                     (change)="updateCart(cartf)"> Đóng gỗ
+                <span></span>
+              </label>
+            </div>
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="bao_hiem" name="bao_hiem"
+                     value="1"
+                     [(ngModel)]="cartf.bao_hiem"
+                     (change)="updateCart(cartf)"> Chống sốc
+                <span></span>
+              </label>
+            </div>
+<!--        <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="chinh_ngach" name="chinh_ngach"
+                     value="1"
+                     [(ngModel)]="cartf.chinh_ngach"
+                     (change)="updateCart(cartf)"> Chính ngạch
+                <span></span>
+              </label>
+            </div>
+            <div class="form-check form-check-inline mr-3">
+              <label class="check-label">
+                <input type="checkbox" id="vat" name="vat"
+                     value="1"
+                     (change)="updateCart(cartf)"
+                     [(ngModel)]="cartf.vat"> VAT
+                <span></span>
+              </label>
+            </div> -->
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th rowspan="2">Sản phẩm</th>
+                <th width="30%"></th>
+                <th rowspan="2" width="15%">Số lượng</th>
+                <th rowspan="2" width="15%">Tỷ giá</th>
+                <th rowspan="2" width="15%">Đơn giá</th>
+                <th rowspan="2" width="15%">Tiền hàng</th>
+                <th rowspan="2" style="text-align: right;" width="10%">Tác vụ</th>
+              </tr>
+              </thead>
+              <tbody *ngIf="cartf.cart_items && cartf.cart_items.length > 0">
+              <ng-template ngFor let-item [ngForOf]="cartf.cart_items" let-i="index">
+                <tr class="bg-gray rounded">
+                  <td rowspan="2">
+                    <a target="_blank" rel="noopener noreferrer"
+                         href="{{item.pro_link}}"><img src="{{item.image}}"></a>
+                  </td>
+                  <td>
+                    <div *ngIf="item.sizetxt">{{item.sizetxt}}</div>
+                    <div *ngIf="item.colortxt">{{item.colortxt}}</div>
+                  </td>
+                  <td>
+                    <input title="Số lượng" [(ngModel)]="cartf.cart_items[i].amount" type="number"
+                              (change)="updateCartItem(cartf.cart_items[i]);"
+                              id="amount"
+                              name="amount" class="form-control">
+                  </td>
+                  <td>
+                    <div *ngIf="!nv">{{cartf.ti_gia}}</div>
+                  </td>
+                  <td>
+                    <div *ngIf="!nv">{{item.price | tempPrice: cartf.ti_gia : 1: true}}<sup>đ</sup></div>
+                    <div *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</div>
+                  </td>
+                  <td>
+                    <div *ngIf="!nv">{{item.price | tempPrice: cartf.ti_gia : cartf.cart_items[i].amount: true}}
+                      <sup>đ</sup>
+                    </div>
+                    <div *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : cartf.cart_items[i].amount :
+                      false}}</div>
+                  </td>
+                  <td style="text-align: right;">
+                    <a href="javascript:void(0)" (click)="openModalDeleteCart(template,item)" class="text-danger">
+                      Xóa
+                    </a>
                   </td>
                 </tr>
-                </tbody>
-              </table>
+                <tr class="bg-gray">
+                  <td colspan="4" style="border-top: 1px solid #e0e0e0; padding-left: 0;">
+                    <textarea [(ngModel)]="cartf.cart_items[i].note" class="form-control" placeholder="Ghi chú" (change)="updateCartItem(cartf.cart_items[i])">
+                    </textarea>
+    
+                  </td>
+                  <td colspan="4" style="border-top: 1px solid #e0e0e0;"></td>
+                </tr>
+              </ng-template>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div *ngIf="cartf.cart_items && cartf.cart_items.length > 0" class="col-lg-4 ml-auto">
+              <strong>Tổng giá trị đơn hàng</strong>
+              <div class="bg-gray rounded p-4 mt-3">
+                <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="!nv">
+                  <div>(I) Tiền hàng</div>
+                  <div>{{cartf.tien_hang | currency:'VND':'' }}<sup>đ</sup></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="!nv">
+                  <div>(1) Phí đặt hàng ({{cartf.phi_dat_hang_cs}}%)</div>
+                  <div>{{cartf.phi_dat_hang | currency:'VND':'' }}<sup>đ</sup></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="!nv">
+                  <div>(2) Chiết khấu VIP ({{cartf.ck_dv}}%)</div>
+                  <div>{{cartf.ck_dv_tt | currency:'VND':'' }}<sup>đ</sup></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="!nv">
+                  <div>(II) Phí đặt hàng phải thanh toán (1) - (2)</div>
+                  <div>{{cartf.phi_dat_hang_tt | currency:'VND':'' }}<sup>đ</sup></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="!nv">
+                  <div>(III) Kiểm đếm ({{cartf.phi_kiem_dem_cs | currency:'VND':'' }}<sup>đ</sup>)</div>
+                  <div>{{cartf.phi_kiem_dem_tt | currency:'VND':'' }}<sup>đ</sup></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="!nv">
+                  <div>#</div>
+                  <div></div>
+                </div>
+                <div class="border-top-dashed pt-2 mt-2"></div>
+                <div class="d-flex justify-content-between align-items-center mb-3" *ngIf="!nv">
+                  <div><strong>Tổng (I) + (II) + (III)</strong></div>
+                  <div>{{(cartf.tien_hang + cartf.phi_dat_hang_tt + cartf.phi_kiem_dem_tt) | currency:'VND':'' }}<sup>đ</sup></div>
+                </div>
+
+                <div>
+                  <button class="btn btn-block btn-primary btn-rounded" (click)="ketDon(cartf)"
+                          type="button">Tạo đơn
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
