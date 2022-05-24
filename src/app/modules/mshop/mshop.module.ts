@@ -3,8 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 
-import {UserService} from '../../services/muser/user.service';
-import {PartnerService} from '../../services/mpartner/partner.service';
+import {ShopService} from '../../services/mshop/shop.service';
 import {MyshopComponent} from './myshop/myshop.component';
 import {MyshopDetailComponent} from './myshop/myshop.detail.component';
 
@@ -18,7 +17,7 @@ import {SharedModule} from '../../shared.module';
     MyshopDetailComponent
   ],
   exports: [],
-  providers: [UserService, PartnerService]
+  providers: [ShopService]
 })
 export class MshopModule {
 }

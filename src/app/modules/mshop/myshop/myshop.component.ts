@@ -1,9 +1,10 @@
-import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, TemplateRef, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserService} from '../../../services/muser/user.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {IUser} from '../../../models/interface';
+import {IShop} from '../../../models/interface';
+import {ShopService} from '../../../services/mshop/shop.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-mshop-myshop',
@@ -12,57 +13,64 @@ import {IUser} from '../../../models/interface';
   encapsulation: ViewEncapsulation.None
 })
 
-export class MyshopComponent implements OnInit {
-  user: IUser;
-  users: IUser[];
+export class MyshopComponent implements OnInit, OnDestroy {
+  shop: IShop;
+  shops: IShop[];
   totalItems = 0;
   modalRef: BsModalRef;
+  sub: Subscription;
 
-  constructor(public userService: UserService,
+  constructor(public shopService: ShopService,
               private router: Router, private modalService: BsModalService) {
 
   }
 
   ngOnInit() {
-    this.searchUsers();
+    this.searchShops();
   }
 
   pageChanged(event: any): void {
-    this.userService.search.page = event.page;
-    this.searchUsers();
-  }
-
-  public addPartner() {
-    this.userService.user.id = null;
-    this.router.navigate(['/muser/user/add']);
+    this.shopService.search.page = event.page;
+    this.searchShops();
   }
 
   public editPartner(id) {
-    this.router.navigate([`/muser/user/edit/${id}`]);
+    this.router.navigate([`/muser/myshop/edit/${id}`]);
   }
 
   public deletePartner() {
-    if (this.user) {
+    /*if (this.user) {
       this.user.is_deleted = 1;
-      this.userService.editUser(this.user)
+      this.shopService.editUser(this.user)
         .subscribe(res => {
-          this.searchUsers();
+          this.searchShops();
         });
-    }
+    }*/
   }
 
-  public searchUsers() {
-    this.userService.showLoading(true);
-    this.userService.getUsers()
-      .subscribe(users => {
-        this.users = users.data.data;
-        this.totalItems = users.data.total;
-        this.userService.showLoading(false);
-      });
+  public searchShops() {
+    this.shopService.showLoading(true);
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+    this.sub = this.shopService.getMyShops()
+      .subscribe(shops => {
+          if (shops.status) {
+            this.shops = shops.data.data;
+            this.totalItems = shops.data.total;
+          }
+
+          this.shopService.showLoading(false);
+          this.sub.unsubscribe();
+        },
+        error => {
+          this.shopService.showLoading(false);
+          this.sub.unsubscribe();
+        });
   }
 
   openModal(template: TemplateRef<any>, item) {
-    this.user = item;
+    this.shop = item;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
@@ -73,5 +81,11 @@ export class MyshopComponent implements OnInit {
 
   decline(): void {
     this.modalRef.hide();
+  }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

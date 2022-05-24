@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 import {User} from '../../models/model';
 import {Transaction, WithdrawalRequest} from '../../models/Transaction';
 import {LoadingService} from '../../loading.service';
-import {IUser} from "../../models/interface";
+import {IUser} from '../../models/interface';
 
 @Injectable()
 export class UserService {
@@ -44,7 +44,7 @@ export class UserService {
   }
 
   reset() {
-    this.user = new User;
+    this.user = new User();
   }
 
   getRoles(): Observable<any> {
