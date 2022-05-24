@@ -6,15 +6,8 @@
                   <div class="row justify-content-between align-items-center">
                     <div class="col-12 col-md-6">
                       <div class="title-list">
-                        <span>Người dùng</span>
+                        <span>Nhà cung cấp</span>
                       </div>
-                    </div>
-                    <div class="col-12 col-md-6 text-right">
-                        <div class="" role="group" aria-label="Button group with nested dropdown">
-                            <a class="btn btn-sm btn-info text-white btn-rounded mr-2 fs-14" href="javascript:void(0)" (click)="addPartner()"><i class="mr-1 iconsax isax-add fs-20"></i>Thêm</a>
-                            <a class="btn btn-sm btn-violet btn-rounded fs-14" href="javascript:void(0)">
-                                <span class="transform-90 d-inline-block mr-1"><i class="iconsax isax-add fs-20"></i></span>Xóa</a>
-                        </div>
                     </div>
                   </div>
                 </div>
@@ -30,7 +23,7 @@
                                   </div>
                                   <input [(ngModel)]="userService.search.key" type="text" id="key" name="key"
                                          class="form-control"
-                                         placeholder="Tìm kiếm theo name, phone number, email...">
+                                         placeholder="Tìm kiếm theo tên, đường dẫn, ngành nghề...">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -46,9 +39,9 @@
                             <thead>
                             <tr>
                                 <th rowspan="2">Tên</th>
-                                <th rowspan="2">Phone number</th>
-                                <th rowspan="2">Email</th>
-                                <th rowspan="2">Vai trò</th>
+                                <th rowspan="2">Đường dẫn</th>
+                                <th rowspan="2">Ngành nghề</th>
+                                <th rowspan="2">Ghi chú</th>
                                 <th rowspan="2" class="text-right">Tác vụ</th>
                             </tr>
                             </thead>
@@ -92,7 +85,7 @@
 </div><!-- /.container-fluid -->
 <ng-template #template>
     <div class="modal-body text-center">
-        <p>Bạn có chắc chắn muốn xóa người dùng này!?</p>
+        <p>Bạn có chắc chắn muốn xóa!?</p>
         <div class="btn-group btn-group-toggle">
             <button type="button" class="btn btn-warning btn-rounded" (click)="confirm()">Yes</button>
             <button type="button" class="btn btn-primary btn-rounded" (click)="decline()">No</button>
