@@ -59,6 +59,12 @@ const appRoutes: Routes = [
           title: 'Người dùng'
         }
       }, {
+        path: 'mshop',
+        loadChildren: './modules/mshop/mshop.module#MshopModule',
+        data: {
+          title: 'Nhà cung cấp'
+        }
+      }, {
         path: 'account',
         loadChildren: './modules/account/account.module#AccountModule',
         data: {

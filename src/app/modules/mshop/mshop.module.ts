@@ -20,5 +20,5 @@ import {SharedModule} from '../../shared.module';
   exports: [],
   providers: [UserService, PartnerService]
 })
-export class MuserModule {
+export class MshopModule {
 }

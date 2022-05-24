@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/muser/user.service';
 
 @Component({
-  selector: 'app-muser-myshop-detail',
+  selector: 'app-mshop-myshop-detail',
   templateUrl: './myshop.detail.component.html',
   styleUrls: ['./myshop.detail.component.css']
 })
