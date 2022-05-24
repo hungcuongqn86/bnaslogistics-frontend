@@ -10,7 +10,7 @@ import {apiV1Url, clientid} from '../../const';
 import {Router} from '@angular/router';
 import {Shop} from '../../models/model';
 import {LoadingService} from '../../loading.service';
-import {IShop} from '../../models/interface';
+import {IChinaWarehouse, IShop} from '../../models/interface';
 
 @Injectable()
 export class ShopService {
@@ -62,6 +62,14 @@ export class ShopService {
     return this.http.post<IShop>(url, shop)
       .pipe(
         catchError(this.handleError('updateShop', shop))
+      );
+  }
+
+  public deleteShop(item: IShop): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}myshop/delete/${item.id}`;
+    return this.http.post<IShop>(url, item)
+      .pipe(
+        catchError(this.handleError('deleteShop', item))
       );
   }
 }

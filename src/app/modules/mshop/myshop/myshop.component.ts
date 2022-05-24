@@ -38,14 +38,13 @@ export class MyshopComponent implements OnInit, OnDestroy {
     this.router.navigate([`/mshop/myshop/edit/${id}`]);
   }
 
-  public deletePartner() {
-    /*if (this.user) {
-      this.user.is_deleted = 1;
-      this.shopService.editUser(this.user)
+  public deleteShop() {
+    if (this.shop) {
+      this.shopService.deleteShop(this.shop)
         .subscribe(res => {
           this.searchShops();
         });
-    }*/
+    }
   }
 
   public searchShops() {
@@ -80,7 +79,7 @@ export class MyshopComponent implements OnInit, OnDestroy {
   }
 
   confirm(): void {
-    this.deletePartner();
+    this.deleteShop();
     this.modalRef.hide();
   }
 
