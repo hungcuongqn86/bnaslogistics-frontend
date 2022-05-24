@@ -39,7 +39,9 @@ export class Shop implements IShop {
   id: number;
   name: string;
   url: string;
-  is_deleted: number;
+  features: string;
+  note: string;
+  orders: IOrder[];
   created_at: string;
   updated_at: string;
 

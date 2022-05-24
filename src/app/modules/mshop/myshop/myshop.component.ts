@@ -69,6 +69,11 @@ export class MyshopComponent implements OnInit, OnDestroy {
         });
   }
 
+  gotoOrder(orderId: number) {
+    const win = window.open(`./order/myorder/detail/${orderId}`, '_blank');
+    win.focus();
+  }
+
   openModal(template: TemplateRef<any>, item) {
     this.shop = item;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});

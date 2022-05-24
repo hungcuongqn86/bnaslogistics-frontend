@@ -38,8 +38,8 @@
             <table class="table table-hover">
               <thead>
               <tr>
-                <th rowspan="2">Tên</th>
-                <th rowspan="2">Đường dẫn</th>
+                <th rowspan="2" width="15%">Nhà cung cấp</th>
+                <th rowspan="2" width="35%">Đơn đã tạo</th>
                 <th rowspan="2">Ngành nghề</th>
                 <th rowspan="2">Ghi chú</th>
                 <th rowspan="2" class="text-right">Tác vụ</th>
@@ -48,18 +48,14 @@
               <tbody>
               <tr *ngFor="let item of shops">
                 <td>
-                  {{item.name}}
+                  <p><a target="_blank" href="{{item.url}}">{{item.name}}</a></p>
                 </td>
                 <td>
-                  <a *ngIf="item.url" href="{{item.url}}">
-                    {{item.url}}</a>
+                  <span *ngFor="let order of item.orders" class="badge badge-info" style="cursor: pointer;"
+                        (click)="gotoOrder(order.id)">{{order.code}}</span>
                 </td>
-                <td>
-                  <a href="{{item.email}}"> {{item.email}}</a>
-                </td>
-                <td>
-                  <p *ngFor="let role of item.roles">{{role.position}}</p>
-                </td>
+                <td>{{item.features}}</td>
+                <td>{{item.note}}</td>
                 <td class="text-right">
                   <button (click)="editPartner(item.id)" class="btn btn-sm btn-info mr-1 text-white" type="button">
                     Sửa
