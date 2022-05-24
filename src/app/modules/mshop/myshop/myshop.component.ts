@@ -34,8 +34,8 @@ export class MyshopComponent implements OnInit, OnDestroy {
     this.searchShops();
   }
 
-  public editPartner(id) {
-    this.router.navigate([`/muser/myshop/edit/${id}`]);
+  public editShop(id) {
+    this.router.navigate([`/mshop/myshop/edit/${id}`]);
   }
 
   public deletePartner() {
