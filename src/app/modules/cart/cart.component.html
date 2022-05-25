@@ -3,8 +3,17 @@
     <div class="col-lg-12">
       <div *ngFor="let cartf of carts" class="card entry-list">
         <div class="card-header">
-          <div class="title-list">
-            <span>{{cartf.shop.name}}</span>
+          <div class="row justify-content-between align-items-center">
+            <div class="col-12 col-md-3">
+              <div class="title-list">
+                <span>{{cartf.shop.name}}</span>
+              </div>
+            </div>
+            <div class="col-12 col-md-3 ml-auto text-right">
+              <a class="btn btn-primary btn-rounded" href="javascript:void(0)" (click)="openModalAddCart(templateAddCart);">
+                <i class="iconsax isax-add fs-20 ml-1"></i> Thêm mới
+              </a>
+            </div>
           </div>
         </div>
         <div class="card-body">
@@ -60,7 +69,7 @@
               <thead>
               <tr>
                 <th rowspan="2">Sản phẩm</th>
-                <th width="30%"></th>
+                <th width="30%" style="min-width: 150px;"></th>
                 <th rowspan="2" width="15%">Số lượng</th>
                 <th rowspan="2" width="15%">Tỷ giá</th>
                 <th rowspan="2" width="15%">Đơn giá</th>
@@ -70,7 +79,7 @@
               </thead>
               <tbody *ngIf="cartf.cart_items && cartf.cart_items.length > 0">
               <ng-template ngFor let-item [ngForOf]="cartf.cart_items" let-i="index">
-                <tr class="bg-gray rounded">
+                <tr class="bg-gray" style="border-top: 10px solid #fff;">
                   <td rowspan="2">
                     <a target="_blank" rel="noopener noreferrer"
                          href="{{item.pro_link}}"><img src="{{item.image}}"></a>
@@ -106,12 +115,11 @@
                   </td>
                 </tr>
                 <tr class="bg-gray">
-                  <td colspan="4" style="border-top: 1px solid #e0e0e0; padding-left: 0;">
+                  <td colspan="6" style="border-top: 1px solid #e0e0e0; padding-left: 0;">
                     <textarea [(ngModel)]="cartf.cart_items[i].note" class="form-control" placeholder="Ghi chú" (change)="updateCartItem(cartf.cart_items[i])">
                     </textarea>
     
                   </td>
-                  <td colspan="4" style="border-top: 1px solid #e0e0e0;"></td>
                 </tr>
               </ng-template>
               </tbody>
@@ -317,7 +325,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="addCartConfirm()">Thêm vào giỏ</button>
-    <button type="button" class="btn btn-warning" (click)="addCartDecline()">Quay lại</button>
+    <button type="button" class="btn btn-primary btn-rounded" (click)="addCartConfirm()">Thêm vào giỏ</button>
+    <button type="button" class="btn btn-warning btn-rounded" (click)="addCartDecline()">Quay lại</button>
   </div>
 </ng-template>
