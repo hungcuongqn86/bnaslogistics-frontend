@@ -74,6 +74,43 @@
                             placeholder="Ghi chú ..."></textarea>
                 </div>
               </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="note">
+                  Đơn đã thực hiện
+                </label>
+                <div class="col-md-9">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th width="18%">Đơn hàng</th>
+                        <th>Sản phẩm</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let item of shopService.shop.orders">
+                        <td>
+                          <p>Mã:
+                            <span class="badge badge-info" style="cursor: pointer;"
+                                  (click)="gotoOrder(item.id)">{{item.code}}</span>
+                          </p>
+                          <p>Ngày tạo: {{item.created_at | tempDate}}</p>
+                        </td>
+                        <td>
+                          <p *ngFor="let cart of item.order_items">
+                            <a target="_blank" href="{{cart.pro_link}}"><img style="max-width: 50px;"
+                                                                             src="{{cart.image}}"></a>
+                            <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
+                            <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
+                            <span> - Số lượng: {{cart.amount}}</span>
+                          </p>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </form>
           </div><!--/.col-->
         </div>

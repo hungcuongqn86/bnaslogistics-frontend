@@ -45,6 +45,11 @@ export class MyshopDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  public gotoOrder(orderId: number) {
+    const win = window.open(`./order/myorder/detail/${orderId}`, '_blank');
+    win.focus();
+  }
+
   public backlist() {
     this.router.navigate(['/mshop/myshop']);
   }
