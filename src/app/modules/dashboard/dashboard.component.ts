@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit {
     // This is a workaround to show previous month
     const prevMonth = new Date();
     prevMonth.setMonth(prevMonth.getMonth() - 1);
-    this.rangePicker._datepicker.instance.monthSelectHandler({ date: prevMonth });
+    this.rangePicker._datepicker.instance.monthSelectHandler({date: prevMonth});
   }
 
   setDateNumber(value: number) {
@@ -100,7 +100,7 @@ export class DashboardComponent implements OnInit {
     this.orderstatisticbystatus();
   }
 
-  onSelect(event) {
+  public onSelect(event) {
 
   }
 
