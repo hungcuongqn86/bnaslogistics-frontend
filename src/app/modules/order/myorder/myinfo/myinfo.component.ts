@@ -1,10 +1,12 @@
-import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {OrderService} from '../../../../services/order/order.service';
 import {OrderStatus, PackageStatus} from '../../../../models/interface';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../../auth.service';
 import {email_nv} from '../../../../const';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {BsModalService} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-myorder-detail-info',
@@ -19,8 +21,11 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
   comments: Comment[];
   nv = false;
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  modalRef: BsModalRef;
 
-  constructor(public orderService: OrderService, private route: ActivatedRoute, public auth: AuthService) {
+  constructor(public orderService: OrderService, private route: ActivatedRoute,
+              private modalService: BsModalService,
+              public auth: AuthService) {
     this.comment = {
       id: null,
       order_id: null,
@@ -115,7 +120,23 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  public reOrderOpenDialog(orderId: number): void {
+  public reOrderOpenDialog(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
 
+  public decline(): void {
+    this.modalRef.hide();
+  }
+
+  public confirmReOrder(): void {
+    if (this.orderService.orderRe.id !== null) {
+      this.orderService.showLoading(true);
+      this.orderService.getOrder(this.orderService.orderRe.id)
+        .subscribe(order => {
+          this.orderService.orderRe = order.data;
+          this.orderService.showLoading(false);
+        });
+    }
+    this.modalRef.hide();
   }
 }

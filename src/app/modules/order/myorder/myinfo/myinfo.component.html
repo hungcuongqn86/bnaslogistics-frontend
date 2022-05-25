@@ -295,11 +295,19 @@
     <div class="card-footer">
       <div>
         <button style="width: 129px;" class="btn btn-block btn-primary btn-rounded"
-                (click)="reOrderOpenDialog(orderService.orderRe.id)"
+                (click)="reOrderOpenDialog(reorder_template)"
                 type="button">Đặt lại đơn
         </button>
       </div>
     </div>
   </div>
 </form>
-
+<ng-template #reorder_template>
+  <div class="modal-body text-center">
+    <p>Bạn muốn đặt đơn mới giống như đơn hàng này!?</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-warning" (click)="confirmReOrder()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
+  </div>
+</ng-template>
