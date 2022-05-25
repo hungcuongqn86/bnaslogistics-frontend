@@ -14,7 +14,7 @@ const appRoutes: Routes = [
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Quản lý đơn hàng'
+      title: ''
     },
     children: [
       {

@@ -1,3 +1,14 @@
+<ol class="breadcrumb">
+  <app-breadcrumb></app-breadcrumb>
+  <!-- Breadcrumb Menu-->
+  <li class="breadcrumb-menu d-md-down-none">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+      <a class="btn" href="javascript:void(0)" (click)="openModalAddCart(templateAddCart);">
+        <i class="fa fa-plus"></i> &nbsp;Thêm mới
+      </a>
+    </div>
+  </li>
+</ol>
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12">
@@ -8,11 +19,6 @@
               <div class="title-list">
                 <span>{{cartf.shop.name}}</span>
               </div>
-            </div>
-            <div class="col-12 col-md-3 ml-auto text-right">
-              <a class="btn btn-primary btn-rounded" href="javascript:void(0)" (click)="openModalAddCart(templateAddCart);">
-                <i class="iconsax isax-add fs-20 ml-1"></i> Thêm mới
-              </a>
             </div>
           </div>
         </div>
@@ -118,7 +124,7 @@
                   <td colspan="6" style="border-top: 1px solid #e0e0e0; padding-left: 0;">
                     <textarea [(ngModel)]="cartf.cart_items[i].note" class="form-control" placeholder="Ghi chú" (change)="updateCartItem(cartf.cart_items[i])">
                     </textarea>
-    
+
                   </td>
                 </tr>
               </ng-template>
