@@ -131,9 +131,9 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
   public confirmReOrder(): void {
     if (this.orderService.orderRe.id !== null) {
       this.orderService.showLoading(true);
-      this.orderService.getOrder(this.orderService.orderRe.id)
+      this.orderService.reOrder(this.orderService.orderRe.id)
         .subscribe(order => {
-          this.orderService.orderRe = order.data;
+
           this.orderService.showLoading(false);
         });
     }

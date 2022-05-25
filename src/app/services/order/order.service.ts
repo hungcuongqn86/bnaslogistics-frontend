@@ -10,7 +10,7 @@ import {apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
 import {History, ICart, IOrder, IOrderItem, IPackage} from '../../models/interface';
 import {Complain} from '../../models/Complain';
-import {Order} from "../../models/model";
+import {Order} from '../../models/model';
 
 @Injectable()
 export class OrderService {
@@ -58,7 +58,7 @@ export class OrderService {
     this.orderRe = new Order();
   }
 
-  getOrders(): Observable<any> {
+  public getOrders(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
     let params = new HttpParams();
     Object.keys(this.search).map((key) => {
@@ -72,7 +72,7 @@ export class OrderService {
       );
   }
 
-  exportOrders(): Observable<any> {
+  public exportOrders(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}export`;
     let params = new HttpParams();
     Object.keys(this.search).map((key) => {
@@ -86,7 +86,7 @@ export class OrderService {
       );
   }
 
-  getCountByStatus(): Observable<any> {
+  public getCountByStatus(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}count`;
     return this.http.get<any>(url)
       .pipe(
@@ -94,7 +94,7 @@ export class OrderService {
       );
   }
 
-  getMyCountByStatus(): Observable<any> {
+  public getMyCountByStatus(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}mycount`;
     return this.http.get<any>(url)
       .pipe(
@@ -102,7 +102,7 @@ export class OrderService {
       );
   }
 
-  getMyOrders(): Observable<any> {
+  public getMyOrders(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}myorder`;
     let params = new HttpParams();
     Object.keys(this.search).map((key) => {
@@ -114,7 +114,7 @@ export class OrderService {
       );
   }
 
-  getStatus(): Observable<any> {
+  public getStatus(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}status`;
     return this.http.get<any>(url)
       .pipe(
@@ -122,7 +122,7 @@ export class OrderService {
       );
   }
 
-  getHandles(): Observable<any> {
+  public getHandles(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `muser/user/handles`;
     return this.http.get<any>(url)
       .pipe(
@@ -130,7 +130,7 @@ export class OrderService {
       );
   }
 
-  getHistoryTypes(): Observable<any> {
+  public getHistoryTypes(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}history/types`;
     return this.http.get<any>(url)
       .pipe(
@@ -138,7 +138,7 @@ export class OrderService {
       );
   }
 
-  postHistory(data: History): Observable<any> {
+  public postHistory(data: History): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}history/create`;
     return this.http.post<History>(url, data)
       .pipe(
@@ -146,7 +146,7 @@ export class OrderService {
       );
   }
 
-  getComplains(param: { order_id: number }): Observable<any> {
+  public getComplains(param: { order_id: number }): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/search`;
     let params = new HttpParams();
     Object.keys(param).map((key) => {
@@ -158,7 +158,7 @@ export class OrderService {
       );
   }
 
-  getComplain(id): Observable<any> {
+  public getComplain(id): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/detail/${id}`;
     return this.http.get<any>(url)
       .pipe(
@@ -166,7 +166,7 @@ export class OrderService {
       );
   }
 
-  getComplainTypes(): Observable<any> {
+  public getComplainTypes(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/types`;
     return this.http.get<any>(url)
       .pipe(
@@ -174,11 +174,19 @@ export class OrderService {
       );
   }
 
-  getOrder(id): Observable<any> {
+  public getOrder(id): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getOrder', []))
+      );
+  }
+
+  public reOrder(id: number): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}reorder/${id}`;
+    return this.http.post<any>(url, {})
+      .pipe(
+        catchError(this.handleError('reOrder', []))
       );
   }
 
