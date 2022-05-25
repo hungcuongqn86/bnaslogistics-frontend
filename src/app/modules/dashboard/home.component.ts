@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.loadData();
   }
 
   public onSelect(event) {
@@ -142,6 +142,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
       if (this.search.web === '1688.com') {
         rdUrl = `https://s.1688.com/selloffer/offer_search.htm?keywords=${this.search.cn_key}&spm=a26352.13672862.searchbox.input`;
+      }
+      if (this.search.web === 'tmall.com') {
+        rdUrl = `https://list.tmall.com/search_product.htm?q=${this.search.cn_key}&type=p&from=.list.pc_1_searchbutton`;
       }
       const win = window.open(rdUrl, '_blank');
       win.focus();
