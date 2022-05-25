@@ -20,7 +20,7 @@ export class MyshopDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.shopService.shop.id !== null) {
+    if (this.shopService.shop && this.shopService.shop.id) {
       this.shopService.getShop(this.shopService.shop.id)
         .subscribe(shop => {
           this.shopService.shop = shop.data;

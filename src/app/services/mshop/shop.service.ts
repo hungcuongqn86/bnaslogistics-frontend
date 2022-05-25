@@ -50,7 +50,7 @@ export class ShopService {
   }
 
   public getShop(id): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}myshop/detail/${id}`;
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getShop', []))
@@ -58,7 +58,7 @@ export class ShopService {
   }
 
   public updateShop(shop: IShop): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}myshop/update`;
     return this.http.post<IShop>(url, shop)
       .pipe(
         catchError(this.handleError('updateShop', shop))

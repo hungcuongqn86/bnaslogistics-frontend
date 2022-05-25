@@ -40,10 +40,15 @@ export class MyshopComponent implements OnInit, OnDestroy {
 
   public deleteShop() {
     if (this.shop) {
-      this.shopService.deleteShop(this.shop)
+      this.shopService.showLoading(true);
+      this.sub = this.shopService.deleteShop(this.shop)
         .subscribe(res => {
-          this.searchShops();
-        });
+            this.searchShops();
+          },
+          error => {
+            this.shopService.showLoading(false);
+            this.sub.unsubscribe();
+          });
     }
   }
 
