@@ -1,11 +1,10 @@
-import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {OrderService} from '../../../../services/order/order.service';
-import {PackageStatus} from '../../../../models/interface';
+import {OrderStatus, PackageStatus} from '../../../../models/interface';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../../auth.service';
 import {email_nv} from '../../../../const';
-import {OrderStatus} from "../../../../models/interface";
 
 @Component({
   selector: 'app-myorder-detail-info',
@@ -114,5 +113,9 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
           this.orderService.showLoading(false);
         });
     }
+  }
+
+  public reOrderOpenDialog(orderId: number): void {
+
   }
 }
