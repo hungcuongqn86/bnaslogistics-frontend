@@ -58,7 +58,7 @@ export class ShopService {
   }
 
   public updateShop(shop: IShop): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}myshop/update`;
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}myshop/update/${shop.id}`;
     return this.http.post<IShop>(url, shop)
       .pipe(
         catchError(this.handleError('updateShop', shop))
