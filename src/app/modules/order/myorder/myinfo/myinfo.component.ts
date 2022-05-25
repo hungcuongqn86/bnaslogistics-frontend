@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, ElementRef, OnInit, TemplateRef, ViewChild}
 import {OrderService} from '../../../../services/order/order.service';
 import {OrderStatus, PackageStatus} from '../../../../models/interface';
 import {Comment} from '../../../../models/Comment';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../../../auth.service';
 import {email_nv} from '../../../../const';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -24,6 +24,7 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
   modalRef: BsModalRef;
 
   constructor(public orderService: OrderService, private route: ActivatedRoute,
+              private router: Router,
               private modalService: BsModalService,
               public auth: AuthService) {
     this.comment = {
@@ -133,8 +134,10 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
       this.orderService.showLoading(true);
       this.orderService.reOrder(this.orderService.orderRe.id)
         .subscribe(order => {
-
           this.orderService.showLoading(false);
+          if (order.status) {
+            this.router.navigate([`/order/myorder/0/od`]);
+          }
         });
     }
     this.modalRef.hide();
