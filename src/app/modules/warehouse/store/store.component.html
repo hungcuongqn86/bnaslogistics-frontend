@@ -6,7 +6,7 @@
           <div class="row justify-content-between align-items-center">
             <div class="col-12 col-md-4">
               <div class="title-list">
-                <span>Danh sách khách hàng có thể xuất kho</span>
+                <span>Danh sách kiện hàng nhập kho</span>
               </div>
             </div>
           </div>
@@ -18,43 +18,19 @@
                 <div class="input-group mb-1">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
-                      <i class="iconsax isax-sms"></i>
-                    </div>
-                  </div>
-                  <input [(ngModel)]="warehouseService.waitSearch.email" type="text" id="email" name="email"
-                         class="form-control"
-                         placeholder="Email">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="input-group mb-1">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <i class="iconsax isax-document-forward"></i>
+                      <i class="iconsax isax-barcode"></i>
                     </div>
                   </div>
                   <input [(ngModel)]="warehouseService.waitSearch.package_code" type="text" id="package_code"
                          name="package_code"
                          class="form-control"
-                         placeholder="Mã vận đơn">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="input-group mb-1">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <i class="iconsax isax-document-text-1"></i>
-                    </div>
-                  </div>
-                  <input [(ngModel)]="warehouseService.waitSearch.code" type="text" id="code" name="code"
-                         class="form-control"
-                         placeholder="Mã đơn hàng">
+                         placeholder="Nhập mã vận đơn và nhấn Enter!">
                 </div>
               </div>
               <div class="col-md-3">
                 <button type="submit" (click)="searchWarehouseWait()"
                         class="btn btn-primary mr-2 mb-1">
-                  <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
+                  <img class="svg-white" src="assets/img/iconsax/additem.svg" alt="search">
                 </button>
               </div>
             </div>
@@ -148,16 +124,7 @@
               </tr>
               </tbody>
             </table>
-            
-            
           </div>
-          <pagination [boundaryLinks]="true" [totalItems]="totalItems"
-                      [(ngModel)]="warehouseService.waitSearch.page"
-                      [itemsPerPage]="warehouseService.waitSearch.limit"
-                      (pageChanged)="pageChanged($event)"
-                      class="pagination-sm pull-right" [maxSize]="6"
-                      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
-                      lastText="&raquo;"></pagination>
         </div>
       </div>
     </div>
