@@ -16,7 +16,7 @@ import {IPackage} from '../../../models/interface';
 
 export class StoreComponent implements OnInit, OnDestroy {
   package_code: string;
-  packages: IPackage[];
+  packages: IPackage[] = [];
   errorMessage: string[] = [];
   sub: Subscription;
   modalRef: BsModalRef;
@@ -35,7 +35,9 @@ export class StoreComponent implements OnInit, OnDestroy {
     if (this.package_code) {
       this.sub = this.packageService.getPackageByCode(this.package_code)
         .subscribe(res => {
-          this.packages = res.data;
+          if (res.status) {
+            this.packages.push(res.data);
+          }
           this.packageService.showLoading(false);
           this.sub.unsubscribe();
         });
