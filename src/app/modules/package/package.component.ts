@@ -127,6 +127,27 @@ export class PackageComponent implements OnInit, OnDestroy {
     printBarcode(template: TemplateRef<any>, code: string) {
         this.barcodeVal = code;
         this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+        setTimeout(() => { this.print(); }, 1000);
+    }
+
+    print(): void {
+        console.log(1212);
+        let printContents, popupWin;
+        printContents = document.getElementById('print-section').innerHTML;
+        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+        popupWin.document.open();
+        popupWin.document.write(`
+        <html>
+          <head>
+            <title>Print tab</title>
+            <style>
+            //........Customized style.......
+            </style>
+          </head>
+      <body onload="window.print();window.close()">${printContents}</body>
+        </html>`
+        );
+        popupWin.document.close();
     }
 
     openErrorModal(template: TemplateRef<any>) {

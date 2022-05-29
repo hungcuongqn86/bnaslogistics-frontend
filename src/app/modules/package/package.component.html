@@ -371,12 +371,13 @@
   <div class="modal-header">
     <h5 class="modal-title">In mã vạch</h5>
   </div>
-  <div class="modal-body">
+  <div id="print-section" class="modal-body">
     <p style="text-align: center;">
       <ngx-barcode [bc-value]="barcodeVal" [bc-display-value]="true"></ngx-barcode>
     </p>
   </div>
   <div class="modal-footer">
+    <button type="button" class="btn btn-info" (click)="print()">Print</button>
     <button type="button" class="btn btn-warning" (click)="declineError()">Quay lại</button>
   </div>
 </ng-template>
