@@ -131,7 +131,6 @@ export class PackageComponent implements OnInit, OnDestroy {
     }
 
     print(): void {
-        console.log(1212);
         let printContents, popupWin;
         printContents = document.getElementById('print-section').innerHTML;
         popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
