@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="card-body">
-          <form novalidate (ngSubmit)="searchWarehouseWait()" #form="ngForm">
+          <form novalidate #form="ngForm">
             <div class="form-group space-7 row filter-advanced">
               <div class="col-md-3">
                 <div class="input-group mb-1">
@@ -21,14 +21,14 @@
                       <i class="iconsax isax-barcode"></i>
                     </div>
                   </div>
-                  <input [(ngModel)]="warehouseService.waitSearch.package_code" type="text" id="package_code"
+                  <input [(ngModel)]="package_code" type="text" id="package_code"
                          name="package_code"
                          class="form-control"
                          placeholder="Nhập mã vận đơn và nhấn Enter!">
                 </div>
               </div>
               <div class="col-md-3">
-                <button type="submit" (click)="searchWarehouseWait()"
+                <button type="submit" (click)="getPackage()"
                         class="btn btn-primary mr-2 mb-1">
                   <img class="svg-white" src="assets/img/iconsax/additem.svg" alt="search">
                 </button>
@@ -46,7 +46,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of warehouseWait">
+              <tr *ngFor="let item of packages">
                 <td>
                   <p>{{item.code}} - {{item.name}}</p>
                   <p>{{item.email}}</p>

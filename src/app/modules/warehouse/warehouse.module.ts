@@ -5,6 +5,7 @@ import {CollapseModule} from 'ngx-bootstrap/collapse';
 
 import {OrderService} from '../../services/order/order.service';
 import {WarehouseService} from '../../services/order/warehouse.service';
+import {PackageService} from '../../services/package/package.service';
 import {WaitComponent} from './wait/wait.component';
 import {StoreComponent} from './store/store.component';
 import {BillComponent} from './bill/bill.component';
@@ -22,7 +23,7 @@ import {SharedModule} from '../../shared.module';
     BillDetailComponent
   ],
   exports: [],
-  providers: [OrderService, WarehouseService]
+  providers: [OrderService, WarehouseService, PackageService]
 })
 export class WarehouseModule {
 }

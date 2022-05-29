@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PackageService} from '../../services/package/package.service';
-import {IPackage, PackageStatus} from "../../models/interface";
-import {Package} from "../../models/model";
+import {IPackage, PackageStatus} from '../../models/interface';
+import {Package} from '../../models/model';
 
 @Component({
   selector: 'app-package-detail',

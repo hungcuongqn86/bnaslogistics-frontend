@@ -57,6 +57,14 @@ export class PackageService {
       );
   }
 
+  public getPackageByCode(code: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}bycode/${code}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getPackageByCode', []))
+      );
+  }
+
   public editPackage(item: IPackage, dirty: string) {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}update/${item.id}`;
     return this.http.post<any>(url, {dirty: dirty, value: item[dirty]})
