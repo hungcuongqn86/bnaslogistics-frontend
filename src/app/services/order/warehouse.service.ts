@@ -44,6 +44,14 @@ export class WarehouseService {
       );
   }
 
+  storeBillCreate(pkidlist: string[], note: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}storebill/create`;
+    return this.http.post<History>(url, {pkcodelist: pkidlist, note: note})
+      .pipe(
+        catchError(this.handleError('storeBillCreate', []))
+      );
+  }
+
   bill(user_id: number, pkidlist: string[]): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/create`;
     return this.http.post<History>(url, {user_id: user_id, pkcodelist: pkidlist})

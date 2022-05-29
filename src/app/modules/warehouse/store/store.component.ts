@@ -5,6 +5,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../../auth.service';
 import {PackageService} from '../../../services/package/package.service';
+import {WarehouseService} from '../../../services/order/warehouse.service';
 import {IPackage} from '../../../models/interface';
 
 @Component({
@@ -20,9 +21,11 @@ export class StoreComponent implements OnInit, OnDestroy {
   errorMessage: string[] = [];
   sub: Subscription;
   modalRef: BsModalRef;
+  note = '';
 
   constructor(private modalService: BsModalService, public authService: AuthService,
               public packageService: PackageService,
+              private warehouseService: WarehouseService,
               private router: Router) {
   }
 
@@ -43,6 +46,25 @@ export class StoreComponent implements OnInit, OnDestroy {
           }
           this.packageService.showLoading(false);
           this.sub.unsubscribe();
+        });
+    }
+  }
+
+  private createStoreBill() {
+    if (this.packages.length) {
+      this.warehouseService.showLoading(true);
+      const pkidlist = [];
+      for (let i = 0; i < this.packages.length; i++) {
+        pkidlist.push(this.packages[i].id);
+      }
+
+      this.sub = this.warehouseService.storeBillCreate(pkidlist, this.note)
+        .subscribe(res => {
+          this.warehouseService.showLoading(false);
+          this.sub.unsubscribe();
+          if (res.status) {
+
+          }
         });
     }
   }

@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
-import {IOrderItem} from "../../../models/interface";
+import {IOrderItem} from '../../../models/interface';
 
 @Component({
   selector: 'app-bill-detail',
