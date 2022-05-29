@@ -91,11 +91,12 @@
             <table class="table table-striped">
               <thead>
               <tr>
-                <th style="width: 20%">Kiện hàng</th>
-                <th style="width: 20%">Đơn hàng</th>
-                <th style="width: 15%">Thông số</th>
-                <th style="width: 15%">Phí vận</th>
-                <th style="width: 15%">Đóng gỗ/ chống sốc</th>
+                <th style="width: 17%">Kiện hàng</th>
+                <th style="width: 17%">Đơn hàng</th>
+                <th style="width: 17%">Thông số</th>
+                <th style="width: 17%">Phí vận</th>
+                <th style="width: 17%">Đóng gỗ/ chống sốc</th>
+                <th style="width: 5%">#</th>
               </tr>
               </thead>
               <tbody>
@@ -326,6 +327,12 @@
                     </span>
                   </p>
                 </td>
+                <td>
+                  <button *ngIf="item.package_code" (click)="printBarcode(barcodeTemplate, item.package_code)"
+                          class="btn btn-sm btn-info mr-1 text-white" type="button">
+                    In mã
+                  </button>
+                </td>
               </tr>
               </tbody>
             </table>
@@ -357,5 +364,19 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-warning" (click)="declineError()">OK</button>
+  </div>
+</ng-template>
+
+<ng-template #barcodeTemplate>
+  <div class="modal-header">
+    <h5 class="modal-title">In mã vạch</h5>
+  </div>
+  <div class="modal-body">
+    <p style="text-align: center;">
+      <ngx-barcode [bc-value]="barcodeVal" [bc-display-value]="true"></ngx-barcode>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="declineError()">Quay lại</button>
   </div>
 </ng-template>
