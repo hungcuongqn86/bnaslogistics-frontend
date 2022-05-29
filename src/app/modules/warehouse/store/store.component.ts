@@ -31,8 +31,8 @@ export class StoreComponent implements OnInit, OnDestroy {
   }
 
   private getPackage() {
-    this.packageService.showLoading(true);
     if (this.package_code) {
+      this.packageService.showLoading(true);
       this.sub = this.packageService.getPackageByCode(this.package_code)
         .subscribe(res => {
           if (res.status) {
@@ -58,6 +58,13 @@ export class StoreComponent implements OnInit, OnDestroy {
 
     if (!found) {
       this.packages.push(item);
+    }
+  }
+
+  public removePackage(item: IPackage) {
+    const index = this.packages.indexOf(item);
+    if (index !== -1) {
+      this.packages.splice(index, 1);
     }
   }
 
