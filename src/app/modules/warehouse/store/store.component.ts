@@ -36,11 +36,28 @@ export class StoreComponent implements OnInit, OnDestroy {
       this.sub = this.packageService.getPackageByCode(this.package_code)
         .subscribe(res => {
           if (res.status) {
-            this.packages.push(res.data);
+            if (res.data) {
+              this.addPackage(res.data);
+              this.package_code = '';
+            }
           }
           this.packageService.showLoading(false);
           this.sub.unsubscribe();
         });
+    }
+  }
+
+  private addPackage(item: IPackage) {
+    let found = false;
+    for (const element of this.packages) {
+      if (element.id === item.id) {
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      this.packages.push(item);
     }
   }
 

@@ -259,6 +259,7 @@ export interface IOrder {
   cart: ICart[];
   history: History[];
   user: IUser;
+  shop: IShop;
   package: IPackage[];
   order_items: IOrderItem[];
 }
