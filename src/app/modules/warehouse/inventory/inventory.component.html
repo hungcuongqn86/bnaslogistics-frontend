@@ -91,10 +91,6 @@
                   <p><span class="packages-inf">Mã vận đơn</span><span
                     class="packages-inf text-right packages-code">{{item.package_code ? item.package_code : '--'}}</span>
                   </p>
-                  <p><span class="packages-inf">Trạng thái</span><span
-                    class="packages-inf text-right packages-status badge badge-info">{{item.status | tempPkStatus :
-                    pkStatus}}</span>
-                  </p>
                   <p *ngIf="item.bill_id"><span class="packages-inf">Phiếu xuất</span><span
                     class="packages-inf text-right packages-status badge badge-info"><a href="javascript:void(0);"
                                                                                         (click)="gotoBill(item.bill_id)"><span
