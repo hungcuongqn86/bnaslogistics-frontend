@@ -292,10 +292,21 @@ export interface PackageStatus {
   name: string;
 }
 
+export interface IReceipt {
+  id: number;
+  code: string;
+  receipt_date: string;
+  note: string;
+  user: IUser;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface IPackage {
   id: number;
   order_id: number;
   order: IOrder;
+  receipt: IReceipt;
   package_code: string;
   contract_code: string;
   ship_khach: number;

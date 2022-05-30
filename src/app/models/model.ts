@@ -8,7 +8,7 @@ import {
   IInspectionFee,
   IOrder,
   IOrderItem,
-  IPackage,
+  IPackage, IReceipt,
   IRole,
   IServiceFee,
   ISetting,
@@ -318,6 +318,7 @@ export class Package implements IPackage {
   id: number;
   order_id: number;
   order: IOrder;
+  receipt: IReceipt;
   package_code: string;
   contract_code: string;
   ship_khach: number;

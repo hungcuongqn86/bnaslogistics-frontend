@@ -13,7 +13,7 @@
         </div>
 
         <div class="card-body">
-          <form novalidate (ngSubmit)="searchPackages()" #form="ngForm">
+          <form novalidate #form="ngForm">
             <div class="form-group space-7 row filter-advanced">
               <div class="col-md-5">
                 <div class="row space-7">
@@ -139,6 +139,18 @@
                   </p>
                 </td>
                 <td>
+                  <div *ngIf="item.receipt">
+                    <p><span class="packages-inf">Phiếu nhập</span><span
+                      class="packages-inf text-right badge badge-info"><span>{{item.receipt.code}}</span></span>
+                    </p>
+                    <p><span class="packages-inf">Ngày nhập</span><span
+                      class="packages-inf text-right badge badge-info"><span>{{item.receipt.receipt_date | tempDate}}</span></span>
+                    </p>
+                    <p *ngIf="item.receipt.user"><span class="packages-inf">Người nhập</span><span
+                      class="packages-inf text-right badge badge-info"><span>{{item.receipt.user.name}}</span></span>
+                    </p>
+                    <p><i>{{item.receipt.note}}</i></p>
+                  </div>
                 </td>
                 <td>
                 </td>
