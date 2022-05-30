@@ -298,6 +298,7 @@ export interface IReceipt {
   receipt_date: string;
   note: string;
   user: IUser;
+  package: IPackage[];
   created_at: string;
   updated_at: string;
 }

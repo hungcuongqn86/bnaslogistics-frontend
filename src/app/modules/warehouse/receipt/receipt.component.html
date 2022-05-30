@@ -60,7 +60,7 @@
                     </div>
                   </div>
                   <div class="col-md-1">
-                    <button type="submit" (click)="searchPackages()"
+                    <button type="submit" (click)="searchReceipts()"
                             class="btn btn-primary mb-1">
                       <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
                     </button>
@@ -81,66 +81,26 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of packages">
+              <tr *ngFor="let item of receipts">
                 <td>
-                  <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
+                  <p><span class="packages-inf">Mã phiếu</span><span class="packages-inf text-right">{{item.code}}</span>
                   </p>
-                  <p><span class="packages-inf">Mã vận đơn</span><span
-                    class="packages-inf text-right packages-code">{{item.package_code ? item.package_code : '--'}}</span>
-                  </p>
-                  <p *ngIf="item.bill_id"><span class="packages-inf">Phiếu xuất</span><span
-                    class="packages-inf text-right packages-status badge badge-info"><a href="javascript:void(0);"
-                                                                                        (click)="gotoBill(item.bill_id)"><span
-                    class="packages-inf text-right"><strong>{{item.bill_id}}</strong></span></a></span>
+                  <p><span class="packages-inf">Ngày nhập</span><span
+                    class="packages-inf text-right badge badge-info"><span>{{item.receipt_date | tempDate}}</span></span>
                   </p>
                 </td>
                 <td>
-                  <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
-                                                                  (click)="gotoOrder(item.order_id)"><span
-                    class="packages-inf text-right packages-code"><strong>{{item.order.code}}</strong></span></a>
-                  </p>
-                  <p><span class="packages-inf">Khách hàng</span><span
-                    class="packages-inf text-right"><strong>{{item.order.user.code}}
-                    - {{item.order.user.name}}</strong></span>
-                  </p>
-                  <p><span class="packages-inf">Email</span><span
-                    class="packages-inf text-right"><strong>{{item.order.user.email}}</strong></span>
-                  </p>
-                  <p><span class="packages-inf">Số điện thoại</span><span
-                    class="packages-inf text-right"><strong>{{item.order.user.phone_number}}</strong></span>
+                  <p *ngIf="item.user"><span>{{item.user.name}}</span>
                   </p>
                 </td>
                 <td>
-                  <div *ngIf="item.receipt">
-                    <p><span class="packages-inf">Phiếu nhập</span><span
-                      class="packages-inf text-right badge badge-info"><span>{{item.receipt.code}}</span></span>
-                    </p>
-                    <p><span class="packages-inf">Ngày nhập</span><span
-                      class="packages-inf text-right badge badge-info"><span>{{item.receipt.receipt_date | tempDate}}</span></span>
-                    </p>
-                    <p *ngIf="item.receipt.user"><span class="packages-inf">Người nhập</span><span
-                      class="packages-inf text-right badge badge-info"><span>{{item.receipt.user.name}}</span></span>
-                    </p>
-                    <p><i>{{item.receipt.note}}</i></p>
-                  </div>
+                  <p *ngFor="let packageItem of item.package">
+                    <span>{{packageItem.package_code}}</span>
+                  </p>
                 </td>
-                <td (click)="selectPackage(item,'ghi_chu_kho_viet')">
-                  <textarea *ngIf="((package.id === item.id) && (col === 'ghi_chu_kho_viet'))"
-                            [(ngModel)]="item.ghi_chu_kho_viet"
-                            #ghi_chu_kho_viet="ngModel"
-                            id="ghi_chu_kho_viet" name="ghi_chu_kho_viet" rows="3"
-                            class="form-control"
-                            (change)="updatePackage(template, 'ghi_chu_kho_viet')"
-                            (blur)="hideInput()"
-                            placeholder="Ghi chú ..."></textarea>
-                  <span *ngIf="((package.id !== item.id) || (col !== 'ghi_chu_kho_viet'))">
-                        <span *ngIf="item.ghi_chu_kho_viet">
-                          {{item.ghi_chu_kho_viet}}
-                        </span>
-                      </span>
-                </td>
+                <td>{{item.note}}</td>
                 <td>
-                  <button *ngIf="item.package_code" (click)="printBarcode(barcodeTemplate, item.package_code)"
+                  <button (click)="printBarcode(barcodeTemplate, item)"
                           class="btn btn-sm btn-info mr-1 text-white" type="button">
                     In phiếu
                   </button>
@@ -184,9 +144,7 @@
     <h5 class="modal-title">In mã vạch</h5>
   </div>
   <div id="print-section" class="modal-body">
-    <p style="text-align: center;">
-      <ngx-barcode [bc-value]="barcodeVal" [bc-display-value]="true"></ngx-barcode>
-    </p>
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-info" (click)="print()">Print</button>

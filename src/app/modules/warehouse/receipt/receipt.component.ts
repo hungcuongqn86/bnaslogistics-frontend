@@ -4,8 +4,7 @@ import {Subscription} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {PackageService} from '../../../services/package/package.service';
 import {AuthService} from '../../../auth.service';
-import {IPackage, PackageStatus} from '../../../models/interface';
-import {Package} from '../../../models/model';
+import {IReceipt} from '../../../models/interface';
 
 @Component({
   selector: 'app-warehouse-receipt',
@@ -15,40 +14,28 @@ import {Package} from '../../../models/model';
 })
 
 export class ReceiptComponent implements OnInit, OnDestroy {
-  packages: IPackage[];
-  package: IPackage;
-  col: string;
-  pkStatus: PackageStatus[];
+  receipts: IReceipt[];
+  receipt: IReceipt;
   totalItems = 0;
   errorMessage: string[] = [];
-  counts: { status: number, total: number }[];
   sub: Subscription;
-  barcodeVal = '';
-
   modalRef: BsModalRef;
 
   constructor(public packageService: PackageService, private route: ActivatedRoute, public authService: AuthService,
               private router: Router, private modalService: BsModalService) {
-    this.packageService.search.status = '6';
-    this.route.params.subscribe(params => {
-      if (params['package_code']) {
-        this.packageService.search.package_code = params['package_code'];
-      }
-    });
-    this.counts = null;
-    this.reNewPackage();
+
   }
 
   ngOnInit() {
-    this.searchPackages();
+    this.searchReceipts();
   }
 
   pageChanged(event: any): void {
     this.packageService.search.page = event.page;
-    this.searchPackages();
+    this.searchReceipts();
   }
 
-  public searchPackages() {
+  public searchReceipts() {
     this.packageService.showLoading(true);
     if (this.sub) {
       this.sub.unsubscribe();
@@ -56,7 +43,7 @@ export class ReceiptComponent implements OnInit, OnDestroy {
 
     this.sub = this.packageService.getPackages()
       .subscribe(data => {
-        this.packages = data.data.data;
+        this.receipts = data.data.data;
         this.totalItems = data.data.total;
         this.packageService.showLoading(false);
       });
@@ -67,52 +54,8 @@ export class ReceiptComponent implements OnInit, OnDestroy {
     win.focus();
   }
 
-  gotoBill(billId: number) {
-    const win = window.open(`./warehouse/bill/detail/${billId}`, '_blank');
-    win.focus();
-  }
+  printBarcode(template: TemplateRef<any>, item: IReceipt) {
 
-  public selectPackage(item: IPackage, col: string) {
-    this.col = col;
-    this.package = item;
-  }
-
-  public hideInput() {
-    this.reNewPackage();
-  }
-
-  private reNewPackage() {
-    this.package = new Package();
-  }
-
-  public updatePackage(template: TemplateRef<any>, dirty: string) {
-    this.packageService.showLoading(true);
-    if (!this.package.weight_qd) {
-      if (this.package.weight < 0.5) {
-        this.package.weight_qd = 0.5;
-      } else {
-        this.package.weight_qd = this.package.weight;
-      }
-    }
-    const updatesub = this.packageService.editPackage(this.package, dirty)
-      .subscribe(res => {
-        if (res.status) {
-          this.searchPackages();
-        } else {
-          this.errorMessage = res.data;
-          this.openErrorModal(template);
-          this.searchPackages();
-        }
-        updatesub.unsubscribe();
-      });
-  }
-
-  printBarcode(template: TemplateRef<any>, code: string) {
-    this.barcodeVal = code;
-    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
-    setTimeout(() => {
-      this.print();
-    }, 1000);
   }
 
   print(): void {

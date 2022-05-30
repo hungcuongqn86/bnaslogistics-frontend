@@ -198,6 +198,20 @@ export class ChinaWarehouse implements IChinaWarehouse {
   }
 }
 
+export class Receipt implements IReceipt {
+  id: number;
+  code: string;
+  receipt_date: string;
+  note: string;
+  user: IUser;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+
+  }
+}
+
 export class User implements IUser {
   id: number;
   code: string;
