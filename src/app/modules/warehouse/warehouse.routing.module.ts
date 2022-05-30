@@ -6,6 +6,7 @@ import {StoreComponent} from './store/store.component';
 import {BillComponent} from './bill/bill.component';
 import {BillDetailComponent} from './bill/bill.detail.component';
 import {InventoryComponent} from './inventory/inventory.component';
+import {ReceiptComponent} from './receipt/receipt.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,12 @@ const routes: Routes = [
     path: 'inventory', component: InventoryComponent,
     data: {
       title: 'Kiện hàng'
+    }
+  },
+  {
+    path: 'receipt', component: ReceiptComponent,
+    data: {
+      title: 'Phiếu nhập'
     }
   }
 ];

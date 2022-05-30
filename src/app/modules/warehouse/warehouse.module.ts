@@ -11,6 +11,7 @@ import {StoreComponent} from './store/store.component';
 import {BillComponent} from './bill/bill.component';
 import {BillDetailComponent} from './bill/bill.detail.component';
 import {InventoryComponent} from './inventory/inventory.component';
+import {ReceiptComponent} from './receipt/receipt.component';
 import {NgxBarcodeModule} from 'ngx-barcode';
 
 import {WarehouseRoutingModule} from './warehouse.routing.module';
@@ -23,7 +24,8 @@ import {SharedModule} from '../../shared.module';
     StoreComponent,
     BillComponent,
     BillDetailComponent,
-    InventoryComponent
+    InventoryComponent,
+    ReceiptComponent
   ],
   exports: [],
   providers: [OrderService, WarehouseService, PackageService]
