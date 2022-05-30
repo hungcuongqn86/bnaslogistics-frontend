@@ -305,6 +305,7 @@ export class Order implements IOrder {
   updated_at: string;
   cart: ICart[];
   history: History[];
+  shop: IShop;
   user: IUser;
   package: IPackage[];
   order_items: IOrderItem[];
