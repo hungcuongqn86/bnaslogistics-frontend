@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 import {WaitComponent} from './wait/wait.component';
 import {StoreComponent} from './store/store.component';
 import {BillComponent} from './bill/bill.component';
 import {BillDetailComponent} from './bill/bill.detail.component';
+import {InventoryComponent} from './inventory/inventory.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,12 @@ const routes: Routes = [
     path: 'bill/detail/:id', component: BillDetailComponent,
     data: {
       title: 'Phiếu xuất kho'
+    }
+  },
+  {
+    path: 'inventory', component: InventoryComponent,
+    data: {
+      title: 'Kiện hàng'
     }
   }
 ];

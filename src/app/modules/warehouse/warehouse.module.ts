@@ -10,17 +10,20 @@ import {WaitComponent} from './wait/wait.component';
 import {StoreComponent} from './store/store.component';
 import {BillComponent} from './bill/bill.component';
 import {BillDetailComponent} from './bill/bill.detail.component';
+import {InventoryComponent} from './inventory/inventory.component';
+import {NgxBarcodeModule} from 'ngx-barcode';
 
 import {WarehouseRoutingModule} from './warehouse.routing.module';
 import {SharedModule} from '../../shared.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, WarehouseRoutingModule, SharedModule, CollapseModule.forRoot()],
+  imports: [CommonModule, FormsModule, WarehouseRoutingModule, SharedModule, CollapseModule.forRoot(), NgxBarcodeModule.forRoot()],
   declarations: [
     WaitComponent,
     StoreComponent,
     BillComponent,
-    BillDetailComponent
+    BillDetailComponent,
+    InventoryComponent
   ],
   exports: [],
   providers: [OrderService, WarehouseService, PackageService]
