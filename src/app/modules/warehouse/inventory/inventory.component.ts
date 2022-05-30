@@ -5,6 +5,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {PackageService} from '../../../services/package/package.service';
 import {AuthService} from '../../../auth.service';
 import {IPackage, PackageStatus} from '../../../models/interface';
+import {Package} from '../../../models/model';
 
 @Component({
   selector: 'app-warehouse-inventory',
@@ -35,6 +36,7 @@ export class InventoryComponent implements OnInit, OnDestroy {
       }
     });
     this.counts = null;
+    this.reNewPackage();
   }
 
   ngOnInit() {
@@ -68,6 +70,19 @@ export class InventoryComponent implements OnInit, OnDestroy {
   gotoBill(billId: number) {
     const win = window.open(`./warehouse/bill/detail/${billId}`, '_blank');
     win.focus();
+  }
+
+  public selectPackage(item: IPackage, col: string) {
+    this.col = col;
+    this.package = item;
+  }
+
+  public hideInput() {
+    this.reNewPackage();
+  }
+
+  private reNewPackage() {
+    this.package = new Package();
   }
 
   public updatePackage(template: TemplateRef<any>, dirty: string) {

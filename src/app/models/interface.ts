@@ -322,6 +322,10 @@ export interface IPackage {
   carrier_brand: string;
   description: string;
   note: string;
+  vi_tri_kho_viet: string;
+  ghi_chu_kho_viet: string;
+  vi_tri_kho_trung: string;
+  ghi_chu_kho_trung: string;
   note_tl: string;
   weight: number;
   weight_qd: number;

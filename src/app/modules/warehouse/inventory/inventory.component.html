@@ -4,9 +4,9 @@
       <div class="card entry-list">
         <div class="card-header">
           <div class="row justify-content-between align-items-center">
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-6">
               <div class="title-list">
-                <span>Kiện hàng</span>
+                <span>Kiện hàng trong kho Việt Nam</span>
               </div>
             </div>
           </div>
@@ -79,6 +79,7 @@
                 <th style="width: 17%">Thông số</th>
                 <th style="width: 17%">Nhập kho</th>
                 <th style="width: 17%">Vị trí trong kho</th>
+                <th style="width: 17%">Ghi chú</th>
                 <th style="width: 5%">#</th>
               </tr>
               </thead>
@@ -152,12 +153,43 @@
                     <p><i>{{item.receipt.note}}</i></p>
                   </div>
                 </td>
-                <td>
+                <td (click)="selectPackage(item,'vi_tri_kho_viet')">
+                  <input *ngIf="((package.id === item.id) && (col === 'vi_tri_kho_viet'))"
+                         [(ngModel)]="item.vi_tri_kho_viet"
+                         #vi_tri_kho_viet="ngModel"
+                         class="form-control"
+                         id="vi_tri_kho_viet"
+                         name="vi_tri_kho_viet"
+                         (change)="updatePackage(template, 'vi_tri_kho_viet')"
+                         (blur)="hideInput()"
+                         appAutofocus
+                         placeholder="Vị trí ..."
+                         type="text">
+                  <span *ngIf="((package.id !== item.id) || (col !== 'vi_tri_kho_viet'))">
+                        <span *ngIf="item.vi_tri_kho_viet">
+                          {{item.vi_tri_kho_viet}}
+                        </span>
+                      </span>
+                </td>
+                <td (click)="selectPackage(item,'ghi_chu_kho_viet')">
+                  <textarea *ngIf="((package.id === item.id) && (col === 'ghi_chu_kho_viet'))"
+                            [(ngModel)]="item.ghi_chu_kho_viet"
+                            #ghi_chu_kho_viet="ngModel"
+                            id="ghi_chu_kho_viet" name="ghi_chu_kho_viet" rows="3"
+                            class="form-control"
+                            (change)="updatePackage(template, 'ghi_chu_kho_viet')"
+                            (blur)="hideInput()"
+                            placeholder="Ghi chú ..."></textarea>
+                  <span *ngIf="((package.id !== item.id) || (col !== 'ghi_chu_kho_viet'))">
+                        <span *ngIf="item.ghi_chu_kho_viet">
+                          {{item.ghi_chu_kho_viet}}
+                        </span>
+                      </span>
                 </td>
                 <td>
                   <button *ngIf="item.package_code" (click)="printBarcode(barcodeTemplate, item.package_code)"
                           class="btn btn-sm btn-info mr-1 text-white" type="button">
-                    In mã
+                    In
                   </button>
                 </td>
               </tr>

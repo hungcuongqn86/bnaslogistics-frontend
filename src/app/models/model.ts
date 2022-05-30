@@ -8,7 +8,8 @@ import {
   IInspectionFee,
   IOrder,
   IOrderItem,
-  IPackage, IReceipt,
+  IPackage,
+  IReceipt,
   IRole,
   IServiceFee,
   ISetting,
@@ -335,6 +336,10 @@ export class Package implements IPackage {
   description: string;
   note: string;
   note_tl: string;
+  vi_tri_kho_viet: string;
+  ghi_chu_kho_viet: string;
+  vi_tri_kho_trung: string;
+  ghi_chu_kho_trung: string;
   weight: number;
   weight_qd: number;
   size: number;
