@@ -52,6 +52,7 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   private createStoreBill() {
     if (this.packages.length) {
+      this.errorMessage = [];
       this.warehouseService.showLoading(true);
       const pkidlist = [];
       for (let i = 0; i < this.packages.length; i++) {
@@ -63,7 +64,9 @@ export class StoreComponent implements OnInit, OnDestroy {
           this.warehouseService.showLoading(false);
           this.sub.unsubscribe();
           if (res.status) {
-
+            this.router.navigate([`/warehouse/storebill`]);
+          } else {
+            this.errorMessage = res.data;
           }
         });
     }

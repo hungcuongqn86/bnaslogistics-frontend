@@ -107,6 +107,9 @@
           </div>
         </div>
         <div *ngIf="packages.length" class="card-footer">
+          <alert type="danger" *ngIf="errorMessage.length > 0">
+            <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+          </alert>
           <label class="alert alert-warning">Nhấn "Nhập kho" sẽ tạo phiếu nhập và chuyển trạng thái kiện hàng thành
             "Trong kho VN"</label>
           <button style="width: 129px;" class="btn btn-block btn-primary btn-rounded pull-right"
