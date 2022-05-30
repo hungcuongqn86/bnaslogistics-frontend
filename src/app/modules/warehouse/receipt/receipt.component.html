@@ -24,7 +24,7 @@
                           <i class="iconsax isax-document-text-1"></i>
                         </div>
                       </div>
-                      <input [(ngModel)]="packageService.search.code" type="text" id="code" name="code"
+                      <input [(ngModel)]="warehouseService.receiptSearch.code" type="text" id="code" name="code"
                              class="form-control"
                              placeholder="Mã phiếu">
                     </div>
@@ -37,7 +37,7 @@
                           <i class="iconsax isax-document-forward"></i>
                         </div>
                       </div>
-                      <input [(ngModel)]="packageService.search.package_code" type="text" id="package_code"
+                      <input [(ngModel)]="warehouseService.receiptSearch.package_code" type="text" id="package_code"
                              name="package_code"
                              class="form-control"
                              placeholder="Mã vận đơn">
@@ -54,7 +54,7 @@
                           <i class="iconsax isax-edit-2"></i>
                         </div>
                       </div>
-                      <input [(ngModel)]="packageService.search.key" type="text" id="key" name="key"
+                      <input [(ngModel)]="warehouseService.receiptSearch.key" type="text" id="key" name="key"
                              class="form-control"
                              placeholder="Tìm kiếm theo ghi chú nhập kho...">
                     </div>
@@ -112,8 +112,8 @@
         </div>
         <div class="card-footer">
           <pagination [boundaryLinks]="true" [totalItems]="totalItems"
-                      [(ngModel)]="packageService.search.page"
-                      [itemsPerPage]="packageService.search.limit"
+                      [(ngModel)]="warehouseService.receiptSearch.page"
+                      [itemsPerPage]="warehouseService.receiptSearch.limit"
                       (pageChanged)="pageChanged($event)"
                       class="pagination-sm pull-right" [maxSize]="6"
                       previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"

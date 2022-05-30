@@ -16,6 +16,7 @@ export class WarehouseService {
   private moduleUri = 'order/warehouse/';
   public waitSearch = {code: '', package_code: '', email: '', limit: 20, page: 1};
   public billSearch = {code: '', status: '', key: '', limit: 20, page: 1};
+  public receiptSearch = {code: '', package_code: '', key: '', limit: 20, page: 1};
 
   constructor(private loadingService: LoadingService,
               private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
@@ -28,6 +29,20 @@ export class WarehouseService {
   }
 
   reset() {
+  }
+
+  geReceipts(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}receipts`;
+    let params = new HttpParams();
+    Object.keys(this.receiptSearch).map((key) => {
+      if (this.receiptSearch[key]) {
+        params = params.append(key, this.receiptSearch[key]);
+      }
+    });
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('geReceipts', []))
+      );
   }
 
   getWarehouseWait(): Observable<any> {

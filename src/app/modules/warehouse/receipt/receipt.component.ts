@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, TemplateRef, ViewEncapsulation} from '@ang
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {PackageService} from '../../../services/package/package.service';
+import {WarehouseService} from '../../../services/order/warehouse.service';
 import {AuthService} from '../../../auth.service';
 import {IReceipt} from '../../../models/interface';
 
@@ -21,7 +21,7 @@ export class ReceiptComponent implements OnInit, OnDestroy {
   sub: Subscription;
   modalRef: BsModalRef;
 
-  constructor(public packageService: PackageService, private route: ActivatedRoute, public authService: AuthService,
+  constructor(public warehouseService: WarehouseService, private route: ActivatedRoute, public authService: AuthService,
               private router: Router, private modalService: BsModalService) {
 
   }
@@ -31,21 +31,21 @@ export class ReceiptComponent implements OnInit, OnDestroy {
   }
 
   pageChanged(event: any): void {
-    this.packageService.search.page = event.page;
+    this.warehouseService.receiptSearch.page = event.page;
     this.searchReceipts();
   }
 
   public searchReceipts() {
-    this.packageService.showLoading(true);
+    this.warehouseService.showLoading(true);
     if (this.sub) {
       this.sub.unsubscribe();
     }
 
-    this.sub = this.packageService.getPackages()
+    this.sub = this.warehouseService.geReceipts()
       .subscribe(data => {
         this.receipts = data.data.data;
         this.totalItems = data.data.total;
-        this.packageService.showLoading(false);
+        this.warehouseService.showLoading(false);
       });
   }
 
