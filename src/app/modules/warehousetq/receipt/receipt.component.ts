@@ -41,7 +41,7 @@ export class ReceiptComponent implements OnInit, OnDestroy {
       this.sub.unsubscribe();
     }
 
-    this.sub = this.warehouseService.geReceipts()
+    this.sub = this.warehouseService.geTqReceipts()
       .subscribe(data => {
         this.receipts = data.data.data;
         this.totalItems = data.data.total;

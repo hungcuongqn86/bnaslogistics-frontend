@@ -46,6 +46,20 @@ export class WarehouseService {
       );
   }
 
+  geTqReceipts(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.tqModuleUri}receipts`;
+    let params = new HttpParams();
+    Object.keys(this.receiptSearch).map((key) => {
+      if (this.receiptSearch[key]) {
+        params = params.append(key, this.receiptSearch[key]);
+      }
+    });
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('geTqReceipts', []))
+      );
+  }
+
   getWarehouseWait(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}wait`;
     let params = new HttpParams();
