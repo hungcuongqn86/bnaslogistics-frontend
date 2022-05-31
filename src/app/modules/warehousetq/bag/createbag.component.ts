@@ -33,7 +33,7 @@ export class CreatebagComponent implements OnInit, OnDestroy {
 
   }
 
-  private getPackage() {
+  public getPackage() {
     if (this.package_code) {
       this.packageService.showLoading(true);
       this.sub = this.packageService.getPackageByCode(this.package_code)
@@ -50,7 +50,7 @@ export class CreatebagComponent implements OnInit, OnDestroy {
     }
   }
 
-  private createStoreBill() {
+  public createStoreBill() {
     if (this.packages.length) {
       this.errorMessage = [];
       this.warehouseService.showLoading(true);
@@ -72,7 +72,7 @@ export class CreatebagComponent implements OnInit, OnDestroy {
     }
   }
 
-  private addPackage(item: IPackage) {
+  public addPackage(item: IPackage) {
     let found = false;
     for (const element of this.packages) {
       if (element.id === item.id) {
