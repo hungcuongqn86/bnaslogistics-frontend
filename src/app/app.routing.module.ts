@@ -121,6 +121,12 @@ const appRoutes: Routes = [
         data: {
           title: 'Kho Việt Nam'
         }
+      }, {
+        path: 'warehouse-tq',
+        loadChildren: './modules/warehousetq/warehousetq.module#WarehousetqModule',
+        data: {
+          title: 'Kho Trung Quốc'
+        }
       }
       , {
         path: 'wallet',

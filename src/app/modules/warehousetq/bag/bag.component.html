@@ -1,0 +1,153 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card entry-list">
+        <div class="card-header">
+          <div class="row justify-content-between align-items-center">
+            <div class="col-12 col-md-6">
+              <div class="title-list">
+                <span>Danh sách Phiếu nhập</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <form novalidate #form="ngForm">
+            <div class="form-group space-7 row filter-advanced">
+              <div class="col-md-5">
+                <div class="row space-7">
+                  <div class="col-md">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="iconsax isax-document-text-1"></i>
+                        </div>
+                      </div>
+                      <input [(ngModel)]="warehouseService.receiptSearch.code" type="text" id="code" name="code"
+                             class="form-control"
+                             placeholder="Mã phiếu">
+                    </div>
+                  </div>
+
+                  <div class="col-md">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="iconsax isax-document-forward"></i>
+                        </div>
+                      </div>
+                      <input [(ngModel)]="warehouseService.receiptSearch.package_code" type="text" id="package_code"
+                             name="package_code"
+                             class="form-control"
+                             placeholder="Mã vận đơn">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="row space-7">
+                  <div class="col-md-11">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="iconsax isax-edit-2"></i>
+                        </div>
+                      </div>
+                      <input [(ngModel)]="warehouseService.receiptSearch.key" type="text" id="key" name="key"
+                             class="form-control"
+                             placeholder="Tìm kiếm theo ghi chú nhập kho...">
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <button type="submit" (click)="searchReceipts()"
+                            class="btn btn-primary mb-1">
+                      <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th style="width: 17%">Phiếu nhập</th>
+                <th style="width: 17%">Người nhập</th>
+                <th style="width: 17%">Kiện hàng</th>
+                <th style="width: 17%">Ghi chú</th>
+                <th style="width: 5%">#</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of receipts">
+                <td>
+                  <p><span class="packages-inf">Mã phiếu</span><span class="packages-inf text-right">{{item.code}}</span>
+                  </p>
+                  <p><span class="packages-inf">Ngày nhập</span><span
+                    class="packages-inf text-right badge badge-info"><span>{{item.receipt_date | tempDate}}</span></span>
+                  </p>
+                </td>
+                <td>
+                  <p *ngIf="item.user"><span>{{item.user.name}}</span>
+                  </p>
+                </td>
+                <td>
+                  <p *ngFor="let packageItem of item.package">
+                    <span>{{packageItem.package_code}}</span>
+                  </p>
+                </td>
+                <td>{{item.note}}</td>
+                <td>
+                  <button (click)="printBarcode(barcodeTemplate, item)"
+                          class="btn btn-sm btn-info mr-1 text-white" type="button">
+                    In phiếu
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <pagination [boundaryLinks]="true" [totalItems]="totalItems"
+                      [(ngModel)]="warehouseService.receiptSearch.page"
+                      [itemsPerPage]="warehouseService.receiptSearch.limit"
+                      (pageChanged)="pageChanged($event)"
+                      class="pagination-sm pull-right" [maxSize]="6"
+                      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                      lastText="&raquo;"></pagination>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div><!-- /.container-fluid -->
+
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title">Thông báo lỗi</h5>
+  </div>
+  <div class="modal-body">
+    <alert type="danger" *ngIf="errorMessage.length > 0">
+      <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="declineError()">OK</button>
+  </div>
+</ng-template>
+
+<ng-template #barcodeTemplate>
+  <div class="modal-header">
+    <h5 class="modal-title">In mã vạch</h5>
+  </div>
+  <div id="print-section" class="modal-body">
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" (click)="print()">Print</button>
+    <button type="button" class="btn btn-warning" (click)="declineError()">Quay lại</button>
+  </div>
+</ng-template>

@@ -1,0 +1,138 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card entry-list">
+        <div class="card-header">
+          <div class="row justify-content-between align-items-center">
+            <div class="col-12 col-md-4">
+              <div class="title-list">
+                <span>Nhập kho Việt Nam</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form novalidate #form="ngForm">
+            <div class="form-group space-7 row filter-advanced">
+              <div class="col-md-3">
+                <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="iconsax isax-barcode"></i>
+                    </div>
+                  </div>
+                  <input [(ngModel)]="package_code" type="text" id="package_code"
+                         name="package_code"
+                         class="form-control"
+                         placeholder="Nhập mã vận đơn và nhấn Enter!">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <button type="submit" (click)="getPackage()"
+                        class="btn btn-primary mr-2 mb-1">
+                  <img class="svg-white" src="assets/img/iconsax/additem.svg" alt="search">
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th style="width: 17%">Kiện hàng</th>
+                <th style="width: 17%">Đơn hàng</th>
+                <th style="width: 17%">Thông số</th>
+                <th style="width: 5%">#</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of packages">
+                <td>
+                  <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
+                  </p>
+                  <p><span class="packages-inf">Mã vận đơn</span><span
+                    class="packages-inf text-right packages-code">{{item.package_code ? item.package_code : '--'}}</span>
+                  </p>
+                </td>
+                <td>
+                  <p><span class="packages-inf">Đơn hàng</span><span
+                    class="packages-inf text-right packages-code"><strong>{{item.order.code}}</strong></span>
+                  </p>
+                  <p><span class="packages-inf">Khách hàng</span><span
+                    class="packages-inf text-right"><strong>{{item.order.user.code}}
+                    - {{item.order.user.name}}</strong></span>
+                  </p>
+                  <p *ngIf="item.order.shop"><span class="packages-inf">Shop</span><span
+                    class="packages-inf text-right"><strong>{{item.order.shop.name}}</strong></span>
+                  </p>
+                </td>
+                <td>
+                  <p *ngIf="item.cal_option===0"><span class="packages-inf">Cân nặng (kg)</span><span
+                    class="packages-inf text-right badge badge-info"><span>{{item.weight ? item.weight : '0.00'}}</span></span>
+                  </p>
+                  <p *ngIf="item.cal_option===1"><span class="packages-inf">Thể tích (m3)</span><span
+                    class="packages-inf text-right badge badge-info"><span>{{item.size ? item.size : '0.00'}}</span></span>
+                  </p>
+                  <p *ngIf="item.cal_option===2"><span class="packages-inf">Dài (cm)</span><span
+                    class="packages-inf text-right badge badge-info"><span>{{item.c_d ? item.c_d : '0.00'}}</span></span>
+                  </p>
+                  <p *ngIf="item.cal_option===2"><span class="packages-inf">Rộng (cm)</span><span
+                    class="packages-inf text-right badge badge-info"><span>{{item.c_r ? item.c_r : '0.00'}}</span></span>
+                  </p>
+                  <p *ngIf="item.cal_option===2"><span class="packages-inf">Cao (cm)</span><span
+                    class="packages-inf text-right badge badge-info"><span>{{item.c_c ? item.c_c : '0.00'}}</span></span>
+                  </p>
+                  <p *ngIf="item.cal_option===2"><span class="packages-inf">Quy đổi (Kg)</span>
+                    <span class="packages-inf text-right badge badge-info">
+                      <span>{{item.weight_qd ? item.weight_qd : '0.00'}}</span>
+                    </span>
+                  </p>
+                </td>
+                <td>
+                  <button *ngIf="item.package_code" (click)="removePackage(item)"
+                          class="btn btn-sm btn-danger mr-1 text-white" type="button">
+                    Loại bỏ
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <textarea [(ngModel)]="note" id="note" name="note" rows="3"
+                            class="form-control"
+                            placeholder="Ghi chú phiếu nhập..."></textarea>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="packages.length" class="card-footer">
+          <alert type="danger" *ngIf="errorMessage.length > 0">
+            <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+          </alert>
+          <label class="alert alert-warning">Nhấn "Nhập kho" sẽ tạo phiếu nhập và chuyển trạng thái kiện hàng thành
+            "Trong kho VN"</label>
+          <button style="width: 129px;" class="btn btn-block btn-primary btn-rounded pull-right"
+                  (click)="createStoreBill()"
+                  type="button">Nhập kho
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div><!-- /.container-fluid -->
+
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title">Thông báo từ hệ thống!</h5>
+  </div>
+  <div class="modal-body">
+    <alert type="danger" *ngIf="errorMessage.length > 0">
+      <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="decline()">OK</button>
+  </div>
+</ng-template>

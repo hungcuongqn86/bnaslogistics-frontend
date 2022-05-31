@@ -1,0 +1,33 @@
+.pager li.btn:active {
+    box-shadow: none;
+}
+
+.table p {
+    margin: 3px 0;
+    border-bottom: 1px dotted #ddd;
+}
+
+.table p span.money {
+    color: #a94442;
+}
+
+.packages-code {
+    font-weight: bold;
+    color: #20a8d8;
+    font-size: 12px;
+}
+
+.packages-inf {
+    width: 50%;
+    display: inline-block;
+}
+
+@media (max-width: 767px) {
+    .card-body {
+        overflow: auto;
+    }
+
+    .table-data {
+        width: max-content;
+    }
+}

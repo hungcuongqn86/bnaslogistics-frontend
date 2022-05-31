@@ -1,0 +1,17 @@
+.pager li.btn:active {
+    box-shadow: none;
+}
+
+.table p {
+    margin: 3px 0;
+    border-bottom: 1px dotted #ddd;
+}
+
+.table p span.money {
+    color: #a94442;
+}
+
+.packages-inf {
+    width: 50%;
+    display: inline-block;
+}

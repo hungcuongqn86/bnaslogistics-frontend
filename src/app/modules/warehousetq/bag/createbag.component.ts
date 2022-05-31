@@ -9,13 +9,13 @@ import {WarehouseService} from '../../../services/order/warehouse.service';
 import {IPackage} from '../../../models/interface';
 
 @Component({
-  selector: 'app-warehouse-store',
-  templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css'],
+  selector: 'app-warehousetq-createbag',
+  templateUrl: './createbag.component.html',
+  styleUrls: ['./createbag.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 
-export class StoreComponent implements OnInit, OnDestroy {
+export class CreatebagComponent implements OnInit, OnDestroy {
   package_code: string;
   packages: IPackage[] = [];
   errorMessage: string[] = [];
