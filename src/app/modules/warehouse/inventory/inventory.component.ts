@@ -87,13 +87,6 @@ export class InventoryComponent implements OnInit, OnDestroy {
 
   public updatePackage(template: TemplateRef<any>, dirty: string) {
     this.packageService.showLoading(true);
-    if (!this.package.weight_qd) {
-      if (this.package.weight < 0.5) {
-        this.package.weight_qd = 0.5;
-      } else {
-        this.package.weight_qd = this.package.weight;
-      }
-    }
     const updatesub = this.packageService.editPackage(this.package, dirty)
       .subscribe(res => {
         if (res.status) {

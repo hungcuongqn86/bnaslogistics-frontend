@@ -6,7 +6,7 @@
           <div class="row justify-content-between align-items-center">
             <div class="col-12 col-md-6">
               <div class="title-list">
-                <span>Kiện hàng trong kho Việt Nam</span>
+                <span>Kiện hàng trong kho Trung Quốc</span>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@
                 <th style="width: 17%">Kiện hàng</th>
                 <th style="width: 17%">Đơn hàng</th>
                 <th style="width: 17%">Thông số</th>
-                <th style="width: 17%">Nhập kho Việt</th>
+                <th style="width: 17%">Nhập kho Trung</th>
                 <th style="width: 17%">Vị trí trong kho</th>
                 <th style="width: 17%">Ghi chú</th>
                 <th style="width: 5%">#</th>
@@ -136,49 +136,49 @@
                   </p>
                 </td>
                 <td>
-                  <div *ngIf="item.receipt">
+                  <div *ngIf="item.tq_receipt">
                     <p><span class="packages-inf">Phiếu nhập</span><span
-                      class="packages-inf text-right badge badge-info"><span>{{item.receipt.code}}</span></span>
+                      class="packages-inf text-right badge badge-info"><span>{{item.tq_receipt.code}}</span></span>
                     </p>
                     <p><span class="packages-inf">Ngày nhập</span><span
-                      class="packages-inf text-right badge badge-info"><span>{{item.receipt.receipt_date | tempDate}}</span></span>
+                      class="packages-inf text-right badge badge-info"><span>{{item.tq_receipt.receipt_date | tempDate}}</span></span>
                     </p>
-                    <p *ngIf="item.receipt.user"><span class="packages-inf">Người nhập</span><span
-                      class="packages-inf text-right badge badge-info"><span>{{item.receipt.user.name}}</span></span>
+                    <p *ngIf="item.tq_receipt.user"><span class="packages-inf">Người nhập</span><span
+                      class="packages-inf text-right badge badge-info"><span>{{item.tq_receipt.user.name}}</span></span>
                     </p>
-                    <p><i>{{item.receipt.note}}</i></p>
+                    <p><i>{{item.tq_receipt.note}}</i></p>
                   </div>
                 </td>
-                <td (click)="selectPackage(item,'vi_tri_kho_viet')">
-                  <input *ngIf="((package.id === item.id) && (col === 'vi_tri_kho_viet'))"
-                         [(ngModel)]="item.vi_tri_kho_viet"
-                         #vi_tri_kho_viet="ngModel"
+                <td (click)="selectPackage(item,'vi_tri_kho_trung')">
+                  <input *ngIf="((package.id === item.id) && (col === 'vi_tri_kho_trung'))"
+                         [(ngModel)]="item.vi_tri_kho_trung"
+                         #vi_tri_kho_trung="ngModel"
                          class="form-control"
-                         id="vi_tri_kho_viet"
-                         name="vi_tri_kho_viet"
-                         (change)="updatePackage(template, 'vi_tri_kho_viet')"
+                         id="vi_tri_kho_trung"
+                         name="vi_tri_kho_trung"
+                         (change)="updatePackage(template, 'vi_tri_kho_trung')"
                          (blur)="hideInput()"
                          appAutofocus
                          placeholder="Vị trí ..."
                          type="text">
-                  <span *ngIf="((package.id !== item.id) || (col !== 'vi_tri_kho_viet'))">
-                        <span *ngIf="item.vi_tri_kho_viet">
-                          {{item.vi_tri_kho_viet}}
+                  <span *ngIf="((package.id !== item.id) || (col !== 'vi_tri_kho_trung'))">
+                        <span *ngIf="item.vi_tri_kho_trung">
+                          {{item.vi_tri_kho_trung}}
                         </span>
                       </span>
                 </td>
-                <td (click)="selectPackage(item,'ghi_chu_kho_viet')">
-                  <textarea *ngIf="((package.id === item.id) && (col === 'ghi_chu_kho_viet'))"
-                            [(ngModel)]="item.ghi_chu_kho_viet"
-                            #ghi_chu_kho_viet="ngModel"
-                            id="ghi_chu_kho_viet" name="ghi_chu_kho_viet" rows="3"
+                <td (click)="selectPackage(item,'ghi_chu_kho_trung')">
+                  <textarea *ngIf="((package.id === item.id) && (col === 'ghi_chu_kho_trung'))"
+                            [(ngModel)]="item.ghi_chu_kho_trung"
+                            #ghi_chu_kho_trung="ngModel"
+                            id="ghi_chu_kho_trung" name="ghi_chu_kho_trung" rows="3"
                             class="form-control"
-                            (change)="updatePackage(template, 'ghi_chu_kho_viet')"
+                            (change)="updatePackage(template, 'ghi_chu_kho_trung')"
                             (blur)="hideInput()"
                             placeholder="Ghi chú ..."></textarea>
-                  <span *ngIf="((package.id !== item.id) || (col !== 'ghi_chu_kho_viet'))">
-                        <span *ngIf="item.ghi_chu_kho_viet">
-                          {{item.ghi_chu_kho_viet}}
+                  <span *ngIf="((package.id !== item.id) || (col !== 'ghi_chu_kho_trung'))">
+                        <span *ngIf="item.ghi_chu_kho_trung">
+                          {{item.ghi_chu_kho_trung}}
                         </span>
                       </span>
                 </td>

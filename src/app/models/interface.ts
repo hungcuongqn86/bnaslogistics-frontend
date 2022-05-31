@@ -308,6 +308,7 @@ export interface IPackage {
   order_id: number;
   order: IOrder;
   receipt: IReceipt;
+  tq_receipt: IReceipt;
   package_code: string;
   contract_code: string;
   ship_khach: number;
