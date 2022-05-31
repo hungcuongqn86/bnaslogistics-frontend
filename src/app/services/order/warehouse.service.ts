@@ -14,6 +14,7 @@ export class WarehouseService {
   static instance: WarehouseService;
   private handleError: HandleError;
   private moduleUri = 'order/warehouse/';
+  private tqModuleUri = 'order/warehouse-tq/';
   public waitSearch = {code: '', package_code: '', email: '', limit: 20, page: 1};
   public billSearch = {code: '', status: '', key: '', limit: 20, page: 1};
   public receiptSearch = {code: '', package_code: '', key: '', limit: 20, page: 1};
@@ -64,6 +65,14 @@ export class WarehouseService {
     return this.http.post<History>(url, {pkcodelist: pkidlist, note: note})
       .pipe(
         catchError(this.handleError('storeBillCreate', []))
+      );
+  }
+
+  tqStoreBillCreate(pkidlist: string[], note: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.tqModuleUri}storebill/create`;
+    return this.http.post<History>(url, {pkcodelist: pkidlist, note: note})
+      .pipe(
+        catchError(this.handleError('tqStoreBillCreate', []))
       );
   }
 

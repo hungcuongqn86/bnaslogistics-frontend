@@ -59,12 +59,12 @@ export class StoreComponent implements OnInit, OnDestroy {
         pkidlist.push(this.packages[i].id);
       }
 
-      this.sub = this.warehouseService.storeBillCreate(pkidlist, this.note)
+      this.sub = this.warehouseService.tqStoreBillCreate(pkidlist, this.note)
         .subscribe(res => {
           this.warehouseService.showLoading(false);
           this.sub.unsubscribe();
           if (res.status) {
-            this.router.navigate([`/warehouse/receipt`]);
+            this.router.navigate([`/warehouse-tq/receipt`]);
           } else {
             this.errorMessage = res.data;
           }
