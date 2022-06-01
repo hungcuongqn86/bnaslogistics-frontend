@@ -74,9 +74,17 @@ export class WarehouseService {
       );
   }
 
+  bagCreate(pkidlist: string[], note: string): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}bag/create`;
+    return this.http.post<any>(url, {pkcodelist: pkidlist, note: note})
+      .pipe(
+        catchError(this.handleError('bagCreate', []))
+      );
+  }
+
   storeBillCreate(pkidlist: string[], note: string): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}storebill/create`;
-    return this.http.post<History>(url, {pkcodelist: pkidlist, note: note})
+    return this.http.post<any>(url, {pkcodelist: pkidlist, note: note})
       .pipe(
         catchError(this.handleError('storeBillCreate', []))
       );
@@ -84,7 +92,7 @@ export class WarehouseService {
 
   tqStoreBillCreate(pkidlist: string[], note: string): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.tqModuleUri}storebill/create`;
-    return this.http.post<History>(url, {pkcodelist: pkidlist, note: note})
+    return this.http.post<any>(url, {pkcodelist: pkidlist, note: note})
       .pipe(
         catchError(this.handleError('tqStoreBillCreate', []))
       );
@@ -92,7 +100,7 @@ export class WarehouseService {
 
   bill(user_id: number, pkidlist: string[]): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/create`;
-    return this.http.post<History>(url, {user_id: user_id, pkcodelist: pkidlist})
+    return this.http.post<any>(url, {user_id: user_id, pkcodelist: pkidlist})
       .pipe(
         catchError(this.handleError('bill', []))
       );
@@ -130,7 +138,7 @@ export class WarehouseService {
 
   billConfirm(id: number): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/confirm`;
-    return this.http.post<History>(url, {id: id})
+    return this.http.post<any>(url, {id: id})
       .pipe(
         catchError(this.handleError('xuatKho', []))
       );
@@ -138,7 +146,7 @@ export class WarehouseService {
 
   deleteBill(id: number) {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/delete`;
-    return this.http.post<History>(url, {id: id})
+    return this.http.post<any>(url, {id: id})
       .pipe(
         catchError(this.handleError('deleteBill', []))
       );
