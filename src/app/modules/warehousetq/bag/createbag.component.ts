@@ -22,6 +22,7 @@ export class CreatebagComponent implements OnInit, OnDestroy {
   sub: Subscription;
   modalRef: BsModalRef;
   note_tq = '';
+  dvvc = '';
 
   constructor(private modalService: BsModalService, public authService: AuthService,
               public packageService: PackageService,
@@ -59,7 +60,7 @@ export class CreatebagComponent implements OnInit, OnDestroy {
         pkidlist.push(this.packages[i].id);
       }
 
-      this.sub = this.warehouseService.bagCreate(pkidlist, this.note_tq)
+      this.sub = this.warehouseService.bagCreate(pkidlist, this.note_tq, this.dvvc)
         .subscribe(res => {
           this.warehouseService.showLoading(false);
           this.sub.unsubscribe();
