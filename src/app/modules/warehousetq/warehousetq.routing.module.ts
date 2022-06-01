@@ -33,7 +33,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'bag/create', component: CreatebagComponent,
+    path: 'bag-create', component: CreatebagComponent,
     data: {
       title: 'Tạo bao hàng'
     }

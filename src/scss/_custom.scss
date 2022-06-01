@@ -6,7 +6,7 @@
 .transform-90{
   -webkit-transform: rotate(45deg);
    -moz-transform: rotate(45deg);
-   -o-transform: rotate(45deg); 
+   -o-transform: rotate(45deg);
    transform: rotate(45deg);
 }
 .fs-14{
@@ -48,6 +48,17 @@
 
 .app-header .dropdown-item {
   font-size: 12px;
+}
+
+ul.header-actions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.header-actions li {
+  display: inline-flex;
+  margin: 3px;
 }
 
 @media print {
