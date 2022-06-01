@@ -24,7 +24,7 @@
                           <i class="iconsax isax-document-text-1"></i>
                         </div>
                       </div>
-                      <input [(ngModel)]="warehouseService.receiptSearch.code" type="text" id="code" name="code"
+                      <input [(ngModel)]="warehouseService.bagSearch.code" type="text" id="code" name="code"
                              class="form-control"
                              placeholder="Mã bao hàng">
                     </div>
@@ -37,7 +37,7 @@
                           <i class="iconsax isax-document-forward"></i>
                         </div>
                       </div>
-                      <input [(ngModel)]="warehouseService.receiptSearch.package_code" type="text" id="package_code"
+                      <input [(ngModel)]="warehouseService.bagSearch.package_code" type="text" id="package_code"
                              name="package_code"
                              class="form-control"
                              placeholder="Mã vận đơn">
@@ -62,12 +62,12 @@
               <thead>
               <tr>
                 <th style="width: 17%">Bao hàng</th>
-                <th style="width: 17%">Kiện hàng</th>
-                <th style="width: 17%">Đơn vị VC</th>
+                <th style="width: 12%">Kiện hàng</th>
+                <th style="width: 12%">Đơn vị VC</th>
                 <th style="width: 17%">Ghi chú TQ</th>
                 <th style="width: 17%">Ghi chú TC</th>
                 <th style="width: 17%">Ghi chú VN</th>
-                <th style="width: 17%">Trạng thái</th>
+                <th style="width: 12%">Trạng thái</th>
                 <th style="width: 5%">#</th>
               </tr>
               </thead>
@@ -103,6 +103,9 @@
                   <button (click)="printBarcode(barcodeTemplate, item)"
                           class="btn btn-sm btn-info mr-1 text-white" type="button">
                     In
+                  </button>
+                  <button class="btn btn-sm btn-info mr-1 text-white" type="button">
+                    Sửa
                   </button>
                 </td>
               </tr>
@@ -144,7 +147,9 @@
     <h5 class="modal-title">In mã vạch</h5>
   </div>
   <div id="print-section" class="modal-body">
-
+    <p style="text-align: center;">
+      <ngx-barcode [bc-value]="barcodeVal" [bc-display-value]="true"></ngx-barcode>
+    </p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-info" (click)="print()">Print</button>

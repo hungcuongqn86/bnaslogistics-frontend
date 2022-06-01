@@ -18,6 +18,7 @@ export class WarehouseService {
   public waitSearch = {code: '', package_code: '', email: '', limit: 20, page: 1};
   public billSearch = {code: '', status: '', key: '', limit: 20, page: 1};
   public receiptSearch = {code: '', package_code: '', key: '', limit: 20, page: 1};
+  public bagSearch = {code: '', package_code: '', limit: 20, page: 1};
 
   constructor(private loadingService: LoadingService,
               private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
@@ -35,9 +36,9 @@ export class WarehouseService {
   getBags(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}bags`;
     let params = new HttpParams();
-    Object.keys(this.receiptSearch).map((key) => {
-      if (this.receiptSearch[key]) {
-        params = params.append(key, this.receiptSearch[key]);
+    Object.keys(this.bagSearch).map((key) => {
+      if (this.bagSearch[key]) {
+        params = params.append(key, this.bagSearch[key]);
       }
     });
     return this.http.get<any>(url, {params: params})

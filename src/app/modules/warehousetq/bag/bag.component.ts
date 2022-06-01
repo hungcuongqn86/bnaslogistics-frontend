@@ -21,6 +21,8 @@ export class BagComponent implements OnInit, OnDestroy {
   sub: Subscription;
   modalRef: BsModalRef;
 
+  barcodeVal = '';
+
   constructor(public warehouseService: WarehouseService, private route: ActivatedRoute, public authService: AuthService,
               private router: Router, private modalService: BsModalService) {
 
@@ -55,7 +57,11 @@ export class BagComponent implements OnInit, OnDestroy {
   }
 
   printBarcode(template: TemplateRef<any>, item: IBag) {
-
+    this.barcodeVal = item.code;
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+    setTimeout(() => {
+      this.print();
+    }, 1000);
   }
 
   print(): void {
