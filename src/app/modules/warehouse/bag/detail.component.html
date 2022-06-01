@@ -12,29 +12,6 @@
           </div>
         </div>
         <div class="card-body">
-          <form *ngIf="bag&&bag.status===1" novalidate #form="ngForm">
-            <div class="form-group space-7 row filter-advanced">
-              <div class="col-md-3">
-                <div class="input-group mb-1">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <i class="iconsax isax-barcode"></i>
-                    </div>
-                  </div>
-                  <input [(ngModel)]="package_code" type="text" id="package_code"
-                         name="package_code"
-                         class="form-control"
-                         placeholder="Nhập mã vận đơn và nhấn Enter!">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <button type="submit" (click)="getPackage()"
-                        class="btn btn-primary mr-2 mb-1">
-                  <img class="svg-white" src="assets/img/iconsax/additem.svg" alt="search">
-                </button>
-              </div>
-            </div>
-          </form>
           <div *ngIf="bag.package && bag.package.length" class="table-responsive">
             <table class="table table-hover">
               <thead>
@@ -42,7 +19,6 @@
                 <th style="width: 17%">Kiện hàng</th>
                 <th style="width: 17%">Đơn hàng</th>
                 <th style="width: 17%">Thông số</th>
-                <th style="width: 5%">#</th>
               </tr>
               </thead>
               <tbody>
@@ -88,17 +64,10 @@
                     </span>
                   </p>
                 </td>
-                <td>
-                  <button *ngIf="bag&&bag.status===1" (click)="removePackage(item)"
-                          class="btn btn-sm btn-danger mr-1 text-white" type="button">
-                    Loại bỏ
-                  </button>
-                </td>
               </tr>
               <tr>
                 <td colspan="4">
-                  <input [disabled]="bag&&bag.status!==1" title="" [(ngModel)]="bag.dvvc" type="text" id="dvvc"
-                         (change)="updateBag('dvvc')"
+                  <input disabled title="" [(ngModel)]="bag.dvvc" type="text" id="dvvc"
                          name="dvvc"
                          class="form-control"
                          placeholder="Đơn vị vận chuyển">
@@ -106,8 +75,7 @@
               </tr>
               <tr>
                 <td colspan="4">
-                  <textarea title="" [(ngModel)]="bag.note_tq" id="note_tq" name="note_tq" rows="3"
-                            (change)="updateBag('note_tq')"
+                  <textarea disabled title="" [(ngModel)]="bag.note_tq" id="note_tq" name="note_tq" rows="3"
                             class="form-control"
                             placeholder="Ghi chú Trung Quốc..."></textarea>
                 </td>
@@ -123,7 +91,7 @@
               </tr>
               <tr>
                 <td colspan="4">
-                  <textarea disabled title="" [(ngModel)]="bag.note_vn" id="note_vn" name="note_vn" rows="3"
+                  <textarea title="" [(ngModel)]="bag.note_vn" id="note_vn" name="note_vn" rows="3"
                             (change)="updateBag('note_vn')"
                             class="form-control"
                             placeholder="Ghi chú Việt Nam..."></textarea>
@@ -137,29 +105,25 @@
           <alert type="danger" *ngIf="errorMessage && errorMessage.length > 0">
             <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
           </alert>
-          <label *ngIf="bag&&bag.status===1" class="alert alert-warning">Nhấn "Hoàn thành tạo bao hàng" sẽ chuyển trạng
-            thái kiện
-            hàng thành
-            "Đang về VN"</label>
           <div class="pull-right">
             <div class="card-header-actions">
               <ul class="header-actions">
-                <li *ngIf="bag&&bag.status===1">
-                  <button class="btn btn-block btn-danger btn-rounded"
-                          (click)="deleteBag()"
-                          type="button">Hủy
-                  </button>
-                </li>
-                <li *ngIf="bag&&bag.status===1">
-                  <button class="btn btn-block btn-primary btn-rounded"
-                          (click)="updateStatus(2)"
-                          type="button">Hoàn thành tạo bao hàng
-                  </button>
-                </li>
                 <li *ngIf="bag&&bag.status===2">
                   <button class="btn btn-block btn-primary btn-rounded"
                           (click)="updateStatus(3)"
                           type="button">Xác nhận TC
+                  </button>
+                </li>
+                <li *ngIf="bag&&bag.status===3">
+                  <button class="btn btn-block btn-primary btn-rounded"
+                          (click)="updateStatus(4)"
+                          type="button">Đã về VN
+                  </button>
+                </li>
+                <li *ngIf="bag&&bag.status===4">
+                  <button class="btn btn-block btn-primary btn-rounded"
+                          (click)="updateStatus(5)"
+                          type="button">Xác nhận đủ hàng
                   </button>
                 </li>
               </ul>

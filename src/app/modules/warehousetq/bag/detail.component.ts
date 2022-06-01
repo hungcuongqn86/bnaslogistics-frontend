@@ -22,8 +22,6 @@ export class DetailComponent implements OnInit, OnDestroy {
   errorMessage: string[] = [];
   sub: Subscription;
   modalRef: BsModalRef;
-  note_tq = '';
-  dvvc = '';
 
   constructor(private modalService: BsModalService, public authService: AuthService,
               private route: ActivatedRoute,

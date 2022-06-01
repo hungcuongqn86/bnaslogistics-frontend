@@ -90,7 +90,7 @@ export class BagComponent implements OnInit, OnDestroy {
   }
 
   public editBag(id) {
-    this.router.navigate([`/warehouse-tq/bag/detail/${id}`]);
+    this.router.navigate([`/warehouse/bag/detail/${id}`]);
   }
 
   gotoOrder(orderId: number) {
