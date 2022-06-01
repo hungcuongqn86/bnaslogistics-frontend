@@ -134,7 +134,7 @@
           </div>
         </div>
         <div *ngIf="bag.package && bag.package.length" class="card-footer">
-          <alert type="danger" *ngIf="errorMessage.length > 0">
+          <alert type="danger" *ngIf="errorMessage && errorMessage.length > 0">
             <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
           </alert>
           <label *ngIf="bag&&bag.status===1" class="alert alert-warning">Nhấn "Hoàn thành tạo bao hàng" sẽ chuyển trạng
