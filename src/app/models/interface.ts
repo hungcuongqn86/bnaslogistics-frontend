@@ -303,6 +303,20 @@ export interface IReceipt {
   updated_at: string;
 }
 
+export interface IBag {
+  id: number;
+  code: string;
+  note_vn: string;
+  note_tq: string;
+  note_tc: string;
+  dvvc: string;
+  status: number;
+  user: IUser;
+  package: IPackage[];
+  created_at: string;
+  updated_at: string;
+}
+
 export interface IPackage {
   id: number;
   order_id: number;

@@ -1,5 +1,5 @@
 import {
-  History,
+  History, IBag,
   ICarrier,
   ICarrierPackage,
   ICart,
@@ -195,6 +195,24 @@ export class ChinaWarehouse implements IChinaWarehouse {
 
   constructor() {
     this.status = 1;
+  }
+}
+
+export class Bag implements IBag {
+  id: number;
+  code: string;
+  note_vn: string;
+  note_tq: string;
+  note_tc: string;
+  dvvc: string;
+  status: number;
+  user: IUser;
+  package: IPackage[];
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+
   }
 }
 

@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {WarehouseService} from '../../../services/order/warehouse.service';
 import {AuthService} from '../../../auth.service';
-import {IReceipt} from '../../../models/interface';
+import {IBag} from '../../../models/interface';
 
 @Component({
   selector: 'app-warehousetq-bag',
@@ -14,8 +14,8 @@ import {IReceipt} from '../../../models/interface';
 })
 
 export class BagComponent implements OnInit, OnDestroy {
-  receipts: IReceipt[];
-  receipt: IReceipt;
+  bags: IBag[];
+  bag: IBag;
   totalItems = 0;
   errorMessage: string[] = [];
   sub: Subscription;
@@ -27,23 +27,23 @@ export class BagComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.searchReceipts();
+    this.searchBags();
   }
 
   pageChanged(event: any): void {
     this.warehouseService.receiptSearch.page = event.page;
-    this.searchReceipts();
+    this.searchBags();
   }
 
-  public searchReceipts() {
+  public searchBags() {
     this.warehouseService.showLoading(true);
     if (this.sub) {
       this.sub.unsubscribe();
     }
 
-    this.sub = this.warehouseService.geReceipts()
+    this.sub = this.warehouseService.getBags()
       .subscribe(data => {
-        this.receipts = data.data.data;
+        this.bags = data.data.data;
         this.totalItems = data.data.total;
         this.warehouseService.showLoading(false);
       });
@@ -54,7 +54,7 @@ export class BagComponent implements OnInit, OnDestroy {
     win.focus();
   }
 
-  printBarcode(template: TemplateRef<any>, item: IReceipt) {
+  printBarcode(template: TemplateRef<any>, item: IBag) {
 
   }
 

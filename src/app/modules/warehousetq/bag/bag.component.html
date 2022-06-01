@@ -64,17 +64,19 @@
                 <th style="width: 17%">Bao hàng</th>
                 <th style="width: 17%">Người tạo</th>
                 <th style="width: 17%">Kiện hàng</th>
-                <th style="width: 17%">Ghi chú</th>
+                <th style="width: 17%">Ghi chú TQ</th>
+                <th style="width: 17%">Ghi chú TC</th>
+                <th style="width: 17%">Ghi chú VN</th>
                 <th style="width: 5%">#</th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of receipts">
+              <tr *ngFor="let item of bags">
                 <td>
-                  <p><span class="packages-inf">Mã phiếu</span><span class="packages-inf text-right">{{item.code}}</span>
+                  <p><span class="packages-inf">Mã bao</span><span class="packages-inf text-right">{{item.code}}</span>
                   </p>
-                  <p><span class="packages-inf">Ngày nhập</span><span
-                    class="packages-inf text-right badge badge-info"><span>{{item.receipt_date | tempDate}}</span></span>
+                  <p><span class="packages-inf">Ngày tạo</span><span
+                    class="packages-inf text-right badge badge-info"><span>{{item.created_at | tempDate}}</span></span>
                   </p>
                 </td>
                 <td>
@@ -86,11 +88,13 @@
                     <span>{{packageItem.package_code}}</span>
                   </p>
                 </td>
-                <td>{{item.note}}</td>
+                <td>{{item.note_tq}}</td>
+                <td>{{item.note_tc}}</td>
+                <td>{{item.note_vn}}</td>
                 <td>
                   <button (click)="printBarcode(barcodeTemplate, item)"
                           class="btn btn-sm btn-info mr-1 text-white" type="button">
-                    In phiếu
+                    In
                   </button>
                 </td>
               </tr>

@@ -32,6 +32,20 @@ export class WarehouseService {
   reset() {
   }
 
+  getBags(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}bags`;
+    let params = new HttpParams();
+    Object.keys(this.receiptSearch).map((key) => {
+      if (this.receiptSearch[key]) {
+        params = params.append(key, this.receiptSearch[key]);
+      }
+    });
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('geReceipts', []))
+      );
+  }
+
   geReceipts(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}receipts`;
     let params = new HttpParams();
