@@ -88,6 +88,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     if (!found) {
       this.bag.package.push(item);
     }
+    this.updateBag('package');
   }
 
   public removePackage(item: IPackage) {
@@ -95,6 +96,30 @@ export class DetailComponent implements OnInit, OnDestroy {
     if (index !== -1) {
       this.bag.package.splice(index, 1);
     }
+    this.updateBag('package');
+  }
+
+  public updateBag(dirty: string) {
+    this.warehouseService.showLoading(true);
+    const updatesub = this.warehouseService.updateBag(this.bag, dirty)
+      .subscribe(res => {
+        if (res.status) {
+          this.getBag();
+        } else {
+          this.errorMessage = res.data;
+        }
+        this.warehouseService.showLoading(false);
+        updatesub.unsubscribe();
+      });
+  }
+
+  public updateStatus(status: number) {
+    this.bag.status = status;
+    this.updateBag('status');
+  }
+
+  public deleteBag() {
+
   }
 
   decline(): void {

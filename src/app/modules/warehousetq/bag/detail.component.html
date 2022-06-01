@@ -98,6 +98,7 @@
               <tr>
                 <td colspan="4">
                   <input [disabled]="bag&&bag.status!==1" title="" [(ngModel)]="bag.dvvc" type="text" id="dvvc"
+                         (change)="updateBag('dvvc')"
                          name="dvvc"
                          class="form-control"
                          placeholder="Đơn vị vận chuyển">
@@ -106,13 +107,16 @@
               <tr>
                 <td colspan="4">
                   <textarea title="" [(ngModel)]="bag.note_tq" id="note_tq" name="note_tq" rows="3"
+                            (change)="updateBag('note_tq')"
                             class="form-control"
                             placeholder="Ghi chú Trung Quốc..."></textarea>
                 </td>
               </tr>
               <tr>
                 <td colspan="4">
-                  <textarea [disabled]="bag&&bag.status!==2" title="" [(ngModel)]="bag.note_tc" id="note_tc" name="note_tc" rows="3"
+                  <textarea [disabled]="bag&&bag.status!==2" title="" [(ngModel)]="bag.note_tc" id="note_tc"
+                            name="note_tc" rows="3"
+                            (change)="updateBag('note_tc')"
                             class="form-control"
                             placeholder="Ghi chú trung chuyển..."></textarea>
                 </td>
@@ -120,6 +124,7 @@
               <tr>
                 <td colspan="4">
                   <textarea disabled title="" [(ngModel)]="bag.note_vn" id="note_vn" name="note_vn" rows="3"
+                            (change)="updateBag('note_vn')"
                             class="form-control"
                             placeholder="Ghi chú Việt Nam..."></textarea>
                 </td>
@@ -132,7 +137,8 @@
           <alert type="danger" *ngIf="errorMessage.length > 0">
             <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
           </alert>
-          <label *ngIf="bag&&bag.status===1" class="alert alert-warning">Nhấn "Hoàn thành tạo bao hàng" sẽ chuyển trạng thái kiện
+          <label *ngIf="bag&&bag.status===1" class="alert alert-warning">Nhấn "Hoàn thành tạo bao hàng" sẽ chuyển trạng
+            thái kiện
             hàng thành
             "Đang về VN"</label>
           <div class="pull-right">
@@ -140,17 +146,19 @@
               <ul class="header-actions">
                 <li *ngIf="bag&&bag.status===1">
                   <button class="btn btn-block btn-danger btn-rounded"
+                          (click)="deleteBag()"
                           type="button">Hủy
                   </button>
                 </li>
                 <li *ngIf="bag&&bag.status===1">
                   <button class="btn btn-block btn-primary btn-rounded"
-                          (click)="createStoreBill()"
+                          (click)="updateStatus(2)"
                           type="button">Hoàn thành tạo bao hàng
                   </button>
                 </li>
                 <li *ngIf="bag&&bag.status===2">
                   <button class="btn btn-block btn-primary btn-rounded"
+                          (click)="updateStatus(3)"
                           type="button">Xác nhận TC
                   </button>
                 </li>
@@ -163,17 +171,3 @@
     <!--/.col-->
   </div>
 </div><!-- /.container-fluid -->
-
-<ng-template #template>
-  <div class="modal-header">
-    <h5 class="modal-title">Thông báo từ hệ thống!</h5>
-  </div>
-  <div class="modal-body">
-    <alert type="danger" *ngIf="errorMessage.length > 0">
-      <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
-    </alert>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="decline()">OK</button>
-  </div>
-</ng-template>

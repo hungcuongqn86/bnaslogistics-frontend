@@ -8,6 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
+import {IBag, IPackage} from '../../models/interface';
 
 @Injectable()
 export class WarehouseService {
@@ -52,6 +53,14 @@ export class WarehouseService {
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getBag', []))
+      );
+  }
+
+  public updateBag(item: IBag, dirty: string) {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}bag/update/${item.id}`;
+    return this.http.post<any>(url, {dirty: dirty, value: item[dirty]})
+      .pipe(
+        catchError(this.handleError('updateBag', item))
       );
   }
 
