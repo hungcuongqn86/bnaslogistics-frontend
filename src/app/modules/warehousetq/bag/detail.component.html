@@ -89,7 +89,7 @@
                   </p>
                 </td>
                 <td>
-                  <button *ngIf="item.package_code" (click)="removePackage(item)"
+                  <button *ngIf="bag&&bag.status===1" (click)="removePackage(item)"
                           class="btn btn-sm btn-danger mr-1 text-white" type="button">
                     Loại bỏ
                   </button>
