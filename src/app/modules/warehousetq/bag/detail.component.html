@@ -97,7 +97,7 @@
               </tr>
               <tr>
                 <td colspan="4">
-                  <input title="" [(ngModel)]="bag.dvvc" type="text" id="dvvc"
+                  <input [disabled]="bag&&bag.status!==1" title="" [(ngModel)]="bag.dvvc" type="text" id="dvvc"
                          name="dvvc"
                          class="form-control"
                          placeholder="Đơn vị vận chuyển">
@@ -132,7 +132,7 @@
           <alert type="danger" *ngIf="errorMessage.length > 0">
             <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
           </alert>
-          <label class="alert alert-warning">Nhấn "Hoàn thành tạo bao hàng" sẽ chuyển trạng thái kiện
+          <label *ngIf="bag&&bag.status===1" class="alert alert-warning">Nhấn "Hoàn thành tạo bao hàng" sẽ chuyển trạng thái kiện
             hàng thành
             "Đang về VN"</label>
           <div class="pull-right">
