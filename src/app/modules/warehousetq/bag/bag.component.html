@@ -48,7 +48,7 @@
               <div class="col-md-7">
                 <div class="row space-7">
                   <div class="col-md-1">
-                    <button type="submit" (click)="searchReceipts()"
+                    <button type="submit" (click)="searchBags()"
                             class="btn btn-primary mb-1">
                       <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
                     </button>
@@ -62,11 +62,12 @@
               <thead>
               <tr>
                 <th style="width: 17%">Bao hàng</th>
-                <th style="width: 17%">Người tạo</th>
                 <th style="width: 17%">Kiện hàng</th>
+                <th style="width: 17%">Đơn vị VC</th>
                 <th style="width: 17%">Ghi chú TQ</th>
                 <th style="width: 17%">Ghi chú TC</th>
                 <th style="width: 17%">Ghi chú VN</th>
+                <th style="width: 17%">Trạng thái</th>
                 <th style="width: 5%">#</th>
               </tr>
               </thead>
@@ -78,9 +79,8 @@
                   <p><span class="packages-inf">Ngày tạo</span><span
                     class="packages-inf text-right badge badge-info"><span>{{item.created_at | tempDate}}</span></span>
                   </p>
-                </td>
-                <td>
-                  <p *ngIf="item.user"><span>{{item.user.name}}</span>
+                  <p *ngIf="item.user"><span class="packages-inf">Người tạo</span><span
+                    class="packages-inf text-right badge badge-info"><span>{{item.user.name}}</span></span>
                   </p>
                 </td>
                 <td>
@@ -88,9 +88,17 @@
                     <span>{{packageItem.package_code}}</span>
                   </p>
                 </td>
+                <td>{{item.dvvc}}</td>
                 <td>{{item.note_tq}}</td>
                 <td>{{item.note_tc}}</td>
                 <td>{{item.note_vn}}</td>
+                <td>
+                  <p *ngIf="item.status === 1"><span class="badge badge-info">Bao mới</span></p>
+                  <p *ngIf="item.status === 2"><span class="badge badge-info">Đã gửi</span></p>
+                  <p *ngIf="item.status === 3"><span class="badge badge-info">Trung chuyển</span></p>
+                  <p *ngIf="item.status === 4"><span class="badge badge-info">Đã về VN</span></p>
+                  <p *ngIf="item.status === 5"><span class="badge badge-info">Đã nhận</span></p>
+                </td>
                 <td>
                   <button (click)="printBarcode(barcodeTemplate, item)"
                           class="btn btn-sm btn-info mr-1 text-white" type="button">
