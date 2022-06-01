@@ -51,7 +51,7 @@ export class CreatebagComponent implements OnInit, OnDestroy {
     }
   }
 
-  public createStoreBill() {
+  public createStoreBill(status: number) {
     if (this.packages.length) {
       this.errorMessage = [];
       this.warehouseService.showLoading(true);
@@ -60,7 +60,7 @@ export class CreatebagComponent implements OnInit, OnDestroy {
         pkidlist.push(this.packages[i].id);
       }
 
-      this.sub = this.warehouseService.bagCreate(pkidlist, this.note_tq, this.dvvc)
+      this.sub = this.warehouseService.bagCreate(pkidlist, this.note_tq, this.dvvc, status)
         .subscribe(res => {
           this.warehouseService.showLoading(false);
           this.sub.unsubscribe();
