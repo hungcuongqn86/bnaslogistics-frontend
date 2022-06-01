@@ -11,6 +11,7 @@ import {InventoryComponent} from './inventory/inventory.component';
 import {ReceiptComponent} from './receipt/receipt.component';
 import {BagComponent} from './bag/bag.component';
 import {CreatebagComponent} from './bag/createbag.component';
+import {DetailComponent} from './bag/detail.component';
 import {NgxBarcodeModule} from 'ngx-barcode';
 
 import {WarehousetqRoutingModule} from './warehousetq.routing.module';
@@ -23,7 +24,8 @@ import {SharedModule} from '../../shared.module';
     InventoryComponent,
     ReceiptComponent,
     BagComponent,
-    CreatebagComponent
+    CreatebagComponent,
+    DetailComponent
   ],
   exports: [],
   providers: [OrderService, WarehouseService, PackageService]

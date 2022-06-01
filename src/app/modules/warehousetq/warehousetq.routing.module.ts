@@ -6,6 +6,7 @@ import {InventoryComponent} from './inventory/inventory.component';
 import {ReceiptComponent} from './receipt/receipt.component';
 import {BagComponent} from './bag/bag.component';
 import {CreatebagComponent} from './bag/createbag.component';
+import {DetailComponent} from './bag/detail.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,12 @@ const routes: Routes = [
     path: 'bag', component: BagComponent,
     data: {
       title: 'Bao hàng'
+    }
+  },
+  {
+    path: 'bag/detail/:id', component: DetailComponent,
+    data: {
+      title: 'Chi tiết bao hàng'
     }
   },
   {

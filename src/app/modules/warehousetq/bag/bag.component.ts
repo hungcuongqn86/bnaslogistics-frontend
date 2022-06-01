@@ -89,6 +89,10 @@ export class BagComponent implements OnInit, OnDestroy {
       });
   }
 
+  public editBag(id) {
+    this.router.navigate([`/warehouse-tq/bag/detail/${id}`]);
+  }
+
   gotoOrder(orderId: number) {
     const win = window.open(`./order/list/detail/${orderId}`, '_blank');
     win.focus();
