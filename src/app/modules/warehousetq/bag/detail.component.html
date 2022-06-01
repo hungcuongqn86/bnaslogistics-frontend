@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="card-body">
-          <form novalidate #form="ngForm">
+          <form *ngIf="bag&&bag.status===1" novalidate #form="ngForm">
             <div class="form-group space-7 row filter-advanced">
               <div class="col-md-3">
                 <div class="input-group mb-1">
@@ -131,25 +131,20 @@
           <div class="pull-right">
             <div class="card-header-actions">
               <ul class="header-actions">
-                <li>
+                <li *ngIf="bag&&bag.status===1">
                   <button class="btn btn-block btn-danger btn-rounded"
                           type="button">Hủy
                   </button>
                 </li>
-                <li>
+                <li *ngIf="bag&&bag.status===1">
                   <button class="btn btn-block btn-primary btn-rounded"
                           (click)="createStoreBill()"
                           type="button">Hoàn thành tạo bao hàng
                   </button>
                 </li>
-                <li>
+                <li *ngIf="bag&&bag.status===2">
                   <button class="btn btn-block btn-primary btn-rounded"
                           type="button">Xác nhận TC
-                  </button>
-                </li>
-                <li>
-                  <button class="btn btn-block btn-primary btn-rounded"
-                          type="button">Xác nhận đủ hàng
                   </button>
                 </li>
               </ul>
