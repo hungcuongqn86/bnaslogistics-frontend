@@ -21,7 +21,7 @@ export class CreatebagComponent implements OnInit, OnDestroy {
   errorMessage: string[] = [];
   sub: Subscription;
   modalRef: BsModalRef;
-  note = '';
+  note_tq = '';
 
   constructor(private modalService: BsModalService, public authService: AuthService,
               public packageService: PackageService,
@@ -59,12 +59,12 @@ export class CreatebagComponent implements OnInit, OnDestroy {
         pkidlist.push(this.packages[i].id);
       }
 
-      this.sub = this.warehouseService.bagCreate(pkidlist, this.note)
+      this.sub = this.warehouseService.bagCreate(pkidlist, this.note_tq)
         .subscribe(res => {
           this.warehouseService.showLoading(false);
           this.sub.unsubscribe();
           if (res.status) {
-            this.router.navigate([`/warehouse/bag`]);
+            this.router.navigate([`/warehouse-tq/bag`]);
           } else {
             this.errorMessage = res.data;
           }

@@ -74,9 +74,9 @@ export class WarehouseService {
       );
   }
 
-  bagCreate(pkidlist: string[], note: string): Observable<any> {
+  bagCreate(pkidlist: string[], note_tq: string): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}bag/create`;
-    return this.http.post<any>(url, {pkcodelist: pkidlist, note: note})
+    return this.http.post<any>(url, {pkcodelist: pkidlist, note_tq: note_tq})
       .pipe(
         catchError(this.handleError('bagCreate', []))
       );
