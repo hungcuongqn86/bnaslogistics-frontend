@@ -63,12 +63,12 @@
               <tr>
                 <th style="width: 17%">Bao hàng</th>
                 <th style="width: 12%">Kiện hàng</th>
-                <th style="width: 12%">Đơn vị VC</th>
-                <th style="width: 17%">Ghi chú TQ</th>
-                <th style="width: 17%">Ghi chú TC</th>
-                <th style="width: 17%">Ghi chú VN</th>
-                <th style="width: 12%">Trạng thái</th>
-                <th style="width: 5%">#</th>
+                <th style="width: 10%">Đơn vị VC</th>
+                <th style="width: 15%">Ghi chú TQ</th>
+                <th style="width: 15%">Ghi chú TC</th>
+                <th style="width: 15%">Ghi chú VN</th>
+                <th style="width: 8%">Trạng thái</th>
+                <th style="width: 15%">#</th>
               </tr>
               </thead>
               <tbody>
@@ -93,7 +93,7 @@
                 <td>{{item.note_tc}}</td>
                 <td>{{item.note_vn}}</td>
                 <td>
-                  <p *ngIf="item.status === 1"><span class="badge badge-info">Bao mới</span></p>
+                  <p *ngIf="item.status === 1"><span class="badge badge-info">Mới</span></p>
                   <p *ngIf="item.status === 2"><span class="badge badge-info">Đã gửi</span></p>
                   <p *ngIf="item.status === 3"><span class="badge badge-info">Trung chuyển</span></p>
                   <p *ngIf="item.status === 4"><span class="badge badge-info">Đã về VN</span></p>
@@ -106,6 +106,9 @@
                   </button>
                   <button class="btn btn-sm btn-info mr-1 text-white" type="button">
                     Sửa
+                  </button>
+                  <button class="btn btn-sm btn-info mr-1 text-white" type="button">
+                    TC Xác nhận
                   </button>
                 </td>
               </tr>
