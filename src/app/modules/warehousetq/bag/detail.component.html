@@ -107,14 +107,21 @@
                 <td colspan="4">
                   <textarea title="" [(ngModel)]="bag.note_tq" id="note_tq" name="note_tq" rows="3"
                             class="form-control"
-                            placeholder="Ghi chú bao hàng..."></textarea>
+                            placeholder="Ghi chú Trung Quốc..."></textarea>
                 </td>
               </tr>
               <tr>
                 <td colspan="4">
-                  <textarea title="" [(ngModel)]="bag.note_tc" id="note_tc" name="note_tc" rows="3"
+                  <textarea [disabled]="bag&&bag.status!==2" title="" [(ngModel)]="bag.note_tc" id="note_tc" name="note_tc" rows="3"
                             class="form-control"
                             placeholder="Ghi chú trung chuyển..."></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <textarea disabled title="" [(ngModel)]="bag.note_vn" id="note_vn" name="note_vn" rows="3"
+                            class="form-control"
+                            placeholder="Ghi chú Việt Nam..."></textarea>
                 </td>
               </tr>
               </tbody>
