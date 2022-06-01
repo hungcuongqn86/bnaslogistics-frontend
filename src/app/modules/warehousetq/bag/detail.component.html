@@ -35,7 +35,7 @@
               </div>
             </div>
           </form>
-          <div class="table-responsive">
+          <div *ngIf="bag.package && bag.package.length" class="table-responsive">
             <table class="table table-hover">
               <thead>
               <tr>
@@ -46,7 +46,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of packages">
+              <tr *ngFor="let item of bag.package">
                 <td>
                   <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
                   </p>
@@ -97,7 +97,7 @@
               </tr>
               <tr>
                 <td colspan="4">
-                  <input title="" [(ngModel)]="dvvc" type="text" id="dvvc"
+                  <input title="" [(ngModel)]="bag.dvvc" type="text" id="dvvc"
                          name="dvvc"
                          class="form-control"
                          placeholder="Đơn vị vận chuyển">
@@ -105,14 +105,14 @@
               </tr>
               <tr>
                 <td colspan="4">
-                  <textarea title="" [(ngModel)]="note_tq" id="note_tq" name="note_tq" rows="3"
+                  <textarea title="" [(ngModel)]="bag.note_tq" id="note_tq" name="note_tq" rows="3"
                             class="form-control"
                             placeholder="Ghi chú bao hàng..."></textarea>
                 </td>
               </tr>
               <tr>
                 <td colspan="4">
-                  <textarea title="" id="note_tc" name="note_tc" rows="3"
+                  <textarea title="" [(ngModel)]="bag.note_tc" id="note_tc" name="note_tc" rows="3"
                             class="form-control"
                             placeholder="Ghi chú trung chuyển..."></textarea>
                 </td>
@@ -121,7 +121,7 @@
             </table>
           </div>
         </div>
-        <div *ngIf="packages.length" class="card-footer">
+        <div *ngIf="bag.package && bag.package.length" class="card-footer">
           <alert type="danger" *ngIf="errorMessage.length > 0">
             <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
           </alert>
@@ -143,12 +143,12 @@
                   </button>
                 </li>
                 <li>
-                  <button class="btn btn-block btn-danger btn-rounded"
+                  <button class="btn btn-block btn-primary btn-rounded"
                           type="button">Xác nhận TC
                   </button>
                 </li>
                 <li>
-                  <button class="btn btn-block btn-danger btn-rounded"
+                  <button class="btn btn-block btn-primary btn-rounded"
                           type="button">Xác nhận đủ hàng
                   </button>
                 </li>

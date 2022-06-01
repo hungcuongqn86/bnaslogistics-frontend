@@ -47,6 +47,14 @@ export class WarehouseService {
       );
   }
 
+  public getBag(id): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}bag/detail/${id}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getBag', []))
+      );
+  }
+
   geReceipts(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}receipts`;
     let params = new HttpParams();

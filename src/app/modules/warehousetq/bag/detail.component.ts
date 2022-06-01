@@ -1,12 +1,13 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../../auth.service';
 import {PackageService} from '../../../services/package/package.service';
 import {WarehouseService} from '../../../services/order/warehouse.service';
-import {IPackage} from '../../../models/interface';
+import {IBag, IPackage} from '../../../models/interface';
+import {Bag} from '../../../models/model';
 
 @Component({
   selector: 'app-warehousetq-bag-detail',
@@ -16,6 +17,7 @@ import {IPackage} from '../../../models/interface';
 })
 
 export class DetailComponent implements OnInit, OnDestroy {
+  bag: IBag;
   package_code: string;
   packages: IPackage[] = [];
   errorMessage: string[] = [];
@@ -25,13 +27,37 @@ export class DetailComponent implements OnInit, OnDestroy {
   dvvc = '';
 
   constructor(private modalService: BsModalService, public authService: AuthService,
+              private route: ActivatedRoute,
               public packageService: PackageService,
               private warehouseService: WarehouseService,
               private router: Router) {
+    this.reNewBag();
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.bag.id = params['id'];
+        this.getBag();
+      }
+    });
   }
 
   ngOnInit() {
 
+  }
+
+  private reNewBag() {
+    this.bag = new Bag();
+  }
+
+  private getBag() {
+    if (this.bag.id !== null) {
+      this.warehouseService.showLoading(true);
+      this.sub = this.warehouseService.getBag(this.bag.id)
+        .subscribe(bag => {
+          this.bag = bag.data;
+          this.warehouseService.showLoading(false);
+          this.sub.unsubscribe();
+        });
+    }
   }
 
   public getPackage() {
