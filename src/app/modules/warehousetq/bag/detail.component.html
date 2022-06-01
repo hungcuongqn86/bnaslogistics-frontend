@@ -6,7 +6,7 @@
           <div class="row justify-content-between align-items-center">
             <div class="col-12 col-md-4">
               <div class="title-list">
-                <span>Tạo bao hàng</span>
+                <span>Chi tiết bao hàng</span>
               </div>
             </div>
           </div>
@@ -105,9 +105,16 @@
               </tr>
               <tr>
                 <td colspan="4">
-                  <textarea [(ngModel)]="note_tq" id="note_tq" name="note_tq" rows="3"
+                  <textarea title="" [(ngModel)]="note_tq" id="note_tq" name="note_tq" rows="3"
                             class="form-control"
                             placeholder="Ghi chú bao hàng..."></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <textarea title="" id="note_tc" name="note_tc" rows="3"
+                            class="form-control"
+                            placeholder="Ghi chú trung chuyển..."></textarea>
                 </td>
               </tr>
               </tbody>
@@ -132,13 +139,17 @@
                 <li>
                   <button class="btn btn-block btn-primary btn-rounded"
                           (click)="createStoreBill()"
-                          type="button">Tạo bao hàng
+                          type="button">Hoàn thành tạo bao hàng
                   </button>
                 </li>
                 <li>
-                  <button class="btn btn-block btn-primary btn-rounded"
-                          (click)="createStoreBill()"
-                          type="button">Hoàn thành tạo bao hàng
+                  <button class="btn btn-block btn-danger btn-rounded"
+                          type="button">Xác nhận TC
+                  </button>
+                </li>
+                <li>
+                  <button class="btn btn-block btn-danger btn-rounded"
+                          type="button">Xác nhận đủ hàng
                   </button>
                 </li>
               </ul>

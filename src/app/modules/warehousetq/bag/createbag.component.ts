@@ -65,7 +65,7 @@ export class CreatebagComponent implements OnInit, OnDestroy {
           this.warehouseService.showLoading(false);
           this.sub.unsubscribe();
           if (res.status) {
-            this.router.navigate([`/warehouse-tq/bag`]);
+            this.router.navigate([`/warehouse-tq/bag/detail/${res.data.id}`]);
           } else {
             this.errorMessage = res.data;
           }
