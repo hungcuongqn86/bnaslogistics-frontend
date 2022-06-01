@@ -89,8 +89,26 @@
                   </p>
                 </td>
                 <td>{{item.dvvc}}</td>
-                <td>{{item.note_tq}}</td>
-                <td>{{item.note_tc}}</td>
+                <td (click)="selectBag(item,'note_tq')">
+                  <textarea *ngIf="((bag.id === item.id) && (col === 'note_tq'))" title="" [(ngModel)]="item.note_tq"
+                            id="note_tq" name="note_tq" rows="3"
+                            class="form-control"
+                            (change)="updateBag(template, 'note_tq')"
+                            (blur)="hideInput()"
+                            appAutofocus
+                            placeholder="Ghi chú Trung Quốc..."></textarea>
+                  <p *ngIf="((bag.id !== item.id) || (col !== 'note_tq'))">{{item.note_tq}}</p>
+                </td>
+                <td (click)="selectBag(item,'note_tc')">
+                  <textarea *ngIf="((bag.id === item.id) && (col === 'note_tc'))" title="" [(ngModel)]="item.note_tc"
+                            id="note_tc" name="note_tc" rows="3"
+                            class="form-control"
+                            (change)="updateBag(template, 'note_tc')"
+                            (blur)="hideInput()"
+                            appAutofocus
+                            placeholder="Ghi chú Trung chuyển..."></textarea>
+                  <p *ngIf="((bag.id !== item.id) || (col !== 'note_tc'))">{{item.note_tc}}</p>
+                </td>
                 <td>{{item.note_vn}}</td>
                 <td>
                   <p *ngIf="item.status === 1"><span class="badge badge-info">Mới</span></p>

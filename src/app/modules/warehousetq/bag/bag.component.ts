@@ -5,6 +5,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {WarehouseService} from '../../../services/order/warehouse.service';
 import {AuthService} from '../../../auth.service';
 import {IBag} from '../../../models/interface';
+import {Bag, Package} from '../../../models/model';
 
 @Component({
   selector: 'app-warehousetq-bag',
@@ -23,13 +24,50 @@ export class BagComponent implements OnInit, OnDestroy {
 
   barcodeVal = '';
 
+  col = '';
+
   constructor(public warehouseService: WarehouseService, private route: ActivatedRoute, public authService: AuthService,
               private router: Router, private modalService: BsModalService) {
-
+    this.reNewBag();
   }
 
   ngOnInit() {
     this.searchBags();
+  }
+
+  public selectBag(item: IBag, col: string) {
+    this.col = col;
+    this.bag = item;
+  }
+
+  public hideInput() {
+    this.reNewBag();
+  }
+
+  private reNewBag() {
+    this.bag = new Bag();
+  }
+
+  public updateBag(template: TemplateRef<any>, dirty: string) {
+    /*this.packageService.showLoading(true);
+    if (!this.package.weight_qd) {
+      if (this.package.weight < 0.5) {
+        this.package.weight_qd = 0.5;
+      } else {
+        this.package.weight_qd = this.package.weight;
+      }
+    }
+    const updatesub = this.packageService.editPackage(this.package, dirty)
+      .subscribe(res => {
+        if (res.status) {
+          this.searchPackages();
+        } else {
+          this.errorMessage = res.data;
+          this.openErrorModal(template);
+          this.searchPackages();
+        }
+        updatesub.unsubscribe();
+      });*/
   }
 
   pageChanged(event: any): void {
