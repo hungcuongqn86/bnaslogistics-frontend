@@ -29,7 +29,15 @@
                   <strong>{{userService.user.name}}</strong>
                 </div>
               </div>
-              <div class="form-group row">
+              <div *ngIf="userService.user.type == 1" class="form-group row">
+                <label class="col-md-3 col-form-label">
+                  Mã
+                </label>
+                <div class="col-md-9">
+                  <strong>{{userService.user.code}}</strong>
+                </div>
+              </div>
+              <div *ngIf="userService.user.type == 1" class="form-group row">
                 <label class="col-md-3 col-form-label">
                   Vip
                 </label>
