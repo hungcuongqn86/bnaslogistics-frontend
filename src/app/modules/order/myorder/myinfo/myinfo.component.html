@@ -201,9 +201,8 @@
       <tr>
         <th class="fs-14" rowspan="2">Mã KS</th>
         <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Tên shop</th>
-        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ghi chú</th>
         <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Tg SL</th>
-        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ship khách</th>
+        <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Ship</th>
         <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Trả shop</th>
         <th class="fs-14" rowspan="2">Mã vận đơn</th>
         <th class="fs-14" rowspan="2" *ngIf="!orderService.orderRe.shipping">Mã hợp đồng</th>
@@ -220,8 +219,8 @@
       <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
         <tr>
           <td>{{item.id}}</td>
-          <td *ngIf="!orderService.orderRe.shipping"></td>
-          <td *ngIf="!orderService.orderRe.shipping"></td>
+          <td *ngIf="!orderService.orderRe.shipping">
+            <p *ngIf="orderService.orderRe.shop">{{orderService.orderRe.shop.name}}</p></td>
           <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="i===0">
             {{orderService.orderRe.count_product}}</p>
           </td>
