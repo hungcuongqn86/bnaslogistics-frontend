@@ -118,7 +118,7 @@ export class UserService {
 
   updateUser() {
     this.showLoading(true);
-    if (this.user.id === null) {
+    if (!this.user.id) {
       this.addUser(this.user).subscribe(
         res => {
           this.updateSuccess(res);
