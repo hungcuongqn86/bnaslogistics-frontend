@@ -30,7 +30,7 @@ export class MyorderDetailComponent implements OnInit {
   }
 
   private genBangphi() {
-    this.orderService.bang_phi = {tong_can_nang: 0, tong_can_nang_qd: 0, tong_tien_can: 0};
+    this.orderService.bang_phi = {tong_can_nang: 0, tong_can_nang_qd: 0, tong_tien_can: 0, phi_van_phat_sinh: 0};
     for (let i = 0; i < this.orderService.orderRe.package.length; i++) {
       this.orderService.bang_phi.tong_can_nang = Number(this.orderService.bang_phi.tong_can_nang)
         + Number(this.orderService.orderRe.package[i].weight);
@@ -43,6 +43,10 @@ export class MyorderDetailComponent implements OnInit {
       this.orderService.bang_phi.tong_tien_can = Number(this.orderService.bang_phi.tong_tien_can)
         + Number(this.orderService.orderRe.package[i].tien_can);
       this.orderService.bang_phi.tong_tien_can = Math.round(this.orderService.bang_phi.tong_tien_can * 100) / 100;
+
+      this.orderService.bang_phi.phi_van_phat_sinh = Number(this.orderService.bang_phi.phi_van_phat_sinh)
+        + Number(this.orderService.orderRe.package[i].phi_van_phat_sinh);
+      this.orderService.bang_phi.phi_van_phat_sinh = Math.round(this.orderService.bang_phi.phi_van_phat_sinh * 100) / 100;
     }
   }
 

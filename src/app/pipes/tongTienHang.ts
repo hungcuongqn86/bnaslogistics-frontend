@@ -34,11 +34,6 @@ export class TempTongTienHangPipe implements PipeTransform {
       return this.formatCurrency(conThieu.toString());
     }
 
-    if (output === 3) {
-      shiptq = Math.round(shiptq * 100) / 100;
-      return this.formatCurrency(shiptq.toString());
-    }
-
     if (output === 4) {
       phivanps = Math.round(phivanps * 100) / 100;
       return this.formatCurrency(phivanps.toString());

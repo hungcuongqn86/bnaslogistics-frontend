@@ -123,6 +123,7 @@
                                                                                   class="badge badge-warning">Đơn ký gửi</span>
                   </p>
                   <p>Ngày tạo: {{item.created_at | tempDate}}</p>
+                  <p *ngIf="item.shop">Shop: {{item.shop.name}}</p>
                 </td>
                 <td>
                   <p><i class="fa fa-user"></i> {{item.user.code}} <span>- {{item.user.name}}</span></p>

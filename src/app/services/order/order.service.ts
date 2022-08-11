@@ -30,7 +30,7 @@ export class OrderService {
   };
   public order: IOrder;
   public orderRe: IOrder;
-  public bang_phi: { tong_can_nang: number, tong_can_nang_qd: number, tong_tien_can: number };
+  public bang_phi: { tong_can_nang: number, tong_can_nang_qd: number, tong_tien_can: number , phi_van_phat_sinh: number };
 
   constructor(private loadingService: LoadingService,
               private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
@@ -42,7 +42,7 @@ export class OrderService {
     if (!this.orderRe) {
       this.order_renew();
     }
-    this.bang_phi = {tong_can_nang: 0, tong_can_nang_qd: 0, tong_tien_can: 0};
+    this.bang_phi = {tong_can_nang: 0, tong_can_nang_qd: 0, tong_tien_can: 0, phi_van_phat_sinh: 0};
     return OrderService.instance = OrderService.instance || this;
   }
 
