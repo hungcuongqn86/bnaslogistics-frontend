@@ -101,12 +101,12 @@
               <tr>
                 <th rowspan="2" class="text-center">#</th>
                 <th rowspan="2">Mã đơn</th>
-                <th rowspan="2" class="text-center">Tiền hàng <br> (5.1)</th>
-                <th rowspan="2" class="text-center">Phí dịch vụ <br> (5.2)</th>
-                <th rowspan="2" class="text-center">Phí kiểm đếm <br> (5.3)</th>
-                <th rowspan="2" class="text-center">Đã đặt cọc <br> (5.4)</th>
-                <th rowspan="2" class="text-center">Phí ship nội địa <br> (5.5)</th>
-                <th rowspan="2" class="text-center">Tiền thanh lý <br> (5.1) + (5.2) + (5.3) - (5.4) + (5.5)</th>
+                <th rowspan="2" class="text-center">5.1 Tiền hàng</th>
+                <th rowspan="2" class="text-center">5.2 Phí dịch vụ</th>
+                <th rowspan="2" class="text-center">5.3 Phí kiểm đếm</th>
+                <th rowspan="2" class="text-center">5.4 Đã đặt cọc</th>
+                <th rowspan="2" class="text-center">5.5 Phí ship nội địa</th>
+                <th rowspan="2" class="text-center">Tiền thanh lý <br> 5.1 + 5.2 + 5.3 - 5.4 + 5.5</th>
               </tr>
               </thead>
               <tbody>
@@ -142,6 +142,10 @@
                   </td>
                 </tr>
               </ng-template>
+              <tr>
+                <td colspan="7"></td>
+                <td class="text-right ">{{report.tong_thanh_ly.toString() | tempPrice: 1 : 1: true}}</td>
+              </tr>
               </tbody>
             </table>
           </div>
