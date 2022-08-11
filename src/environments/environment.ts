@@ -8,7 +8,7 @@ export const environment = {
   backend: 'http://localhost/',
   apiUrl: './api/',
   apiV1Url: '../api/v1/',
-  appId: 'nguonhangnet',
+  appId: 'nguonhang',
   firebase: {
     apiKey: 'AIzaSyBtTPUa19nLkReMDWXTFr6U43D166n9MVE',
     authDomain: 'banhangqc.firebaseapp.com',
