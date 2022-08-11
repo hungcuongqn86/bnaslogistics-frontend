@@ -86,15 +86,11 @@
                   </div>
                 </td>
                 <td class="text-right">
-                  <p *ngIf="!nv"><span class="pull-left">Tiền hàng</span> <span
-                    class="money">{{item | tempTongTienHang: 2}}</span>
+                  <p *ngIf="!nv"><span class="pull-left">Tổng tiền đơn hàng</span> <span
+                    class="money">{{item | tempTongTienHang: 1}}</span>
                     <sup> đ</sup></p>
-                  <p *ngIf="!nv"><span class="pull-left">Thanh toán</span> <span *ngIf="item.dat_coc"
+                  <p *ngIf="!nv"><span class="pull-left">Đặt cọc</span> <span *ngIf="item.dat_coc"
                                                                                  class="money">{{item.dat_coc.toString() | tempPrice: 1 : 1 : false}}</span>
-                    <sup> đ</sup></p>
-                  <p *ngIf="!nv"><span class="pull-left">Còn thiếu</span> <span
-                    *ngIf="item.tien_hang && item.dat_coc"
-                    class="money">{{item | tempTongTienHang: 2}}</span>
                     <sup> đ</sup></p>
                 </td>
                 <td>

@@ -19,17 +19,13 @@
             Đặt tại website: <span class="text-danger"> {{orderService.orderRe.order_items[0].site}}</span>
           </p>
           <p>
-            <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 2}}
+            <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Tổng tiền đơn hàng: {{orderService.orderRe | tempTongTienHang : 1}}
             <sup> đ</sup>
           </p>
           <p>
-            <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Đã thanh toán: <span
+            <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Đặt cọc: <span
             *ngIf="orderService.orderRe.dat_coc">{{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}}
             <sup> đ</sup></span>
-          </p>
-          <p>
-            <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}}
-            <sup> đ</sup>
           </p>
         </div>
       </div>
