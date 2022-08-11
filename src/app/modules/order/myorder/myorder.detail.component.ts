@@ -47,8 +47,12 @@ export class MyorderDetailComponent implements OnInit {
         + Number(this.orderService.orderRe.package[i].weight_qd);
       this.orderService.bang_phi.tong_can_nang_qd = Math.round(this.orderService.bang_phi.tong_can_nang_qd * 100) / 100;
 
+      this.orderService.bang_phi.tong_kich_thuoc = Number(this.orderService.bang_phi.tong_kich_thuoc)
+        + Number(this.orderService.orderRe.package[i].size);
+      this.orderService.bang_phi.tong_kich_thuoc = Math.round(this.orderService.bang_phi.tong_kich_thuoc * 100) / 100;
+
       this.orderService.bang_phi.tong_tien_can = Number(this.orderService.bang_phi.tong_tien_can)
-        + Number(this.orderService.orderRe.package[i].tien_can);
+        + Number(this.orderService.orderRe.package[i].tien_can_tt);
       this.orderService.bang_phi.tong_tien_can = Math.round(this.orderService.bang_phi.tong_tien_can * 100) / 100;
 
       this.orderService.bang_phi.phi_van_phat_sinh = Number(this.orderService.bang_phi.phi_van_phat_sinh)
