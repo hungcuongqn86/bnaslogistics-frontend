@@ -235,6 +235,8 @@ export interface IOrder {
   vat: boolean;
   tien_hang: number;
   tra_shop: number;
+  ship_khach_tt: number;
+  ship_tt_tt: number;
   vip_id: number;
   ck_dv: number;
   ck_dv_tt: number;
