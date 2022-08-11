@@ -2,49 +2,40 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {IOrder} from '../models/interface';
 
 @Pipe({
-  name: 'tempTongTienHang'
+    name: 'tempTongTienHang'
 })
 export class TempTongTienHangPipe implements PipeTransform {
-  transform(order: IOrder, output: number): string {
-    let vndTotal = order.tien_hang + order.phi_dat_hang_tt + order.phi_kiem_dem_tt + order.phi_bao_hiem_tt;
-    const tigia = order.ti_gia;
-    let shiptq = 0;
-    let phivanps = 0;
+    transform(order: IOrder, output: number): string {
+        let vndTotal = order.tien_hang + order.phi_dat_hang_tt + order.phi_kiem_dem_tt + order.ship_khach_tt;
 
-    if (order.package) {
-      for (let i = 0; i < order.package.length; i++) {
-        if (order.package[i].ship_khach) {
-          const ndt = order.package[i].ship_khach;
-          const vnd = ndt * tigia;
-          shiptq = shiptq + vnd;
-          vndTotal = vndTotal + vnd;
+        if (output === 2) {
+            if (order.package) {
+                for (let i = 0; i < order.package.length; i++) {
+                    if (order.package[i].tien_can_tt) {
+                        vndTotal = vndTotal + Number(order.package[i].tien_can_tt);
+                    }
+
+                    if (order.package[i].tien_dong_go) {
+                        vndTotal = vndTotal + Number(order.package[i].tien_dong_go);
+                    }
+
+                    if (order.package[i].tien_chong_soc_tt) {
+                        vndTotal = vndTotal + Number(order.package[i].tien_chong_soc_tt);
+                    }
+
+                    if (order.package[i].phi_van_phat_sinh) {
+                        vndTotal = vndTotal + Number(order.package[i].phi_van_phat_sinh);
+                    }
+                }
+            }
         }
 
-        if (order.package[i].phi_van_phat_sinh) {
-          const phiv = order.package[i].phi_van_phat_sinh * 1;
-          vndTotal = vndTotal + phiv;
-          phivanps = phivanps + phiv;
-        }
-      }
+        return this.formatCurrency(vndTotal.toString());
     }
 
-    if (output === 2) {
-      let conThieu = vndTotal - order.dat_coc;
-      conThieu = Math.round(conThieu * 100) / 100;
-      return this.formatCurrency(conThieu.toString());
+    formatCurrency(number: string) {
+        const n = number.split('').reverse().join('');
+        const n2 = n.replace(/\d\d\d(?!$)/g, '$&,');
+        return n2.split('').reverse().join('');
     }
-
-    if (output === 4) {
-      phivanps = Math.round(phivanps * 100) / 100;
-      return this.formatCurrency(phivanps.toString());
-    }
-
-    return this.formatCurrency(vndTotal.toString());
-  }
-
-  formatCurrency(number: string) {
-    const n = number.split('').reverse().join('');
-    const n2 = n.replace(/\d\d\d(?!$)/g, '$&,');
-    return n2.split('').reverse().join('');
-  }
 }

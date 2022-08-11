@@ -19,7 +19,7 @@
             Đặt tại website: <span class="text-danger"> {{orderService.orderRe.order_items[0].site}}</span>
           </p>
           <p>
-            <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}}
+            <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 2}}
             <sup> đ</sup>
           </p>
           <p>
@@ -90,7 +90,6 @@
     <div *ngIf="orderService.orderRe" class="card-body">
       <div class="row">
         <div class="col-md-6">
-          <p><strong>Tiền hàng</strong></p>
           <p>(1) Tiền hàng <span *ngIf="orderService.orderRe.tien_hang"
                                  class="pull-right"><strong>{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}}
             <sup> đ</sup></strong></span></p>
@@ -137,6 +136,10 @@
                                          class="pull-right"><strong>{{orderService.bang_phi.phi_van_phat_sinh.toString() | tempPrice: 1 : 1 : false}}
             <sup> đ</sup></strong></span>
           </p>
+        </div>
+        <div class="col-md-6">
+          <p>Tổng phí = 5 + 6 + 7 + 8 + 9<span
+            class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 2}}</strong></span></p>
         </div>
       </div>
     </div>
