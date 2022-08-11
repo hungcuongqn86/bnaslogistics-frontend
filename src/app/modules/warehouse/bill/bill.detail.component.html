@@ -187,9 +187,9 @@
                   <td class="text-right ">{{item.tien_dong_go |
                     tempPrice: 1 : 1: false}}</td>
                   <td class="text-right ">
-                    (<span>¥</span>{{item.tien_chong_soc.toString() | tempPrice: 1 : 1: true}})
-                    {{item.tien_chong_soc_tt |
-                    tempPrice: 1 : 1: false}}
+                    <span *ngIf="item.tien_chong_soc">(<span>¥</span>{{item.tien_chong_soc.toString() | tempPrice: 1 : 1: true}})
+                      {{item.tien_chong_soc_tt |
+                        tempPrice: 1 : 1: false}}</span>
                   </td>
                 </tr>
               </ng-template>
