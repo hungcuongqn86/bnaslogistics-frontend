@@ -26,3 +26,7 @@ p {
 .toolbar button {
     margin: 3px;
 }
+
+.table, .table thead th, .table td {
+  border: 1px solid #ddd;
+}

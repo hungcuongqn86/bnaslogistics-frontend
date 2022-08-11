@@ -18,7 +18,10 @@ export class BillDetailComponent implements OnInit, OnDestroy {
   bill: Bill = null;
   id: number;
   date: string;
-  report: { tong_tien_can: number, tong_tien_dong_go: number, tong_tien_chong_soc: number, tong_tien_chong_soc_tt: number, tong_thanh_ly: number, tong_van_phi_ps: number };
+  report: {
+    tong_tien_can: number, tong_tien_dong_go: number, tong_tien_chong_soc: number,
+    tong_tien_chong_soc_tt: number, tong_thanh_ly: number, tong_van_phi_ps: number
+  };
   order_items: IOrderItem[] = [];
   sub: Subscription;
   errorMessage: string[] = [];
@@ -52,7 +55,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
     const hours = currentDate.getHours();
     const minutes = currentDate.getMinutes();
     const seconds = currentDate.getSeconds();
-    this.date = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+    this.date = `Hà Nội, Ngày ${day} tháng ${month} năm ${year}`;
   }
 
   private getBill() {

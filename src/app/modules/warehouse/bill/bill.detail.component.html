@@ -22,19 +22,15 @@
           <div class="row">
             <div class="col-sm-5">
               <h4 class="">Thông tin khách</h4>
-              <table class="table table-bordered table-striped">
+              <table class="table">
                 <tbody>
                 <tr>
                   <td>Khách</td>
-                  <td>{{bill.user.name}}</td>
+                  <td>{{bill.user.code}} - {{bill.user.name}}</td>
                 </tr>
                 <tr>
-                  <td>Email</td>
-                  <td><p>{{bill.user.email}}</p></td>
-                </tr>
-                <tr>
-                  <td>Điện thoại</td>
-                  <td><p>{{bill.user.phone_number}}</p></td>
+                  <td>Điện thoại/ Email</td>
+                  <td><p>{{bill.user.phone_number}} - {{bill.user.email}}</p></td>
                 </tr>
                 </tbody>
               </table>
@@ -72,11 +68,11 @@
               <table class="table table-hover">
                 <thead>
                 <tr class="">
-                  <th rowspan="2">1. Tiền cân</th>
-                  <th rowspan="2">2. Tiền đóng gỗ</th>
-                  <th rowspan="2">3. Tiền chống sốc</th>
-                  <th rowspan="2">4. Cước Vận phát sinh</th>
-                  <th rowspan="2">5. Thanh lý</th>
+                  <th rowspan="2" class="text-center">1. Tiền cân</th>
+                  <th rowspan="2" class="text-center">2. Tiền đóng gỗ</th>
+                  <th rowspan="2" class="text-center">3. Tiền chống sốc</th>
+                  <th rowspan="2" class="text-center">4. Cước Vận phát sinh</th>
+                  <th rowspan="2" class="text-center">5. Thanh lý</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -97,14 +93,13 @@
               </table>
             </div>
           </div>
-          <div class="table-responsive">
+          <div class="table-responsive" style="overflow: hidden;">
             <h4 class="g-no-print">Thông tin kiện hàng <span style="font-size: 10pt;"><i>(Công thức quy đổi: (kg) = Dài (cm) x rộng (cm) x cao (cm)/ 6000)</i></span></h4>
-            <table class="table table-hover  lading_table" style="cursor: pointer;">
+            <table class="table table-hover  lading_table" style="cursor: pointer;overflow: hidden;">
               <thead>
               <tr>
                 <th rowspan="2" class="text-center">#</th>
-                <th rowspan="2">Mã kiện</th>
-                <th rowspan="2">Mã đơn</th>
+                <th rowspan="2">Mã kiện/Mã đơn</th>
                 <th rowspan="2" class="text-center">Thanh lý</th>
                 <th rowspan="2" class="text-center">Cân nặng</th>
                 <th rowspan="2" class="text-center">Quy đổi</th>
@@ -122,25 +117,20 @@
                   <td class="text-center">{{i + 1}}</td>
                   <td>
                       <span>
-                          <a target="_blank"
-                             href="./package/{{item.package_code}}">
-                              {{item.package_code}}
-                          </a>
+                          {{item.package_code}} / {{item.order.code}}
                       </span>
                   </td>
-                  <td>
-                    <a href="./order/list/detail/{{item.order.id}}"
-                       target="_blank">{{item.order.code}}</a>
+                  <td class="text-right">
+                    <span *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
+                    tempPrice: 1 : 1: false}}</span>
                   </td>
-                  <td class="text-right"><p *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
-                    tempPrice: 1 : 1: false}}</p></td>
                   <td class="text-right"><span *ngIf="item.cal_option==0">{{item.weight}}</span></td>
                   <td class="text-right"><span *ngIf="item.cal_option==2">{{item.weight_qd}}</span></td>
                   <td class="text-right"><span *ngIf="item.cal_option==1">{{item.size}}</span></td>
-                  <td class="text-right"><p *ngIf="item.gia_can">{{item.gia_can |
-                    tempPrice: 1 : 1: false}}</p></td>
-                  <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can_tt |
-                    tempPrice: 1 : 1: false}}</p>
+                  <td class="text-right"><span *ngIf="item.gia_can">{{item.gia_can |
+                    tempPrice: 1 : 1: false}}</span></td>
+                  <td class="text-right"><span *ngIf="item.tien_can">{{item.tien_can_tt |
+                    tempPrice: 1 : 1: false}}</span>
                   </td>
                   <td class="text-right ">{{item.phi_van_phat_sinh |
                     tempPrice: 1 : 1: false}}</td>
@@ -154,7 +144,7 @@
                 </tr>
               </ng-template>
               <tr>
-                <td colspan="3"></td>
+                <td colspan="2"></td>
                 <td class="text-right ">{{report.tong_thanh_ly.toString() | tempPrice: 1 : 1: false}}</td>
                 <td colspan="4"></td>
                 <td class="text-right ">{{report.tong_tien_can.toString() | tempPrice: 1 : 1: false}}</td>
@@ -206,12 +196,15 @@
               </tbody>
             </table>
           </div>
-          <p class="text-right">Ngày <b>{{date}}</b></p>
+
           <table class="table">
             <thead>
             <tr>
-              <th class="text-left">Khách hàng</th>
-              <th class="text-right">Nhân viên xuất kho</th>
+              <th class="text-center">Khách hàng</th>
+              <th class="text-center">
+                <p class="text-center"><b>{{date}}</b></p>
+                Nhân viên xuất kho
+              </th>
             </tr>
             </thead>
             <tbody>
@@ -219,8 +212,10 @@
               <td style="height: 50px;" colspan="4" tabindex="1"></td>
             </tr>
             <tr>
-              <td class="text-left">{{bill.user.name}}</td>
-              <td class="text-right">{{bill.employee.name}}</td>
+              <td class="text-center">
+                {{bill.user.name}}
+              </td>
+              <td class="text-center">{{bill.employee.name}}</td>
             </tr>
             </tbody>
           </table>
