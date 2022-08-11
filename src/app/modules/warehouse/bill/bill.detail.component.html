@@ -93,16 +93,68 @@
               </table>
             </div>
           </div>
+
           <div class="table-responsive" style="overflow: hidden;">
-            <h4 class="g-no-print">Thông tin kiện hàng <span style="font-size: 10pt;"><i>(Công thức quy đổi: (kg) = Dài (cm) x rộng (cm) x cao (cm)/ 6000)</i></span></h4>
-            <table class="table table-hover  lading_table" style="cursor: pointer;overflow: hidden;">
+            <h4 class="g-no-print">Thông tin đơn hàng thanh lý</h4>
+            <table class="table table-hover detail-table" style="cursor: pointer;overflow: hidden;">
               <thead>
               <tr>
                 <th rowspan="2" class="text-center">#</th>
-                <th rowspan="2">Mã kiện/Mã đơn</th>
-                <th rowspan="2" class="text-center">Thanh lý</th>
-                <th rowspan="2" class="text-center">Cân nặng</th>
-                <th rowspan="2" class="text-center">Quy đổi</th>
+                <th rowspan="2">Mã đơn</th>
+                <th rowspan="2" class="text-center">Tiền hàng <br> (5.1)</th>
+                <th rowspan="2" class="text-center">Phí dịch vụ <br> (5.2)</th>
+                <th rowspan="2" class="text-center">Phí kiểm đếm <br> (5.3)</th>
+                <th rowspan="2" class="text-center">Đã đặt cọc <br> (5.4)</th>
+                <th rowspan="2" class="text-center">Phí ship nội địa <br> (5.5)</th>
+                <th rowspan="2" class="text-center">Tiền thanh lý <br> (5.1) + (5.2) + (5.3) - (5.4) + (5.5)</th>
+              </tr>
+              </thead>
+              <tbody>
+              <ng-template ngFor let-item [ngForOf]="bill.package" let-i="index">
+                <tr *ngIf="item.is_main > 0">
+                  <td class="text-center">{{i + 1}}</td>
+                  <td>
+                    {{item.order.code}}
+                  </td>
+                  <td class="text-right">
+                    <span *ngIf="item.order.tien_hang">{{item.order.tien_hang |
+                      tempPrice: 1 : 1: false}}</span>
+                  </td>
+                  <td class="text-right">
+                    <span *ngIf="item.order.phi_dat_hang_tt">{{item.order.phi_dat_hang_tt |
+                      tempPrice: 1 : 1: false}}</span>
+                  </td>
+                  <td class="text-right">
+                    <span *ngIf="item.order.phi_kiem_dem_tt">{{item.order.phi_kiem_dem_tt |
+                    tempPrice: 1 : 1: false}}</span>
+                  </td>
+                  <td class="text-right">
+                    <span *ngIf="item.order.dat_coc">{{item.order.dat_coc |
+                      tempPrice: 1 : 1: false}}</span>
+                  </td>
+                  <td class="text-right">
+                    <span *ngIf="item.order.phi_kiem_dem_tt">{{item.order.phi_kiem_dem_tt |
+                    tempPrice: 1 : 1: false}}</span>
+                  </td>
+                  <td class="text-right">
+                    <span *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
+                      tempPrice: 1 : 1: false}}</span>
+                  </td>
+                </tr>
+              </ng-template>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-responsive" style="overflow: hidden;">
+            <h4 class="g-no-print">Thông tin kiện hàng <span style="font-size: 10pt;"><i>(Công thức quy đổi: (kg) = Dài (cm) x rộng (cm) x cao (cm)/ 6000)</i></span></h4>
+            <table class="table table-hover detail-table" style="cursor: pointer;overflow: hidden;">
+              <thead>
+              <tr>
+                <th rowspan="2" class="text-center">#</th>
+                <th rowspan="2">Mã kiện - Mã đơn</th>
+                <th rowspan="2" class="text-center">Cân nặng(kg)</th>
+                <th rowspan="2" class="text-center">Quy đổi(kg)</th>
                 <th rowspan="2" class="text-center">KT(m3)</th>
                 <th rowspan="2" class="text-center">Vận giá</th>
                 <th rowspan="2" class="text-center">Cước vận</th>
@@ -116,13 +168,7 @@
                 <tr>
                   <td class="text-center">{{i + 1}}</td>
                   <td>
-                      <span>
-                          {{item.package_code}} / {{item.order.code}}
-                      </span>
-                  </td>
-                  <td class="text-right">
-                    <span *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
-                    tempPrice: 1 : 1: false}}</span>
+                    {{item.package_code}}<br>{{item.order.code}}
                   </td>
                   <td class="text-right"><span *ngIf="item.cal_option==0">{{item.weight}}</span></td>
                   <td class="text-right"><span *ngIf="item.cal_option==2">{{item.weight_qd}}</span></td>
@@ -155,9 +201,10 @@
               </tbody>
             </table>
           </div>
+
           <div id="detail-link" class="table-responsive">
             <h4>Chi tiết link</h4>
-            <table class="table table-hover">
+            <table class="table table-hover detail-table">
               <thead>
               <tr>
                 <th rowspan="2">Mã đơn</th>

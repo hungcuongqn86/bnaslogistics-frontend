@@ -30,3 +30,7 @@ p {
 .table, .table thead th, .table td {
   border: 1px solid #ddd;
 }
+
+.detail-table thead th, .detail-table td{
+  font-size: 10pt;
+}
