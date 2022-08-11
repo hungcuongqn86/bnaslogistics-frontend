@@ -55,6 +55,14 @@ export class MyorderDetailComponent implements OnInit {
         + Number(this.orderService.orderRe.package[i].tien_can_tt);
       this.orderService.bang_phi.tong_tien_can = Math.round(this.orderService.bang_phi.tong_tien_can * 100) / 100;
 
+      this.orderService.bang_phi.tong_tien_dong_go = Number(this.orderService.bang_phi.tong_tien_dong_go)
+        + Number(this.orderService.orderRe.package[i].tien_dong_go);
+      this.orderService.bang_phi.tong_tien_dong_go = Math.round(this.orderService.bang_phi.tong_tien_dong_go * 100) / 100;
+
+      this.orderService.bang_phi.tong_tien_chong_soc = Number(this.orderService.bang_phi.tong_tien_chong_soc)
+        + Number(this.orderService.orderRe.package[i].tien_chong_soc_tt);
+      this.orderService.bang_phi.tong_tien_chong_soc = Math.round(this.orderService.bang_phi.tong_tien_chong_soc * 100) / 100;
+
       this.orderService.bang_phi.phi_van_phat_sinh = Number(this.orderService.bang_phi.phi_van_phat_sinh)
         + Number(this.orderService.orderRe.package[i].phi_van_phat_sinh);
       this.orderService.bang_phi.phi_van_phat_sinh = Math.round(this.orderService.bang_phi.phi_van_phat_sinh * 100) / 100;
