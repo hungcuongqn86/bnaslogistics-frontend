@@ -99,7 +99,8 @@
             *ngIf="orderService.orderRe.phi_dat_hang_tt"
             class="pull-right"><strong>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
             <sup> đ</sup></strong></span></p>
-          <p>(3) Ship nội địa TQ <span *ngIf="orderService.orderRe.ship_khach_tt" class="pull-right"><strong>{{orderService.orderRe.ship_khach_tt.toString() | tempPrice: 1 : 1 : false}}
+          <p>(3) Ship nội địa TQ <span *ngIf="orderService.orderRe.ship_khach_tt"
+                                       class="pull-right"><strong>{{orderService.orderRe.ship_khach_tt.toString() | tempPrice: 1 : 1 : false}}
             <sup> đ</sup></strong></span>
           </p>
           <p>(4) Phí kiểm đếm<span
@@ -117,20 +118,24 @@
           <p>Cân nặng quy đổi <span
             class="pull-right"><strong>{{orderService.bang_phi.tong_can_nang_qd}}</strong></span>
           </p>
+          <p>Kích thước <span
+            class="pull-right"><strong>{{orderService.bang_phi.tong_kich_thuoc}}</strong></span>
+          </p>
           <p>(6) Phí cân nặng <span
             class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}
             <sup> đ</sup></strong></span>
           </p>
           <p>(7) Tiền đóng gỗ <span
-            class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}
+            class="pull-right"><strong>{{orderService.bang_phi.tong_tien_dong_go.toString() | tempPrice: 1 : 1 : false}}
             <sup> đ</sup></strong></span>
           </p>
-          <p>(8) Tiền chống sốc <span *ngIf="orderService.orderRe.phi_bao_hiem_tt"
-                                      class="pull-right"><strong>{{orderService.orderRe.phi_bao_hiem_tt.toString() | tempPrice: 1 : 1 : false}}
+          <p>(8) Tiền chống sốc <span
+            class="pull-right"><strong>{{orderService.bang_phi.tong_tien_chong_soc.toString() | tempPrice: 1 : 1 : false}}
             <sup> đ</sup></strong></span>
           </p>
           <p>(9) Cước vận phát sinh<span *ngIf="orderService.bang_phi && orderService.bang_phi.phi_van_phat_sinh"
-            class="pull-right"><strong>{{orderService.bang_phi.phi_van_phat_sinh.toString() | tempPrice: 1 : 1 : false}}<sup> đ</sup></strong></span>
+                                         class="pull-right"><strong>{{orderService.bang_phi.phi_van_phat_sinh.toString() | tempPrice: 1 : 1 : false}}
+            <sup> đ</sup></strong></span>
           </p>
         </div>
       </div>
@@ -224,7 +229,7 @@
           <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="i===0">
             {{orderService.orderRe.count_product}}</p>
           </td>
-          <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv">{{item.ship_khach}}</p></td>
+          <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv"><span>¥</span>{{item.ship_khach}}</p></td>
           <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="!nv && item.tra_shop">
             <span>¥</span>{{item.tra_shop | tempPrice: 1 : 1 : false}}</p></td>
           <td>{{item.package_code}}</td>

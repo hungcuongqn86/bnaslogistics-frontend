@@ -30,7 +30,14 @@ export class MyorderDetailComponent implements OnInit {
   }
 
   private genBangphi() {
-    this.orderService.bang_phi = {tong_can_nang: 0, tong_can_nang_qd: 0, tong_tien_can: 0, phi_van_phat_sinh: 0};
+    this.orderService.bang_phi = {
+      tong_can_nang: 0, tong_can_nang_qd: 0, tong_tien_can: 0,
+      tong_kich_thuoc: 0,
+      tong_tien_chong_soc: 0,
+      tong_tien_dong_go: 0,
+      phi_van_phat_sinh: 0
+    };
+
     for (let i = 0; i < this.orderService.orderRe.package.length; i++) {
       this.orderService.bang_phi.tong_can_nang = Number(this.orderService.bang_phi.tong_can_nang)
         + Number(this.orderService.orderRe.package[i].weight);
@@ -51,7 +58,7 @@ export class MyorderDetailComponent implements OnInit {
   }
 
   public backlist() {
-    let link: string = '/order/myorder/';
+    let link = '/order/myorder/';
     let status = '';
     if (this.orderService.search.type === 'od') {
       status = this.orderService.search.status;
