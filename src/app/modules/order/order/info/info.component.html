@@ -44,7 +44,7 @@
           </p>
 
           <p >
-            <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
+            <i class="mr-2 iconsax isax-coin-1 fs-16"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
           </p>
           <p  *ngIf="orderService.orderRe.dat_coc">
             <i class="mr-2 iconsax isax-coin fs-16"></i> Đã thanh toán: {{orderService.orderRe.dat_coc.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup>
