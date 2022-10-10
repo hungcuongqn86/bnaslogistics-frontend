@@ -71,13 +71,13 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div *ngIf="rError" class="alert alert-warning">
-                                  <strong><i class="fa fa-exclamation-triangle"
-                                             aria-hidden="true"></i> Warning!</strong> {{alert}}
+                                <div *ngIf="rError" class="alert alert-danger">
+                                  <p *ngFor="let error of alert"><strong><i class="fa fa-exclamation-triangle"
+                                                                            aria-hidden="true"></i> Warning!</strong> {{error}}</p>
                                 </div>
                                 <div *ngIf="sSuccess" class="alert alert-success">
-                                  <strong><i class="fa fa-exclamation-triangle"
-                                             aria-hidden="true"></i> Success!</strong> {{alert}}
+                                  <p *ngFor="let mess of alert"><strong><i class="fa fa-exclamation-triangle"
+                                                                            aria-hidden="true"></i> Success!</strong> {{mess}}</p>
                                 </div>
                                 <button [disabled]="!form.form.valid" (click)="registerAcc()" type="button" class="btn btn-block btn-primary">Đăng Ký</button>
                                 <p class="mt-2"><a class="pull-right" (click)="login()" href="javascript:void(0);"

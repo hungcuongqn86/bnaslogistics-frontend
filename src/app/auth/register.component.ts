@@ -40,6 +40,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   public registerAcc() {
+    this.rError = false;
+    this.sSuccess = false;
+    this.alert = [];
+
     this.authService.showLoading(true);
     if (this.sub) {
       this.sub.unsubscribe();
@@ -57,6 +61,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.rError = true;
           this.sSuccess = false;
           this.alert = res.data;
+          console.log(alert);
         }
         this.sub.unsubscribe();
         this.authService.showLoading(false);
