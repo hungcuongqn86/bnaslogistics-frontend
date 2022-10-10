@@ -54,8 +54,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
         if (res.status) {
           this.sSuccess = true;
           this.rError = false;
-          const tb = `Đăng ký thành công! Chúng tôi gửi cho bạn link kích hoạt tài khoản đến địa chỉ email: ${this.register.email}` +
-            `, hãy kiểm tra hòm thư và kích hoạt tài khoản!`;
+          const tb = `Đăng ký thành công! Chúng tôi đã gửi link kích hoạt tài khoản đến địa chỉ email: ${this.register.email}` +
+            `, vui lòng kiểm tra hòm thư và kích hoạt tài khoản!`;
           this.alert = [tb];
         } else {
           this.rError = true;
