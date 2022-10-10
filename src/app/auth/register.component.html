@@ -23,7 +23,7 @@
                                     <input type="text" [(ngModel)]="register.name" #name="ngModel" id="name" name="name" class="form-control" placeholder="Họ tên" required>
                                     <div [hidden]="name.valid || name.untouched" class="message-valid">
                                         <span *ngIf="name.errors && name.errors.required"
-                                              class="badge badge-warning">
+                                              class="badge badge-danger">
                                             Phải nhập Họ và Tên!
                                         </span>
                                     </div>
@@ -35,7 +35,7 @@
                                     <input type="text" [(ngModel)]="register.phone_number" #phone_number="ngModel" id="phone_number" name="phone_number" class="form-control" placeholder="Số điện thoại" required>
                                     <div [hidden]="phone_number.valid || phone_number.untouched" class="message-valid">
                                         <span *ngIf="phone_number.errors && phone_number.errors.required"
-                                              class="badge badge-warning">
+                                              class="badge badge-danger">
                                             Phải nhập Số điện thoại!
                                         </span>
                                     </div>
@@ -48,7 +48,7 @@
                                            autocomplete="email" required>
                                     <div [hidden]="email.valid || email.untouched" class="message-valid">
                                         <span *ngIf="email.errors && email.errors.required"
-                                              class="badge badge-warning">
+                                              class="badge badge-danger">
                                             Phải nhập Email đăng ký!
                                         </span>
                                     </div>
@@ -61,7 +61,7 @@
                                            autocomplete="new-password" required>
                                     <div [hidden]="password.valid || password.untouched" class="message-valid">
                                         <span *ngIf="password.errors && password.errors.required"
-                                              class="badge badge-warning">
+                                              class="badge badge-danger">
                                             Phải nhập Mật khẩu!
                                         </span>
                                     </div>
@@ -74,28 +74,17 @@
                                            autocomplete="new-password" required>
                                     <div [hidden]="c_password.valid || c_password.untouched" class="message-valid">
                                         <span *ngIf="c_password.errors && c_password.errors.required"
-                                              class="badge badge-warning">
+                                              class="badge badge-danger">
                                             Phải nhắc lại Mật khẩu!
                                         </span>
                                     </div>
                                 </div>
-                                <button [disabled]="!form.form.valid" (click)="registerAcc()" type="button" class="btn btn-block btn-success">Đăng Ký</button>
+                                <button [disabled]="!form.form.valid" (click)="registerAcc()" type="button" class="btn btn-block btn-primary">Đăng Ký</button>
                                 <p class="mt-2"><a class="pull-right" (click)="login()" href="javascript:void(0);"
-                                                   style="font-size: 14px"><i class="cui-shield icons"></i> Đăng
+                                                   style="font-size: 14px; text-decoration: none;"><i class="fa fa-arrow-left"></i> Đăng
                                     nhập</a></p>
                             </form>
                         </div>
-                        <!--<div class="card-footer p-4">
-                            <div class="row">
-                                <div class="col-6">
-                                    <button class="btn btn-block btn-facebook" type="button"><span>facebook</span>
-                                    </button>
-                                </div>
-                                <div class="col-6">
-                                    <button class="btn btn-block btn-twitter" type="button"><span>Google</span></button>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>

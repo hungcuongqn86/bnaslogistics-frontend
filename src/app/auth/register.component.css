@@ -1,4 +1,5 @@
 .message-valid {
-    display: inline-block;
-    width: 100%;
+  display: inline-block;
+  width: 100%;
+  margin-top: 3px;
 }
