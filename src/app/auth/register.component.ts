@@ -20,8 +20,8 @@ export interface Register {
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   public register: Register;
-  public rError;
-  public sSuccess;
+  public rError = false;
+  public sSuccess = false;
   public alert: string[];
   public sub: Subscription;
 
@@ -60,15 +60,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
         } else {
           this.rError = true;
           this.sSuccess = false;
-          this.alert = res.data;
-          console.log(alert);
+          if (res.data) {
+            this.alert = res.data;
+          } else {
+            this.alert = ['Đăng ký không thành công, vui lòng liên hệ với Admin để được hỗ trợ!'];
+          }
         }
         this.sub.unsubscribe();
         this.authService.showLoading(false);
       }, (error) => {
         this.rError = true;
         this.sSuccess = false;
-        this.alert = [error.message];
+        this.alert = ['Đăng ký không thành công, vui lòng liên hệ với Admin để được hỗ trợ!'];
         this.sub.unsubscribe();
         this.authService.showLoading(false);
       });

@@ -8,9 +8,10 @@
                             <form #form="ngForm" id="login-form">
                                 <h1>Đăng ký</h1>
                                 <p class="text-muted">Tạo tài khoản thành viên</p>
-                                <div class="input-group mb-3">
+                                <div *ngIf="!sSuccess">
+                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="icon-user"></i></span>
+                                      <span class="input-group-text"><i class="icon-user"></i></span>
                                     </div>
                                     <input type="text" [(ngModel)]="register.name" #name="ngModel" id="name" name="name" class="form-control" placeholder="Họ tên" required>
                                     <div [hidden]="name.valid || name.untouched" class="message-valid">
@@ -19,10 +20,10 @@
                                             Phải nhập Họ và Tên!
                                         </span>
                                     </div>
-                                </div>
-                                <div class="input-group mb-3">
+                                  </div>
+                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="cui-phone icons"></i></span>
+                                      <span class="input-group-text"><i class="cui-phone icons"></i></span>
                                     </div>
                                     <input type="text" [(ngModel)]="register.phone_number" #phone_number="ngModel" id="phone_number" name="phone_number" class="form-control" placeholder="Số điện thoại" required>
                                     <div [hidden]="phone_number.valid || phone_number.untouched" class="message-valid">
@@ -31,10 +32,10 @@
                                             Phải nhập Số điện thoại!
                                         </span>
                                     </div>
-                                </div>
-                                <div class="input-group mb-3">
+                                  </div>
+                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="cui-envelope-closed icons"></i></span>
+                                      <span class="input-group-text"><i class="cui-envelope-closed icons"></i></span>
                                     </div>
                                     <input [(ngModel)]="register.email" #email="ngModel" id="email" name="email" type="text" class="form-control" placeholder="Email dùng để đăng nhập"
                                            autocomplete="email" required>
@@ -44,10 +45,10 @@
                                             Phải nhập Email đăng ký!
                                         </span>
                                     </div>
-                                </div>
-                                <div class="input-group mb-3">
+                                  </div>
+                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                                      <span class="input-group-text"><i class="icon-lock"></i></span>
                                     </div>
                                     <input [(ngModel)]="register.password" #password="ngModel" id="password" name="password" type="password" class="form-control" placeholder="Mật khẩu"
                                            autocomplete="new-password" required>
@@ -57,10 +58,10 @@
                                             Phải nhập Mật khẩu!
                                         </span>
                                     </div>
-                                </div>
-                                <div class="input-group mb-4">
+                                  </div>
+                                  <div class="input-group mb-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                                      <span class="input-group-text"><i class="icon-lock"></i></span>
                                     </div>
                                     <input [(ngModel)]="register.c_password" #c_password="ngModel" id="c_password" name="c_password"  type="password" class="form-control" placeholder="Nhắc lại mật khẩu"
                                            autocomplete="new-password" required>
@@ -70,6 +71,7 @@
                                             Phải nhắc lại Mật khẩu!
                                         </span>
                                     </div>
+                                  </div>
                                 </div>
                                 <div *ngIf="rError" class="alert alert-danger">
                                   <p *ngFor="let error of alert"><strong><i class="fa fa-exclamation-triangle"
