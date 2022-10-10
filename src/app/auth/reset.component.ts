@@ -45,8 +45,7 @@ export class ResetComponent implements OnInit, OnDestroy {
         } else {
           this.sSuccess = false;
           this.rError = true;
-          if (data.data) {
-            console.log(121212)
+          if (data.data && data.data.length > 0) {
             this.alert = data.data;
           } else {
             this.alert = ['Đặt lại mật khẩu không thành công, vui lòng liên hệ với Admin để được hỗ trợ!'];

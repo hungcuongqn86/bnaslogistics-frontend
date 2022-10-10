@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         } else {
           this.rError = true;
           this.sSuccess = false;
-          if (res.data) {
+          if (res.data && res.data.length > 0) {
             this.alert = res.data;
           } else {
             this.alert = ['Đăng ký không thành công, vui lòng liên hệ với Admin để được hỗ trợ!'];
