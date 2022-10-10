@@ -5,14 +5,6 @@
                 <div class="col-md-6 mx-auto">
                     <div class="card mx-4">
                         <div class="card-body p-4">
-                            <div *ngIf="rError" class="alert alert-warning">
-                                <strong><i class="fa fa-exclamation-triangle"
-                                           aria-hidden="true"></i> Warning!</strong> {{alert}}
-                            </div>
-                            <div *ngIf="sSuccess" class="alert alert-success">
-                                <strong><i class="fa fa-exclamation-triangle"
-                                           aria-hidden="true"></i> Success!</strong> {{alert}}
-                            </div>
                             <form #form="ngForm" id="login-form">
                                 <h1>Đăng ký</h1>
                                 <p class="text-muted">Tạo tài khoản thành viên</p>
@@ -78,6 +70,14 @@
                                             Phải nhắc lại Mật khẩu!
                                         </span>
                                     </div>
+                                </div>
+                                <div *ngIf="rError" class="alert alert-warning">
+                                  <strong><i class="fa fa-exclamation-triangle"
+                                             aria-hidden="true"></i> Warning!</strong> {{alert}}
+                                </div>
+                                <div *ngIf="sSuccess" class="alert alert-success">
+                                  <strong><i class="fa fa-exclamation-triangle"
+                                             aria-hidden="true"></i> Success!</strong> {{alert}}
                                 </div>
                                 <button [disabled]="!form.form.valid" (click)="registerAcc()" type="button" class="btn btn-block btn-primary">Đăng Ký</button>
                                 <p class="mt-2"><a class="pull-right" (click)="login()" href="javascript:void(0);"

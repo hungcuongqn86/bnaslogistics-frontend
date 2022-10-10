@@ -8,7 +8,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {HandleError, HttpErrorHandler} from './http-error-handler.service';
 import {Util} from './helper/lib';
-import {IUser} from "./models/interface";
+import {IUser} from './models/interface';
+import {LoadingService} from './loading.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,9 +24,15 @@ export class AuthService {
   private handleError: HandleError;
   public user: IUser;
 
-  constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler, private router: Router) {
+  constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler,
+              private loadingService: LoadingService,
+              private router: Router) {
     this.handleError = httpErrorHandler.createHandleError('AuthService');
     return AuthService.instance = AuthService.instance || this;
+  }
+
+  showLoading(value: boolean) {
+    this.loadingService.setLoading(value);
   }
 
   public hasRole(role: string) {
