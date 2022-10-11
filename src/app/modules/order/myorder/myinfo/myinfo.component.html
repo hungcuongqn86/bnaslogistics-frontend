@@ -133,21 +133,22 @@
             <sup> đ</sup></strong></span>
           </p>
         </div>
+      </div>
+      <div class="row">
         <div class="col-md-6">
-          <p>Tổng phí = 5 + 6 + 7 + 8 + 9<span
+
+        </div>
+        <div class="col-md-6">
+          <p style="color: #ba1f1f; font-weight: bold;">Tổng phí = 5 + 6 + 7 + 8 + 9<span
             class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 2}}</strong></span></p>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<form novalidate #form="ngForm" class="form-horizontal">
-  <div *ngIf="orderService.orderRe"
-       class="card border-0">
-    <div class="card-body p-0">
-      <div class="row">
-        <div class="col-lg-12">
+      <div *ngIf="orderService.orderRe" style="margin-top: 15px;" class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-lg-6">
           <div class="col-form-label text-right">
             <div class="form-check form-check-inline mr-3">
               <label class="check-label">
@@ -197,6 +198,15 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<form novalidate #form="ngForm" class="form-horizontal">
+  <div *ngIf="orderService.orderRe"
+       class="card border-0">
+    <div class="card-body p-0">
+
     </div>
   </div>
   <div class="table-responsive">
