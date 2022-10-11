@@ -1,95 +1,120 @@
 <div class="app-body">
-    <main class="main d-flex align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <div class="card mx-4">
-                        <div class="card-body p-4">
-                            <form #form="ngForm" id="login-form">
-                                <h1>Đăng ký</h1>
-                                <p class="text-muted">Tạo tài khoản thành viên</p>
-                                <div *ngIf="!sSuccess">
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text"><i class="icon-user"></i></span>
-                                    </div>
-                                    <input type="text" [(ngModel)]="register.name" #name="ngModel" id="name" name="name" class="form-control" placeholder="Họ tên" required>
-                                    <div [hidden]="name.valid || name.untouched" class="message-valid">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <form #form="ngForm" id="login-form">
+                <h1>Đăng ký</h1>
+                <p class="text-muted">Tạo tài khoản thành viên</p>
+                <div *ngIf="!sSuccess">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input type="text" [(ngModel)]="register.name" #name="ngModel" id="name" name="name"
+                           class="form-control" placeholder="Họ tên" required>
+                    <div [hidden]="name.valid || name.untouched" class="message-valid">
                                         <span *ngIf="name.errors && name.errors.required"
                                               class="badge badge-danger">
                                             Phải nhập Họ và Tên!
                                         </span>
-                                    </div>
-                                  </div>
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text"><i class="cui-phone icons"></i></span>
-                                    </div>
-                                    <input type="text" [(ngModel)]="register.phone_number" #phone_number="ngModel" id="phone_number" name="phone_number" class="form-control" placeholder="Số điện thoại" required>
-                                    <div [hidden]="phone_number.valid || phone_number.untouched" class="message-valid">
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="cui-phone icons"></i></span>
+                    </div>
+                    <input type="text" [(ngModel)]="register.phone_number" #phone_number="ngModel" id="phone_number"
+                           name="phone_number" class="form-control" placeholder="Số điện thoại" required>
+                    <div [hidden]="phone_number.valid || phone_number.untouched" class="message-valid">
                                         <span *ngIf="phone_number.errors && phone_number.errors.required"
                                               class="badge badge-danger">
                                             Phải nhập Số điện thoại!
                                         </span>
-                                    </div>
-                                  </div>
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text"><i class="cui-envelope-closed icons"></i></span>
-                                    </div>
-                                    <input [(ngModel)]="register.email" #email="ngModel" id="email" name="email" type="text" class="form-control" placeholder="Email dùng để đăng nhập"
-                                           autocomplete="email" required>
-                                    <div [hidden]="email.valid || email.untouched" class="message-valid">
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="cui-envelope-closed icons"></i></span>
+                    </div>
+                    <input [(ngModel)]="register.email" #email="ngModel" id="email" name="email" type="text"
+                           class="form-control" placeholder="Email dùng để đăng nhập"
+                           autocomplete="email" required>
+                    <div [hidden]="email.valid || email.untouched" class="message-valid">
                                         <span *ngIf="email.errors && email.errors.required"
                                               class="badge badge-danger">
                                             Phải nhập Email đăng ký!
                                         </span>
-                                    </div>
-                                  </div>
-                                  <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text"><i class="icon-lock"></i></span>
-                                    </div>
-                                    <input [(ngModel)]="register.password" #password="ngModel" id="password" name="password" type="password" class="form-control" placeholder="Mật khẩu"
-                                           autocomplete="new-password" required>
-                                    <div [hidden]="password.valid || password.untouched" class="message-valid">
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                      </div>
+                      <input [(ngModel)]="register.password" #password="ngModel" id="password" name="password"
+                             [type]="show ? 'text' : 'password'" class="form-control" placeholder="Mật khẩu"
+                             autocomplete="new-password" required>
+                      <div (click)="spassword()" class="input-group-append" style="cursor: pointer;">
+                                        <span class="input-group-text">
+                                          <i *ngIf="!show" class="fa fa-eye"></i>
+                                          <i *ngIf="show" class="fa fa-eye-slash"></i>
+                                        </span>
+                      </div>
+                    </div>
+                    <div [hidden]="password.valid || password.untouched" class="message-valid">
                                         <span *ngIf="password.errors && password.errors.required"
                                               class="badge badge-danger">
                                             Phải nhập Mật khẩu!
                                         </span>
-                                    </div>
-                                  </div>
-                                  <div class="input-group mb-4">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text"><i class="icon-lock"></i></span>
-                                    </div>
-                                    <input [(ngModel)]="register.c_password" #c_password="ngModel" id="c_password" name="c_password"  type="password" class="form-control" placeholder="Nhắc lại mật khẩu"
-                                           autocomplete="new-password" required>
-                                    <div [hidden]="c_password.valid || c_password.untouched" class="message-valid">
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                      </div>
+                      <input [(ngModel)]="register.c_password" #c_password="ngModel" id="c_password" name="c_password"
+                             [type]="show1 ? 'text' : 'password'" class="form-control" placeholder="Nhắc lại mật khẩu"
+                             autocomplete="new-password" required>
+                      <div (click)="spassword1()" class="input-group-append" style="cursor: pointer;">
+                                        <span class="input-group-text">
+                                          <i *ngIf="!show1" class="fa fa-eye"></i>
+                                          <i *ngIf="show1" class="fa fa-eye-slash"></i>
+                                        </span>
+                      </div>
+                    </div>
+                    <div [hidden]="c_password.valid || c_password.untouched" class="message-valid">
                                         <span *ngIf="c_password.errors && c_password.errors.required"
                                               class="badge badge-danger">
                                             Phải nhắc lại Mật khẩu!
                                         </span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div *ngIf="rError" class="alert alert-danger">
-                                  <p *ngFor="let error of alert"><strong><i class="fa fa-exclamation-triangle"
-                                                                            aria-hidden="true"></i> Warning!</strong> {{error}}</p>
-                                </div>
-                                <div *ngIf="sSuccess" class="alert alert-success">
-                                  <p *ngFor="let mess of alert"><strong><i class="fa fa-exclamation-triangle"
-                                                                            aria-hidden="true"></i> Success!</strong> {{mess}}</p>
-                                </div>
-                                <button *ngIf="!sSuccess" [disabled]="!form.form.valid" (click)="registerAcc()" type="button" class="btn btn-block btn-primary">Đăng Ký</button>
-                                <p class="mt-2"><a class="pull-right" (click)="login()" href="javascript:void(0);"
-                                                   style="font-size: 14px; text-decoration: none;"><i class="fa fa-arrow-left"></i> Đăng
-                                    nhập</a></p>
-                            </form>
-                        </div>
                     </div>
+                  </div>
+
                 </div>
+                <div *ngIf="rError" class="alert alert-danger">
+                  <p *ngFor="let error of alert"><strong><i class="fa fa-exclamation-triangle"
+                                                            aria-hidden="true"></i> Warning!</strong> {{error}}</p>
+                </div>
+                <div *ngIf="sSuccess" class="alert alert-success">
+                  <p *ngFor="let mess of alert"><strong><i class="fa fa-exclamation-triangle"
+                                                           aria-hidden="true"></i> Success!</strong> {{mess}}</p>
+                </div>
+                <button *ngIf="!sSuccess" [disabled]="!form.form.valid" (click)="registerAcc()" type="button"
+                        class="btn btn-block btn-primary">Đăng Ký
+                </button>
+                <p class="mt-2"><a class="pull-right" (click)="login()" href="javascript:void(0);"
+                                   style="font-size: 14px; text-decoration: none;"><i class="fa fa-arrow-left"></i> Đăng
+                  nhập</a></p>
+              </form>
             </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
 </div>

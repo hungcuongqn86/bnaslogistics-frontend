@@ -58,12 +58,20 @@
                   Password <code class="highlighter-rouge">*</code>
                 </label>
                 <div class="col-md-9">
-                  <input [(ngModel)]="userService.user.password" #password="ngModel" type="password"
-                         id="password"
-                         name="password"
-                         required
-                         class="form-control"
-                         placeholder="Password">
+                  <div class="input-group">
+                    <input [(ngModel)]="userService.user.password" #password="ngModel" [type]="show ? 'text' : 'password'"
+                           id="password"
+                           name="password"
+                           required
+                           class="form-control"
+                           placeholder="Password">
+                    <div (click)="spassword()" class="input-group-append" style="cursor: pointer;">
+                                        <span class="input-group-text">
+                                          <i *ngIf="!show" class="fa fa-eye"></i>
+                                          <i *ngIf="show" class="fa fa-eye-slash"></i>
+                                        </span>
+                    </div>
+                  </div>
                   <div [hidden]="password.valid || password.untouched">
                                 <span *ngIf="password.errors && password.errors.required"
                                       class="badge badge-warning">
@@ -77,12 +85,20 @@
                   Nhập lại password <code class="highlighter-rouge">*</code>
                 </label>
                 <div class="col-md-9">
-                  <input [(ngModel)]="userService.user.c_password" #c_password="ngModel"
-                         type="password" id="c_password"
-                         name="c_password"
-                         required
-                         class="form-control"
-                         placeholder="Nhập lại password">
+                  <div class="input-group">
+                    <input [(ngModel)]="userService.user.c_password" #c_password="ngModel"
+                           [type]="show1 ? 'text' : 'password'" id="c_password"
+                           name="c_password"
+                           required
+                           class="form-control"
+                           placeholder="Nhập lại password">
+                    <div (click)="spassword1()" class="input-group-append" style="cursor: pointer;">
+                                        <span class="input-group-text">
+                                          <i *ngIf="!show1" class="fa fa-eye"></i>
+                                          <i *ngIf="show1" class="fa fa-eye-slash"></i>
+                                        </span>
+                    </div>
+                  </div>
                   <div [hidden]="c_password.valid || c_password.untouched">
                                 <span *ngIf="c_password.errors && c_password.errors.required"
                                       class="badge badge-warning">

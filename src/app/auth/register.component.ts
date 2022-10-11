@@ -24,6 +24,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public sSuccess = false;
   public alert: string[];
   public sub: Subscription;
+  public show = false;
+  public show1 = false;
 
   constructor(private router: Router, private authService: AuthService) {
     this.register = {
@@ -75,6 +77,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
         this.authService.showLoading(false);
       });
+  }
+
+  public spassword() {
+    this.show = !this.show;
+  }
+
+  public spassword1() {
+    this.show1 = !this.show1;
   }
 
   public login() {

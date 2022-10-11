@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/muser/user.service';
 import {AuthService} from '../../../auth.service';
-import {forkJoin, Observable} from "rxjs";
-import {SettingService} from "../../../services/setting/setting.service";
-import {IChinaWarehouse} from "../../../models/interface";
+import {forkJoin, Observable} from 'rxjs';
+import {SettingService} from '../../../services/setting/setting.service';
+import {IChinaWarehouse} from '../../../models/interface';
 
 @Component({
   selector: 'app-account-profile',
@@ -14,6 +14,8 @@ import {IChinaWarehouse} from "../../../models/interface";
 
 export class ProfileComponent implements OnInit {
   chinaWarehouses: IChinaWarehouse[];
+  public show = false;
+  public show1 = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private auth: AuthService, public userService: UserService, public settingService: SettingService) {
     this.userService.user.id = this.auth.user.id;
@@ -44,6 +46,14 @@ export class ProfileComponent implements OnInit {
       this.settingService.showLoading(false);
       listSub.unsubscribe();
     });
+  }
+
+  public spassword() {
+    this.show = !this.show;
+  }
+
+  public spassword1() {
+    this.show1 = !this.show1;
   }
 
   private setWarehouseInfo() {

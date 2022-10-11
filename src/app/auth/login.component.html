@@ -27,11 +27,17 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-lock"></i></span>
                                         </div>
-                                        <input type="password" placeholder="Password" [(ngModel)]="fdata.password"
+                                        <input [type]="show ? 'text' : 'password'" placeholder="Password" [(ngModel)]="fdata.password"
                                                name="password" id="password"
                                                tabindex="2"
                                                required
                                                class="form-control" value=""/>
+                                      <div (click)="password()" class="input-group-append" style="cursor: pointer;">
+                                        <span class="input-group-text">
+                                          <i *ngIf="!show" class="fa fa-eye"></i>
+                                          <i *ngIf="show" class="fa fa-eye-slash"></i>
+                                        </span>
+                                      </div>
                                     </div>
                                     <!--<div class="captcha2-box">
                                         <ngx-recaptcha2 [hl]="'vi'" [size]="'compact'" (success)="handleSuccess($event)"></ngx-recaptcha2>

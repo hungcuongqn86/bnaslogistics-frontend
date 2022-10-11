@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   rError;
   alert;
   fdata: any = {email: '', password: '', remember_me: false, captcha: ''};
+  show = false;
 
   constructor(private router: Router, private authService: AuthService) {
   }
@@ -55,6 +56,10 @@ export class LoginComponent implements OnInit {
         this.rError = true;
         this.alert = 'Đăng nhập không thành công!';
       });
+  }
+
+  public password() {
+    this.show = !this.show;
   }
 
   public register() {
