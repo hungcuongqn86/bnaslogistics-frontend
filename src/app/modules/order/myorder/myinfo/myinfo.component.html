@@ -306,15 +306,68 @@
       </table>
     </div>
     <div class="card-footer">
-      <div>
-        <button style="width: 129px;" class="btn btn-block btn-primary btn-rounded"
-                (click)="reOrderOpenDialog(reorder_template)"
-                type="button">Đặt lại đơn
-        </button>
-      </div>
+      <ul class="header-actions">
+        <li>
+          <button style="width: 129px;" class="btn btn-block btn-primary btn-rounded"
+                  (click)="reOrderOpenDialog(reorder_template)"
+                  type="button">Đặt lại đơn
+          </button>
+        </li>
+        <li *ngIf="!nv && orderService.orderRe && orderService.orderRe.status===2" >
+          <button style="width: 129px;" class="btn btn-block btn-primary btn-rounded"
+                  (click)="datCoc(template,orderService.orderRe)"
+                  type="button">Đặt cọc
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 </form>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title">Đặt cọc</h5>
+  </div>
+  <div class="modal-body">
+    <form novalidate #form="ngForm">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="content">Tiền hàng </label>
+            <p><strong>{{inputDatCoc.tien_hang.toString() | tempPrice: 1 : 1 : false}}</strong><sup>đ</sup>
+            </p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="content">Dư nợ hiện tại</label>
+            <p><strong>{{auth.user.debt.toString() | tempPrice: 1 : 1 : false}}</strong><sup>đ</sup></p>
+          </div>
+        </div>
+      </div>
+      <alert type="danger" *ngIf="auth.user.debt < inputDatCoc.dc_value">
+        <p><strong>Cảnh báo!</strong> Dư nợ không đủ để thực hiện đặt cọc!</p>
+      </alert>
+      <p></p>
+      <div class="form-group">
+        <label for="content">Nội dung</label>
+        <textarea [(ngModel)]="inputDatCoc.content" #content="ngModel" id="content" name="content" rows="3"
+                  disabled
+                  class="form-control"
+                  placeholder="Nội dung ..."></textarea>
+      </div>
+      <p></p>
+      <alert type="danger" *ngIf="errorMessage.length > 0">
+        <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="confirmDatCoc()">OK</button>
+    <button type="button" class="btn btn-warning" (click)="declineDatCoc()">Cancel</button>
+  </div>
+</ng-template>
+
 <ng-template #reorder_template>
   <div class="modal-body text-center">
     <p>Bạn muốn đặt đơn mới tương tự đơn hàng này!?</p>
