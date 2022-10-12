@@ -183,6 +183,17 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
     return n2.split('').reverse().join('');
   }
 
+  public reloadOrder() {
+    this.orderService.showLoading(true);
+    if (this.orderService.orderRe.id !== null) {
+      this.orderService.getOrder(this.orderService.orderRe.id)
+        .subscribe(order => {
+          this.orderService.orderRe = order.data;
+          this.orderService.showLoading(false);
+        });
+    }
+  }
+
   public confirmDatCoc(): void {
     this.orderService.showLoading(true);
     if (this.inputDatCoc.id > 0) {
@@ -191,6 +202,7 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
           if (res.status) {
             this.orderService.showLoading(false);
             this.modalRef.hide();
+            this.reloadOrder();
           } else {
             this.errorMessage.push(res.message);
             this.orderService.showLoading(false);
