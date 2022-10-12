@@ -189,8 +189,49 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
       this.orderService.getOrder(this.orderService.orderRe.id)
         .subscribe(order => {
           this.orderService.orderRe = order.data;
+          this.genBangphi();
           this.orderService.showLoading(false);
         });
+    }
+  }
+
+  private genBangphi() {
+    this.orderService.bang_phi = {
+      tong_can_nang: 0, tong_can_nang_qd: 0, tong_tien_can: 0,
+      tong_kich_thuoc: 0,
+      tong_tien_chong_soc: 0,
+      tong_tien_dong_go: 0,
+      phi_van_phat_sinh: 0
+    };
+
+    for (let i = 0; i < this.orderService.orderRe.package.length; i++) {
+      this.orderService.bang_phi.tong_can_nang = Number(this.orderService.bang_phi.tong_can_nang)
+        + Number(this.orderService.orderRe.package[i].weight);
+      this.orderService.bang_phi.tong_can_nang = Math.round(this.orderService.bang_phi.tong_can_nang * 100) / 100;
+
+      this.orderService.bang_phi.tong_can_nang_qd = Number(this.orderService.bang_phi.tong_can_nang_qd)
+        + Number(this.orderService.orderRe.package[i].weight_qd);
+      this.orderService.bang_phi.tong_can_nang_qd = Math.round(this.orderService.bang_phi.tong_can_nang_qd * 100) / 100;
+
+      this.orderService.bang_phi.tong_kich_thuoc = Number(this.orderService.bang_phi.tong_kich_thuoc)
+        + Number(this.orderService.orderRe.package[i].size);
+      this.orderService.bang_phi.tong_kich_thuoc = Math.round(this.orderService.bang_phi.tong_kich_thuoc * 100) / 100;
+
+      this.orderService.bang_phi.tong_tien_can = Number(this.orderService.bang_phi.tong_tien_can)
+        + Number(this.orderService.orderRe.package[i].tien_can_tt);
+      this.orderService.bang_phi.tong_tien_can = Math.round(this.orderService.bang_phi.tong_tien_can * 100) / 100;
+
+      this.orderService.bang_phi.tong_tien_dong_go = Number(this.orderService.bang_phi.tong_tien_dong_go)
+        + Number(this.orderService.orderRe.package[i].tien_dong_go);
+      this.orderService.bang_phi.tong_tien_dong_go = Math.round(this.orderService.bang_phi.tong_tien_dong_go * 100) / 100;
+
+      this.orderService.bang_phi.tong_tien_chong_soc = Number(this.orderService.bang_phi.tong_tien_chong_soc)
+        + Number(this.orderService.orderRe.package[i].tien_chong_soc_tt);
+      this.orderService.bang_phi.tong_tien_chong_soc = Math.round(this.orderService.bang_phi.tong_tien_chong_soc * 100) / 100;
+
+      this.orderService.bang_phi.phi_van_phat_sinh = Number(this.orderService.bang_phi.phi_van_phat_sinh)
+        + Number(this.orderService.orderRe.package[i].phi_van_phat_sinh);
+      this.orderService.bang_phi.phi_van_phat_sinh = Math.round(this.orderService.bang_phi.phi_van_phat_sinh * 100) / 100;
     }
   }
 
