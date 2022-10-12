@@ -46,6 +46,12 @@ const routes: Routes = [
         data: {
             title: 'Danh sách đơn hàng'
         }
+    },
+    {
+      path: 'myorder/:status/:type/detail/:id', component: MyorderDetailComponent,
+      data: {
+        title: 'Chi tiết đơn hàng'
+      }
     }
 ];
 

@@ -29,6 +29,8 @@ export class MyorderComponent implements OnInit {
   errorMessage: string[] = [];
   arrDeposit = [];
   nv = false;
+  stype = '';
+  sstatus = '';
 
   constructor(public orderService: OrderService, private settingService: SettingService,
               private modalService: BsModalService,
@@ -42,8 +44,9 @@ export class MyorderComponent implements OnInit {
     this.counts = null;
     this.route.params.subscribe(params => {
       if (params['status']) {
-        const type = params['type'] ? params['type'] : '';
-        this.selectTab(params['status'], type);
+        this.stype = params['type'] ? params['type'] : '';
+        this.sstatus = params['status'] ? params['status'] : '';
+        this.selectTab(this.sstatus, this.stype);
       }
     });
     this.nv = email_nv.includes(auth.user.email);
@@ -59,7 +62,7 @@ export class MyorderComponent implements OnInit {
   }
 
   public editOrder(id) {
-    this.router.navigate([`/order/myorder/detail/${id}`]);
+    this.router.navigate([`/order/myorder`, this.sstatus, this.stype, `detail`, id]);
   }
 
   public searchOrders() {
