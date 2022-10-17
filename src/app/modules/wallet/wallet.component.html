@@ -1,12 +1,31 @@
 <div class="card entry-list detail">
   <div class="card-header">
     <div class="row justify-content-between align-items-center">
-      <div class="col-12 col-md-6">
+      <div class="col-md-4">
         <div class="title-list">
           <span>{{authService.user.code}} - {{authService.user.name}}</span>
         </div>
       </div>
-      <div class="col-12 col-md-6">
+      <div class="col-md-4">
+        <table style="    margin-top: 15px;" class="table table-hover table-bordered">
+          <tbody>
+          <tr>
+            <td style="    vertical-align: middle;
+    font-weight: bold;    font-size: 18px;"><i class="fa fa-usd" aria-hidden="true"></i> Số dư hiện tại</td>
+            <td style="font-size: 24px;
+    font-weight: bold;
+    color: red;
+}">{{authService.user.debt.toString() | tempPrice : 1 : 1: true}} <sup>đ</sup></td>
+          </tr>
+          <!--<tr style="    vertical-align: middle;
+    font-weight: bold;">
+            <td><i class="fa fa-usd" aria-hidden="true"></i> Tổng tiền đã nạp</td>
+            <td style="color: #43A047;">{{totalTransactions.toString() | tempPrice : 1 : 1: true}} <sup>đ</sup></td>
+          </tr>-->
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-4">
         <div class="card-header-actions">
           <button (click)="rutTien(templateRutTien)"
                   class="btn btn-block btn-outline-primary btn-sm"
@@ -17,27 +36,6 @@
     </div>
   </div>
   <div *ngIf="authService.user" class="card-body entry-detail">
-    <div class="row">
-      <div class="col-md-4 table-responsive">
-        <table class="table table-hover table-bordered">
-          <tbody>
-          <tr>
-            <td style="    vertical-align: middle;
-    font-weight: bold;"><i class="fa fa-usd" aria-hidden="true"></i> Số dư</td>
-            <td style="font-size: 24px;
-    font-weight: bold;
-    color: red;
-}">{{authService.user.debt.toString() | tempPrice : 1 : 1: true}} <sup>đ</sup></td>
-          </tr>
-          <tr style="    vertical-align: middle;
-    font-weight: bold;">
-            <td><i class="fa fa-usd" aria-hidden="true"></i> Tổng tiền đã nạp</td>
-            <td style="color: #43A047;">{{totalTransactions.toString() | tempPrice : 1 : 1: true}} <sup>đ</sup></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
     <tabset class="tab-container">
       <tab>
         <ng-template tabHeading>Lịch sử giao dịch</ng-template>
