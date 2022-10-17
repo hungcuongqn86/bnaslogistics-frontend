@@ -4,6 +4,7 @@ import {AuthService} from '../../auth.service';
 import {Transaction, WithdrawalRequest} from '../../models/Transaction';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {WarehouseWait} from '../../models/Warehouse';
 
 @Component({
   selector: 'app-wallet',
@@ -19,6 +20,7 @@ export class WalletComponent {
   totalItems = 0;
   errorMessage: string[] = [];
   inputRutTien = {id: null, value: null, content: ''};
+  totalTransactions = 0;
 
   constructor(public userService: UserService, public authService: AuthService, private modalService: BsModalService) {
     this.getTransactions();
@@ -30,7 +32,18 @@ export class WalletComponent {
       .subscribe(transactions => {
         this.transactions = transactions.data.data;
         this.totalItems = transactions.data.total;
+        this.genData();
       });
+  }
+
+  private genData() {
+    this.totalTransactions = 0;
+    for (let i = 0; i < this.transactions.length; i++) {
+      if (this.transactions[i].otype.value > 0) {
+        console.log(this.transactions[i]);
+        this.totalTransactions = this.totalTransactions + this.transactions[i].value;
+      }
+    }
   }
 
   private getWithdrawalRequest() {
