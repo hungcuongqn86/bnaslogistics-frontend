@@ -15,6 +15,8 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   public sSuccess = false;
   public alert: string[];
   public sub: Subscription;
+  show = false;
+  show1 = false;
 
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
@@ -33,6 +35,14 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+  }
+
+  public showpassword() {
+    this.show = !this.show;
+  }
+
+  public showpassword1() {
+    this.show1 = !this.show1;
   }
 
   private getInfo() {
