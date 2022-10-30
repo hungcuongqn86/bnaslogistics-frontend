@@ -13,6 +13,10 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 
 export class CustumerDetailComponent implements OnInit {
   modalRef: BsModalRef;
+  public resetPass: { password: string, password_confirmation: string };
+  show = false;
+  show1 = false;
+  errorMessage: string[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute
     , public authService: AuthService
@@ -23,6 +27,10 @@ export class CustumerDetailComponent implements OnInit {
         this.userService.user.id = params['id'];
       }
     });
+    this.resetPass = {
+      password: null,
+      password_confirmation: null
+    };
   }
 
   ngOnInit() {
@@ -31,6 +39,14 @@ export class CustumerDetailComponent implements OnInit {
     } else {
       this.userService.reset();
     }
+  }
+
+  public showpassword() {
+    this.show = !this.show;
+  }
+
+  public showpassword1() {
+    this.show1 = !this.show1;
   }
 
   public getUser(): void {
@@ -61,6 +77,26 @@ export class CustumerDetailComponent implements OnInit {
         });
     }
     this.modalRef.hide();
+  }
+
+  public confirmChangePass(): void {
+    if (this.userService.user.id !== null) {
+      this.userService.showLoading(true);
+      this.userService.changePass(this.userService.user.id, this.resetPass)
+        .subscribe(user => {
+          this.getUser();
+          this.userService.showLoading(false);
+        });
+    }
+    this.modalRef.hide();
+  }
+
+  public changePassOpenDialog(template: TemplateRef<any>): void {
+    this.resetPass = {
+      password: null,
+      password_confirmation: null
+    };
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
   }
 
   public decline(): void {

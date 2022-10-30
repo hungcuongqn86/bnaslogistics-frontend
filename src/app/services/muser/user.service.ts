@@ -164,6 +164,14 @@ export class UserService {
       );
   }
 
+  public changePass(id: number, resetPass: { password: string, password_confirmation: string }): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}passwordreset/${id}`;
+    return this.http.post<any>(url, resetPass)
+      .pipe(
+        catchError(this.handleError('activeUser', id))
+      );
+  }
+
   public addTransaction(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `muser/transaction/create`;
     this.transaction.user_id = this.user.id;
