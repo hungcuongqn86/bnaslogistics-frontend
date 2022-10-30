@@ -156,6 +156,14 @@ export class UserService {
       );
   }
 
+  public activeUser(id: number): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}active/${id}`;
+    return this.http.post<any>(url, {})
+      .pipe(
+        catchError(this.handleError('activeUser', id))
+      );
+  }
+
   public addTransaction(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `muser/transaction/create`;
     this.transaction.user_id = this.user.id;

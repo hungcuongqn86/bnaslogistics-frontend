@@ -3,3 +3,7 @@
         padding: 15px 5px;
     }
 }
+
+ul.header-actions {
+  text-align: right;
+}
