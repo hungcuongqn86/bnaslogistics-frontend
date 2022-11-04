@@ -68,11 +68,16 @@ export class CustumerDetailComponent implements OnInit {
   }
 
   public confirmActive(): void {
+    this.errorMessage = [];
     if (this.userService.user.id !== null) {
       this.userService.showLoading(true);
       this.userService.activeUser(this.userService.user.id)
         .subscribe(user => {
-          this.getUser();
+          if (user.status) {
+            this.getUser();
+          } else {
+            this.errorMessage = user.data;
+          }
           this.userService.showLoading(false);
         });
     }
@@ -80,11 +85,16 @@ export class CustumerDetailComponent implements OnInit {
   }
 
   public confirmChangePass(): void {
+    this.errorMessage = [];
     if (this.userService.user.id !== null) {
       this.userService.showLoading(true);
       this.userService.changePass(this.userService.user.id, this.resetPass)
         .subscribe(user => {
-          this.getUser();
+          if (user.status) {
+            this.getUser();
+          } else {
+            this.errorMessage = user.data;
+          }
           this.userService.showLoading(false);
         });
     }

@@ -13,6 +13,9 @@
             <tabset>
               <tab>
                 <ng-template tabHeading>Thông tin</ng-template>
+                <alert type="danger" *ngIf="errorMessage.length > 0">
+                  <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+                </alert>
                 <app-mcustumer-custumer-detail-info>
                 </app-mcustumer-custumer-detail-info>
               </tab>

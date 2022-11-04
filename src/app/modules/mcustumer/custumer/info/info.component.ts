@@ -3,9 +3,9 @@ import {UserService} from '../../../../services/muser/user.service';
 import {PartnerService} from '../../../../services/mpartner/partner.service';
 import {Partner} from '../../../../models/Partner';
 import {AuthService} from '../../../../auth.service';
-import {forkJoin, Observable} from "rxjs";
-import {IRole, IUser, IVip} from "../../../../models/interface";
-import {SettingService} from "../../../../services/setting/setting.service";
+import {forkJoin, Observable} from 'rxjs';
+import {IRole, IUser, IVip} from '../../../../models/interface';
+import {SettingService} from '../../../../services/setting/setting.service';
 
 @Component({
   selector: 'app-mcustumer-custumer-detail-info',
