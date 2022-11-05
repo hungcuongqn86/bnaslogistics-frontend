@@ -150,6 +150,11 @@ const appRoutes: Routes = [
   {path: 'reset', component: ResetComponent, pathMatch: 'full'},
   {path: 'reset-password/:token', component: ResetPasswordComponent, pathMatch: 'full'},
   {path: 'activate-account/:token', component: ActiveComponent, pathMatch: 'full'},
+  {
+    path: 'website', loadChildren: () => new Promise(() => {
+      window.location.href = 'https://nguonhang.net/';
+    }), pathMatch: 'full'
+  },
   {path: '**', component: Error404Component, pathMatch: 'full'}
 ];
 
