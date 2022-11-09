@@ -11,64 +11,75 @@ import {Router} from '@angular/router';
 import {LoadingService} from '../loading.service';
 
 export interface BankAccount {
-    id: number;
-    name: string;
-    status: number;
-    bank_debt: number;
-    is_deleted: number;
-    created_at: string;
-    updated_at: string;
+  id: number;
+  name: string;
+  account_number: string;
+  account_name: string;
+  bin: string;
+  sender: string;
+  is_sms: string;
+  status: number;
+  bank_debt: number;
+  is_deleted: number;
+  created_at: string;
+  updated_at: string;
 }
 
 @Injectable()
 export class BankAccountService {
-    static instance: BankAccountService;
-    private handleError: HandleError;
-    private moduleUri = 'bankaccount/';
-    public account: BankAccount;
+  static instance: BankAccountService;
+  private handleError: HandleError;
+  private moduleUri = 'bankaccount/';
+  public account: BankAccount;
 
-    constructor(private router: Router, private loadingService: LoadingService,
-                private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
-        this.handleError = httpErrorHandler.createHandleError('PartnerService');
-        if (!this.account) {
-            this.reset();
-        }
-        return BankAccountService.instance = BankAccountService.instance || this;
+  constructor(private router: Router, private loadingService: LoadingService,
+              private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
+    this.handleError = httpErrorHandler.createHandleError('PartnerService');
+    if (!this.account) {
+      this.reset();
     }
+    return BankAccountService.instance = BankAccountService.instance || this;
+  }
 
-    showLoading(value: boolean) {
-        this.loadingService.setLoading(value);
-    }
+  showLoading(value: boolean) {
+    this.loadingService.setLoading(value);
+  }
 
-    reset() {
-        this.account = {
-            id: null, name: null, status: 1, is_deleted: 0, created_at: '', updated_at: '', bank_debt: null
-        };
-    }
+  reset() {
+    this.account = {
+      id: null, name: null, status: 1,
+      is_deleted: 0, created_at: '', updated_at: '', bank_debt: null,
+      account_name: null,
+      account_number: null,
+      is_sms: null,
+      bin: null,
+      sender: null
+    };
+  }
 
-    getBankAccounts(): Observable<any> {
-        const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
-        return this.http.get<any>(url)
-            .pipe(
-                catchError(this.handleError('getBankAccounts', []))
-            );
-    }
+  getBankAccounts(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getBankAccounts', []))
+      );
+  }
 
-    getBankAccount(id): Observable<any> {
-        const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
-        return this.http.get<any>(url)
-            .pipe(
-                catchError(this.handleError('getBankAccount', []))
-            );
-    }
+  getBankAccount(id): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getBankAccount', []))
+      );
+  }
 
-    getTransactions(accountid: number) {
-        const url = Util.getUri(apiV1Url) + `muser/transaction/search`;
-        let params = new HttpParams();
-        params = params.append('account_id', accountid.toString());
-        return this.http.get<any>(url, {params: params})
-            .pipe(
-                catchError(this.handleError('getTransactionTypes', []))
-            );
-    }
+  getTransactions(accountid: number) {
+    const url = Util.getUri(apiV1Url) + `muser/transaction/search`;
+    let params = new HttpParams();
+    params = params.append('account_id', accountid.toString());
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('getTransactionTypes', []))
+      );
+  }
 }

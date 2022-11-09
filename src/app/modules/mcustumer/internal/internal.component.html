@@ -12,7 +12,7 @@
                         <div class="col-12 col-md-8 ml-auto">
                             <div class="text-right">
                                 <div class="total-internal d-inline-block">
-                                    Tổng tài khoản: <span>{{total | tempPrice : 1 : 1}}</span>
+                                    Tổng tài khoản: <span>{{total.toString() | tempPrice : 1 : 1: true}}</span>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <tr *ngFor="let item of accounts">
                                 <td>{{item.id}}</td>
                                 <td>{{item.name}}</td>
-                                <td>{{item.bank_debt | tempPrice : 1 : 1}} <sup>đ</sup></td>
+                                <td>{{item.bank_debt.toString() | tempPrice : 1 : 1:true}} <sup>đ</sup></td>
                                 <td class="text-right">
                                     <button (click)="editPartner(item.id)" class="btn btn-sm btn-info text-white"
                                             type="button">
