@@ -11,7 +11,7 @@ import {BankSmsService} from '../../../services/bankSms.service';
 })
 
 export class SmsComponent implements OnInit {
-  bankSmss: IBankSms[];
+  bankSmss: IBankSms[] = [];
   totalItems = 0;
 
   constructor(public bankSmsService: BankSmsService,
@@ -33,7 +33,7 @@ export class SmsComponent implements OnInit {
     this.bankSmsService.getBankSmss()
       .subscribe(bankSmss => {
         if (bankSmss.status) {
-          this.bankSmss = bankSmss.data;
+          this.bankSmss = bankSmss.data.data;
           this.totalItems = bankSmss.data.total;
         }
         this.bankSmsService.showLoading(false);

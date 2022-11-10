@@ -32,7 +32,7 @@ export class BankSmsService {
   }
 
   getBankSmss(): Observable<any> {
-    const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}getall`;
     let params = new HttpParams();
     Object.keys(this.search).map((key) => {
       if (this.search[key]) {

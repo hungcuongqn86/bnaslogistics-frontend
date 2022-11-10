@@ -29,8 +29,7 @@
                     </div>
                   </div>
                   <div class="col-md-3">
-                    <button type="submit" (click)="getBank()"
-                            class="btn btn-primary mr-2 mb-1">
+                    <button type="submit" class="btn btn-primary mr-2 mb-1">
                       <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
                     </button>
                   </div>
@@ -43,11 +42,12 @@
               <thead>
               <tr>
                 <th width="5%">ID</th>
-                <th width="15%">SMS ID</th>
+                <th width="5%">SMS ID</th>
                 <th>Sender</th>
                 <th>Body</th>
-                <th width="15%">Date</th>
-                <th width="15%">Giao dịch</th>
+                <th width="10%">Ngày nhận tin</th>
+                <th width="10%">Ngày tạo</th>
+                <th width="10%">Giao dịch</th>
               </tr>
               </thead>
               <tbody>
@@ -57,6 +57,7 @@
                 <td>{{item.address}}</td>
                 <td>{{item.body}}</td>
                 <td>{{item.date}}</td>
+                <td>{{item.created_at}}</td>
                 <td></td>
               </tr>
               </tbody>
