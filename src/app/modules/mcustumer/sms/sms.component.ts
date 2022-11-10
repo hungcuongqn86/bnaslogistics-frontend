@@ -12,7 +12,7 @@ import {BankSmsService} from '../../../services/bankSms.service';
 
 export class SmsComponent implements OnInit {
   bankSmss: IBankSms[];
-  total = 0;
+  totalItems = 0;
 
   constructor(public bankSmsService: BankSmsService,
               private router: Router) {
@@ -23,11 +23,19 @@ export class SmsComponent implements OnInit {
     this.getBank();
   }
 
+  pageChanged(event: any): void {
+    this.bankSmsService.search.page = event.page;
+    this.getBank();
+  }
+
   public getBank() {
     this.bankSmsService.showLoading(true);
     this.bankSmsService.getBankSmss()
       .subscribe(bankSmss => {
-        this.bankSmss = bankSmss.data;
+        if (bankSmss.status) {
+          this.bankSmss = bankSmss.data;
+          this.totalItems = bankSmss.data.total;
+        }
         this.bankSmsService.showLoading(false);
       });
   }

@@ -15,6 +15,11 @@ export class BankSmsService {
   static instance: BankSmsService;
   private handleError: HandleError;
   private moduleUri = 'banksms/';
+  public search = {
+    key: '',
+    limit: 100,
+    page: 1
+  };
 
   constructor(private router: Router, private loadingService: LoadingService,
               private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
@@ -28,7 +33,13 @@ export class BankSmsService {
 
   getBankSmss(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
-    return this.http.get<any>(url)
+    let params = new HttpParams();
+    Object.keys(this.search).map((key) => {
+      if (this.search[key]) {
+        params = params.append(key, this.search[key]);
+      }
+    });
+    return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('getBankSmss', []))
       );
