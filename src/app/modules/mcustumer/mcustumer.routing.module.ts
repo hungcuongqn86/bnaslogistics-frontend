@@ -29,15 +29,21 @@ const routes: Routes = [
     }
   },
   {
+    path: 'internal/edit/:id', component: InternalDetailComponent,
+    data: {
+      title: 'Chi tiết tài khoản'
+    }
+  },
+  {
     path: 'sms', component: SmsComponent,
     data: {
       title: 'Tin nhắn'
     }
   },
   {
-    path: 'internal/edit/:id', component: InternalDetailComponent,
+    path: 'sms/edit/:id', component: SmsDetailComponent,
     data: {
-      title: 'Lịch sử giao dịch'
+      title: 'Chi tiết tin nhắn'
     }
   },
   {
