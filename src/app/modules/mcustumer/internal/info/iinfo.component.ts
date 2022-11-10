@@ -6,6 +6,7 @@ import {AuthService} from '../../../../auth.service';
 import {forkJoin, Observable} from 'rxjs';
 import {IRole, IUser, IVip} from '../../../../models/interface';
 import {SettingService} from '../../../../services/setting/setting.service';
+import {BankAccountService} from '../../../../services/bankAccount.service';
 
 @Component({
   selector: 'app-mcustumer-internal-detail-info',
@@ -20,6 +21,7 @@ export class IinfoComponent {
   vips: IVip[];
 
   constructor(public userService: UserService, public settingService: SettingService, private partnerService: PartnerService,
+              public bankAccountService: BankAccountService,
               public authService: AuthService) {
     this.getRoles();
     this.getPartners();

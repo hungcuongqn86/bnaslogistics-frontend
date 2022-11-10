@@ -1,95 +1,107 @@
 <form novalidate #form="ngForm" class="form-horizontal">
   <div class="form-group row">
     <label class="col-md-3 col-form-label" for="name">
-      Tên <code class="highlighter-rouge">*</code>
+      Tên ngân hàng <code class="highlighter-rouge">*</code>
     </label>
     <div class="col-md-9">
-      <input disabled [(ngModel)]="userService.user.name" #name="ngModel" type="text" id="name"
+      <input [(ngModel)]="bankAccountService.account.name" #name="ngModel" type="text" id="name"
              name="name"
              required
              class="form-control"
-             placeholder="Tên">
+             placeholder="Tên ngân hàng">
       <div [hidden]="name.valid || name.untouched">
                                 <span *ngIf="name.errors && name.errors.required"
                                       class="badge badge-warning">
-                                    Phải nhập Tên!
+                                    Phải nhập Tên ngân hàng!
                                 </span>
       </div>
     </div>
   </div>
+
   <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="email">
-      Email <code class="highlighter-rouge">*</code>
+    <label class="col-md-3 col-form-label" for="account_name">
+      Chủ tài khoản <code class="highlighter-rouge">*</code>
     </label>
     <div class="col-md-9">
-      <input disabled [(ngModel)]="userService.user.email" #email="ngModel" type="text" id="email"
-             name="email"
+      <input [(ngModel)]="bankAccountService.account.account_name" #account_name="ngModel" type="text" id="account_name"
+             name="account_name"
              required
              class="form-control"
-             placeholder="Email">
-      <div [hidden]="email.valid || email.untouched">
-                                <span *ngIf="email.errors && email.errors.required"
+             placeholder="Chủ tài khoản">
+      <div [hidden]="account_name.valid || account_name.untouched">
+                                <span *ngIf="account_name.errors && account_name.errors.required"
                                       class="badge badge-warning">
-                                    Phải nhập Email!
+                                    Phải nhập Tên chủ tài khoản!
                                 </span>
       </div>
     </div>
   </div>
+
   <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="phone_number">
-      Số điện thoại <code class="highlighter-rouge">*</code>
+    <label class="col-md-3 col-form-label" for="account_number">
+      Số tài khoản <code class="highlighter-rouge">*</code>
     </label>
     <div class="col-md-9">
-      <input disabled [(ngModel)]="userService.user.phone_number" #phone_number="ngModel" type="text"
-             id="phone_number"
-             name="phone_number"
+      <input [(ngModel)]="bankAccountService.account.account_number" #account_number="ngModel" type="text"
+             id="account_number"
+             name="account_number"
              required
              class="form-control"
-             placeholder="Số điện thoại">
-      <div [hidden]="phone_number.valid || phone_number.untouched">
-                                <span *ngIf="phone_number.errors && phone_number.errors.required"
+             placeholder="Số tài khoản">
+      <div [hidden]="account_number.valid || account_number.untouched">
+                                <span *ngIf="account_number.errors && account_number.errors.required"
                                       class="badge badge-warning">
-                                    Phải nhập Số điện thoại!
+                                    Phải nhập Số tài khoản!
                                 </span>
       </div>
     </div>
   </div>
+
   <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="address">
-      Địa chỉ
+    <label class="col-md-3 col-form-label" for="bin">
+      BIN
     </label>
     <div class="col-md-9">
-      <input disabled [(ngModel)]="userService.user.address" #address="ngModel" type="text"
-             id="address"
-             name="address"
+      <input [(ngModel)]="bankAccountService.account.bin" #bin="ngModel" type="text" id="bin"
+             name="bin"
              class="form-control"
-             placeholder="Địa chỉ">
+             placeholder="Mã BIN">
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="hander">Phụ trách</label>
-    <div class="col-md-9">
-      <select [(ngModel)]="userService.user.hander" #hander="ngModel"
-              class="form-control"
-              name="hander" id="hander">
-        <option value="null">Chọn người phụ trách ...</option>
-        <option *ngFor="let hander of handers" [value]="hander.id">
-          {{hander.name}}
-        </option>
-      </select>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="vip">
-      Vip
+    <label class="col-md-3 col-form-label" for="is_sms">
+      TIN NHẮN NẠP
     </label>
     <div class="col-md-9">
-      <select [(ngModel)]="userService.user.vip" class="form-control"
-              name="vip" id="vip">
-        <option *ngFor="let vip of vips" [value]="vip.id">
-          {{vip.title}}
-        </option>
-      </select>
+      <div class="form-check form-check-inline mr-3">
+        <label class="check-label">
+          <input type="checkbox" id="is_sms" name="is_sms" #is_sms="ngModel"
+                 value="1"
+                 [(ngModel)]="bankAccountService.account.is_sms"> <i>Chọn sẽ thiết lập nạp tiền tự động!</i>
+          <span></span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="sender">
+      SENDER
+    </label>
+    <div class="col-md-9">
+      <input [(ngModel)]="bankAccountService.account.sender" #sender="ngModel" type="text" id="sender"
+             name="sender"
+             class="form-control"
+             placeholder="SENDER">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="sms_temp">
+      Mẫu TN NGÂN HÀNG
+    </label>
+    <div class="col-md-9">
+      <textarea [(ngModel)]="bankAccountService.account.sms_temp" id="sms_temp" name="sms_temp" class="form-control"
+                placeholder="Mẫu TN NGÂN HÀNG">
+      </textarea>
     </div>
   </div>
 </form>
