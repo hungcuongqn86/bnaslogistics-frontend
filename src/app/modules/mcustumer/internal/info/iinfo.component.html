@@ -19,6 +19,18 @@
   </div>
 
   <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="bin">
+      Mã ngân hàng
+    </label>
+    <div class="col-md-9">
+      <input [(ngModel)]="bankAccountService.account.bin" #bin="ngModel" type="text" id="bin"
+             name="bin"
+             class="form-control"
+             placeholder="Mã ngân hàng">
+    </div>
+  </div>
+
+  <div class="form-group row">
     <label class="col-md-3 col-form-label" for="account_name">
       Chủ tài khoản <code class="highlighter-rouge">*</code>
     </label>
@@ -57,17 +69,6 @@
     </div>
   </div>
 
-  <div class="form-group row">
-    <label class="col-md-3 col-form-label" for="bin">
-      BIN
-    </label>
-    <div class="col-md-9">
-      <input [(ngModel)]="bankAccountService.account.bin" #bin="ngModel" type="text" id="bin"
-             name="bin"
-             class="form-control"
-             placeholder="Mã BIN">
-    </div>
-  </div>
   <div class="form-group row">
     <label class="col-md-3 col-form-label" for="is_sms">
       TIN NHẮN NẠP

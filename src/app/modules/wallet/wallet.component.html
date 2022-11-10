@@ -184,7 +184,7 @@
         <label for="n_value">2. Ngân hàng <code class="highlighter-rouge">*</code></label>
         <div class="row">
           <div *ngFor="let ibank of vqrSmsBanks; let i = index" class="bank_list col-sm-3 col-md-3 col-lg-3">
-            <div (click)="selBank(ibank)" class="bank_item text-center {{(vqrSelBank && (vqrSelBank.id==ibank.id))?'active':''}}">
+            <div (click)="selBank(ibank)" class="bank_item text-center {{(inputNapTien && inputNapTien.vqrSelBank && (inputNapTien.vqrSelBank.id==ibank.id))?'active':''}}">
               <img src="{{ibank.logo}}" style="max-width: 100%;">
               <p>{{ibank.name}}</p>
             </div>

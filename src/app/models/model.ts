@@ -20,6 +20,7 @@ import {
 } from './interface';
 import {Partner} from './Partner';
 import {Transaction} from './Transaction';
+import {BankAccount} from '../services/bankAccount.service';
 
 
 export class Setting implements ISetting {
@@ -472,7 +473,7 @@ export class VqrBank implements IVqrBank {
   name: string;
   shortName: string;
   swift_code: string;
-
+  account: BankAccount;
   constructor() {
 
   }

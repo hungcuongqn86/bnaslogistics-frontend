@@ -1,5 +1,6 @@
 import {Partner} from './Partner';
 import {Transaction} from './Transaction';
+import {BankAccount} from '../services/bankAccount.service';
 
 export interface ISetting {
   id: number;
@@ -425,4 +426,5 @@ export interface IVqrBank {
   name: string;
   shortName: string;
   swift_code: string;
+  account: BankAccount;
 }

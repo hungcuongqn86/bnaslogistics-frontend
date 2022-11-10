@@ -23,13 +23,12 @@ export class WalletComponent {
   totalItems = 0;
   errorMessage: string[] = [];
   inputRutTien = {id: null, value: null, content: ''};
-  inputNapTien = {id: null, n_value: null, bank_account_id: null};
+  inputNapTien = {id: null, n_value: null, vqrSelBank: null};
   totalTransactions = 0;
   sub: Subscription;
   accounts: BankAccount[] = [];
   vqrBanks: IVqrBank[] = [];
   vqrSmsBanks: IVqrBank[] = [];
-  vqrSelBank: IVqrBank;
 
   constructor(public userService: UserService,
               public bankAccountService: BankAccountService,
@@ -124,7 +123,8 @@ export class WalletComponent {
       this.vqrBanks = vqrBanks.data;
       this.vqrBanks.forEach(element => {
         for (let i = 0; i < this.accounts.length; i++) {
-          if (this.accounts[i].bin === element.bin) {
+          if (this.accounts[i].bin === element.code) {
+            element.account = this.accounts[i];
             this.vqrSmsBanks.push(element);
             break;
           }
@@ -137,10 +137,25 @@ export class WalletComponent {
   }
 
   public selBank(item: IVqrBank) {
-    this.vqrSelBank = item;
+    this.inputNapTien.vqrSelBank = item;
   }
 
   public napConfirm(): void {
-    this.modalRef.hide();
+    this.errorMessage = [];
+    this.bankAccountService.showLoading(true);
+    this.bankAccountService.recharge(this.inputNapTien)
+      .subscribe(res => {
+        if (res.status) {
+
+          this.inputNapTien = {id: null, n_value: null, vqrSelBank: null};
+          this.bankAccountService.showLoading(false);
+          this.modalRef.hide();
+        } else {
+          for (let i = 0; i < res.data.length; i++) {
+            this.errorMessage.push(res.data[i]);
+          }
+          this.bankAccountService.showLoading(false);
+        }
+      });
   }
 }

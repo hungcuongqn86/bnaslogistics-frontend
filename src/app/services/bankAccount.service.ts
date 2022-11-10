@@ -83,6 +83,14 @@ export class BankAccountService {
       );
   }
 
+  recharge(item: any): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}recharge`;
+    return this.http.post<any>(url, item)
+      .pipe(
+        catchError(this.handleError('recharge', item))
+      );
+  }
+
   updateBank(bank: BankAccount): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}update/${bank.id}`;
     return this.http.post<BankAccount>(url, bank)
