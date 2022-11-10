@@ -37,7 +37,8 @@
                                 <td>{{item.name}}</td>
                                 <td>{{item.account_number}}</td>
                                 <td>{{item.account_name}}</td>
-                                <td>{{item.is_sms}}</td>
+                                <td>                <span *ngIf="item.is_sms=='1'" class="badge badge-info">ON</span>
+                                  <span *ngIf="item.is_sms!='1'" class="badge badge-danger">OFF</span></td>
                                 <td>{{item.bank_debt.toString() | tempPrice : 1 : 1:true}} <sup>đ</sup></td>
                                 <td class="text-right">
                                     <button (click)="editPartner(item.id)" class="btn btn-sm btn-info text-white"
