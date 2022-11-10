@@ -5,5 +5,12 @@
 .card-header-actions {
   position: absolute;
   right: 30px;
-  bottom: 15px;
+  bottom: 9px;
+}
+
+.bank_name {
+  font-size: 18px;
+  font-weight: bold;
+  height: 24px;
+  line-height: 24px;
 }
