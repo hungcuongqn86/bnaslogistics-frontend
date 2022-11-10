@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card entry-list">
+                <div class="card-header">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-12 col-md-4">
+                            <div class="title-list">
+                                <span>Danh sách tài khoản</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-8 ml-auto">
+                            <div class="text-right">
+                                <div class="total-internal d-inline-block">
+                                    Tổng tài khoản: <span>{{total.toString() | tempPrice : 1 : 1: true}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th width="5%">ID</th>
+                            <th width="15%">Ngân hàng</th>
+                            <th>Số tài khoản</th>
+                            <th>Chủ tài khoản</th>
+                            <th width="15%">SMS</th>
+                            <th width="15%">Số dư</th>
+                            <th class="text-right">Tác vụ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of accounts">
+                                <td>{{item.id}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.account_number}}</td>
+                                <td>{{item.account_name}}</td>
+                                <td>{{item.is_sms}}</td>
+                                <td>{{item.bank_debt.toString() | tempPrice : 1 : 1:true}} <sup>đ</sup></td>
+                                <td class="text-right">
+                                    <button (click)="editPartner(item.id)" class="btn btn-sm btn-info text-white"
+                                            type="button">
+                                        Chi tiết
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div><!-- /.container-fluid -->

@@ -6,6 +6,8 @@ import {CustumerDetailComponent} from './custumer/custumer.detail.component';
 import {InternalComponent} from './internal/internal.component';
 import {InternalDetailComponent} from './internal/internal.detail.component';
 import {WithdrawalComponent} from './withdrawal/withdrawal.component';
+import {SmsComponent} from './sms/sms.component';
+import {SmsDetailComponent} from './sms/sms.detail.component';
 
 const routes: Routes = [
   {
@@ -24,6 +26,12 @@ const routes: Routes = [
     path: 'internal', component: InternalComponent,
     data: {
       title: 'Tài khoản nội bộ'
+    }
+  },
+  {
+    path: 'sms', component: SmsComponent,
+    data: {
+      title: 'Tin nhắn'
     }
   },
   {
