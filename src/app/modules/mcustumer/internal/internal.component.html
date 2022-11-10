@@ -23,7 +23,10 @@
                         <thead>
                         <tr>
                             <th width="5%">ID</th>
-                            <th width="15%">Tên tài khoản</th>
+                            <th width="15%">Ngân hàng</th>
+                            <th>Số tài khoản</th>
+                            <th>Chủ tài khoản</th>
+                            <th width="15%">SMS</th>
                             <th width="15%">Số dư</th>
                             <th class="text-right">Tác vụ</th>
                         </tr>
@@ -32,6 +35,9 @@
                             <tr *ngFor="let item of accounts">
                                 <td>{{item.id}}</td>
                                 <td>{{item.name}}</td>
+                                <td>{{item.account_number}}</td>
+                                <td>{{item.account_name}}</td>
+                                <td>{{item.is_sms}}</td>
                                 <td>{{item.bank_debt.toString() | tempPrice : 1 : 1:true}} <sup>đ</sup></td>
                                 <td class="text-right">
                                     <button (click)="editPartner(item.id)" class="btn btn-sm btn-info text-white"

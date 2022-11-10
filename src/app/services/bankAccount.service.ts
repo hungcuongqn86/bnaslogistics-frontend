@@ -18,6 +18,7 @@ export interface BankAccount {
   bin: string;
   sender: string;
   is_sms: string;
+  sms_temp: string;
   status: number;
   bank_debt: number;
   is_deleted: number;
@@ -52,6 +53,7 @@ export class BankAccountService {
       account_name: null,
       account_number: null,
       is_sms: null,
+      sms_temp: null,
       bin: null,
       sender: null
     };
