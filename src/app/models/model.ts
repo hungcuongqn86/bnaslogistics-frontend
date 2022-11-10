@@ -1,5 +1,5 @@
 import {
-  History, IBag,
+  History, IBag, IBankSms,
   ICarrier,
   ICarrierPackage,
   ICart,
@@ -447,5 +447,19 @@ export class CarrierPackage implements ICarrierPackage {
 
   constructor() {
     this.is_main = 0;
+  }
+}
+
+export class BankSms implements IBankSms {
+  id: number;
+  msg_id: string;
+  address: string;
+  body: string;
+  date: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+
   }
 }

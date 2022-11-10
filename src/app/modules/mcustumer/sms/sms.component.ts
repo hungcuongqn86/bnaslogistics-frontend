@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {BankAccountService, BankAccount} from '../../../services/bankAccount.service';
+import {IBankSms} from '../../../models/interface';
+import {BankSmsService} from '../../../services/bankSms.service';
 
 @Component({
   selector: 'app-mcustumer-sms',
@@ -10,10 +11,10 @@ import {BankAccountService, BankAccount} from '../../../services/bankAccount.ser
 })
 
 export class SmsComponent implements OnInit {
-  accounts: BankAccount[];
+  bankSmss: IBankSms[];
   total = 0;
 
-  constructor(public bankAccountService: BankAccountService,
+  constructor(public bankSmsService: BankSmsService,
               private router: Router) {
 
   }
@@ -22,25 +23,12 @@ export class SmsComponent implements OnInit {
     this.getBank();
   }
 
-  public editPartner(id) {
-    this.router.navigate([`/mcustumer/internal/edit/${id}`]);
-  }
-
-
   public getBank() {
-    this.bankAccountService.showLoading(true);
-    this.bankAccountService.getBankAccounts()
-      .subscribe(accounts => {
-        this.accounts = accounts.data;
-        this.getTotal();
-        this.bankAccountService.showLoading(false);
+    this.bankSmsService.showLoading(true);
+    this.bankSmsService.getBankSmss()
+      .subscribe(bankSmss => {
+        this.bankSmss = bankSmss.data;
+        this.bankSmsService.showLoading(false);
       });
-  }
-
-  private getTotal() {
-    this.total = 0;
-    for (let i = 0; i < this.accounts.length; i++) {
-      this.total = this.total + this.accounts[i].bank_debt;
-    }
   }
 }

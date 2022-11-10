@@ -406,3 +406,13 @@ export interface ICarrierPackage {
   created_at: string;
   updated_at: string;
 }
+
+export interface IBankSms {
+  id: number;
+  msg_id: string;
+  address: string;
+  body: string;
+  date: number;
+  created_at: string;
+  updated_at: string;
+}
