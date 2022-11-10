@@ -416,3 +416,13 @@ export interface IBankSms {
   created_at: string;
   updated_at: string;
 }
+
+export interface IVqrBank {
+  id: number;
+  bin: string;
+  code: string;
+  logo: string;
+  name: string;
+  shortName: string;
+  swift_code: string;
+}

@@ -9,7 +9,6 @@ import {Util} from '../helper/lib';
 import {apiV1Url} from '../const';
 import {Router} from '@angular/router';
 import {LoadingService} from '../loading.service';
-import {User} from '../models/model';
 
 export interface BankAccount {
   id: number;
@@ -58,6 +57,14 @@ export class BankAccountService {
       bin: null,
       sender: null
     };
+  }
+
+  getVqrBanks(): Observable<any> {
+    const url = 'https://api.vietqr.io/v2/banks';
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getVqrBanks', []))
+      );
   }
 
   getBankAccounts(): Observable<any> {

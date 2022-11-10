@@ -162,7 +162,7 @@
 
 <ng-template #templateNapTien>
   <div class="modal-header">
-    <h5 class="modal-title">Tạo đơn nạp tiền</h5>
+    <h5 class="modal-title">ĐƠN NẠP TIỀN</h5>
   </div>
   <div class="modal-body">
     <form novalidate #napform="ngForm">
@@ -178,6 +178,21 @@
                                       class="badge badge-warning">
                                     Phải nhập số tiền muốn nạp!
                                 </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="n_value">2. Ngân hàng <code class="highlighter-rouge">*</code></label>
+        <div class="row">
+          <div class="col-sm-3 col-md-3 col-lg-3">
+            <div type="button" onclick="openModalAmount(12)" class="blur-shadow p-4 shadow-showcase text-center">
+              <img src="https://fbvip.vn/assets/storage/images/bank/QJD.png" style="max-width: 100%;">
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3 col-lg-3">
+            <div type="button" onclick="openModalAmount(13)" class="blur-shadow p-4 shadow-showcase text-center">
+              <img src="https://fbvip.vn/assets/storage/images/bank/NME.png" style="max-width: 100%;">
+            </div>
+          </div>
         </div>
       </div>
     </form>

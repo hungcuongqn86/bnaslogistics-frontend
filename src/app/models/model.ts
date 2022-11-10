@@ -16,7 +16,7 @@ import {
   IShop,
   ITransportFee,
   IUser,
-  IVip
+  IVip, IVqrBank
 } from './interface';
 import {Partner} from './Partner';
 import {Transaction} from './Transaction';
@@ -458,6 +458,20 @@ export class BankSms implements IBankSms {
   date: number;
   created_at: string;
   updated_at: string;
+
+  constructor() {
+
+  }
+}
+
+export class VqrBank implements IVqrBank {
+  id: number;
+  bin: string;
+  code: string;
+  logo: string;
+  name: string;
+  shortName: string;
+  swift_code: string;
 
   constructor() {
 

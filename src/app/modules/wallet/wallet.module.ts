@@ -8,6 +8,7 @@ import {WalletComponent} from './wallet.component';
 
 import {WalletRoutingModule} from './wallet.routing.module';
 import {SharedModule} from '../../shared.module';
+import {BankAccountService} from '../../services/bankAccount.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule, WalletRoutingModule, SharedModule, CollapseModule.forRoot()],
@@ -15,7 +16,7 @@ import {SharedModule} from '../../shared.module';
         WalletComponent
     ],
     exports: [],
-    providers: [UserService]
+    providers: [UserService, BankAccountService]
 })
 export class WalletModule {
 }
