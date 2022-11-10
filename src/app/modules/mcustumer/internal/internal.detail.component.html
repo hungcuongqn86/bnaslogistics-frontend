@@ -22,99 +22,17 @@
             </tabset>
           </div><!--/.col-->
         </div>
-        <!--<div class="card-footer">
+        <div class="card-footer">
           <ul class="header-actions">
-            <li *ngIf="this.userService.user && this.userService.user.active">
-              <button style="width: 160px;" class="btn btn-block btn-primary btn-rounded"
-                      (click)="changePassOpenDialog(changepass_template)"
-                      type="button">Đặt lại mật khẩu
-              </button>
-            </li>
-            <li *ngIf="this.userService.user && !this.userService.user.active">
-              <button style="width: 160px;" class="btn btn-block btn-primary btn-rounded"
+            <li *ngIf="authService.hasRole('admin')">
+              <button style="width: 100px;" class="btn btn-block btn-primary btn-rounded"
                       (click)="activeOpenDialog(active_template)"
-                      type="button">Kích hoạt tài khoản
+                      type="button">CẬP NHẬT
               </button>
             </li>
           </ul>
-        </div>-->
+        </div>
       </div>
     </div>
   </div><!--/.row-->
 </div>
-
-<!--<ng-template #active_template>
-  <div class="modal-body text-center">
-    <p>Bạn chắc chắn muốn kích hoạt tài khoản này!?</p>
-    <div class="btn-group btn-group-toggle">
-      <button type="button" class="btn btn-warning" (click)="confirmActive()">Yes</button>
-      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
-    </div>
-  </div>
-</ng-template>
-<ng-template #changepass_template>
-  <div class="modal-header">
-    <h5 class="modal-title">Đặt lại mật khẩu</h5>
-  </div>
-  <div class="modal-body">
-    <form novalidate #form="ngForm">
-      <div class="mb-4">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="icon-lock"></i></span>
-          </div>
-          <input [(ngModel)]="resetPass.password" #password="ngModel" id="password"
-                 name="password" [type]="show ? 'text' : 'password'" class="form-control" placeholder="Mật khẩu"
-                 autocomplete="new-password" required>
-          <div (click)="showpassword()" class="input-group-append" style="cursor: pointer;">
-                                        <span class="input-group-text">
-                                          <i *ngIf="!show" class="fa fa-eye"></i>
-                                          <i *ngIf="show" class="fa fa-eye-slash"></i>
-                                        </span>
-          </div>
-
-        </div>
-        <div [hidden]="password.valid || password.untouched" class="message-valid">
-                                        <span *ngIf="password.errors && password.errors.required"
-                                              class="badge badge-danger">
-                                            Phải nhập Mật khẩu!
-                                        </span>
-        </div>
-      </div>
-      <div class="mb-4">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="icon-lock"></i></span>
-          </div>
-          <input [(ngModel)]="resetPass.password_confirmation" #c_password="ngModel"
-                 id="c_password"
-                 name="c_password" [type]="show1 ? 'text' : 'password'" class="form-control"
-                 placeholder="Nhắc lại mật khẩu"
-                 autocomplete="new-password" required>
-          <div (click)="showpassword1()" class="input-group-append" style="cursor: pointer;">
-                                        <span class="input-group-text">
-                                          <i *ngIf="!show1" class="fa fa-eye"></i>
-                                          <i *ngIf="show1" class="fa fa-eye-slash"></i>
-                                        </span>
-          </div>
-        </div>
-        <div [hidden]="c_password.valid || c_password.untouched" class="message-valid">
-                                        <span *ngIf="c_password.errors && c_password.errors.required"
-                                              class="badge badge-danger">
-                                            Phải nhắc lại Mật khẩu!
-                                        </span>
-        </div>
-      </div>
-
-
-      <p></p>
-      <alert type="danger" *ngIf="errorMessage.length > 0">
-        <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
-      </alert>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="confirmChangePass()">OK</button>
-    <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
-  </div>
-</ng-template>-->

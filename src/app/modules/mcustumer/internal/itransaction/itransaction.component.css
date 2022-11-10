@@ -1,0 +1,9 @@
+.card-header {
+  position: relative;
+}
+
+.card-header-actions {
+  position: absolute;
+  right: 30px;
+  bottom: 15px;
+}

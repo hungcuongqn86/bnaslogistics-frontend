@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BankAccountService} from '../../../services/bankAccount.service';
+import {AuthService} from '../../../auth.service';
 
 @Component({
     selector: 'app-mcustumer-internal-detail',
@@ -9,7 +10,8 @@ import {BankAccountService} from '../../../services/bankAccount.service';
 })
 
 export class InternalDetailComponent implements OnInit {
-    constructor(private router: Router, private route: ActivatedRoute
+    constructor(private router: Router, private route: ActivatedRoute,
+                public authService: AuthService
         , public bankAccountService: BankAccountService) {
         this.route.params.subscribe(params => {
             if (params['id']) {
