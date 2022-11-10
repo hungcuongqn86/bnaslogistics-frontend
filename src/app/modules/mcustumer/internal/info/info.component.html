@@ -1,0 +1,95 @@
+<form novalidate #form="ngForm" class="form-horizontal">
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="name">
+      Tên <code class="highlighter-rouge">*</code>
+    </label>
+    <div class="col-md-9">
+      <input disabled [(ngModel)]="userService.user.name" #name="ngModel" type="text" id="name"
+             name="name"
+             required
+             class="form-control"
+             placeholder="Tên">
+      <div [hidden]="name.valid || name.untouched">
+                                <span *ngIf="name.errors && name.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Tên!
+                                </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="email">
+      Email <code class="highlighter-rouge">*</code>
+    </label>
+    <div class="col-md-9">
+      <input disabled [(ngModel)]="userService.user.email" #email="ngModel" type="text" id="email"
+             name="email"
+             required
+             class="form-control"
+             placeholder="Email">
+      <div [hidden]="email.valid || email.untouched">
+                                <span *ngIf="email.errors && email.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Email!
+                                </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="phone_number">
+      Số điện thoại <code class="highlighter-rouge">*</code>
+    </label>
+    <div class="col-md-9">
+      <input disabled [(ngModel)]="userService.user.phone_number" #phone_number="ngModel" type="text"
+             id="phone_number"
+             name="phone_number"
+             required
+             class="form-control"
+             placeholder="Số điện thoại">
+      <div [hidden]="phone_number.valid || phone_number.untouched">
+                                <span *ngIf="phone_number.errors && phone_number.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Số điện thoại!
+                                </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="address">
+      Địa chỉ
+    </label>
+    <div class="col-md-9">
+      <input disabled [(ngModel)]="userService.user.address" #address="ngModel" type="text"
+             id="address"
+             name="address"
+             class="form-control"
+             placeholder="Địa chỉ">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="hander">Phụ trách</label>
+    <div class="col-md-9">
+      <select [(ngModel)]="userService.user.hander" #hander="ngModel"
+              class="form-control"
+              name="hander" id="hander">
+        <option value="null">Chọn người phụ trách ...</option>
+        <option *ngFor="let hander of handers" [value]="hander.id">
+          {{hander.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="vip">
+      Vip
+    </label>
+    <div class="col-md-9">
+      <select [(ngModel)]="userService.user.vip" class="form-control"
+              name="vip" id="vip">
+        <option *ngFor="let vip of vips" [value]="vip.id">
+          {{vip.title}}
+        </option>
+      </select>
+    </div>
+  </div>
+</form>
