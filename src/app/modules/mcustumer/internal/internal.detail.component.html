@@ -26,7 +26,7 @@
           <ul class="header-actions">
             <li *ngIf="authService.hasRole('admin')">
               <button style="width: 100px;" class="btn btn-block btn-primary btn-rounded"
-                      (click)="activeOpenDialog(active_template)"
+                      (click)="saveBank()"
                       type="button">CẬP NHẬT
               </button>
             </li>

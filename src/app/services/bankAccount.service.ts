@@ -9,6 +9,7 @@ import {Util} from '../helper/lib';
 import {apiV1Url} from '../const';
 import {Router} from '@angular/router';
 import {LoadingService} from '../loading.service';
+import {User} from '../models/model';
 
 export interface BankAccount {
   id: number;
@@ -72,6 +73,14 @@ export class BankAccountService {
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError('getBankAccount', []))
+      );
+  }
+
+  updateBank(bank: BankAccount): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}update/${bank.id}`;
+    return this.http.post<BankAccount>(url, bank)
+      .pipe(
+        catchError(this.handleError('updateBank', bank))
       );
   }
 
