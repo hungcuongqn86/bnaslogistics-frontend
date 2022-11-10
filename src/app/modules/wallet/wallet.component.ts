@@ -5,8 +5,9 @@ import {Transaction, WithdrawalRequest} from '../../models/Transaction';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {WarehouseWait} from '../../models/Warehouse';
-import {Subscription} from 'rxjs';
-import {BankAccountService} from '../../services/bankAccount.service';
+import {forkJoin, Observable, Subscription} from 'rxjs';
+import {BankAccount, BankAccountService} from '../../services/bankAccount.service';
+import {IVqrBank} from '../../models/interface';
 
 @Component({
   selector: 'app-wallet',
@@ -25,6 +26,10 @@ export class WalletComponent {
   inputNapTien = {id: null, n_value: null, bank_account_id: null};
   totalTransactions = 0;
   sub: Subscription;
+  accounts: BankAccount[] = [];
+  vqrBanks: IVqrBank[] = [];
+  vqrSmsBanks: IVqrBank[] = [];
+  vqrSelBank: IVqrBank;
 
   constructor(public userService: UserService,
               public bankAccountService: BankAccountService,
@@ -46,7 +51,6 @@ export class WalletComponent {
     this.totalTransactions = 0;
     for (let i = 0; i < this.transactions.length; i++) {
       if (this.transactions[i].otype.value > 0) {
-        console.log(this.transactions[i]);
         this.totalTransactions = this.totalTransactions + this.transactions[i].value;
       }
     }
@@ -108,11 +112,35 @@ export class WalletComponent {
   }
 
   public napTien(template) {
+    this.vqrSmsBanks = [];
     this.bankAccountService.showLoading(true);
-    this.bankAccountService.getVqrBanks()
-      .subscribe(res => {
-        this.bankAccountService.showLoading(false);
-        this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
+    const getVqrBanks: Observable<any> = this.bankAccountService.getVqrBanks();
+    const getBankAccounts: Observable<any> = this.bankAccountService.getBankAccounts();
+    const listSub = forkJoin([
+      getVqrBanks,
+      getBankAccounts
+    ]).subscribe(([vqrBanks, bankaccounts]) => {
+      this.accounts = bankaccounts.data;
+      this.vqrBanks = vqrBanks.data;
+      this.vqrBanks.forEach(element => {
+        for (let i = 0; i < this.accounts.length; i++) {
+          if (this.accounts[i].bin === element.bin) {
+            this.vqrSmsBanks.push(element);
+            break;
+          }
+        }
       });
+      this.bankAccountService.showLoading(false);
+      this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
+      listSub.unsubscribe();
+    });
+  }
+
+  public selBank(item: IVqrBank) {
+    this.vqrSelBank = item;
+  }
+
+  public napConfirm(): void {
+    this.modalRef.hide();
   }
 }

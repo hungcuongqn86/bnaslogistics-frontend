@@ -1,9 +1,24 @@
 @media (max-width: 767px) {
-    .card-body {
-        overflow: auto;
-    }
+  .card-body {
+    overflow: auto;
+  }
 
-    .table-data {
-        width: max-content;
-    }
+  .table-data {
+    width: max-content;
+  }
+}
+
+.bank_list .bank_item {
+  border: 1px solid #ccc;
+  font-size: 11px;
+  cursor: pointer;
+  min-height: 115px;
+}
+
+.bank_list .bank_item:hover {
+  background-color: #6ebab6;
+}
+
+.bank_list .active {
+  background-color: #6ebab6;
 }
