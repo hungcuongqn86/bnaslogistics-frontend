@@ -8,18 +8,19 @@ import {IRole, IUser, IVip} from '../../../../models/interface';
 import {SettingService} from '../../../../services/setting/setting.service';
 
 @Component({
-  selector: 'app-mcustumer-custumer-detail-info',
-  templateUrl: './info.component.html',
-  styleUrls: ['./info.component.css']
+  selector: 'app-mcustumer-internal-detail-info',
+  templateUrl: './iinfo.component.html',
+  styleUrls: ['./iinfo.component.css']
 })
 
-export class InfoComponent {
+export class IinfoComponent {
   roles: IRole[];
   partners: Partner[];
   handers: IUser[] = [];
   vips: IVip[];
 
-  constructor(public userService: UserService, public settingService: SettingService, private partnerService: PartnerService, public authService: AuthService) {
+  constructor(public userService: UserService, public settingService: SettingService, private partnerService: PartnerService,
+              public authService: AuthService) {
     this.getRoles();
     this.getPartners();
     this.getHandles();

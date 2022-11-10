@@ -16,6 +16,7 @@ import {TransactionComponent} from './custumer/transaction/transaction.component
 import {InternalComponent} from './internal/internal.component';
 import {InternalDetailComponent} from './internal/internal.detail.component';
 import {ItransactionComponent} from './internal/itransaction/itransaction.component';
+import {IinfoComponent} from './internal/info/iinfo.component';
 import {WithdrawalComponent} from './withdrawal/withdrawal.component';
 
 import {McustumerRoutingModule} from './mcustumer.routing.module';
@@ -29,6 +30,7 @@ import {SharedModule} from '../../shared.module';
     InfoComponent,
     TransactionComponent,
     InternalComponent,
+    IinfoComponent,
     InternalDetailComponent,
     ItransactionComponent,
     WithdrawalComponent
