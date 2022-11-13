@@ -202,7 +202,7 @@
       <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
     </div>
   </div>
-  <div *ngIf="!transactionRequest || !transactionRequest.vqr_bank_qr_data_url">
+  <div *ngIf="transactionRequest && transactionRequest.vqr_bank_qr_data_url">
     <div class="modal-header">
       <h5 class="modal-title">NẠP TIỀN</h5>
     </div>
