@@ -212,14 +212,15 @@
     </div>
     <div class="modal-body">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
+          <p><strong><i>Quét QR hoặc chuyển khoản theo thông tin sau:</i></strong></p>
           <p>Ngân hàng: {{transactionRequest.vqr_bank_name}}</p>
           <p>Số TK: <strong>{{transactionRequest.account_number}}</strong></p>
           <p>Chủ TK: {{transactionRequest.account_name}}</p>
           <p>Số tiền: {{transactionRequest.value | tempPrice : 1 : 1: true}}</p>
           <p>Nội dung: <strong>{{transactionRequest.code}}</strong></p>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
           <img src="{{transactionRequest.vqr_bank_qr_data_url}}" style="max-width: 100%;" />
         </div>
       </div>
