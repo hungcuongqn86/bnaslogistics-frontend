@@ -211,10 +211,21 @@
       <h5 class="modal-title">NẠP TIỀN</h5>
     </div>
     <div class="modal-body">
-      <img src="{{transactionRequest.vqr_bank_qr_data_url}}" style="max-width: 100%;" />
+      <div class="row">
+        <div class="col-md-4">
+          <p>Ngân hàng: {{transactionRequest.vqr_bank_name}}</p>
+          <p>Số TK: <strong>{{transactionRequest.account_number}}</strong></p>
+          <p>Chủ TK: {{transactionRequest.account_name}}</p>
+          <p>Số tiền: {{transactionRequest.value | tempPrice : 1 : 1: true}}</p>
+          <p>Nội dung: <strong>{{transactionRequest.code}}</strong></p>
+        </div>
+        <div class="col-md-8">
+          <img src="{{transactionRequest.vqr_bank_qr_data_url}}" style="max-width: 100%;" />
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-warning" (click)="decline()">Hủy</button>
+      <button type="button" class="btn btn-warning" (click)="decline()">Đóng cửa sổ</button>
     </div>
   </div>
 </ng-template>
