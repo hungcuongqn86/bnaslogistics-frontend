@@ -161,41 +161,57 @@
 </div>
 
 <ng-template #templateNapTien>
-  <div class="modal-header">
-    <h5 class="modal-title">ĐƠN NẠP TIỀN</h5>
-  </div>
-  <div class="modal-body">
-    <form novalidate #napform="ngForm">
-      <div class="form-group">
-        <label for="n_value">1. Số tiền muốn nạp (VNĐ) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="inputNapTien.n_value" #n_value="ngModel" class="form-control" id="n_value"
-               name="n_value"
-               required
-               placeholder="Số tiền muốn nạp"
-               type="number">
-        <div [hidden]="n_value.valid || n_value.untouched">
+  <div *ngIf="!transactionRequest || !transactionRequest.vqr_bank_qr_data_url">
+    <div class="modal-header">
+      <h5 class="modal-title">NẠP TIỀN</h5>
+    </div>
+    <div class="modal-body">
+      <form novalidate #napform="ngForm">
+        <div class="form-group">
+          <label for="n_value">1. Số tiền muốn nạp (VNĐ) <code class="highlighter-rouge">*</code></label>
+          <input [(ngModel)]="inputNapTien.n_value" #n_value="ngModel" class="form-control" id="n_value"
+                 name="n_value"
+                 required
+                 placeholder="Số tiền muốn nạp"
+                 type="number">
+          <div [hidden]="n_value.valid || n_value.untouched">
                                 <span *ngIf="n_value.errors && n_value.errors.required"
                                       class="badge badge-warning">
                                     Phải nhập số tiền muốn nạp!
                                 </span>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="n_value">2. Ngân hàng <code class="highlighter-rouge">*</code></label>
-        <div class="row">
-          <div *ngFor="let ibank of vqrSmsBanks; let i = index" class="bank_list col-sm-3 col-md-3 col-lg-3">
-            <div (click)="selBank(ibank)" class="bank_item text-center {{(inputNapTien && inputNapTien.vqrSelBank && (inputNapTien.vqrSelBank.id==ibank.id))?'active':''}}">
-              <img src="{{ibank.logo}}" style="max-width: 100%;">
-              <p>{{ibank.name}}</p>
+        <div class="form-group">
+          <label for="n_value">2. Ngân hàng <code class="highlighter-rouge">*</code></label>
+          <div class="row">
+            <div *ngFor="let ibank of vqrSmsBanks; let i = index" class="bank_list col-sm-3 col-md-3 col-lg-3">
+              <div (click)="selBank(ibank)"
+                   class="bank_item text-center {{(inputNapTien && inputNapTien.vqrSelBank && (inputNapTien.vqrSelBank.id==ibank.id))?'active':''}}">
+                <img src="{{ibank.logo}}" style="max-width: 100%;">
+                <p>{{ibank.name}}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" [disabled]="napform.invalid || (sub && !sub.closed)"
+              (click)="napConfirm()">OK
+      </button>
+      <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
+    </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" [disabled]="napform.invalid || (sub && !sub.closed)" (click)="napConfirm()">OK</button>
-    <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
+  <div *ngIf="!transactionRequest || !transactionRequest.vqr_bank_qr_data_url">
+    <div class="modal-header">
+      <h5 class="modal-title">NẠP TIỀN</h5>
+    </div>
+    <div class="modal-body">
+      <img src="{{transactionRequest.vqr_bank_qr_data_url}}" style="max-width: 100%;" />
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-warning" (click)="decline()">Hủy</button>
+    </div>
   </div>
 </ng-template>
 

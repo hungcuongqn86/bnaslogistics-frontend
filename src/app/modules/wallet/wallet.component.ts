@@ -7,7 +7,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {WarehouseWait} from '../../models/Warehouse';
 import {forkJoin, Observable, Subscription} from 'rxjs';
 import {BankAccount, BankAccountService} from '../../services/bankAccount.service';
-import {IVqrBank} from '../../models/interface';
+import {ITransactionRequest, IVqrBank} from '../../models/interface';
 
 @Component({
   selector: 'app-wallet',
@@ -29,6 +29,7 @@ export class WalletComponent {
   accounts: BankAccount[] = [];
   vqrBanks: IVqrBank[] = [];
   vqrSmsBanks: IVqrBank[] = [];
+  transactionRequest: ITransactionRequest;
 
   constructor(public userService: UserService,
               public bankAccountService: BankAccountService,
@@ -131,6 +132,7 @@ export class WalletComponent {
         }
       });
       this.bankAccountService.showLoading(false);
+      this.transactionRequest = null;
       this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
       listSub.unsubscribe();
     });
@@ -146,7 +148,7 @@ export class WalletComponent {
     this.bankAccountService.recharge(this.inputNapTien)
       .subscribe(res => {
         if (res.status) {
-
+          this.transactionRequest = res.data;
           this.inputNapTien = {id: null, n_value: null, vqrSelBank: null};
           this.bankAccountService.showLoading(false);
           this.modalRef.hide();

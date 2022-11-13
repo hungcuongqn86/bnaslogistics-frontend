@@ -13,7 +13,7 @@ import {
   IRole,
   IServiceFee,
   ISetting,
-  IShop,
+  IShop, ITransactionRequest,
   ITransportFee,
   IUser,
   IVip, IVqrBank
@@ -474,6 +474,23 @@ export class VqrBank implements IVqrBank {
   shortName: string;
   swift_code: string;
   account: BankAccount;
+  constructor() {
+
+  }
+}
+
+export class TransactionRequest implements ITransactionRequest {
+  id: number;
+  user_id: number;
+  code: string;
+  value: string;
+  vqr_bank_code: string;
+  vqr_bank_name: string;
+  vqr_bank_bin: string;
+  vqr_bank_qr_code: string;
+  account_name: string;
+  account_number: string;
+  vqr_bank_qr_data_url: string;
   constructor() {
 
   }
