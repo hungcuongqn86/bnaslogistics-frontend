@@ -151,7 +151,6 @@ export class WalletComponent {
           this.transactionRequest = res.data;
           this.inputNapTien = {id: null, n_value: null, vqrSelBank: null};
           this.bankAccountService.showLoading(false);
-          this.modalRef.hide();
         } else {
           for (let i = 0; i < res.data.length; i++) {
             this.errorMessage.push(res.data[i]);
