@@ -80,6 +80,7 @@ export class DefaultLayoutComponent {
 
   public getStatus() {
     this.status = [
+      {id: 1, name: 'Chờ báo giá', type: 'od'},
       {id: 2, name: 'Chờ đặt cọc', type: 'od'},
       {id: 3, name: 'Đang mua hàng', type: 'od'},
       {id: 2, name: 'Đã mua hàng', type: 'pk'},
