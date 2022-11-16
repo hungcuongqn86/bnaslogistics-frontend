@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {History, HistoryType} from "../../../../models/interface";
+import {History, HistoryType} from '../../../../models/interface';
 
 @Component({
   selector: 'app-order-detail-history',

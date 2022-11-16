@@ -224,6 +224,40 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       });
   }
 
+  public confirmOrderOpenDialog(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+  }
+
+  public confirmOrder(): void {
+    this.orderService.showLoading(true);
+    const history = {
+      id: null,
+      user_name: null,
+      content: 'Xác nhận đơn hàng!',
+      type: 12,
+      created_at: null,
+      is_deleted: 0,
+      order_id: this.orderService.orderRe.id,
+      updated_at: null,
+      user_id: null
+    };
+    this.orderService.postHistory(history)
+      .subscribe(res => {
+        if (res.status) {
+          this.orderService.showLoading(false);
+          this.modalRef.hide();
+          this.getOrder();
+        } else {
+          this.errorMessage.push(res.message);
+          this.orderService.showLoading(false);
+        }
+      });
+  }
+
+  public decline(): void {
+    this.modalRef.hide();
+  }
+
   openErrorModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-md'});
   }

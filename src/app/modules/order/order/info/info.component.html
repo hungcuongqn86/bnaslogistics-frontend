@@ -571,7 +571,7 @@
                   </div>
                 </div>
                 <div style="text-align: right;display: inline-block;width: 100%;">
-                  <button type="button" class="btn btn-primary">Xác nhận đơn</button>
+                  <button *ngIf="orderService.orderRe.status == 1" type="button" (click)="confirmOrderOpenDialog(confirm_template)" class="btn btn-primary">Xác nhận đơn</button>
                 </div>
               </div>
             </div>
@@ -592,5 +592,15 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-warning" (click)="declineError()">OK</button>
+  </div>
+</ng-template>
+
+<ng-template #confirm_template>
+  <div class="modal-body text-center">
+    <p>Sau khi xác nhận thông tin đơn thì khách hàng có thể tiến hành đặt cọc, Bạn chắc chắn xác nhận thông tin đơn hàng!!?</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-warning" (click)="confirmOrder()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
   </div>
 </ng-template>
