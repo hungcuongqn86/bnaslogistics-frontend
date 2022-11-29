@@ -124,7 +124,7 @@ export class WalletComponent {
       this.vqrBanks = vqrBanks.data;
       this.vqrBanks.forEach(element => {
         for (let i = 0; i < this.accounts.length; i++) {
-          if (this.accounts[i].bin === element.code) {
+          if (this.accounts[i].is_sms && (this.accounts[i].bin === element.code)) {
             element.account = this.accounts[i];
             this.vqrSmsBanks.push(element);
             break;
