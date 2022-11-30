@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <form novalidate (ngSubmit)="searchUsers()" #form="ngForm">
                         <div class="form-group space-7 row filter-advanced">
-                            <div class="col-md-11">
+                            <div class="col-10 col-md-11">
                                 <div class="input-group mb-1">
                                   <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -33,7 +33,7 @@
                                          placeholder="Tìm kiếm theo name, phone number, email...">
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-2 col-md-1">
                                 <button type="submit" (click)="searchUsers()"
                                         class="btn btn-primary mb-1">
                                   <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
@@ -54,7 +54,7 @@
                             </thead>
                             <tbody>
                             <tr *ngFor="let item of users">
-                                <td>
+                                <td class="text-nowrap">
                                     {{item.name}}
                                 </td>
                                 <td>
@@ -64,7 +64,7 @@
                                 <td>
                                     <a href="{{item.email}}"> {{item.email}}</a>
                                 </td>
-                                <td>
+                                <td class="text-nowrap">
                                     <p *ngFor="let role of item.roles">{{role.position}}</p>
                                 </td>
                                 <td class="text-right">

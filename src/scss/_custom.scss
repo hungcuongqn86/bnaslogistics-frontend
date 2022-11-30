@@ -9,6 +9,7 @@
    -o-transform: rotate(45deg);
    transform: rotate(45deg);
 }
+
 .fs-14{
   font-size: 14px !important;
 }
@@ -169,10 +170,10 @@ body {
   color: $color-text;
 }
 
-form.ng-untouched.ng-pristine.ng-valid .col-md-2 {
-  flex: 0 0 16.66666667%;
-  max-width: 16.66666667%;
-}
+// form.ng-untouched.ng-pristine.ng-valid .col-md-2 {
+//   flex: 0 0 16.66666667%;
+//   max-width: 16.66666667%;
+// }
 
 pagination.pagination-sm.pull-right.ng-untouched {
   margin-bottom: 15px;
@@ -528,6 +529,7 @@ body.app:not(.header-fixed) {
     span {
       position: relative;
       padding-left: 35px;
+      display: block;
       &::before {
         content: '';
         display: block;
@@ -536,7 +538,7 @@ body.app:not(.header-fixed) {
         background-color: #5585EE;
         @include border-radius(6px);
         position: absolute;
-        top: -1px;
+        top: 2px;
         left: 0;
       }
       &.highlight-violet::before{
@@ -827,6 +829,12 @@ body.app:not(.header-fixed) {
 .app-header .navbar-toggler-icon{
   filter: brightness(0) invert(1);
 }
+.card-header .nav-tabs .nav-item {
+  margin: 5px 0;
+}
+table .btn.btn-sm {
+  white-space: nowrap;
+}
 @media(min-width: 992px) {
   .app-header .navbar-toggler-icon{
     display: none;
@@ -850,10 +858,10 @@ body.app:not(.header-fixed) {
     .inner-desc{
       font-size: 14px;
       line-height: 45px;
-      margin-left: 5px;
+      margin-left: 10px;
     }
     .inner-value {
-      margin-left: 45px;
+      margin-left: 50px;
       font-size: 38px;
     }
   }
@@ -886,6 +894,7 @@ body.app:not(.header-fixed) {
     }
     .title-list {
       font-size: 18px;
+      margin-bottom: 10px;
       span{
         &::before {
           height: 23px;
@@ -895,8 +904,91 @@ body.app:not(.header-fixed) {
   }
 }
 @media (max-width: 991.98px) {
+  .card-header .d-md-down-none{
+    display: block !important;
+  }
   .app-header .navbar-brand {
       position: initial;
       margin-left: 0;
+  }
+}
+.entry-detail .nav-tabs .nav-link{
+  font-size: 14px;
+}
+@media(max-width: 769px) {
+
+  .card-header .nav-tabs .nav-item {
+    margin: 3px 0;
+  }
+  .entry-list .total-internal span {
+    font-size: 20px;
+  }
+  table .btn.btn-sm.mr-1{
+    margin-right: 0 !important;
+  }
+  table .btn.btn-sm {
+    margin-bottom: 5px;
+  }
+  .sidebar .nav-dropdown > .nav-dropdown-items{
+    margin-left: 20px;
+  }
+  .app-header .navbar-brand, .sidebar-fixed .sidebar, .sidebar .sidebar-nav, .sidebar .nav {
+    width: 220px;
+    margin-top: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .sidebar .nav-link {
+    padding: 0px 8px !important;
+    font-size: 14px;
+  }
+  .app-header .navbar-nav .dropdown-menu-right{
+    width: 190px;
+  }
+  .app-header{
+    padding: 0;
+    .navbar-brand{
+      width: auto;
+      .navbar-brand-full {
+        width: 110px;
+        height: auto !important;
+        padding-left: 0;
+      }
+    }
+    .nav-item .nav-link{
+      font-size: 0;
+      background-color: transparent !important;
+      height: auto;
+      width: auto;
+      line-height: initial;
+      padding: 0 !important;
+    }
+  }
+  .header-fixed .app-body{
+    margin-top: 56px;
+  }
+  .sidebar .nav-dropdown > .nav-dropdown-items > .nav-item > .nav-link {
+    margin: 7px 15px;
+    padding: 5px 10px !important;
+  }
+  .sidebar .nav-dropdown-toggle::before {
+    top: calc(50% - 10px);
+  }
+  .card-body{
+    padding: 1rem;
+  }
+  .widget .inner-value{
+    margin-top: 0;
+    font-size: 30px;
+  }
+  .brand-card .text-value{
+    font-size: 30px;
+  }
+  .brand-card .text-desc{
+    font-size: 14px;
+  }
+  .entry-list:not(.detail) .card-header .nav-tabs .nav-link{
+    font-size: 14px;
+    padding: 7px 10px !important;
   }
 }

@@ -15,45 +15,36 @@
         <div class="card-body">
           <form novalidate #form="ngForm">
             <div class="form-group space-7 row filter-advanced">
-              <div class="col-md-5">
-                <div class="row space-7">
-                  <div class="col-md">
-                    <div class="input-group mb-1">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <i class="iconsax isax-document-text-1"></i>
-                        </div>
-                      </div>
-                      <input [(ngModel)]="warehouseService.bagSearch.code" type="text" id="code" name="code"
-                             class="form-control"
-                             placeholder="Mã bao hàng">
+              <div class="col-md-3">
+                <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="iconsax isax-document-text-1"></i>
                     </div>
                   </div>
-
-                  <div class="col-md">
-                    <div class="input-group mb-1">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <i class="iconsax isax-document-forward"></i>
-                        </div>
-                      </div>
-                      <input [(ngModel)]="warehouseService.bagSearch.package_code" type="text" id="package_code"
-                             name="package_code"
-                             class="form-control"
-                             placeholder="Mã vận đơn">
-                    </div>
-                  </div>
+                  <input [(ngModel)]="warehouseService.bagSearch.code" type="text" id="code" name="code"
+                         class="form-control"
+                         placeholder="Mã bao hàng">
                 </div>
               </div>
-              <div class="col-md-7">
-                <div class="row space-7">
-                  <div class="col-md-1">
-                    <button type="submit" (click)="searchBags()"
-                            class="btn btn-primary mb-1">
-                      <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
-                    </button>
+              <div class="col-md-3">
+                <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="iconsax isax-document-forward"></i>
+                    </div>
                   </div>
+                  <input [(ngModel)]="warehouseService.bagSearch.package_code" type="text" id="package_code"
+                         name="package_code"
+                         class="form-control"
+                         placeholder="Mã vận đơn">
                 </div>
+              </div>
+              <div class="col-md-1">
+                <button type="submit" (click)="searchBags()"
+                        class="btn btn-primary mb-1">
+                  <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
+                </button>
               </div>
             </div>
           </form>

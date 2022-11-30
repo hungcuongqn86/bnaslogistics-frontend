@@ -102,7 +102,7 @@
               </thead>
               <tbody>
               <tr *ngFor="let item of packages">
-                <td>
+                <td class="text-nowrap">
                   <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
                   </p>
                   <p><span class="packages-inf">Mã vận đơn</span><span
@@ -118,7 +118,7 @@
                     class="packages-inf text-right"><strong>{{item.bill_id}}</strong></span></a></span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
                                                                   (click)="gotoOrder(item.order_id)"><span
                     class="packages-inf text-right packages-code"><strong>{{item.order.code}}</strong></span></a>
@@ -134,7 +134,7 @@
                     class="packages-inf text-right"><strong>{{item.order.user.phone_number}}</strong></span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p><span class="packages-inf">Áp giá theo</span>
                     <span (click)="selectPackage(item,'cal_option')" class="packages-inf text-right badge badge-info">
                         <select [(ngModel)]="item.cal_option" #cal_option="ngModel"
@@ -239,7 +239,7 @@
                     </span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p><span class="packages-inf">Giá vận (vnđ)</span>
                     <span (click)="selectPackage(item,'gia_can')" class="packages-inf text-right badge badge-info">
                       <input *ngIf="((package.id === item.id) && (col === 'gia_can'))"
@@ -280,10 +280,10 @@
                     </span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p *ngIf="item.order.dong_go">
                     <span class="packages-inf">Giá đóng gỗ</span>
-                    <span class="packages-inf text-right badge badge-info">
+                    <span class="packages-inf text-right badge badge-info text-nowrap">
                       <span>
                         <span *ngIf="item.dg_1_price">
                           {{item.dg_1_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
@@ -328,7 +328,7 @@
                     </span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <button *ngIf="item.package_code" (click)="printBarcode(barcodeTemplate, item.package_code)"
                           class="btn btn-sm btn-info mr-1 text-white" type="button">
                     In mã

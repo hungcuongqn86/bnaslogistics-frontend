@@ -12,10 +12,10 @@
       <tbody>
       <ng-template ngFor let-item [ngForOf]="orderService.orderRe.history" let-i="index">
         <tr *ngIf="!item.hide">
-          <td><p>{{item.created_at}}</p></td>
-          <td><p><i class="fa fa-user"></i> {{item.user_name}}</p></td>
-          <td><p *ngIf="types">{{item.type | tempHistoryType : types}}</p></td>
-          <td><p>{{item.content}}</p></td>
+          <td class="text-nowrap"><p>{{item.created_at}}</p></td>
+          <td class="text-nowrap"><p><i class="fa fa-user"></i> {{item.user_name}}</p></td>
+          <td class="text-nowrap"><p *ngIf="types">{{item.type | tempHistoryType : types}}</p></td>
+          <td class="text-nowrap"><p>{{item.content}}</p></td>
         </tr>
       </ng-template>
       </tbody>

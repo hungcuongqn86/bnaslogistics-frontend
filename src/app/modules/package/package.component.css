@@ -5,6 +5,7 @@
 .table p {
     margin: 3px 0;
     border-bottom: 1px dotted #ddd;
+    min-width: 215px;
 }
 
 .table p span.money {

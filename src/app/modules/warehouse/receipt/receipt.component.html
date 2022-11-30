@@ -82,18 +82,18 @@
               </thead>
               <tbody>
               <tr *ngFor="let item of receipts">
-                <td>
+                <td class="text-nowrap">
                   <p><span class="packages-inf">Mã phiếu</span><span class="packages-inf text-right">{{item.code}}</span>
                   </p>
                   <p><span class="packages-inf">Ngày nhập</span><span
                     class="packages-inf text-right badge badge-info"><span>{{item.receipt_date | tempDate}}</span></span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p *ngIf="item.user"><span>{{item.user.name}}</span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p *ngFor="let packageItem of item.package">
                     <span>{{packageItem.package_code}}</span>
                   </p>

@@ -85,7 +85,7 @@
               </thead>
               <tbody>
               <tr *ngFor="let item of packages">
-                <td>
+                <td class="text-nowrap">
                   <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
                   </p>
                   <p><span class="packages-inf">Mã vận đơn</span><span
@@ -97,7 +97,7 @@
                     class="packages-inf text-right"><strong>{{item.bill_id}}</strong></span></a></span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
                                                                   (click)="gotoOrder(item.order_id)"><span
                     class="packages-inf text-right packages-code"><strong>{{item.order.code}}</strong></span></a>
@@ -113,7 +113,7 @@
                     class="packages-inf text-right"><strong>{{item.order.user.phone_number}}</strong></span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p *ngIf="item.cal_option===0"><span class="packages-inf">Cân nặng (kg)</span><span
                     class="packages-inf text-right badge badge-info"><span>{{item.weight ? item.weight : '0.00'}}</span></span>
                   </p>
@@ -135,7 +135,7 @@
                     </span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <div *ngIf="item.tq_receipt">
                     <p><span class="packages-inf">Phiếu nhập</span><span
                       class="packages-inf text-right badge badge-info"><span>{{item.tq_receipt.code}}</span></span>

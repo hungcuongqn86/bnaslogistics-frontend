@@ -15,46 +15,38 @@
         <div class="card-body">
           <form novalidate #form="ngForm">
             <div class="form-group space-7 row filter-advanced">
-              <div class="col-md-5">
-                <div class="row space-7">
-                  <div class="col-md">
-                    <div class="input-group mb-1">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <i class="iconsax isax-document-text-1"></i>
-                        </div>
-                      </div>
-                      <input [(ngModel)]="warehouseService.bagSearch.code" type="text" id="code" name="code"
-                             class="form-control"
-                             placeholder="Mã bao hàng">
+              <div class="col-md-3">
+                <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="iconsax isax-document-text-1"></i>
                     </div>
                   </div>
+                  <input [(ngModel)]="warehouseService.bagSearch.code" type="text" id="code" name="code"
+                         class="form-control"
+                         placeholder="Mã bao hàng">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="iconsax isax-document-forward"></i>
+                    </div>
+                  </div>
+                  <input [(ngModel)]="warehouseService.bagSearch.package_code" type="text" id="package_code"
+                         name="package_code"
+                         class="form-control"
+                         placeholder="Mã vận đơn">
+                </div>
+              </div>
+              <div class="col-md-1">
+                <button type="submit" (click)="searchBags()"
+                        class="btn btn-primary mb-1">
+                  <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
+                </button>
+              </div>
 
-                  <div class="col-md">
-                    <div class="input-group mb-1">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">
-                          <i class="iconsax isax-document-forward"></i>
-                        </div>
-                      </div>
-                      <input [(ngModel)]="warehouseService.bagSearch.package_code" type="text" id="package_code"
-                             name="package_code"
-                             class="form-control"
-                             placeholder="Mã vận đơn">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-7">
-                <div class="row space-7">
-                  <div class="col-md-1">
-                    <button type="submit" (click)="searchBags()"
-                            class="btn btn-primary mb-1">
-                      <img class="svg-white" src="assets/img/iconsax/vuesax-bold-bootsrap.svg" alt="search">
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
           </form>
           <div class="table-responsive">
@@ -73,7 +65,7 @@
               </thead>
               <tbody>
               <tr *ngFor="let item of bags">
-                <td>
+                <td class="text-nowrap">
                   <p><span class="packages-inf">Mã bao</span><span class="packages-inf text-right">{{item.code}}</span>
                   </p>
                   <p><span class="packages-inf">Ngày tạo</span><span
@@ -83,20 +75,20 @@
                     class="packages-inf text-right badge badge-info"><span>{{item.user.name}}</span></span>
                   </p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p *ngFor="let packageItem of item.package">
                     <span>{{packageItem.package_code}}</span>
                   </p>
                 </td>
-                <td>{{item.dvvc}}</td>
-                <td>
+                <td class="text-nowrap">{{item.dvvc}}</td>
+                <td class="text-nowrap">
                   <p>{{item.note_tq}}</p>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <p>{{item.note_tc}}</p>
                 </td>
-                <td>{{item.note_vn}}</td>
-                <td>
+                <td class="text-nowrap">{{item.note_vn}}</td>
+                <td class="text-nowrap">
                   <p *ngIf="item.status === 1"><span class="badge badge-info">Mới</span></p>
                   <p *ngIf="item.status === 2"><span class="badge badge-info">Đã gửi</span></p>
                   <p *ngIf="item.status === 3"><span class="badge badge-info">Trung chuyển</span></p>

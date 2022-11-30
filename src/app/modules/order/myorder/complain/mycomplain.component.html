@@ -93,34 +93,35 @@
                                 </span>
         </div>
       </div>
-
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th width="15%">Sản phẩm</th>
-          <th width="15%">Số lượng</th>
-          <th>Ảnh khiếu nại</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of complain.complain_products">
-          <td><a target="_blank" rel="noopener noreferrer" href="{{item.order_item.pro_link}}"><img
-            src="{{item.order_item.image}}"></a></td>
-          <td><p>Đặt: {{item.order_item.amount}}</p></td>
-          <td>
-            <input [hidden]="1" type="file" multiple id="files" name="files" #picked
-                   (change)="uploadExc(picked, item)">
-            <a class="btn" (click)="picked.click()"><i class="fa fa-upload"></i> &nbsp;Upload</a>
-            <div class="row">
-              <div *ngFor="let img of item.media" class="col-3">
-                <a target="_blank" rel="noopener noreferrer" href="{{img.url}}"><img style="max-height: 50px;"
-                                                                                     src="{{img.url}}"></a>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th width="15%">Sản phẩm</th>
+            <th width="15%">Số lượng</th>
+            <th>Ảnh khiếu nại</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of complain.complain_products">
+            <td><a target="_blank" rel="noopener noreferrer" href="{{item.order_item.pro_link}}"><img
+              src="{{item.order_item.image}}"></a></td>
+            <td><p>Đặt: {{item.order_item.amount}}</p></td>
+            <td>
+              <input [hidden]="1" type="file" multiple id="files" name="files" #picked
+                     (change)="uploadExc(picked, item)">
+              <a class="btn" (click)="picked.click()"><i class="fa fa-upload"></i> &nbsp;Upload</a>
+              <div class="row">
+                <div *ngFor="let img of item.media" class="col-3">
+                  <a target="_blank" rel="noopener noreferrer" href="{{img.url}}"><img style="max-height: 50px;"
+                                                                                       src="{{img.url}}"></a>
+                </div>
               </div>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
