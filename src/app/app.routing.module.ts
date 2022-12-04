@@ -152,7 +152,7 @@ const appRoutes: Routes = [
   {path: 'activate-account/:token', component: ActiveComponent, pathMatch: 'full'},
   {
     path: 'website', loadChildren: () => new Promise(() => {
-      window.location.href = 'https://nguonhang.net/';
+      window.open('https://nguonhang.net/');
     }), pathMatch: 'full'
   },
   {path: '**', component: Error404Component, pathMatch: 'full'}
