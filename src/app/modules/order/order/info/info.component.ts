@@ -156,26 +156,26 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   }
 
   public selectOrderItem(item: IOrderItem, col: string) {
-    if (this.authService.user.id === this.orderService.orderRe.handle.id) {
+    if (this.authService.hasRole('admin') || (this.authService.user.id === this.orderService.orderRe.handle.id)) {
       this.col = col;
       this.orderItem = item;
     }
   }
 
   public phiKiemDemEdit(status: boolean) {
-    if (this.authService.user.id === this.orderService.orderRe.handle.id) {
+    if (this.authService.hasRole('admin') || (this.authService.user.id === this.orderService.orderRe.handle.id)) {
       this.editPhiKiemDem = status;
     }
   }
 
   public phiDichVuEdit(status: boolean) {
-    if (this.authService.user.id === this.orderService.orderRe.handle.id) {
+    if (this.authService.hasRole('admin') || (this.authService.user.id === this.orderService.orderRe.handle.id)) {
       this.editPhiDichVu = status;
     }
   }
 
   public tigiaEdit(status: boolean) {
-    if (this.authService.user.id === this.orderService.orderRe.handle.id) {
+    if (this.authService.hasRole('admin') || (this.authService.user.id === this.orderService.orderRe.handle.id)) {
       this.editTigia = status;
     }
   }
