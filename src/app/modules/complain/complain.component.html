@@ -31,7 +31,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        
+
                                     </div>
                                 </div>
                             </form>
@@ -65,7 +65,7 @@
                                 </p>
                                 <p>Ngày tạo: {{item.order.created_at | tempDate}}</p>
                             </td>
-                            <td>{{item.created_at | tempDate}}</td>
+                            <td>{{item.created_at | date: 'dd-MM-yyyy H:m'}}</td>
                             <td>{{item.otype.name}}</td>
                             <td>{{item.money_request | tempPrice: 1 : 1}} <sup> đ</sup></td>
                             <td>{{item.content}}</td>

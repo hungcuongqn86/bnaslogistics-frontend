@@ -12,7 +12,7 @@
             class="text-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
           </p>
           <p>
-            <i class="mr-2 iconsax isax-menu-board fs-16"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}
+            <i class="mr-2 iconsax isax-menu-board fs-16"></i> Ngày tạo: {{orderService.orderRe.created_at | date: 'dd-MM-yyyy H:m'}}
           </p>
           <p *ngIf="orderService.orderRe.order_items && orderService.orderRe.order_items.length > 0">
             <i class="mr-2 iconsax isax-global-search fs-16"></i>

@@ -36,7 +36,7 @@
             <i class="mr-2 iconsax isax-receipt fs-16"></i> Mã đơn: {{orderService.orderRe.code}}
           </p>
           <p >
-            <i class="mr-2 iconsax isax-menu-board fs-16"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}
+            <i class="mr-2 iconsax isax-menu-board fs-16"></i> Ngày tạo: {{orderService.orderRe.created_at | date: 'dd-MM-yyyy H:m'}}
           </p>
           <p  *ngIf="orderService.orderRe.tra_shop">
             <i class="mr-2 iconsax isax-coin fs-16"></i> Tiền hàng:
