@@ -6,7 +6,7 @@ import {catchError} from 'rxjs/operators';
 
 import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
-import {apiV1Url, clientid} from '../../const';
+import {apiUrl, apiV1Url, clientid} from '../../const';
 import {Router} from '@angular/router';
 import {User} from '../../models/model';
 import {Transaction, WithdrawalRequest} from '../../models/Transaction';
@@ -153,6 +153,14 @@ export class UserService {
     return this.http.post<User>(url, user)
       .pipe(
         catchError(this.handleError('editUser', user))
+      );
+  }
+
+  public deleteUser(id: number) {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}delete/${id}`;
+    return this.http.post<any>(url, {id: id})
+      .pipe(
+        catchError(this.handleError('deleteUser', {id: id}))
       );
   }
 

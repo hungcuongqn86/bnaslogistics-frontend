@@ -44,8 +44,7 @@ export class CustumerComponent implements OnInit {
 
   public deletePartner() {
     if (this.user) {
-      this.user.is_deleted = 1;
-      this.userService.editUser(this.user)
+      this.userService.deleteUser(this.user.id)
         .subscribe(res => {
           this.searchUsers();
         });
