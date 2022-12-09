@@ -31,6 +31,12 @@
           <ul class="header-actions">
             <li *ngIf="this.userService.user && this.userService.user.active">
               <button style="width: 160px;" class="btn btn-block btn-primary btn-rounded"
+                      (click)="userService.updateUser()"
+                      type="button">Cập nhật
+              </button>
+            </li>
+            <li *ngIf="this.userService.user && this.userService.user.active">
+              <button style="width: 160px;" class="btn btn-block btn-primary btn-rounded"
                       (click)="changePassOpenDialog(changepass_template)"
                       type="button">Đặt lại mật khẩu
               </button>
