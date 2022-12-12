@@ -142,7 +142,7 @@
                                 (change)="updatePackage(template, 'cal_option')"
                                 name="cal_option" id="cal_option">
                           <option value="0">Cân nặng</option>
-                          <option value="1">Thể tích</option>
+                          <option value="1">Kích thước</option>
                           <option value="2">Quy đổi</option>
                         </select>
                     </span>
@@ -164,7 +164,7 @@
                                     *ngIf="((package.id !== item.id) || (col !== 'weight'))">{{item.weight ? item.weight : '0.00'}}</span>
                                   </span>
                   </p>
-                  <p *ngIf="item.cal_option===1"><span class="packages-inf">Thể tích (m3)</span><span
+                  <p *ngIf="item.cal_option===1"><span class="packages-inf">Kích thước (m3)</span><span
                     (click)="selectPackage(item,'size')"
                     class="packages-inf text-right badge badge-info">
                                       <input *ngIf="((package.id === item.id) && (col === 'size'))"

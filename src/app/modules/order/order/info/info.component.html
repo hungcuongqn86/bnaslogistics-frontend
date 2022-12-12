@@ -489,6 +489,81 @@
           </div>
           <div class="border-top mt-3 mb-3"></div>
           <div class="row">
+            <div class="col-lg-4">
+              <strong>Chi phí vận chuyển dự kiến</strong>
+              <div class="bg-gray rounded p-4 mt-3">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="text-right">Cân nặng (kg)</div>
+                  <div (click)="tigiaEdit(true)">
+                    <input
+                      *ngIf="editTigia"
+                      [(ngModel)]="orderService.orderRe.ti_gia"
+                      #can_nang_dk="ngModel" class="form-control"
+                      id="can_nang_dk"
+                      name="can_nang_dk"
+                      (change)="updateOrder('ti_gia')"
+                      (blur)="tigiaEdit(false)"
+                      appAutofocus
+                      type="number">
+                    <div *ngIf="!editTigia">
+                      {{orderService.orderRe.ti_gia}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="text-right">Kích thước (m3)</div>
+                  <div (click)="tigiaEdit(true)">
+                    <input
+                      *ngIf="editTigia"
+                      [(ngModel)]="orderService.orderRe.ti_gia"
+                      #kich_thuoc_dk="ngModel" class="form-control"
+                      id="kich_thuoc_dk"
+                      name="kich_thuoc_dk"
+                      (change)="updateOrder('ti_gia')"
+                      (blur)="tigiaEdit(false)"
+                      appAutofocus
+                      type="number">
+                    <div *ngIf="!editTigia">
+                      {{orderService.orderRe.ti_gia}}
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>Tính theo</div>
+                  <div>
+                    <select class="form-control" name="type" id="type">
+                      <option value="1">Trọng lượng</option>
+                      <option value="2">Kích thước</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>Giá cân nặng</div>
+                  <div>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+                    <sup>đ</sup>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>Phí cân nặng thành tiền</div>
+                  <div>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+                    <sup>đ</sup>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>Phí đóng gỗ thành tiền</div>
+                  <div>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+                    <sup>đ</sup>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>Phí chống sốc thành tiền</div>
+                  <div>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+                    <sup>đ</sup>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="col-lg-4 ml-auto">
               <strong>Tổng giá trị đơn hàng</strong>
               <div class="bg-gray rounded p-4 mt-3">

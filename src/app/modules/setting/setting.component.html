@@ -190,7 +190,7 @@
         <select [(ngModel)]="settingService.transportFeeSearchParam.type" class="form-control" name="type"
                 id="type" (change)="getTransportFeesData()">
           <option value="1">Trọng lượng</option>
-          <option value="2">Thể tích</option>
+          <option value="2">Kích thước</option>
         </select>
       </div>
     </div>
@@ -224,7 +224,7 @@
         </tr>
         </tbody>
       </table>
-      
+
     </div>
   </div>
 </div>
@@ -263,7 +263,7 @@
                 id="transportFeeType"
                 required>
           <option value="1">Trọng lượng</option>
-          <option value="2">Thể tích</option>
+          <option value="2">Kích thước</option>
         </select>
         <div [hidden]="transportFeeType.valid || transportFeeType.untouched">
           <span *ngIf="transportFeeType.errors && transportFeeType.errors.required"
@@ -289,26 +289,26 @@
       </div>
 
       <div class="form-group">
-        <label for="transportFeeMinR">Trọng lượng (thể tích) từ <code class="highlighter-rouge">*</code></label>
+        <label for="transportFeeMinR">Trọng lượng (kích thước) từ <code class="highlighter-rouge">*</code></label>
         <input [(ngModel)]="transportFee.min_r" #transportFeeMinR="ngModel" type="number" min="0"
                id="transportFeeMinR" name="transportFeeMinR"
                class="form-control"
                required
-               placeholder="Trọng lượng (thể tích) từ">
+               placeholder="Trọng lượng (kích thước) từ">
         <div [hidden]="transportFeeMinR.valid || transportFeeMinR.untouched">
           <span *ngIf="transportFeeMinR.errors && transportFeeMinR.errors.required"
                 class="badge badge-warning">
-              Phải nhập TRỌNG LƯỢNG (THỂ TÍCH) TỪ!
+              Phải nhập TRỌNG LƯỢNG (Kích thước) TỪ!
           </span>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="transportFeeMaxR">Trọng lượng (thể tích) đến </label>
+        <label for="transportFeeMaxR">Trọng lượng (kích thước) đến </label>
         <input [(ngModel)]="transportFee.max_r" type="number" min="0"
                id="transportFeeMaxR" name="transportFeeMaxR"
                class="form-control"
-               placeholder="Trọng lượng (thể tích) đến">
+               placeholder="Trọng lượng (kích thước) đến">
       </div>
 
       <div class="form-group">
