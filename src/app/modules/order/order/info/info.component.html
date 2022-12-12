@@ -506,7 +506,7 @@
                       appAutofocus
                       type="number">
                     <div *ngIf="!editTigia">
-                      {{orderService.orderRe.ti_gia}}
+                      {{orderService.orderRe.ti_gia}} (kg)
                     </div>
                   </div>
                 </div>
@@ -525,7 +525,7 @@
                       appAutofocus
                       type="number">
                     <div *ngIf="!editTigia">
-                      {{orderService.orderRe.ti_gia}}
+                      {{orderService.orderRe.ti_gia}} (m3)
                     </div>
                   </div>
                 </div>
@@ -646,7 +646,7 @@
                   </div>
                 </div>
                 <div style="text-align: right;display: inline-block;width: 100%;">
-                  <button *ngIf="orderService.orderRe.status == 1" type="button" (click)="confirmOrderOpenDialog(confirm_template)" class="btn btn-primary">Xác nhận đơn</button>
+                  <button *ngIf="orderService.orderRe.status == 1" type="button" (click)="confirmOrderOpenDialog(confirm_template)" class="btn btn-primary btn-rounded">Xác nhận đơn</button>
                 </div>
               </div>
             </div>
