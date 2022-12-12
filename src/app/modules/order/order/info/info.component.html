@@ -494,45 +494,37 @@
               <div class="bg-gray rounded p-4 mt-3">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div class="text-right">Cân nặng (kg)</div>
-                  <div (click)="tigiaEdit(true)">
-                    <input
-                      *ngIf="editTigia"
-                      [(ngModel)]="orderService.orderRe.ti_gia"
+                  <div>
+                    <input title="" [(ngModel)]="orderService.orderRe.can_nang_dk"
                       #can_nang_dk="ngModel" class="form-control"
                       id="can_nang_dk"
                       name="can_nang_dk"
-                      (change)="updateOrder('ti_gia')"
-                      (blur)="tigiaEdit(false)"
+                      (change)="updateOrder('can_nang_dk')"
                       appAutofocus
                       type="number">
-                    <div *ngIf="!editTigia">
-                      {{orderService.orderRe.ti_gia}} (kg)
-                    </div>
                   </div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div class="text-right">Kích thước (m3)</div>
-                  <div (click)="tigiaEdit(true)">
-                    <input
-                      *ngIf="editTigia"
-                      [(ngModel)]="orderService.orderRe.ti_gia"
+                  <div>
+                    <input title="" [(ngModel)]="orderService.orderRe.kich_thuoc_dk"
                       #kich_thuoc_dk="ngModel" class="form-control"
                       id="kich_thuoc_dk"
                       name="kich_thuoc_dk"
-                      (change)="updateOrder('ti_gia')"
-                      (blur)="tigiaEdit(false)"
+                      (change)="updateOrder('kich_thuoc_dk')"
                       appAutofocus
                       type="number">
-                    <div *ngIf="!editTigia">
-                      {{orderService.orderRe.ti_gia}} (m3)
-                    </div>
                   </div>
                 </div>
+
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div>Tính theo</div>
                   <div>
-                    <select class="form-control" name="type" id="type">
+                    <select title="" class="form-control"
+                            [(ngModel)]="orderService.orderRe.cal_option"
+                            (change)="updateOrder('cal_option')"
+                            name="cal_option" id="cal_option">
                       <option value="1">Trọng lượng</option>
                       <option value="2">Kích thước</option>
                     </select>
@@ -540,25 +532,25 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div>Giá cân nặng</div>
-                  <div>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+                  <div>{{orderService.orderRe.gia_can_dk.toString() | tempPrice: 1 : 1 : false}}
                     <sup>đ</sup>
                   </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div>Phí cân nặng thành tiền</div>
-                  <div>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+                  <div>{{orderService.orderRe.tien_can_dk.toString() | tempPrice: 1 : 1 : false}}
                     <sup>đ</sup>
                   </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div *ngIf="orderService.orderRe.dong_go" class="d-flex justify-content-between align-items-center mb-3">
                   <div>Phí đóng gỗ thành tiền</div>
-                  <div>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+                  <div>{{orderService.orderRe.tien_dong_go_dk.toString() | tempPrice: 1 : 1 : false}}
                     <sup>đ</sup>
                   </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div *ngIf="orderService.orderRe.bao_hiem" class="d-flex justify-content-between align-items-center mb-3">
                   <div>Phí chống sốc thành tiền</div>
-                  <div>{{orderService.orderRe.phi_dat_hang_tt.toString() | tempPrice: 1 : 1 : false}}
+                  <div>{{orderService.orderRe.tien_chong_soc_dk.toString() | tempPrice: 1 : 1 : false}}
                     <sup>đ</sup>
                   </div>
                 </div>

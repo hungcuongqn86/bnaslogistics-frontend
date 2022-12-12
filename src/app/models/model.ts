@@ -346,6 +346,18 @@ export class Order implements IOrder {
   user: IUser;
   package: IPackage[];
   order_items: IOrderItem[];
+  can_nang_dk: number;
+  kich_thuoc_dk: number;
+  cal_option: number;
+  gia_can_dk: number;
+  ck_vc_dk: number;
+  tien_can_dk: number;
+  dg_1_price: number;
+  dg_2_price: number;
+  tien_dong_go: number;
+  chong_soc_1_price: number;
+  chong_soc_2_price: number;
+  tien_chong_soc: number;
 
   constructor() {
   }
