@@ -354,10 +354,10 @@ export class Order implements IOrder {
   tien_can_dk: number;
   dg_1_price: number;
   dg_2_price: number;
-  tien_dong_go: number;
+  tien_dong_go_dk: number;
   chong_soc_1_price: number;
   chong_soc_2_price: number;
-  tien_chong_soc: number;
+  tien_chong_soc_dk: number;
 
   constructor() {
   }

@@ -488,7 +488,7 @@
             </table>
           </div>
           <div class="border-top mt-3 mb-3"></div>
-          <div class="row">
+          <div *ngIf="orderService.orderRe" class="row">
             <div class="col-lg-4">
               <strong>Chi phí vận chuyển dự kiến</strong>
               <div class="bg-gray rounded p-4 mt-3">
@@ -532,25 +532,25 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div>Giá cân nặng</div>
-                  <div>{{orderService.orderRe.gia_can_dk.toString() | tempPrice: 1 : 1 : false}}
+                  <div *ngIf="orderService.orderRe.gia_can_dk">{{orderService.orderRe.gia_can_dk.toString() | tempPrice: 1 : 1 : false}}
                     <sup>đ</sup>
                   </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div>Phí cân nặng thành tiền</div>
-                  <div>{{orderService.orderRe.tien_can_dk.toString() | tempPrice: 1 : 1 : false}}
+                  <div *ngIf="orderService.orderRe.tien_can_dk">{{orderService.orderRe.tien_can_dk.toString() | tempPrice: 1 : 1 : false}}
                     <sup>đ</sup>
                   </div>
                 </div>
                 <div *ngIf="orderService.orderRe.dong_go" class="d-flex justify-content-between align-items-center mb-3">
                   <div>Phí đóng gỗ thành tiền</div>
-                  <div>{{orderService.orderRe.tien_dong_go_dk.toString() | tempPrice: 1 : 1 : false}}
+                  <div *ngIf="orderService.orderRe.tien_dong_go_dk">{{orderService.orderRe.tien_dong_go_dk.toString() | tempPrice: 1 : 1 : false}}
                     <sup>đ</sup>
                   </div>
                 </div>
                 <div *ngIf="orderService.orderRe.bao_hiem" class="d-flex justify-content-between align-items-center mb-3">
                   <div>Phí chống sốc thành tiền</div>
-                  <div>{{orderService.orderRe.tien_chong_soc_dk.toString() | tempPrice: 1 : 1 : false}}
+                  <div *ngIf="orderService.orderRe.tien_chong_soc_dk">{{orderService.orderRe.tien_chong_soc_dk.toString() | tempPrice: 1 : 1 : false}}
                     <sup>đ</sup>
                   </div>
                 </div>
