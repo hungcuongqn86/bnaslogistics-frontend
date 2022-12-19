@@ -313,7 +313,7 @@
 
       <div class="form-group">
         <label for="transportFeeVal">Tính phí (VNĐ) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="transportFee.val" #transportFeeVal="ngModel" type="number" min="0" max="100"
+        <input [(ngModel)]="transportFee.val" #transportFeeVal="ngModel" type="number" min="0"
                id="transportFeeVal" name="transportFeeVal"
                class="form-control"
                required
@@ -471,7 +471,7 @@
 
       <div class="form-group">
         <label for="inspectionFeeVal">Tính phí (VNĐ) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="inspectionFee.val" #inspectionFeeVal="ngModel" type="number" min="0" max="100"
+        <input [(ngModel)]="inspectionFee.val" #inspectionFeeVal="ngModel" type="number" min="0"
                id="inspectionFeeVal" name="inspectionFeeVal"
                class="form-control"
                required
@@ -556,7 +556,9 @@
       <tr>
         <th rowspan="2">Dịch vụ</th>
         <th rowspan="2">Kích thước (dm3)</th>
-        <th rowspan="2">Phí (VNĐ)</th>
+        <th rowspan="2">Kích thước đầu (dm3)</th>
+        <th rowspan="2">Phí KT đầu (VNĐ)</th>
+        <th rowspan="2">Phí KT tiếp theo (VNĐ)</th>
         <th rowspan="2">Ghi chú</th>
         <th rowspan="2" class="text-right">Tác vụ</th>
       </tr>
@@ -565,6 +567,8 @@
       <tr *ngFor="let item of cratingFees">
         <td>{{item.title}}</td>
         <td>{{item.min_count}} - {{item.max_count}}</td>
+        <td>{{item.first_count}}</td>
+        <td>{{item.first_val | currency:'VND':'' }} đ</td>
         <td>{{item.val | currency:'VND':'' }} đ</td>
         <td>{{item.note}}</td>
         <td class="text-right">
@@ -628,16 +632,46 @@
       </div>
 
       <div class="form-group">
-        <label for="cratingFeeVal">Tính phí (VNĐ) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="cratingFee.val" #cratingFeeVal="ngModel" type="number" min="0" max="100"
+        <label for="cratingFeeFirstCount">Kích thước đầu (dm3) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="cratingFee.first_count" #cratingFeeFirstCount="ngModel" type="number" min="0"
+               id="cratingFeeFirstCount" name="cratingFeeFirstCount"
+               class="form-control"
+               required
+               placeholder="Kích thước đầu">
+        <div [hidden]="cratingFeeFirstCount.valid || cratingFeeFirstCount.untouched">
+          <span *ngIf="cratingFeeFirstCount.errors && cratingFeeFirstCount.errors.required"
+                class="badge badge-warning">
+              Phải nhập KÍCH THƯỚC ĐẦU!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cratingFeeFirstVal">Phí KT đầu (VNĐ) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="cratingFee.first_val" #cratingFeeFirstVal="ngModel" type="number" min="0"
+               id="cratingFeeFirstVal" name="cratingFeeFirstVal"
+               class="form-control"
+               required
+               placeholder="PHÍ KT đầu">
+        <div [hidden]="cratingFeeFirstVal.valid || cratingFeeFirstVal.untouched">
+          <span *ngIf="cratingFeeFirstVal.errors && cratingFeeFirstVal.errors.required"
+                class="badge badge-warning">
+              Phải nhập PHÍ KT đầu!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cratingFeeVal">Phí KT tiếp theo (VNĐ) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="cratingFee.val" #cratingFeeVal="ngModel" type="number" min="0"
                id="cratingFeeVal" name="cratingFeeVal"
                class="form-control"
                required
-               placeholder="Tính phí">
+               placeholder="PHÍ KT tiếp theo">
         <div [hidden]="cratingFeeVal.valid || cratingFeeVal.untouched">
           <span *ngIf="cratingFeeVal.errors && cratingFeeVal.errors.required"
                 class="badge badge-warning">
-              Phải nhập TÍNH PHÍ!
+              Phải nhập PHÍ KT tiếp theo!
           </span>
         </div>
       </div>

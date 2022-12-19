@@ -156,6 +156,8 @@ export class CratingFee implements ICratingFee {
   note: string;
   min_count: number;
   max_count: number;
+  first_count: number;
+  first_val: number;
   val: number;
   created_at: string;
   updated_at: string;
