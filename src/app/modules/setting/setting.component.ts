@@ -70,6 +70,7 @@ export class SettingComponent implements OnInit, OnDestroy{
     const getWarehousesObs: Observable<any> = this.settingService.getWarehouses();
     const getTransportFeesObs: Observable<any> = this.settingService.getTransportFees();
     const getInspectionFeesObs: Observable<any> = this.settingService.getInspectionFees();
+    const getCratingFeesObs: Observable<any> = this.settingService.getCratingFees();
     const getSettingsObs: Observable<any> = this.settingService.getSettings();
     const getVipsObs: Observable<any> = this.settingService.getVips();
     const getServiceFeesObs: Observable<any> = this.settingService.getServiceFees();
@@ -79,13 +80,15 @@ export class SettingComponent implements OnInit, OnDestroy{
       getWarehousesObs,
       getTransportFeesObs,
       getInspectionFeesObs,
+      getCratingFeesObs,
       getSettingsObs,
       getVipsObs,
       getServiceFeesObs,
       getChinaWarehousesObs
-    ]).subscribe(([warehouses, transportFees, inspectionFees, settings, vips, serviceFees, chinaWarehouses]) => {
+    ]).subscribe(([warehouses, transportFees, inspectionFees, cratingFees, settings, vips, serviceFees, chinaWarehouses]) => {
       this.warehouses = warehouses.data.data;
       this.inspectionFees = inspectionFees.data.data;
+      this.cratingFees = cratingFees.data.data;
       this.transportFees = transportFees.data.data;
       this.settings = settings.data.data;
       this.vips = vips.data.data;
@@ -280,6 +283,19 @@ export class SettingComponent implements OnInit, OnDestroy{
     this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
   }
 
+  private getCratingFees() {
+    this.settingService.showLoading(true);
+    const getCratingFeesObs: Observable<any> = this.settingService.getCratingFees();
+
+    const listSub = forkJoin([
+      getCratingFeesObs
+    ]).subscribe(([cratingFees]) => {
+      this.cratingFees = cratingFees.data.data;
+      this.settingService.showLoading(false);
+      listSub.unsubscribe();
+    });
+  }
+
   public cratingFeeModalOpen(template: TemplateRef<any>, item: ICratingFee = null) {
     if (item) {
       this.cratingFee = item;
@@ -316,26 +332,26 @@ export class SettingComponent implements OnInit, OnDestroy{
 
   public cratingFeeConfirm(): void {
     let updateObs: Observable<any> = new Observable<any>();
-    if (this.inspectionFee.id) {
+    if (this.cratingFee.id) {
       // Update
-      updateObs = this.settingService.editInspectionFee(this.inspectionFee);
+      updateObs = this.settingService.editCratingFee(this.cratingFee);
     } else {
       // Create
-      updateObs = this.settingService.addInspectionFee(this.inspectionFee);
+      updateObs = this.settingService.addCratingFee(this.cratingFee);
     }
     this.settingService.showLoading(true);
-    this.inspectionFeeSub = updateObs.subscribe(data => {
+    this.cratingFeeSub = updateObs.subscribe(data => {
       if (data.status) {
-        this.inspectionFeeErrorMessage = [];
-        this.getInspectionFees();
+        this.cratingFeeErrorMessage = [];
+        this.getCratingFees();
         this.modalRef.hide();
       } else {
         for (let i = 0; i < data.data.length; i++) {
-          this.inspectionFeeErrorMessage.push(data.data[i]);
+          this.cratingFeeErrorMessage.push(data.data[i]);
         }
       }
       this.settingService.showLoading(false);
-      this.inspectionFeeSub.unsubscribe();
+      this.cratingFeeSub.unsubscribe();
     });
   }
 
@@ -368,20 +384,20 @@ export class SettingComponent implements OnInit, OnDestroy{
   }
 
   public cratingFeeDelConfirm(): void {
-    const deleteObs: Observable<any> = this.settingService.deleteInspectionFee(this.inspectionFee);
+    const deleteObs: Observable<any> = this.settingService.deleteCratingFee(this.cratingFee);
     this.settingService.showLoading(true);
-    this.inspectionFeeSub = deleteObs.subscribe(data => {
+    this.cratingFeeSub = deleteObs.subscribe(data => {
       if (data.status) {
-        this.inspectionFeeErrorMessage = [];
-        this.getInspectionFees();
+        this.cratingFeeErrorMessage = [];
+        this.getCratingFees();
         this.modalRef.hide();
       } else {
         for (let i = 0; i < data.data.length; i++) {
-          this.inspectionFeeErrorMessage.push(data.data[i]);
+          this.cratingFeeErrorMessage.push(data.data[i]);
         }
       }
       this.settingService.showLoading(false);
-      this.inspectionFeeSub.unsubscribe();
+      this.cratingFeeSub.unsubscribe();
     });
   }
   // =====================================================================================

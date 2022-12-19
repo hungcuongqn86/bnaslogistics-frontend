@@ -8,7 +8,7 @@ import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {Router} from '@angular/router';
-import {IChinaWarehouse, IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip} from '../../models/interface';
+import {IChinaWarehouse, ICratingFee, IInspectionFee, IServiceFee, ISetting, ITransportFee, IVip} from '../../models/interface';
 import {Setting} from '../../models/model';
 import {LoadingService} from '../../loading.service';
 
@@ -22,6 +22,7 @@ export class SettingService {
   private serviceFeeModuleUri = 'service_fee/';
   private transportFeeModuleUri = 'transport_fees/';
   private inspectionFeeModuleUri = 'inspection_fees/';
+  private cratingFeeModuleUri = 'crating_fees/';
   private warehouseModuleUri = 'warehouses/';
   public search = {key: '', page_size: 100, page: 1};
   public vipSearchParam = {key: '', page_size: 100, page: 1};
@@ -29,6 +30,7 @@ export class SettingService {
   public serviceFeeSearchParam = {key: '', page_size: 100, page: 1};
   public transportFeeSearchParam = {key: '', type: 1, warehouse_id: 1, page_size: 100, page: 1};
   public inspectionFeeSearchParam = {key: '', page_size: 100, page: 1};
+  public cratingFeeSearchParam = {key: '', page_size: 100, page: 1};
   public warehouseSearchParam = {key: '', page_size: 100, page: 1};
 
   constructor(private router: Router, private loadingService: LoadingService,
@@ -211,6 +213,44 @@ export class SettingService {
     return this.http.post<IInspectionFee>(url, item)
       .pipe(
         catchError(this.handleError('deleteInspectionFee', item))
+      );
+  }
+
+  // =============================================
+  // CratingFees
+  public getCratingFees(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.cratingFeeModuleUri}search`;
+    let params = new HttpParams();
+    Object.keys(this.cratingFeeSearchParam).map((key) => {
+      params = params.append(key, this.cratingFeeSearchParam[key]);
+    });
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('getCratingFees', []))
+      );
+  }
+
+  public addCratingFee(item: ICratingFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.cratingFeeModuleUri}create`;
+    return this.http.post<ICratingFee>(url, item)
+      .pipe(
+        catchError(this.handleError('addCratingFee', item))
+      );
+  }
+
+  public editCratingFee(item: ICratingFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.cratingFeeModuleUri}update/${item.id}`;
+    return this.http.post<ICratingFee>(url, item)
+      .pipe(
+        catchError(this.handleError('editCratingFee', item))
+      );
+  }
+
+  public deleteCratingFee(item: ICratingFee): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.cratingFeeModuleUri}delete/${item.id}`;
+    return this.http.post<ICratingFee>(url, item)
+      .pipe(
+        catchError(this.handleError('deleteCratingFee', item))
       );
   }
 
