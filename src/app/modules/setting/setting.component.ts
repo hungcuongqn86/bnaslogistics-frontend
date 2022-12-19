@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {SettingService} from '../../services/setting/setting.service';
 import {
-  IChinaWarehouse,
+  IChinaWarehouse, ICratingFee,
   IInspectionFee,
   IServiceFee,
   ISetting,
@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 import {forkJoin, Observable, Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {ChinaWarehouse, InspectionFee, ServiceFee, Setting, TransportFee, Vip} from "../../models/model";
+import {ChinaWarehouse, CratingFee, InspectionFee, ServiceFee, Setting, TransportFee, Vip} from '../../models/model';
 
 @Component({
   selector: 'app-setting',
@@ -28,10 +28,12 @@ export class SettingComponent implements OnInit, OnDestroy{
   warehouses: IWarehouse[];
   chinaWarehouses: IChinaWarehouse[];
   inspectionFees: IInspectionFee[];
+  cratingFees: ICratingFee[];
   transportFees: ITransportFee[];
 
   serviceFee: IServiceFee;
   inspectionFee: IInspectionFee;
+  cratingFee: ICratingFee;
   transportFee: ITransportFee;
   vip: IVip;
   chinaWarehouse: IChinaWarehouse;
@@ -41,6 +43,7 @@ export class SettingComponent implements OnInit, OnDestroy{
 
   serviceFeeSub: Subscription;
   inspectionFeeSub: Subscription;
+  cratingFeeSub: Subscription;
   transportFeeSub: Subscription;
   vipSub: Subscription;
   chinaWarehouseSub: Subscription;
@@ -48,6 +51,7 @@ export class SettingComponent implements OnInit, OnDestroy{
 
   serviceFeeErrorMessage: string[] = [];
   inspectionFeeErrorMessage: string[] = [];
+  cratingFeeErrorMessage: string[] = [];
   transportFeeErrorMessage: string[] = [];
   vipErrorMessage: string[] = [];
   chinaWarehouseErrorMessage: string[] = [];
@@ -276,7 +280,41 @@ export class SettingComponent implements OnInit, OnDestroy{
     this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
   }
 
+  public cratingFeeModalOpen(template: TemplateRef<any>, item: ICratingFee = null) {
+    if (item) {
+      this.cratingFee = item;
+    } else {
+      this.cratingFee = new CratingFee();
+    }
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
   public inspectionFeeConfirm(): void {
+    let updateObs: Observable<any> = new Observable<any>();
+    if (this.inspectionFee.id) {
+      // Update
+      updateObs = this.settingService.editInspectionFee(this.inspectionFee);
+    } else {
+      // Create
+      updateObs = this.settingService.addInspectionFee(this.inspectionFee);
+    }
+    this.settingService.showLoading(true);
+    this.inspectionFeeSub = updateObs.subscribe(data => {
+      if (data.status) {
+        this.inspectionFeeErrorMessage = [];
+        this.getInspectionFees();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.inspectionFeeErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      this.inspectionFeeSub.unsubscribe();
+    });
+  }
+
+  public cratingFeeConfirm(): void {
     let updateObs: Observable<any> = new Observable<any>();
     if (this.inspectionFee.id) {
       // Update
@@ -306,6 +344,11 @@ export class SettingComponent implements OnInit, OnDestroy{
     this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
   }
 
+  public cratingFeeDelModalOpen(template: TemplateRef<any>, item: ICratingFee) {
+    this.cratingFee = item;
+    this.modalRef = this.modalService.show(template, {class: 'modal-md', ignoreBackdropClick: true});
+  }
+
   public inspectionFeeDelConfirm(): void {
     const deleteObs: Observable<any> = this.settingService.deleteInspectionFee(this.inspectionFee);
     this.settingService.showLoading(true);
@@ -324,6 +367,23 @@ export class SettingComponent implements OnInit, OnDestroy{
     });
   }
 
+  public cratingFeeDelConfirm(): void {
+    const deleteObs: Observable<any> = this.settingService.deleteInspectionFee(this.inspectionFee);
+    this.settingService.showLoading(true);
+    this.inspectionFeeSub = deleteObs.subscribe(data => {
+      if (data.status) {
+        this.inspectionFeeErrorMessage = [];
+        this.getInspectionFees();
+        this.modalRef.hide();
+      } else {
+        for (let i = 0; i < data.data.length; i++) {
+          this.inspectionFeeErrorMessage.push(data.data[i]);
+        }
+      }
+      this.settingService.showLoading(false);
+      this.inspectionFeeSub.unsubscribe();
+    });
+  }
   // =====================================================================================
   // CHINA Warehouse
   private getChinaWarehouses() {
@@ -522,6 +582,10 @@ export class SettingComponent implements OnInit, OnDestroy{
 
     if (this.inspectionFeeSub) {
       this.inspectionFeeSub.unsubscribe();
+    }
+
+    if (this.cratingFeeSub) {
+      this.cratingFeeSub.unsubscribe();
     }
 
     if (this.serviceFeeSub) {

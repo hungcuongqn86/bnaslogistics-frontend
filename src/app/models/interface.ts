@@ -113,6 +113,17 @@ export interface IInspectionFee {
   updated_at: string;
 }
 
+export interface ICratingFee {
+  id: number;
+  title: string;
+  note: string;
+  min_count: number;
+  max_count: number;
+  val: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface ITransportFee {
   id: number;
   type: number;

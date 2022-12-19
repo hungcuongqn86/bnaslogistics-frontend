@@ -4,7 +4,7 @@ import {
   ICarrierPackage,
   ICart,
   ICartItem,
-  IChinaWarehouse,
+  IChinaWarehouse, ICratingFee,
   IInspectionFee,
   IOrder,
   IOrderItem,
@@ -136,6 +136,21 @@ export class TransportFee implements ITransportFee {
 }
 
 export class InspectionFee implements IInspectionFee {
+  id: number;
+  title: string;
+  note: string;
+  min_count: number;
+  max_count: number;
+  val: number;
+  created_at: string;
+  updated_at: string;
+
+  constructor() {
+
+  }
+}
+
+export class CratingFee implements ICratingFee {
   id: number;
   title: string;
   note: string;

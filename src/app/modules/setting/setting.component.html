@@ -529,6 +529,163 @@
 
 <!--
 // =====================================================================================================================
+// Dong go theo kich thuoc - crating
+ -->
+
+<div class="card entry-list">
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-12 col-md-6">
+        <div class="title-list">
+          <span>Phí đóng gỗ theo kích thước</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-header-actions">
+          <button (click)="cratingFeeModalOpen(cratingFeeModal)" class="btn btn-block btn-primary btn-rounded"
+                  type="button">Thêm
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body table-responsive">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th rowspan="2">Dịch vụ</th>
+        <th rowspan="2">Kích thước</th>
+        <th rowspan="2">Phí (VNĐ)</th>
+        <th rowspan="2">Ghi chú</th>
+        <th rowspan="2" class="text-right">Tác vụ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of cratingFees">
+        <td>{{item.title}}</td>
+        <td>{{item.min_count}} - {{item.max_count}}</td>
+        <td>{{item.val | currency:'VND':'' }} đ</td>
+        <td>{{item.note}}</td>
+        <td class="text-right">
+          <button (click)="cratingFeeModalOpen(cratingFeeModal, item)" class="btn btn-sm btn-info mr-1 text-white"
+                  type="button">
+            Sửa
+          </button>
+          <button (click)="cratingFeeDelModalOpen(cratingFeeDelModal, item)" class="btn btn-sm btn-violet"
+                  type="button">
+            Xóa
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #cratingFeeModal>
+  <form novalidate #cratingFeeForm="ngForm">
+    <div class="modal-header">
+      <h5 class="modal-title">Chi tiết Phí đóng gỗ</h5>
+    </div>
+    <div class="modal-body" *ngIf="cratingFee">
+      <div class="form-group">
+        <label for="cratingFeeTitle">Dịch vụ <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="cratingFee.title" #cratingFeeTitle="ngModel" type="text" id="cratingFeeTitle"
+               name="cratingFeeTitle"
+               class="form-control"
+               required
+               placeholder="Dịch vụ">
+        <div [hidden]="cratingFeeTitle.valid || cratingFeeTitle.untouched">
+          <span *ngIf="cratingFeeTitle.errors && cratingFeeTitle.errors.required"
+                class="badge badge-warning">
+              Phải nhập DỊCH VỤ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cratingFeeMinCount">Kích thước từ (dm3) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="cratingFee.min_count" #cratingFeeMinCount="ngModel" type="number" min="0"
+               id="cratingFeeMinCount" name="cratingFeeMinCount"
+               class="form-control"
+               required
+               placeholder="Kích thước từ">
+        <div [hidden]="cratingFeeMinCount.valid || cratingFeeMinCount.untouched">
+          <span *ngIf="cratingFeeMinCount.errors && cratingFeeMinCount.errors.required"
+                class="badge badge-warning">
+              Phải nhập KÍCH THƯỚC TỪ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cratingFeeMaxCount">Kích thước đến (dm3)</label>
+        <input [(ngModel)]="cratingFee.max_count" type="number" min="0"
+               id="cratingFeeMaxCount" name="cratingFeeMaxCount"
+               class="form-control"
+               placeholder="Kích thước đến (dm3)">
+      </div>
+
+      <div class="form-group">
+        <label for="cratingFeeVal">Tính phí (VNĐ) <code class="highlighter-rouge">*</code></label>
+        <input [(ngModel)]="cratingFee.val" #cratingFeeVal="ngModel" type="number" min="0" max="100"
+               id="cratingFeeVal" name="cratingFeeVal"
+               class="form-control"
+               required
+               placeholder="Tính phí">
+        <div [hidden]="cratingFeeVal.valid || cratingFeeVal.untouched">
+          <span *ngIf="cratingFeeVal.errors && cratingFeeVal.errors.required"
+                class="badge badge-warning">
+              Phải nhập TÍNH PHÍ!
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cratingFeeNote">Ghi chú </label>
+        <textarea [(ngModel)]="cratingFee.note" id="cratingFeeNote" name="cratingFeeNote" rows="3"
+                  class="form-control"
+                  placeholder="Ghi chú ..."></textarea>
+      </div>
+
+      <p></p>
+      <alert type="danger" *ngIf="cratingFeeErrorMessage.length > 0">
+        <p *ngFor="let error of cratingFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="!cratingFeeForm.form.valid || (cratingFeeSub && !cratingFeeSub.closed)"
+              class="btn btn-primary btn-rounded" (click)="cratingFeeConfirm()">Cập nhật
+      </button>
+      <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #cratingFeeDelModal>
+  <div class="modal-header">
+    <h5 class="modal-title">Xóa Phí kiểm đếm</h5>
+  </div>
+  <div class="modal-body" *ngIf="cratingFee">
+    <alert type="danger">
+      <p><strong>!</strong> Bạn chắc chắn xóa "{{cratingFee.title}}"!</p>
+    </alert>
+
+    <p></p>
+    <alert type="danger" *ngIf="cratingFeeErrorMessage.length > 0">
+      <p *ngFor="let error of cratingFeeErrorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" [disabled]="(cratingFeeSub && !cratingFeeSub.closed)"
+            class="btn btn-primary btn-rounded" (click)="cratingFeeDelConfirm()">Xóa
+    </button>
+    <button type="button" class="btn btn-warning btn-rounded" (click)="declineModal()">Quay lại</button>
+  </div>
+</ng-template>
+<!--
+// =====================================================================================================================
 // CHINA Warehouse
  -->
 <div class="card entry-list">
