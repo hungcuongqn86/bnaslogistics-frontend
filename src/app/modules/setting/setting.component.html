@@ -74,11 +74,12 @@
 
       <div class="form-group">
         <label for="serviceFeeMinTotTran">Tiền hàng từ (Triệu VNĐ) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="serviceFee.min_tot_tran" #serviceFeeMinTotTran="ngModel" type="number" min="0"
+        <input [(ngModel)]="serviceFee.min_tot_tran" #serviceFeeMinTotTran="ngModel"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="serviceFeeMinTotTran" name="serviceFeeMinTotTran"
                class="form-control"
-               required
-               placeholder="Tiền hàng từ">
+               required>
         <div [hidden]="serviceFeeMinTotTran.valid || serviceFeeMinTotTran.untouched">
           <span *ngIf="serviceFeeMinTotTran.errors && serviceFeeMinTotTran.errors.required"
                 class="badge badge-warning">
@@ -89,7 +90,9 @@
 
       <div class="form-group">
         <label for="serviceFeeMaxTotTran">Tiền hàng đến (Triệu VNĐ)</label>
-        <input [(ngModel)]="serviceFee.max_tot_tran" type="number" min="0"
+        <input [(ngModel)]="serviceFee.max_tot_tran"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="serviceFeeMaxTotTran" name="serviceFeeMaxTotTran"
                class="form-control"
                placeholder="Tiền hàng đến">
@@ -313,7 +316,9 @@
 
       <div class="form-group">
         <label for="transportFeeVal">Tính phí (VNĐ) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="transportFee.val" #transportFeeVal="ngModel" type="number" min="0"
+        <input [(ngModel)]="transportFee.val" #transportFeeVal="ngModel"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="transportFeeVal" name="transportFeeVal"
                class="form-control"
                required
@@ -448,7 +453,9 @@
 
       <div class="form-group">
         <label for="inspectionFeeMinCount">Số lượng từ <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="inspectionFee.min_count" #inspectionFeeMinCount="ngModel" type="number" min="0"
+        <input [(ngModel)]="inspectionFee.min_count" #inspectionFeeMinCount="ngModel"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="inspectionFeeMinCount" name="inspectionFeeMinCount"
                class="form-control"
                required
@@ -463,7 +470,9 @@
 
       <div class="form-group">
         <label for="inspectionFeeMaxCount">Số lượng đến </label>
-        <input [(ngModel)]="inspectionFee.max_count" type="number" min="0"
+        <input [(ngModel)]="inspectionFee.max_count"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="inspectionFeeMaxCount" name="inspectionFeeMaxCount"
                class="form-control"
                placeholder="Số lượng đến">
@@ -471,7 +480,9 @@
 
       <div class="form-group">
         <label for="inspectionFeeVal">Tính phí (VNĐ) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="inspectionFee.val" #inspectionFeeVal="ngModel" type="number" min="0"
+        <input [(ngModel)]="inspectionFee.val" #inspectionFeeVal="ngModel"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="inspectionFeeVal" name="inspectionFeeVal"
                class="form-control"
                required
@@ -648,7 +659,9 @@
 
       <div class="form-group">
         <label for="cratingFeeFirstVal">Phí KT đầu (VNĐ) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="cratingFee.first_val" #cratingFeeFirstVal="ngModel" type="number" min="0"
+        <input [(ngModel)]="cratingFee.first_val" #cratingFeeFirstVal="ngModel"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="cratingFeeFirstVal" name="cratingFeeFirstVal"
                class="form-control"
                required
@@ -663,7 +676,9 @@
 
       <div class="form-group">
         <label for="cratingFeeVal">Phí KT tiếp theo (VNĐ) <code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="cratingFee.val" #cratingFeeVal="ngModel" type="number" min="0"
+        <input [(ngModel)]="cratingFee.val" #cratingFeeVal="ngModel"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="cratingFeeVal" name="cratingFeeVal"
                class="form-control"
                required
@@ -955,7 +970,9 @@
 
       <div class="form-group">
         <label for="vipMinTotTran">Tổng giao dịch từ (Triệu VNĐ)<code class="highlighter-rouge">*</code></label>
-        <input [(ngModel)]="vip.min_tot_tran" #vipMinTotTran="ngModel" type="number" min="0"
+        <input [(ngModel)]="vip.min_tot_tran" #vipMinTotTran="ngModel"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="vipMinTotTran" name="vipMinTotTran"
                class="form-control"
                required
@@ -970,7 +987,9 @@
 
       <div class="form-group">
         <label for="vipMaxTotTran">Tổng giao dịch đến (Triệu VNĐ)</label>
-        <input [(ngModel)]="vip.max_tot_tran" type="number" min="0"
+        <input [(ngModel)]="vip.max_tot_tran"
+               currencyMask
+               [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',', precision: 0}"
                id="vipMaxTotTran" name="vipMaxTotTran"
                class="form-control"
                placeholder="Tổng giao dịch đến">
