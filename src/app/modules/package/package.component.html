@@ -93,10 +93,10 @@
               <thead>
               <tr>
                 <th style="width: 17%">Kiện hàng</th>
-                <th style="width: 25%">Đơn hàng</th>
-                <th style="width: 17%">Thông số</th>
-                <th style="width: 14%">Phí vận</th>
-                <th style="width: 14%">Đóng gỗ/ chống sốc</th>
+                <th style="width: 18%">Đơn hàng</th>
+                <th style="width: 14%">Thông số</th>
+                <th style="width: 17%">Phí vận</th>
+                <th style="width: 17%">Đóng gỗ/ chống sốc</th>
                 <th style="width: 5%">#</th>
               </tr>
               </thead>
@@ -119,46 +119,22 @@
                   </p>
                 </td>
                 <td class="text-nowrap">
-                  <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
+                  <p><span class="">Đơn hàng: </span><a href="javascript:void(0);"
                                                                   (click)="gotoOrder(item.order_id)"><span
-                    class="packages-inf text-right packages-code"><strong>{{item.order.code}}</strong></span></a>
+                    class="packages-code"><strong>{{item.order.code}}</strong></span></a>
                   </p>
-                  <p><span class="packages-inf">Khách hàng</span><span
-                    class="packages-inf text-right"><strong>{{item.order.user.code}}
+                  <p><span class="">Khách hàng: </span><span
+                    class=""><strong>{{item.order.user.code}}
                     - {{item.order.user.name}}</strong></span>
                   </p>
-                  <p><span class="packages-inf">Email</span><span
-                    class="packages-inf text-right"><strong>{{item.order.user.email}}</strong></span>
+                  <p><span class="">Email: </span><span
+                    class=""><strong>{{item.order.user.email}}</strong></span>
                   </p>
-                  <p><span class="packages-inf">Số điện thoại</span><span
-                    class="packages-inf text-right"><strong>{{item.order.user.phone_number}}</strong></span>
+                  <p><span class="">Số điện thoại: </span><span
+                    class=""><strong>{{item.order.user.phone_number}}</strong></span>
                   </p>
                 </td>
                 <td class="text-nowrap">
-                  <p><span class="packages-inf">Áp giá VC theo</span>
-                    <span (click)="selectPackage(item,'cal_option')" class="packages-inf text-right badge badge-info">
-                        <select [(ngModel)]="item.cal_option" #cal_option="ngModel"
-                                class="form-control"
-                                (change)="updatePackage(template, 'cal_option')"
-                                name="cal_option" id="cal_option">
-                          <option value="0">Cân nặng</option>
-                          <option value="1">Kích thước</option>
-                          <!--<option value="2">Quy đổi</option>-->
-                        </select>
-                    </span>
-                  </p>
-                  <p><span class="packages-inf">Áp giá ĐG theo</span>
-                    <span (click)="selectPackage(item,'dg_cal_option')"
-                          class="packages-inf text-right badge badge-info">
-                        <select [(ngModel)]="item.dg_cal_option" #dg_cal_option="ngModel"
-                                class="form-control"
-                                (change)="updatePackage(template, 'dg_cal_option')"
-                                name="dg_cal_option" id="dg_cal_option">
-                          <option value="0">Cân nặng</option>
-                          <option value="1">Kích thước</option>
-                        </select>
-                    </span>
-                  </p>
                   <p><span
                     class="packages-inf">Cân nặng (kg)</span><span
                     (click)="selectPackage(item,'weight')"
@@ -253,6 +229,18 @@
                   </p>
                 </td>
                 <td class="text-nowrap">
+                  <p><span class="packages-inf">Áp giá VC theo</span>
+                    <span (click)="selectPackage(item,'cal_option')" class="packages-inf text-right badge badge-info">
+                        <select [(ngModel)]="item.cal_option" #cal_option="ngModel"
+                                class="form-control"
+                                (change)="updatePackage(template, 'cal_option')"
+                                name="cal_option" id="cal_option">
+                          <option value="0">Cân nặng</option>
+                          <option value="1">Kích thước</option>
+                          <!--<option value="2">Quy đổi</option>-->
+                        </select>
+                    </span>
+                  </p>
                   <p><span class="packages-inf">Giá vận (vnđ)</span>
                     <span (click)="selectPackage(item,'gia_can')" class="packages-inf text-right badge badge-info">
                       <input *ngIf="((package.id === item.id) && (col === 'gia_can'))"
@@ -294,6 +282,18 @@
                   </p>
                 </td>
                 <td class="text-nowrap">
+                  <p *ngIf="item.order.dong_go"><span class="packages-inf">Áp giá ĐG theo</span>
+                    <span (click)="selectPackage(item,'dg_cal_option')"
+                          class="packages-inf text-right badge badge-info">
+                        <select [(ngModel)]="item.dg_cal_option" #dg_cal_option="ngModel"
+                                class="form-control"
+                                (change)="updatePackage(template, 'dg_cal_option')"
+                                name="dg_cal_option" id="dg_cal_option">
+                          <option value="0">Cân nặng</option>
+                          <option value="1">Kích thước</option>
+                        </select>
+                    </span>
+                  </p>
                   <p *ngIf="item.order.dong_go">
                     <span class="packages-inf">Giá đóng gỗ</span>
                     <span class="packages-inf text-right badge badge-info text-nowrap">
