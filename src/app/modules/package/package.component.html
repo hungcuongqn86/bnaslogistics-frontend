@@ -93,10 +93,10 @@
               <thead>
               <tr>
                 <th style="width: 17%">Kiện hàng</th>
-                <th style="width: 17%">Đơn hàng</th>
+                <th style="width: 25%">Đơn hàng</th>
                 <th style="width: 17%">Thông số</th>
-                <th style="width: 17%">Phí vận</th>
-                <th style="width: 17%">Đóng gỗ/ chống sốc</th>
+                <th style="width: 14%">Phí vận</th>
+                <th style="width: 14%">Đóng gỗ/ chống sốc</th>
                 <th style="width: 5%">#</th>
               </tr>
               </thead>
@@ -159,7 +159,7 @@
                         </select>
                     </span>
                   </p>
-                  <p *ngIf="((item.cal_option===0)||(item.dg_cal_option===0))"><span
+                  <p><span
                     class="packages-inf">Cân nặng (kg)</span><span
                     (click)="selectPackage(item,'weight')"
                     class="packages-inf text-right badge badge-info">
@@ -177,7 +177,7 @@
                                     *ngIf="((package.id !== item.id) || (col !== 'weight'))">{{item.weight ? item.weight : '0.00'}}</span>
                                   </span>
                   </p>
-                  <p *ngIf="((item.cal_option===1)||(item.dg_cal_option===1))"><span class="packages-inf">Kích thước (m3)</span><span
+                  <p><span class="packages-inf">Kích thước (m3)</span><span
                     (click)="selectPackage(item,'size')"
                     class="packages-inf text-right badge badge-info">
                                       <input *ngIf="((package.id === item.id) && (col === 'size'))"

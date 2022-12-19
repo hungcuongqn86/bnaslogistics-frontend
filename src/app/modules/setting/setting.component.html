@@ -189,7 +189,7 @@
       <div class="col-md-2">
         <select [(ngModel)]="settingService.transportFeeSearchParam.type" class="form-control" name="type"
                 id="type" (change)="getTransportFeesData()">
-          <option value="1">Trọng lượng</option>
+          <option value="1">Cân nặng</option>
           <option value="2">Kích thước</option>
         </select>
       </div>
@@ -199,7 +199,7 @@
         <thead>
         <tr>
           <th rowspan="2">Dịch vụ</th>
-          <th rowspan="2">Mức cân nặng (Kg)</th>
+          <th rowspan="2">Mức cân nặng (Kg), kich thước (m3)</th>
           <th rowspan="2">Phí (VNĐ)</th>
           <th rowspan="2">Ghi chú</th>
           <th rowspan="2" class="text-right">Tác vụ</th>
@@ -262,7 +262,7 @@
                 name="transportFeeType"
                 id="transportFeeType"
                 required>
-          <option value="1">Trọng lượng</option>
+          <option value="1">Cân nặng</option>
           <option value="2">Kích thước</option>
         </select>
         <div [hidden]="transportFeeType.valid || transportFeeType.untouched">
@@ -289,7 +289,7 @@
       </div>
 
       <div class="form-group">
-        <label for="transportFeeMinR">Trọng lượng (kích thước) từ <code class="highlighter-rouge">*</code></label>
+        <label for="transportFeeMinR">Trọng lượng (kg), kích thước (m3) từ <code class="highlighter-rouge">*</code></label>
         <input [(ngModel)]="transportFee.min_r" #transportFeeMinR="ngModel" type="number" min="0"
                id="transportFeeMinR" name="transportFeeMinR"
                class="form-control"
@@ -304,7 +304,7 @@
       </div>
 
       <div class="form-group">
-        <label for="transportFeeMaxR">Trọng lượng (kích thước) đến </label>
+        <label for="transportFeeMaxR">Trọng lượng (kg), kích thước (m3) đến </label>
         <input [(ngModel)]="transportFee.max_r" type="number" min="0"
                id="transportFeeMaxR" name="transportFeeMaxR"
                class="form-control"
@@ -555,8 +555,8 @@
       <thead>
       <tr>
         <th rowspan="2">Dịch vụ</th>
-        <th rowspan="2">Kích thước (dm3)</th>
-        <th rowspan="2">Kích thước đầu (dm3)</th>
+        <th rowspan="2">Kích thước (m3)</th>
+        <th rowspan="2">Kích thước đầu (m3)</th>
         <th rowspan="2">Phí KT đầu (VNĐ)</th>
         <th rowspan="2">Phí KT tiếp theo (VNĐ)</th>
         <th rowspan="2">Ghi chú</th>
@@ -609,7 +609,7 @@
       </div>
 
       <div class="form-group">
-        <label for="cratingFeeMinCount">Kích thước từ (dm3) <code class="highlighter-rouge">*</code></label>
+        <label for="cratingFeeMinCount">Kích thước từ (m3) <code class="highlighter-rouge">*</code></label>
         <input [(ngModel)]="cratingFee.min_count" #cratingFeeMinCount="ngModel" type="number" min="0"
                id="cratingFeeMinCount" name="cratingFeeMinCount"
                class="form-control"
@@ -624,7 +624,7 @@
       </div>
 
       <div class="form-group">
-        <label for="cratingFeeMaxCount">Kích thước đến (dm3)</label>
+        <label for="cratingFeeMaxCount">Kích thước đến (m3)</label>
         <input [(ngModel)]="cratingFee.max_count" type="number" min="0"
                id="cratingFeeMaxCount" name="cratingFeeMaxCount"
                class="form-control"
@@ -632,7 +632,7 @@
       </div>
 
       <div class="form-group">
-        <label for="cratingFeeFirstCount">Kích thước đầu (dm3) <code class="highlighter-rouge">*</code></label>
+        <label for="cratingFeeFirstCount">Kích thước đầu (m3) <code class="highlighter-rouge">*</code></label>
         <input [(ngModel)]="cratingFee.first_count" #cratingFeeFirstCount="ngModel" type="number" min="0"
                id="cratingFeeFirstCount" name="cratingFeeFirstCount"
                class="form-control"
