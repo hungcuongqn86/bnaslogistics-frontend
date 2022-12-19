@@ -382,6 +382,8 @@ export interface IPackage {
   ck_vc_tt: number;
   tien_can_tt: number;
   cal_option: number;
+  dg_cal_option: number;
+  dg_first_unit: number;
   dg_1_price: number;
   dg_2_price: number;
   tien_dong_go: number;

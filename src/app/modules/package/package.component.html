@@ -135,7 +135,7 @@
                   </p>
                 </td>
                 <td class="text-nowrap">
-                  <p><span class="packages-inf">Áp giá theo</span>
+                  <p><span class="packages-inf">Áp giá VC theo</span>
                     <span (click)="selectPackage(item,'cal_option')" class="packages-inf text-right badge badge-info">
                         <select [(ngModel)]="item.cal_option" #cal_option="ngModel"
                                 class="form-control"
@@ -147,7 +147,20 @@
                         </select>
                     </span>
                   </p>
-                  <p *ngIf="item.cal_option===0"><span class="packages-inf">Cân nặng (kg)</span><span
+                  <p><span class="packages-inf">Áp giá ĐG theo</span>
+                    <span (click)="selectPackage(item,'dg_cal_option')"
+                          class="packages-inf text-right badge badge-info">
+                        <select [(ngModel)]="item.dg_cal_option" #dg_cal_option="ngModel"
+                                class="form-control"
+                                (change)="updatePackage(template, 'dg_cal_option')"
+                                name="dg_cal_option" id="dg_cal_option">
+                          <option value="0">Cân nặng</option>
+                          <option value="1">Kích thước</option>
+                        </select>
+                    </span>
+                  </p>
+                  <p *ngIf="((item.cal_option===0)||(item.dg_cal_option===0))"><span
+                    class="packages-inf">Cân nặng (kg)</span><span
                     (click)="selectPackage(item,'weight')"
                     class="packages-inf text-right badge badge-info">
                                       <input *ngIf="((package.id === item.id) && (col === 'weight'))"
@@ -164,7 +177,7 @@
                                     *ngIf="((package.id !== item.id) || (col !== 'weight'))">{{item.weight ? item.weight : '0.00'}}</span>
                                   </span>
                   </p>
-                  <p *ngIf="item.cal_option===1"><span class="packages-inf">Kích thước (m3)</span><span
+                  <p *ngIf="((item.cal_option===1)||(item.dg_cal_option===1))"><span class="packages-inf">Kích thước (m3)</span><span
                     (click)="selectPackage(item,'size')"
                     class="packages-inf text-right badge badge-info">
                                       <input *ngIf="((package.id === item.id) && (col === 'size'))"
