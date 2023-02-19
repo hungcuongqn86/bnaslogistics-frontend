@@ -28,9 +28,9 @@ export class OrderDetailComponent implements OnInit {
       this.orderService.getOrder(this.orderService.orderRe.id)
         .subscribe(order => {
           this.orderService.orderRe = order.data;
-          this.orderService.orderRe.tong_tien_can_dk = parseInt(this.orderService.orderRe.tien_can_dk) +
-            parseInt(this.orderService.orderRe.tien_dong_go_dk) +
-            parseInt(this.orderService.orderRe.tien_chong_soc_dk);
+          this.orderService.orderRe.tong_tien_can_dk = Number(this.orderService.orderRe.tien_can_dk) +
+            Number(this.orderService.orderRe.tien_dong_go_dk) +
+            Number(this.orderService.orderRe.tien_chong_soc_dk);
         });
     }
   }
