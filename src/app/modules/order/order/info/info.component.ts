@@ -180,11 +180,15 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  public updateOrder(dirty: string) {
+  public updateOrder(template: TemplateRef<any>, dirty: string) {
     this.orderService.showLoading(true);
     this.orderService.editOrder(this.orderService.orderRe, dirty)
       .subscribe(res => {
         if (res.status) {
+          this.getOrder();
+        } else {
+          this.errorMessage = res.data;
+          this.openErrorModal(template);
           this.getOrder();
         }
       });

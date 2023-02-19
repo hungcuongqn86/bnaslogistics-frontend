@@ -369,6 +369,7 @@ export class Order implements IOrder {
   gia_can_dk: number;
   ck_vc_dk: number;
   tien_can_dk: number;
+  tong_tien_can_dk: number;
   dg_1_price: number;
   dg_2_price: number;
   tien_dong_go_dk: number;

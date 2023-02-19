@@ -135,7 +135,7 @@
                 <input type="checkbox" id="kiem_hang" name="kiem_hang"
                        value="1"
                        [(ngModel)]="orderService.orderRe.kiem_hang"
-                       (change)="updateOrder('kiem_hang')"> Kiểm hàng
+                       (change)="updateOrder(template,'kiem_hang')"> Kiểm hàng
                 <span></span>
               </label>
             </div>
@@ -144,7 +144,7 @@
                 <input type="checkbox" id="dong_go" name="dong_go"
                        value="1"
                        [(ngModel)]="orderService.orderRe.dong_go"
-                       (change)="updateOrder('dong_go')"> Đóng gỗ
+                       (change)="updateOrder(template,'dong_go')"> Đóng gỗ
                 <span></span>
               </label>
             </div>
@@ -153,7 +153,7 @@
                 <input type="checkbox" id="bao_hiem" name="bao_hiem"
                        value="1"
                        [(ngModel)]="orderService.orderRe.bao_hiem"
-                       (change)="updateOrder('bao_hiem')"> Chống sốc
+                       (change)="updateOrder(template,'bao_hiem')"> Chống sốc
                 <span></span>
               </label>
             </div>
@@ -508,7 +508,7 @@
                              #can_nang_dk="ngModel" class="form-control"
                              id="can_nang_dk"
                              name="can_nang_dk"
-                             (change)="updateOrder('can_nang_dk')"
+                             (change)="updateOrder(template,'can_nang_dk')"
                              appAutofocus
                              type="number">
                     </div>
@@ -520,7 +520,7 @@
                              #kich_thuoc_dk="ngModel" class="form-control"
                              id="kich_thuoc_dk"
                              name="kich_thuoc_dk"
-                             (change)="updateOrder('kich_thuoc_dk')"
+                             (change)="updateOrder(template,'kich_thuoc_dk')"
                              appAutofocus
                              type="number">
                     </div>
@@ -532,7 +532,7 @@
                   <div>
                     <select title="" class="form-control"
                             [(ngModel)]="orderService.orderRe.cal_option"
-                            (change)="updateOrder('cal_option')"
+                            (change)="updateOrder(template,'cal_option')"
                             name="cal_option" id="cal_option">
                       <option value="1">Cân nặng</option>
                       <option value="2">Kích thước</option>
@@ -554,7 +554,7 @@
                   </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <div>Phí cân nặng thành tiền</div>
+                  <div>Phí cân nặng/ kích thước thành tiền</div>
                   <div *ngIf="orderService.orderRe.tien_can_dk">
                     <strong>{{orderService.orderRe.tien_can_dk.toString() | tempPrice: 1 : 1 : false}}</strong>
                     <sup>đ</sup>
@@ -604,6 +604,13 @@
                     <sup>đ</sup>
                   </div>
                 </div>
+                <div *ngIf="orderService.orderRe.tong_tien_can_dk" class="d-flex justify-content-between align-items-center mb-3">
+                  <div><b>Tổng phí vận chuyển dự kiến</b></div>
+                  <div>
+                    <strong>{{orderService.orderRe.tong_tien_can_dk.toString() | tempPrice: 1 : 1 : false}}</strong>
+                    <sup>đ</sup>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-lg-4 ml-auto">
@@ -618,7 +625,7 @@
                       #ti_gia="ngModel" class="form-control"
                       id="ti_gia"
                       name="ti_gia"
-                      (change)="updateOrder('ti_gia')"
+                      (change)="updateOrder(template,'ti_gia')"
                       (blur)="tigiaEdit(false)"
                       appAutofocus
                       type="number">
@@ -641,7 +648,7 @@
                       #phi_dat_hang_cs="ngModel" class="form-control"
                       id="phi_dat_hang_cs"
                       name="phi_dat_hang_cs"
-                      (change)="updateOrder('phi_dat_hang_cs')"
+                      (change)="updateOrder(template,'phi_dat_hang_cs')"
                       (blur)="phiDichVuEdit(false)"
                       appAutofocus
                       type="number">
@@ -672,7 +679,7 @@
                       #phi_kiem_dem_cs="ngModel" class="form-control"
                       id="phi_kiem_dem_cs"
                       name="phi_kiem_dem_cs"
-                      (change)="updateOrder('phi_kiem_dem_cs')"
+                      (change)="updateOrder(template,'phi_kiem_dem_cs')"
                       (blur)="phiKiemDemEdit(false)"
                       appAutofocus
                       type="number">
