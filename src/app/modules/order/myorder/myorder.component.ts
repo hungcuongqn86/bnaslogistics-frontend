@@ -169,19 +169,7 @@ export class MyorderComponent implements OnInit {
   public confirmDeleteOrder(): void {
     if (this.order) {
       this.errorMessage = [];
-      const history: History = {
-        id: null,
-        user_name: null,
-        content: 'Hủy đơn!',
-        type: 6,
-        created_at: null,
-        is_deleted: 0,
-        order_id: this.order.id,
-        updated_at: null,
-        user_id: null
-      };
-
-      this.orderService.postHistory(history)
+      this.orderService.postDelete(this.order.id)
         .subscribe(res => {
           if (res.status) {
             this.errorMessage = [];

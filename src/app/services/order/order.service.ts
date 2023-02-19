@@ -160,6 +160,14 @@ export class OrderService {
       );
   }
 
+  public postDelete(orderId): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}delete/${orderId}`;
+    return this.http.post<any>(url, {})
+      .pipe(
+        catchError(this.handleError('postDelete', {}))
+      );
+  }
+
   public getComplains(param: { order_id: number }): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/search`;
     let params = new HttpParams();
