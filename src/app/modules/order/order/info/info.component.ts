@@ -23,6 +23,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   comments: Comment[];
   errorMessage: string[] = [];
   col: string;
+  editPhiCanNangDk = false;
   editPhiKiemDem = false;
   editPhiDichVu = false;
   editTigia = false;
@@ -159,6 +160,12 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     if (this.authService.hasRole('admin') || (this.authService.user.id === this.orderService.orderRe.handle.id)) {
       this.col = col;
       this.orderItem = item;
+    }
+  }
+
+  public phiCanNangDkEdit(status: boolean) {
+    if (this.authService.hasRole('admin') || (this.authService.user.id === this.orderService.orderRe.handle.id)) {
+      this.editPhiCanNangDk = status;
     }
   }
 

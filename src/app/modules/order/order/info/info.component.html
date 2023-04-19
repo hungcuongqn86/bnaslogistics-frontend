@@ -539,11 +539,23 @@
                     </select>
                   </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div *ngIf="orderService.orderRe.gia_can_dk" class="d-flex justify-content-between align-items-center mb-3">
                   <div>Giá cân nặng</div>
-                  <div
-                    *ngIf="orderService.orderRe.gia_can_dk">{{orderService.orderRe.gia_can_dk.toString() | tempPrice: 1 : 1 : false}}
-                    <sup>đ</sup>
+                  <div (click)="phiCanNangDkEdit(true)">
+                    <input
+                      *ngIf="editPhiCanNangDk"
+                      [(ngModel)]="orderService.orderRe.gia_can_dk"
+                      #gia_can_dk="ngModel" class="form-control"
+                      id="gia_can_dk"
+                      name="gia_can_dk"
+                      (change)="updateOrder(template,'gia_can_dk')"
+                      (blur)="phiCanNangDkEdit(false)"
+                      appAutofocus
+                      type="number">
+                    <div *ngIf="!editPhiCanNangDk">
+                      {{orderService.orderRe.gia_can_dk.toString() | tempPrice: 1 : 1 : false}}
+                      <sup>đ</sup>
+                    </div>
                   </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
