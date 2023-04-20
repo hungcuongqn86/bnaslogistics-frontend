@@ -575,15 +575,41 @@
                 <div *ngIf="orderService.orderRe.dong_go"
                      class="d-flex justify-content-between align-items-center mb-3">
                   <div>Giá đóng gỗ</div>
+                  <div (click)="phiDonggoDkEdit(true)">
+                    <input
+                      *ngIf="editPhiDonggoDk"
+                      [(ngModel)]="orderService.orderRe.dg_1_price"
+                      #dg_1_price="ngModel" class="form-control"
+                      id="dg_1_price"
+                      name="dg_1_price"
+                      (change)="updateOrder(template,'dg_1_price')"
+                      (blur)="phiDonggoDkEdit(false)"
+                      appAutofocus
+                      type="number">
+
+                    <input
+                      *ngIf="editPhiDonggoDk"
+                      [(ngModel)]="orderService.orderRe.dg_2_price"
+                      #dg_2_price="ngModel" class="form-control"
+                      id="dg_2_price"
+                      name="dg_2_price"
+                      (change)="updateOrder(template,'dg_2_price')"
+                      (blur)="phiDonggoDkEdit(false)"
+                      appAutofocus
+                      type="number">
+
+                  </div>
+
                   <div *ngIf="orderService.orderRe.dg_1_price && orderService.orderRe.dg_2_price">
                     <span>
-                        <span *ngIf="orderService.orderRe.dg_1_price">
-                          {{orderService.orderRe.dg_1_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
-                        </span>
-                        <span *ngIf="orderService.orderRe.dg_2_price">
-                          + {{orderService.orderRe.dg_2_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
-                        </span>
+                      <span *ngIf="orderService.orderRe.dg_1_price">
+                        {{orderService.orderRe.dg_1_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+
                       </span>
+                      <span *ngIf="orderService.orderRe.dg_2_price">
+                        + {{orderService.orderRe.dg_2_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
+                      </span>
+                    </span>
                   </div>
                 </div>
                 <div *ngIf="orderService.orderRe.dong_go"
