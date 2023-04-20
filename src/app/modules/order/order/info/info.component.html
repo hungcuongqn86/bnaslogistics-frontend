@@ -539,7 +539,8 @@
                     </select>
                   </div>
                 </div>
-                <div *ngIf="orderService.orderRe.gia_can_dk" class="d-flex justify-content-between align-items-center mb-3">
+                <div *ngIf="orderService.orderRe.gia_can_dk"
+                     class="d-flex justify-content-between align-items-center mb-3">
                   <div>Giá cân nặng</div>
                   <div (click)="phiCanNangDkEdit(true)">
                     <input
@@ -575,41 +576,40 @@
                 <div *ngIf="orderService.orderRe.dong_go"
                      class="d-flex justify-content-between align-items-center mb-3">
                   <div>Giá đóng gỗ</div>
-                  <div (click)="phiDonggoDkEdit(true)">
-                    <input
-                      *ngIf="editPhiDonggoDk"
-                      [(ngModel)]="orderService.orderRe.dg_1_price"
-                      #dg_1_price="ngModel" class="form-control"
-                      id="dg_1_price"
-                      name="dg_1_price"
-                      (change)="updateOrder(template,'dg_1_price')"
-                      (blur)="phiDonggoDkEdit(false)"
-                      appAutofocus
-                      type="number">
+                  <div style="display: flex;">
+                    <div (click)="phiDonggo1DkEdit(true)">
+                      <input
+                        *ngIf="editPhiDonggo1Dk"
+                        [(ngModel)]="orderService.orderRe.dg_1_price"
+                        #dg_1_price="ngModel" class="form-control"
+                        id="dg_1_price"
+                        name="dg_1_price"
+                        (change)="updateOrder(template,'dg_1_price')"
+                        (blur)="phiDonggo1DkEdit(false)"
+                        appAutofocus
+                        type="number" style="width: 100px;">
+                      <div *ngIf="!editPhiDonggo1Dk">
+                        {{orderService.orderRe.dg_1_price.toString() | tempPrice: 1 : 1 : true}}
+                        <sup>đ</sup>
+                      </div>
+                    </div>
 
-                    <input
-                      *ngIf="editPhiDonggoDk"
-                      [(ngModel)]="orderService.orderRe.dg_2_price"
-                      #dg_2_price="ngModel" class="form-control"
-                      id="dg_2_price"
-                      name="dg_2_price"
-                      (change)="updateOrder(template,'dg_2_price')"
-                      (blur)="phiDonggoDkEdit(false)"
-                      appAutofocus
-                      type="number">
-
-                  </div>
-
-                  <div *ngIf="orderService.orderRe.dg_1_price && orderService.orderRe.dg_2_price">
-                    <span>
-                      <span *ngIf="orderService.orderRe.dg_1_price">
-                        {{orderService.orderRe.dg_1_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
-
-                      </span>
-                      <span *ngIf="orderService.orderRe.dg_2_price">
-                        + {{orderService.orderRe.dg_2_price.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
-                      </span>
-                    </span>
+                    <div (click)="phiDonggo2DkEdit(true)">
+                      <input
+                        *ngIf="editPhiDonggo2Dk"
+                        [(ngModel)]="orderService.orderRe.dg_2_price"
+                        #dg_2_price="ngModel" class="form-control"
+                        id="dg_2_price"
+                        name="dg_2_price"
+                        (change)="updateOrder(template,'dg_2_price')"
+                        (blur)="phiDonggo2DkEdit(false)"
+                        appAutofocus
+                        type="number" style="width: 100px;">
+                      <div *ngIf="!editPhiDonggo2Dk">
+                        + {{orderService.orderRe.dg_2_price.toString() | tempPrice: 1 : 1 : true}}
+                        <sup>đ</sup>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div *ngIf="orderService.orderRe.dong_go"
@@ -642,7 +642,8 @@
                     <sup>đ</sup>
                   </div>
                 </div>
-                <div *ngIf="orderService.orderRe.tong_tien_can_dk" class="d-flex justify-content-between align-items-center mb-3">
+                <div *ngIf="orderService.orderRe.tong_tien_can_dk"
+                     class="d-flex justify-content-between align-items-center mb-3">
                   <div><b>Tổng phí vận chuyển dự kiến</b></div>
                   <div>
                     <strong>{{orderService.orderRe.tong_tien_can_dk.toString() | tempPrice: 1 : 1 : false}}</strong>
@@ -675,7 +676,8 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div>Tiền hàng</div>
-                  <div><strong>{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}}</strong> <sup>đ</sup></div>
+                  <div><strong>{{orderService.orderRe.tien_hang.toString() | tempPrice: 1 : 1 : false}}</strong>
+                    <sup>đ</sup></div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <div>Phí dịch vụ mua hàng (%)</div>
