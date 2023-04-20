@@ -589,8 +589,8 @@
                         appAutofocus
                         type="number" style="width: 100px;">
                       <div *ngIf="!editPhiDonggo1Dk">
-                        {{orderService.orderRe.dg_1_price.toString() | tempPrice: 1 : 1 : true}}
-                        <sup>đ</sup>
+                        <span *ngIf="orderService.orderRe.dg_1_price">{{orderService.orderRe.dg_1_price.toString() | tempPrice: 1 : 1 : true}}
+                          <sup>đ</sup></span>
                       </div>
                     </div>
 
@@ -606,8 +606,8 @@
                         appAutofocus
                         type="number" style="width: 100px;">
                       <div *ngIf="!editPhiDonggo2Dk">
-                        + {{orderService.orderRe.dg_2_price.toString() | tempPrice: 1 : 1 : true}}
-                        <sup>đ</sup>
+                        <span *ngIf="orderService.orderRe.dg_2_price">+ {{orderService.orderRe.dg_2_price.toString() | tempPrice: 1 : 1 : true}}
+                          <sup>đ</sup></span>
                       </div>
                     </div>
                   </div>
