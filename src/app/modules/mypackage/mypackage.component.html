@@ -21,7 +21,7 @@
                                 <tab *ngFor="let item of pkStatus">
                                     <ng-template tabHeading>
                                         <div (click)="selectTab(item.id)">
-                                            {{item.name}} 
+                                            {{item.name}}
                                             <!-- <span class="badge badge-pill badge-danger">{{ item.id | tempCountByStatus : counts}}</span> -->
                                         </div>
                                     </ng-template>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body">
                     <form novalidate (ngSubmit)="searchPackages()" #form="ngForm">
                         <div class="form-group space-7 row filter-advanced">
@@ -100,7 +100,8 @@
                                 <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
                                 </p>
                                 <p><span class="packages-inf">Tên shop</span><span *ngIf="item.order.shop"
-                                                                                   class="packages-inf text-right">{{item.order.shop.name}}</span>
+                                                                                   [innerHTML]="item.order.shop.name"
+                                                                                   class="packages-inf text-right"></span>
                                 </p>
                             </td>
                             <td>

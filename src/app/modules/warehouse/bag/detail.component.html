@@ -39,7 +39,7 @@
                     - {{item.order.user.name}}</strong></span>
                   </p>
                   <p *ngIf="item.order.shop"><span class="packages-inf">Shop</span><span
-                    class="packages-inf text-right"><strong>{{item.order.shop.name}}</strong></span>
+                    class="packages-inf text-right"><strong [innerHTML]="item.order.shop.name"></strong></span>
                   </p>
                 </td>
                 <td>

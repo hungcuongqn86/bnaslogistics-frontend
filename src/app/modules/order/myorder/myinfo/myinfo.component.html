@@ -291,7 +291,7 @@
         <tr>
           <td>{{item.id}}</td>
           <td *ngIf="!orderService.orderRe.shipping">
-            <p *ngIf="orderService.orderRe.shop">{{orderService.orderRe.shop.name}}</p></td>
+            <p *ngIf="orderService.orderRe.shop" [innerHTML]="orderService.orderRe.shop.name"></p></td>
           <td *ngIf="!orderService.orderRe.shipping"><p *ngIf="i===0">
             {{orderService.orderRe.count_product}}</p>
           </td>
