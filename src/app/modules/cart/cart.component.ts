@@ -45,12 +45,13 @@ export class CartComponent implements OnInit {
       });
   }
 
-  public ketDon(item: ICart) {
+  public ketDon(item: ICart, template: TemplateRef<any>) {
     this.cartService.showLoading(true);
     this.orderService.addOrder(item)
       .subscribe(order => {
         if (order.status) {
           this.getCarts();
+          this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
         } else {
           this.getCarts();
           this.cartService.showLoading(false);

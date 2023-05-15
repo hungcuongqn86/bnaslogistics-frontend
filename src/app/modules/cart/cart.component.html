@@ -166,7 +166,7 @@
                 </div>
 
                 <div>
-                  <button class="btn btn-block btn-primary btn-rounded" (click)="ketDon(cartf)"
+                  <button class="btn btn-block btn-primary btn-rounded" (click)="ketDon(cartf, alert_template)"
                           type="button">Tạo đơn
                   </button>
                 </div>
@@ -206,6 +206,15 @@
     <div class="btn-group btn-group-toggle">
       <button type="button" class="btn btn-warning" (click)="confirmDeleteShop()">Yes</button>
       <button type="button" class="btn btn-primary" (click)="declineDeleteShop()">No</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #alert_template>
+  <div class="modal-body text-center">
+    <p>Tạo đơn hàng thành công!</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-primary" (click)="declineDeleteShop()">OK</button>
     </div>
   </div>
 </ng-template>
