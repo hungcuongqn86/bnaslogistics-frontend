@@ -111,8 +111,7 @@
               </thead>
               <tbody>
               <ng-template ngFor let-item [ngForOf]="bill.package" let-i="index">
-               <!-- <tr *ngIf="item.is_main > 0">-->
-                <tr>
+                <tr *ngIf="item.is_main > 0">
                   <td class="text-center">{{i + 1}}</td>
                   <td>
                     {{item.order.code}}
