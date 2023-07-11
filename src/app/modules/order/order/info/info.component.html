@@ -573,7 +573,7 @@
                     <sup>đ</sup>
                   </div>
                 </div>
-                <div *ngIf="orderService.orderRe.dong_go"
+                <div *ngIf="orderService.orderRe.dong_go && (orderService.orderRe.cal_option===1)"
                      class="d-flex justify-content-between align-items-center mb-3">
                   <div>Giá đóng gỗ</div>
                   <div style="display: flex;">
@@ -617,12 +617,24 @@
                 <div *ngIf="orderService.orderRe.dong_go"
                      class="d-flex justify-content-between align-items-center mb-3">
                   <div>Phí đóng gỗ thành tiền</div>
-                  <div *ngIf="orderService.orderRe.tien_dong_go_dk">
-                    <strong>{{orderService.orderRe.tien_dong_go_dk.toString() | tempPrice: 1 : 1 : false}}</strong>
-                    <sup>đ</sup>
+                  <div (click)="phiDonggo1TtDkEdit(true)">
+                    <input
+                      *ngIf="editPhiDonggo1TtDk"
+                      [(ngModel)]="orderService.orderRe.tien_dong_go_dk"
+                      #tien_dong_go_dk="ngModel" class="form-control"
+                      id="tien_dong_go_dk"
+                      name="tien_dong_go_dk"
+                      (change)="updateOrder(template,'tien_dong_go_dk')"
+                      (blur)="phiDonggo1TtDkEdit(false)"
+                      appAutofocus
+                      type="number">
+                    <div *ngIf="!editPhiDonggo1TtDk && orderService.orderRe.tien_dong_go_dk">
+                      <strong>{{orderService.orderRe.tien_dong_go_dk.toString() | tempPrice: 1 : 1 : false}}</strong>
+                      <sup>đ</sup>
+                    </div>
                   </div>
                 </div>
-                <div *ngIf="orderService.orderRe.bao_hiem"
+                <div *ngIf="orderService.orderRe.bao_hiem  && (orderService.orderRe.cal_option===1)"
                      class="d-flex justify-content-between align-items-center mb-3">
                   <div>Giá chống sốc</div>
                   <div style="display: flex;">
