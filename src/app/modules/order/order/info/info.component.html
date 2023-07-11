@@ -676,10 +676,23 @@
                 <div *ngIf="orderService.orderRe.bao_hiem"
                      class="d-flex justify-content-between align-items-center mb-3">
                   <div>Phí chống sốc thành tiền</div>
-                  <div *ngIf="orderService.orderRe.tien_chong_soc_dk">
-                    <strong>{{orderService.orderRe.tien_chong_soc_dk.toString() | tempPrice: 1 : 1 : false}}</strong>
-                    <sup>đ</sup>
+                  <div (click)="phiChongSocTtDkEdit(true)">
+                    <input
+                      *ngIf="editPhiChongSocTtDk"
+                      [(ngModel)]="orderService.orderRe.tien_chong_soc_dk"
+                      #tien_chong_soc_dk="ngModel" class="form-control"
+                      id="tien_chong_soc_dk"
+                      name="tien_chong_soc_dk"
+                      (change)="updateOrder(template,'tien_chong_soc_dk')"
+                      (blur)="phiChongSocTtDkEdit(false)"
+                      appAutofocus
+                      type="number">
+                    <div *ngIf="orderService.orderRe.tien_chong_soc_dk && !editPhiChongSocTtDk">
+                      <strong>{{orderService.orderRe.tien_chong_soc_dk.toString() | tempPrice: 1 : 1 : false}}</strong>
+                      <sup>đ</sup>
+                    </div>
                   </div>
+
                 </div>
                 <div *ngIf="orderService.orderRe.tong_tien_can_dk"
                      class="d-flex justify-content-between align-items-center mb-3">

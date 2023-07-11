@@ -30,6 +30,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
 
   editPhiChongsoc1Dk = false;
   editPhiChongsoc2Dk = false;
+  editPhiChongSocTtDk = false;
 
   editPhiKiemDem = false;
   editPhiDichVu = false;
@@ -206,6 +207,12 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   public phiChongSoc2DkEdit(status: boolean) {
     if (this.authService.hasRole('admin') || (this.authService.user.id === this.orderService.orderRe.handle.id)) {
       this.editPhiChongsoc2Dk = status;
+    }
+  }
+
+  public phiChongSocTtDkEdit(status: boolean) {
+    if (this.authService.hasRole('admin') || (this.authService.user.id === this.orderService.orderRe.handle.id)) {
+      this.editPhiChongSocTtDk = status;
     }
   }
 
