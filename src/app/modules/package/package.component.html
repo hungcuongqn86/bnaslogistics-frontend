@@ -294,7 +294,7 @@
                         </select>
                     </span>
                   </p>-->
-                  <p *ngIf="item.order.dong_go">
+                  <p *ngIf="((item.cal_option == 0) && item.order.dong_go)">
                     <span class="packages-inf">Giá đóng gỗ</span>
                     <span class="packages-inf text-right badge badge-info text-nowrap">
                       <span>
@@ -317,7 +317,7 @@
                       </span>
                     </span>
                   </p>
-                  <p *ngIf="item.order.bao_hiem">
+                  <p *ngIf="((item.cal_option == 0) && item.order.bao_hiem)">
                     <span class="packages-inf">Giá chống sốc</span>
                     <span class="packages-inf text-right badge badge-info">
                       <span>
