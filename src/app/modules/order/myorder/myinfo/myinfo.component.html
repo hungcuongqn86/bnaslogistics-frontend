@@ -250,8 +250,8 @@
                         </span>
                     </span></span></p>
           <p>Phí chống sốc thành tiền <span *ngIf="orderService.orderRe.tien_chong_soc_dk"
-            class="pull-right"><strong>{{orderService.orderRe.tien_chong_soc_dk.toString() | tempPrice: 1 : 1 : false}} <sup>
-                          ¥</sup></strong></span>
+            class="pull-right"><strong>{{orderService.orderRe.tien_chong_soc_dk.toString() | tempPrice: orderService.orderRe.ti_gia : 1 : false}} <sup>
+                          đ</sup></strong></span>
           </p>
 
           <p><b>Tổng phí vận chuyển dự kiến</b> <span *ngIf="orderService.orderRe.tong_tien_can_dk"
