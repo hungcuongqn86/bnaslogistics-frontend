@@ -309,8 +309,18 @@
                   </p>
                   <p *ngIf="item.order.dong_go">
                     <span class="packages-inf">Phí đóng gỗ</span>
-                    <span class="packages-inf text-right badge badge-info">
-                      <span>
+                    <span (click)="selectPackage(item,'tien_dong_go')" class="packages-inf text-right badge badge-info">
+                      <input *ngIf="((package.id === item.id) && (col === 'tien_dong_go'))"
+                             [(ngModel)]="item.tien_dong_go"
+                             #tien_dong_go="ngModel"
+                             class="form-control"
+                             id="tien_dong_go"
+                             name="tien_dong_go"
+                             (change)="updatePackage(template, 'tien_dong_go')"
+                             (blur)="hideInput()"
+                             appAutofocus
+                             type="number">
+                      <span *ngIf="((package.id !== item.id) || (col !== 'tien_dong_go'))">
                         <span *ngIf="item.tien_dong_go">
                           {{item.tien_dong_go.toString() | tempPrice: 1 : 1: true}}<sup> đ</sup>
                         </span>
@@ -332,8 +342,18 @@
                   </p>
                   <p *ngIf="item.order.bao_hiem">
                     <span class="packages-inf">Phí chống sốc</span>
-                    <span class="packages-inf text-right badge badge-info">
-                      <span>
+                    <span (click)="selectPackage(item,'tien_chong_soc')" class="packages-inf text-right badge badge-info">
+                      <input *ngIf="((package.id === item.id) && (col === 'tien_chong_soc'))"
+                             [(ngModel)]="item.tien_chong_soc"
+                             #tien_chong_soc="ngModel"
+                             class="form-control"
+                             id="tien_chong_soc"
+                             name="tien_chong_soc"
+                             (change)="updatePackage(template, 'tien_chong_soc')"
+                             (blur)="hideInput()"
+                             appAutofocus
+                             type="number">
+                      <span *ngIf="((package.id !== item.id) || (col !== 'tien_chong_soc'))">
                         <span *ngIf="item.tien_chong_soc"><span>¥</span>
                           {{item.tien_chong_soc.toString() | tempPrice: 1 : 1: true}}
                         </span>
