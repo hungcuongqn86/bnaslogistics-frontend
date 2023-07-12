@@ -689,10 +689,9 @@
                       type="number">
                     <div *ngIf="orderService.orderRe.tien_chong_soc_dk && !editPhiChongSocTtDk">
                       <strong>{{orderService.orderRe.tien_chong_soc_dk.toString() | tempPrice: 1 : 1 : false}}</strong>
-                      <sup>đ</sup>
+                      <sup>¥</sup>
                     </div>
                   </div>
-
                 </div>
                 <div *ngIf="orderService.orderRe.tong_tien_can_dk"
                      class="d-flex justify-content-between align-items-center mb-3">
