@@ -109,6 +109,7 @@
               <tr>
                 <th>Đơn hàng</th>
                 <th>Khách hàng</th>
+                <th>Hình ảnh</th>
                 <th style="width: 25%; min-width: 250px;">Tiền hàng</th>
                 <th style="width: 10%; min-width: 150px;">Phụ trách</th>
                 <th style="width: 10%; min-width: 150px;">Trạng thái</th>
@@ -131,6 +132,11 @@
                     <p><i class="fa fa-phone"></i> <span> {{item.user.phone_number}}</span></p>
                     <p><i class="fa fa-envelope"></i> {{item.user.email}}</p>
                   </div>
+                </td>
+                <td>
+                  <p *ngFor="let cart of item.order_items">
+                    <a target="_blank" href="{{cart.pro_link}}"><img style="max-width: 50px;" src="{{cart.image}}"></a>
+                  </p>
                 </td>
                 <td class="text-right">
                   <p><span class="pull-left">Tổng tiền đơn hàng</span> <span
