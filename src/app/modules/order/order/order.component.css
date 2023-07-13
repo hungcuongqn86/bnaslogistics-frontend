@@ -1,3 +1,11 @@
+.yl-bg {
+  background: #ccc;
+}
+
+.yl-bg:hover {
+  background: #ccc !important;
+}
+
 .pager li.btn:active {
     box-shadow: none;
 }
