@@ -1,3 +1,8 @@
+.badge-dark {
+  color: #fff;
+  background-color: #535758;
+}
+
 .pager li.btn:active {
     box-shadow: none;
 }

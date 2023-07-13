@@ -152,7 +152,9 @@
                     <p *ngIf="item.content_pc"><i>{{item.content_pc}}</i></p>
                   </td>
                   <td>
-                    <p><span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span></p>
+                    <p *ngIf="status">
+                      <span class="badge" [ngClass]="{'badge-dark': item.status === 6, 'badge-danger' : item.status !== 6 }" >{{item.status | tempStatus: status}}</span>
+                    </p>
                   </td>
                   <td>
                     <a class="btn btn-sm btn-info mr-1 text-white" routerLink="/order/list/detail/{{item.id}}">Chi tiết</a>
