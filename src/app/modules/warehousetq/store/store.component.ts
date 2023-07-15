@@ -19,6 +19,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   package_code: string;
   package_filter_key: string;
   packages: IPackage[] = [];
+  packagesSearch: IPackage[] = [];
   errorMessage: string[] = [];
   sub: Subscription;
   modalRef: BsModalRef;
@@ -45,7 +46,7 @@ export class StoreComponent implements OnInit, OnDestroy {
       this.sub = this.packageService.packageSearch(this.package_filter_key)
         .subscribe(res => {
           if (res.status) {
-
+            this.packagesSearch = res.data;
           }
           this.packageService.showLoading(false);
           this.sub.unsubscribe();
