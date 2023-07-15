@@ -143,3 +143,39 @@
     <button type="button" class="btn btn-primary" (click)="decline()">OK</button>
   </div>
 </ng-template>
+
+<ng-template #package_list_template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Danh sách kiện hàng</h4>
+  </div>
+  <div class="modal-body">
+    <form novalidate (ngSubmit)="btnSearch()" #form="ngForm">
+      <div class="form-group row">
+        <div class="col-md-8">
+          <input [(ngModel)]="customerService.search.key" type="text" id="key" name="key"
+                 class="form-control"
+                 placeholder="Nhập từ khóa...">
+        </div>
+        <div class="col-md-4">
+          <button type="button" (click)="btnSearch()"
+                  class="btn btn-primary m-v-5">Tìm kiếm
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Tên</th>
+        <th>Số điện thoại</th>
+        <th>Địa chỉ</th>
+        <th>Pet đã có</th>
+        <th class="text-right">Tác vụ</th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
