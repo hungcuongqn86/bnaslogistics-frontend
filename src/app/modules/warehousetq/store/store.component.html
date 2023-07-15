@@ -197,7 +197,10 @@
             <p>{{item.size ? item.size : '0.00'}}</p>
           </td>
           <td class="text-right">
-
+            <button (click)="selectCustomer(item)" class="btn btn-sm btn-ghost-primary"
+                    type="button">
+              Chọn
+            </button>
           </td>
         </tr>
       </tbody>
