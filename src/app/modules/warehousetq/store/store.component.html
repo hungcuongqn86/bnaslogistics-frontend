@@ -15,7 +15,7 @@
           <form novalidate #form="ngForm">
             <div class="form-group row filter-advanced">
               <div class="col-2 col-md-3">
-                <button type="submit" (click)="packageFilter()"
+                <button type="submit" (click)="packageFilter(package_list_template)"
                         class="btn btn-primary mr-2 mb-1">
                   <i class="iconsax isax-document-filter"></i>
                 </button>
@@ -150,15 +150,24 @@
   </div>
   <div class="modal-body">
     <form novalidate (ngSubmit)="btnSearch()" #form="ngForm">
-      <div class="form-group row">
-        <div class="col-md-8">
-          <input [(ngModel)]="customerService.search.key" type="text" id="key" name="key"
-                 class="form-control"
-                 placeholder="Nhập từ khóa...">
+      <div class="form-group row filter-advanced">
+        <div class="col-10 col-md-6">
+          <div class="input-group mb-1">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="iconsax isax-direct-right"></i>
+              </div>
+            </div>
+            <input [(ngModel)]="package_code" type="text" id="key"
+                   name="key"
+                   class="form-control"
+                   placeholder="Nhập từ khóa...">
+          </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-2 col-md-3">
           <button type="button" (click)="btnSearch()"
-                  class="btn btn-primary m-v-5">Tìm kiếm
+                  class="btn btn-primary mr-2 mb-1">
+            <i class="iconsax isax-document-filter"></i>
           </button>
         </div>
       </div>
@@ -167,10 +176,10 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th>Tên</th>
-        <th>Số điện thoại</th>
-        <th>Địa chỉ</th>
-        <th>Pet đã có</th>
+        <th>Mã vận đơn</th>
+        <th>Đơn hàng</th>
+        <th>Khách hàng</th>
+        <th>Cân nặng, Kích thước</th>
         <th class="text-right">Tác vụ</th>
       </tr>
       </thead>

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -34,8 +34,9 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   }
 
-  public packageFilter(){
+  public packageFilter(template: TemplateRef<any>) {
 
+    this.modalRef = this.modalService.show(template, {class: 'modal-xl', ignoreBackdropClick: false});
   }
 
   public getPackage() {
