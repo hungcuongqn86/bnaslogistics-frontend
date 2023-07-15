@@ -72,6 +72,10 @@ export class StoreComponent implements OnInit, OnDestroy {
     }
   }
 
+  public selectPackage(item: IPackage) {
+    this.addPackage(item);
+  }
+
   public createStoreBill() {
     if (this.packages.length) {
       this.errorMessage = [];
