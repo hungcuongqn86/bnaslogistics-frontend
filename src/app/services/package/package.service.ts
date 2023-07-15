@@ -41,10 +41,11 @@ export class PackageService {
       );
   }
 
-  public packageSearch(key: string): Observable<any> {
+  public packageSearch(key: string, action: string): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}search1`;
     let params = new HttpParams();
     params = params.append('key', key);
+    params = params.append('action', action);
     return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('packageSearch', []))

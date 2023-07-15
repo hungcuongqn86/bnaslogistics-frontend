@@ -44,7 +44,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   public btnPackageSearch() {
     if (this.package_filter_key) {
       this.packageService.showLoading(true);
-      this.sub = this.packageService.packageSearch(this.package_filter_key)
+      this.sub = this.packageService.packageSearch(this.package_filter_key, 'nhap_kho_tq')
         .subscribe(res => {
           if (res.status) {
             this.packagesSearch = res.data;
