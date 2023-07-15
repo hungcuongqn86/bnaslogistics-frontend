@@ -39,6 +39,19 @@ export class StoreComponent implements OnInit, OnDestroy {
     this.modalRef = this.modalService.show(template, {class: 'modal-xl', ignoreBackdropClick: false});
   }
 
+  public btnPackageSearch() {
+    if (this.package_filter_key) {
+      this.packageService.showLoading(true);
+      this.sub = this.packageService.getPackageByCode(this.package_filter_key)
+        .subscribe(res => {
+          if (res.status) {
+
+          }
+          this.packageService.showLoading(false);
+          this.sub.unsubscribe();
+        });
+    }
+  }
   public getPackage() {
     if (this.package_code) {
       this.packageService.showLoading(true);
