@@ -42,7 +42,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   public btnPackageSearch() {
     if (this.package_filter_key) {
       this.packageService.showLoading(true);
-      this.sub = this.packageService.getPackageByCode(this.package_filter_key)
+      this.sub = this.packageService.packageSearch(this.package_filter_key)
         .subscribe(res => {
           if (res.status) {
 
@@ -52,6 +52,7 @@ export class StoreComponent implements OnInit, OnDestroy {
         });
     }
   }
+
   public getPackage() {
     if (this.package_code) {
       this.packageService.showLoading(true);
