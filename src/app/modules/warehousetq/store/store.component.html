@@ -13,7 +13,14 @@
         </div>
         <div class="card-body">
           <form novalidate #form="ngForm">
-            <div class="form-group space-7 row filter-advanced">
+            <div class="form-group row filter-advanced">
+              <div class="col-2 col-md-3">
+                <button type="submit" (click)="packageFilter()"
+                        class="btn btn-primary mr-2 mb-1">
+                  <i class="iconsax isax-document-filter"></i>
+                </button>
+              </div>
+
               <div class="col-10 col-md-3">
                 <div class="input-group mb-1">
                   <div class="input-group-prepend">

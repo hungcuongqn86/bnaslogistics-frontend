@@ -17,6 +17,7 @@ import {IPackage} from '../../../models/interface';
 
 export class StoreComponent implements OnInit, OnDestroy {
   package_code: string;
+  package_filter_key: string;
   packages: IPackage[] = [];
   errorMessage: string[] = [];
   sub: Subscription;
@@ -30,6 +31,10 @@ export class StoreComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+  }
+
+  public packageFilter(){
 
   }
 
