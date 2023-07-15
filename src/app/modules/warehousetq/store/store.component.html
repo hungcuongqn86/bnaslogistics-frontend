@@ -197,9 +197,13 @@
             <p>{{item.size ? item.size : '0.00'}}</p>
           </td>
           <td class="text-right">
-            <button (click)="selectPackage(item)" class="btn btn-sm btn-ghost-primary"
+            <button *ngIf="packages.indexOf(item) < 0" (click)="selectPackage(item)" class="btn btn-sm btn-ghost-primary"
                     type="button">
               Chọn
+            </button>
+            <button *ngIf="packages.indexOf(item) > -1" disabled class="btn btn-sm btn-ghost-primary"
+                    type="button">
+              Đã chọn
             </button>
           </td>
         </tr>
