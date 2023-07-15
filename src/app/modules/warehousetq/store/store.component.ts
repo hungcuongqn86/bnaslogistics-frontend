@@ -37,6 +37,7 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   public packageFilter(template: TemplateRef<any>) {
     this.package_filter_key = '';
+    this.packagesSearch = null;
     this.modalRef = this.modalService.show(template, {class: 'modal-xl', ignoreBackdropClick: false});
   }
 

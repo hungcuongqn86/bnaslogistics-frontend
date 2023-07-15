@@ -179,17 +179,26 @@
         <th>Mã vận đơn</th>
         <th>Đơn hàng</th>
         <th>Khách hàng</th>
-        <th>Cân nặng, Kích thước</th>
+        <th>Cân nặng</th>
+        <th>Kích thước</th>
         <th class="text-right">Tác vụ</th>
       </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of packagesSearch">
-          <td>{{item.id}}</td>
-          <td>{{item.id}}</td>
-          <td>{{item.id}}</td>
-          <td>{{item.id}}</td>
-          <td>{{item.id}}</td>
+          <td>{{item.package_code}}</td>
+          <td>{{item.order.code}}</td>
+          <td>{{item.order.user.code}}
+            - {{item.order.user.name}}</td>
+          <td>
+            <p>{{item.weight ? item.weight : '0.00'}}</p>
+          </td>
+          <td>
+            <p>{{item.size ? item.size : '0.00'}}</p>
+          </td>
+          <td class="text-right">
+
+          </td>
         </tr>
       </tbody>
     </table>
