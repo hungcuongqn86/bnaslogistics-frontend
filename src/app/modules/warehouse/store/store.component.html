@@ -13,7 +13,14 @@
         </div>
         <div class="card-body">
           <form novalidate #form="ngForm">
-            <div class="form-group space-7 row filter-advanced">
+            <div class="form-group row filter-advanced">
+              <div class="col-2 col-md-3">
+                <button type="submit" (click)="packageFilter(package_list_template)"
+                        class="btn btn-primary mr-2 mb-1">
+                  <i class="iconsax isax-empty-wallet-add"></i>
+                </button>
+              </div>
+
               <div class="col-10 col-md-3">
                 <div class="input-group mb-1">
                   <div class="input-group-prepend">
@@ -134,5 +141,73 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="decline()">OK</button>
+  </div>
+</ng-template>
+
+<ng-template #package_list_template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Danh sách kiện hàng</h4>
+  </div>
+  <div class="modal-body">
+    <form novalidate (ngSubmit)="btnPackageSearch()" #form="ngForm">
+      <div class="form-group row filter-advanced">
+        <div class="col-10 col-md-6">
+          <div class="input-group mb-1">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="iconsax isax-direct-right"></i>
+              </div>
+            </div>
+            <input [(ngModel)]="package_filter_key" type="text" id="key"
+                   name="key"
+                   class="form-control"
+                   placeholder="Nhập mã vận đơn...">
+          </div>
+        </div>
+        <div class="col-2 col-md-3">
+          <button type="button" (click)="btnPackageSearch()"
+                  class="btn btn-primary mr-2 mb-1">
+            <i class="iconsax isax-document-filter"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Mã vận đơn</th>
+        <th>Đơn hàng</th>
+        <th>Khách hàng</th>
+        <th>Cân nặng</th>
+        <th>Kích thước</th>
+        <th class="text-right">Tác vụ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of packagesSearch">
+        <td>{{item.package_code}}</td>
+        <td>{{item.order.code}}</td>
+        <td>{{item.order.user.code}}
+          - {{item.order.user.name}}</td>
+        <td>
+          <p>{{item.weight ? item.weight : '0.00'}}</p>
+        </td>
+        <td>
+          <p>{{item.size ? item.size : '0.00'}}</p>
+        </td>
+        <td class="text-right">
+          <button *ngIf="packages.indexOf(item) < 0" (click)="selectPackage(item)" class="btn btn-sm btn-ghost-primary"
+                  type="button">
+            Chọn
+          </button>
+          <button *ngIf="packages.indexOf(item) > -1" disabled class="btn btn-sm btn-ghost-primary"
+                  type="button">
+            Đã chọn
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </ng-template>

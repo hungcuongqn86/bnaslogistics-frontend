@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -23,6 +23,9 @@ export class StoreComponent implements OnInit, OnDestroy {
   modalRef: BsModalRef;
   note = '';
 
+  package_filter_key: string;
+  packagesSearch: IPackage[] = [];
+
   constructor(private modalService: BsModalService, public authService: AuthService,
               public packageService: PackageService,
               private warehouseService: WarehouseService,
@@ -31,6 +34,30 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+  }
+
+  public packageFilter(template: TemplateRef<any>) {
+    this.package_filter_key = '';
+    this.packagesSearch = null;
+    this.modalRef = this.modalService.show(template, {class: 'modal-xl', ignoreBackdropClick: false});
+  }
+
+  public selectPackage(item: IPackage) {
+    this.addPackage(item);
+  }
+
+  public btnPackageSearch() {
+    if (this.package_filter_key) {
+      this.packageService.showLoading(true);
+      this.sub = this.packageService.packageSearch(this.package_filter_key, 'nhap_kho_viet')
+        .subscribe(res => {
+          if (res.status) {
+            this.packagesSearch = res.data;
+          }
+          this.packageService.showLoading(false);
+          this.sub.unsubscribe();
+        });
+    }
   }
 
   public getPackage() {
