@@ -56,6 +56,7 @@ export class ReceiptComponent implements OnInit, OnDestroy {
 
   deleteModalOpen(template: TemplateRef<any>, item: IReceipt) {
     this.receipt = item;
+    this.errorMessage = [];
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 

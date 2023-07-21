@@ -155,6 +155,9 @@
 <ng-template #delete_template>
   <div class="modal-body text-center">
     <p>Bạn có chắc chắn muốn xóa phiếu!?</p>
+    <alert type="danger" *ngIf="errorMessage.length > 0">
+      <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
     <div class="btn-group btn-group-toggle">
       <button type="button" class="btn btn-warning" (click)="confirmDelete()">Yes</button>
       <button type="button" class="btn btn-primary" (click)="declineModal()">No</button>
