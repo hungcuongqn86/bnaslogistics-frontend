@@ -93,10 +93,17 @@ export class WarehouseService {
   }
 
   deleteReceipts(id: number) {
-    const url = Util.getUri(apiV1Url) + `${this.tqModuleUri}receipt/delete/${id}`;
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}receipt/delete/${id}`;
     return this.http.post<any>(url, {id: id})
       .pipe(
         catchError(this.handleError('deleteReceipts', []))
+      );
+  }
+  deleteTqReceipts(id: number) {
+    const url = Util.getUri(apiV1Url) + `${this.tqModuleUri}receipt/delete/${id}`;
+    return this.http.post<any>(url, {id: id})
+      .pipe(
+        catchError(this.handleError('deleteTqReceipts', []))
       );
   }
 

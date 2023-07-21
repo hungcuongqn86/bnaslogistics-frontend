@@ -63,7 +63,7 @@ export class ReceiptComponent implements OnInit, OnDestroy {
   public confirmDelete(): void {
     if (this.receipt) {
       this.errorMessage = [];
-      this.warehouseService.deleteReceipts(this.receipt.id)
+      this.warehouseService.deleteTqReceipts(this.receipt.id)
         .subscribe(res => {
           if (res.status) {
             this.errorMessage = [];
