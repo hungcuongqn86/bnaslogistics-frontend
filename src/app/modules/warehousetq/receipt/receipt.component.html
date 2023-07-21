@@ -100,9 +100,9 @@
                 </td>
                 <td>{{item.note}}</td>
                 <td>
-                  <button (click)="printBarcode(barcodeTemplate, item)"
+                  <button (click)="deleteModalOpen(delete_template, item)"
                           class="btn btn-sm btn-info mr-1 text-white" type="button">
-                    In phiếu
+                    Xóa phiếu
                   </button>
                 </td>
               </tr>
@@ -149,5 +149,15 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-info" (click)="print()">Print</button>
     <button type="button" class="btn btn-warning" (click)="declineError()">Quay lại</button>
+  </div>
+</ng-template>
+
+<ng-template #delete_template>
+  <div class="modal-body text-center">
+    <p>Bạn có chắc chắn muốn xóa phiếu!?</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-warning" (click)="confirmDelete()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="declineModal()">No</button>
+    </div>
   </div>
 </ng-template>

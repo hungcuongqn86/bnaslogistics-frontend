@@ -54,8 +54,32 @@ export class ReceiptComponent implements OnInit, OnDestroy {
     win.focus();
   }
 
-  printBarcode(template: TemplateRef<any>, item: IReceipt) {
+  deleteModalOpen(template: TemplateRef<any>, item: IReceipt) {
+    this.receipt = item;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
 
+  public confirmDelete(): void {
+    if (this.receipt) {
+      this.errorMessage = [];
+      this.warehouseService.deleteReceipts(this.receipt.id)
+        .subscribe(res => {
+          if (res.status) {
+            this.errorMessage = [];
+            this.searchReceipts();
+            this.modalRef.hide();
+          } else {
+            for (let i = 0; i < res.data.length; i++) {
+              this.errorMessage.push(res.data[i]);
+            }
+          }
+        });
+    }
+  }
+
+  public declineModal(): void {
+    this.modalRef.hide();
+    this.errorMessage = [];
   }
 
   print(): void {
