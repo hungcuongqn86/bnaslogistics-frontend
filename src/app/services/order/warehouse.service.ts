@@ -107,6 +107,14 @@ export class WarehouseService {
       );
   }
 
+  deleteBag(id: number) {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}bag/delete/${id}`;
+    return this.http.post<any>(url, {id: id})
+      .pipe(
+        catchError(this.handleError('deleteBag', []))
+      );
+  }
+
   getWarehouseWait(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}wait`;
     let params = new HttpParams();

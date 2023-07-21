@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {WarehouseService} from '../../../services/order/warehouse.service';
 import {AuthService} from '../../../auth.service';
-import {IBag} from '../../../models/interface';
+import {IBag, IReceipt} from '../../../models/interface';
 import {Bag, Package} from '../../../models/model';
 
 @Component({
@@ -96,6 +96,35 @@ export class BagComponent implements OnInit, OnDestroy {
   gotoOrder(orderId: number) {
     const win = window.open(`./order/list/detail/${orderId}`, '_blank');
     win.focus();
+  }
+
+  deleteModalOpen(template: TemplateRef<any>, item: IBag) {
+    this.bag = item;
+    this.errorMessage = [];
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  public confirmDelete(): void {
+    if (this.bag) {
+      this.errorMessage = [];
+      this.warehouseService.deleteBag(this.bag.id)
+        .subscribe(res => {
+          if (res.status) {
+            this.errorMessage = [];
+            this.searchBags();
+            this.modalRef.hide();
+          } else {
+            for (let i = 0; i < res.data.length; i++) {
+              this.errorMessage.push(res.data[i]);
+            }
+          }
+        });
+    }
+  }
+
+  public declineModal(): void {
+    this.modalRef.hide();
+    this.errorMessage = [];
   }
 
   printBarcode(template: TemplateRef<any>, item: IBag) {

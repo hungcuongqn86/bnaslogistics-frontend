@@ -102,6 +102,10 @@
                   <button (click)="editBag(item.id)" class="btn btn-sm btn-info mr-1 text-white" type="button">
                     Cập nhật
                   </button>
+                  <button (click)="deleteModalOpen(delete_template, item)"
+                          class="btn btn-sm btn-info mr-1 text-white" type="button">
+                    Xóa bao
+                  </button>
                 </td>
               </tr>
               </tbody>
@@ -149,5 +153,17 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-info" (click)="print()">Print</button>
     <button type="button" class="btn btn-warning" (click)="declineError()">Quay lại</button>
+  </div>
+</ng-template>
+<ng-template #delete_template>
+  <div class="modal-body text-center">
+    <p>Bạn có chắc chắn muốn xóa bao!?</p>
+    <alert type="danger" *ngIf="errorMessage.length > 0">
+      <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-warning" (click)="confirmDelete()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="declineModal()">No</button>
+    </div>
   </div>
 </ng-template>
