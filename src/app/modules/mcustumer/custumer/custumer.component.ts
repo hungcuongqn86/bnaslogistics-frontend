@@ -4,7 +4,7 @@ import {UserService} from '../../../services/muser/user.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
-import {IUser} from "../../../models/interface";
+import {IUser} from '../../../models/interface';
 
 @Component({
   selector: 'app-custumer',
