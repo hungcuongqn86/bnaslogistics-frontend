@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 
+import {ToastModule} from '@syncfusion/ej2-angular-notifications';
+
 import {OrderService} from '../../services/order/order.service';
 import {OrderComponent} from './order/order.component';
 import {OrderDetailComponent} from './order/order.detail.component';
@@ -22,7 +24,8 @@ import {OrderGuardService} from './order.guard.service';
 import {SettingService} from '../../services/setting/setting.service';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, OrderRoutingModule, SharedModule, CollapseModule.forRoot()],
+    imports: [CommonModule, FormsModule, OrderRoutingModule, SharedModule, CollapseModule.forRoot(),
+      ToastModule],
     declarations: [
         OrderComponent,
         OrderDetailComponent,

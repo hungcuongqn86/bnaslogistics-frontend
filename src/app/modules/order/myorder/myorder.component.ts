@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewEncapsulation, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrderService} from '../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
@@ -9,6 +9,7 @@ import {History, IOrder, IVip, OrderStatus} from '../../../models/interface';
 import {Order} from '../../../models/model';
 import {forkJoin, Observable} from 'rxjs';
 import {SettingService} from '../../../services/setting/setting.service';
+import {ToastComponent} from '@syncfusion/ej2-angular-notifications';
 
 @Component({
   selector: 'app-myorder',
@@ -31,6 +32,14 @@ export class MyorderComponent implements OnInit {
   nv = false;
   stype = '';
   sstatus = '';
+
+  @ViewChild('alert_toast') alert_toast: ToastComponent;
+  position_toast = {X: 'Right', Y: 'Top'};
+  toasts = [
+    {title: 'Warning !', content: 'There was a problem with your network connection.', cssClass: 'e-toast-warning'},
+    {title: 'Success !', content: 'Your message has been sent successfully.', cssClass: 'e-toast-success'},
+    {title: 'Error !', content: 'A problem has been occurred while submitting your data.', cssClass: 'e-toast-danger'},
+    {title: 'Information !', content: 'Please read the comments carefully.', cssClass: 'e-toast-info'}];
 
   constructor(public orderService: OrderService, private settingService: SettingService,
               private modalService: BsModalService,
@@ -138,6 +147,12 @@ export class MyorderComponent implements OnInit {
       this.orderService.postDatCoc(this.inputDatCoc)
         .subscribe(res => {
           if (res.status) {
+            this.alert_toast.show({
+              title: 'Success !',
+              content: 'Đặt cọc thành công!',
+              cssClass: 'e-toast-success'
+            });
+
             this.searchOrders();
             this.orderService.showLoading(false);
             this.modalRef.hide();
